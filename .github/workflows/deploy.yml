@@ -15,7 +15,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      APP_ID: "910950117743035041"
+      APP_ID: "2398145058980083349"
       ZMP_TOKEN: ${{ secrets.ZMP_TOKEN }}
     steps:
       - uses: actions/checkout@v4

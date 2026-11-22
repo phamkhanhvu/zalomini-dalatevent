@@ -13,13 +13,13 @@ Mini app xem lịch Festival Hoa Đà Lạt 2026 ngay trong Zalo. Viết bằng 
 
 ## Đưa lên Zalo (làm một lần)
 
-1. Mini App đã tạo trên https://mini.zalo.me, ID: **910950117743035041**.
+1. Mini App đã tạo trên https://mini.zalo.me, ID: **2398145058980083349**.
 2. Cài Node.js (bản 18 trở lên), rồi mở Terminal trong thư mục này:
    ```bash
    npm install -g zmp-cli
    npm install
    ```
-3. Đăng nhập và chạy thử trên máy tính (Mini App ID `910950117743035041` đã ghi sẵn trong file `.env`):
+3. Đăng nhập và chạy thử trên máy tính (Mini App ID `2398145058980083349` đã ghi sẵn trong file `.env`):
    ```bash
    zmp login     # quét mã QR bằng Zalo của tài khoản quản lý mini app
    zmp start     # mở bản chạy thử trên trình duyệt

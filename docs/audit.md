@@ -125,4 +125,4 @@ Mọi thay đổi trang công khai làm trên bản nháp/nhánh riêng, anh duy
 | Khai mạc ấn định 19.12 | Sửa thẻ khai mạc trong mục "Đang diễn ra" trên web và dữ liệu app thành 20:00 ngày 19.12.2026; tác vụ cập nhật hằng ngày được dặn giữ ngày này | Trang 1337 khối 2; `src/data/festival.ts` |
 | Em tự soạn quy tắc bảo mật Firebase | Đã soạn, chưa áp dụng lên Firebase | `docs/firebase/` |
 
-Còn lại: bản tiếng Anh, tiếng Hàn và trang Về chúng tôi chưa đổi logo.
+Cập nhật cùng ngày: bản tiếng Anh, tiếng Hàn và ba trang Về chúng tôi đã hiện logo chính thức ở đầu trang.

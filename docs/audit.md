@@ -126,3 +126,18 @@ Mọi thay đổi trang công khai làm trên bản nháp/nhánh riêng, anh duy
 | Em tự soạn quy tắc bảo mật Firebase | Đã soạn, chưa áp dụng lên Firebase | `docs/firebase/` |
 
 Cập nhật cùng ngày: bản tiếng Anh, tiếng Hàn và ba trang Về chúng tôi đã hiện logo chính thức ở đầu trang.
+
+## 11. Đối chiếu với cổng chính thức (23.11.2026)
+
+Nguồn anh gửi: https://festivaldalat.lamdongtructuyen.vn (cơ quan chủ quản ghi trên trang: Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng). Trang Chương trình có 34 mục, trong đó 12 mục "Lễ hội chính". Em đã ghi nguồn và ngày xác minh vào `data/events.json` cho 9 chương trình khớp.
+
+| Điểm khác | Cổng chính thức | Web và app của mình đang ghi | Trạng thái |
+|---|---|---|---|
+| Khai mạc | 20:00 ngày 12.12.2026 | 20:00 ngày 19.12.2026 (anh ấn định sáng 23.11) | Chờ anh quyết |
+| Thời gian Festival | 12.12.2026 – 03.01.2027 | 19.12 – 31.12.2026 | Chờ anh quyết |
+| Triển lãm tại Công viên Trần Quốc Toản | "Trưng bày, triển lãm hoa, cây cảnh", 01–25.12 | "Triển lãm quốc tế hoa lan Hồ Điệp…" 01–25.12, và "Trưng bày hoa và cây cảnh quốc tế" tại Vườn hoa 18.12–03.01 | Chờ anh quyết |
+| Lễ hội nhạc Jazz Việt Nam 2026 | 25–27.12, trên mặt hồ Xuân Hương | Chưa có | Chờ anh duyệt để thêm |
+| Giờ Golf, Hội thảo, Carnival | 10:00 | Golf "trong ngày"; Hội thảo và Carnival chưa ghi giờ | Sẽ sửa cùng đợt |
+| Chiến dịch trồng hoa | 01.06.2026 – 03.01.2027 | "Từ nay đến 03.01.2027" | Khớp về ý |
+
+22 mục "hưởng ứng" còn lại trên cổng phần lớn mang ngày giờ giống nhau (30.11–31.12, 17:00), có vẻ là giá trị điền tạm, nên em chưa nhập.

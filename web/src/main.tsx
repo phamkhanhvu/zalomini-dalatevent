@@ -13,12 +13,15 @@ import "@fontsource/playfair-display/vietnamese-700.css";
 import "@fontsource/playfair-display/vietnamese-700-italic.css";
 import "@fontsource/playfair-display/latin-700.css";
 import "@fontsource/playfair-display/latin-700-italic.css";
-import "./native.css";
-import "@shared/css/app.css";
+import "./css/base.css";
+import "./css/app.css";
+import "./css/site.css";
 
-import App from "@shared/components/app";
-import { SAVED_EVENT, SAVED_KEY } from "@shared/utils/saved";
-import { syncReminders } from "./reminders";
+import App from "./components/app";
+import { initData } from "./data/store";
+import { IS_NATIVE } from "./utils/device";
+import { SAVED_EVENT, SAVED_KEY } from "./utils/saved";
+import { syncReminders } from "./platform/reminders";
 
 function savedIds(): string[] {
   try {
@@ -29,8 +32,14 @@ function savedIds(): string[] {
   }
 }
 
-// Mở app: hẹn lại thông báo (không hỏi quyền). Khi người dùng lưu chương trình: hỏi quyền nếu cần.
-syncReminders(savedIds(), false);
-window.addEventListener(SAVED_EVENT, () => syncReminders(savedIds(), true));
-
-createRoot(document.getElementById("app")!).render(<App />);
+async function start() {
+  if (IS_NATIVE) document.documentElement.classList.add("is-native");
+  await initData();
+  // Nhắc lịch chỉ có trong app cài trên máy. Mở app: hẹn lại (không hỏi quyền). Lưu chương trình: hỏi quyền nếu cần.
+  if (IS_NATIVE) {
+    syncReminders(savedIds(), false);
+    window.addEventListener(SAVED_EVENT, () => syncReminders(savedIds(), true));
+  }
+  createRoot(document.getElementById("app")!).render(<App />);
+}
+start();

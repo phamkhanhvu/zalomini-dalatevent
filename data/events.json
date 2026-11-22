@@ -259,7 +259,11 @@
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
       "updated_at": "2026-11-23T06:45:00+07:00",
-      "organizer": "Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng"
+      "organizer": "Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng",
+      "venue_ids": [
+        "lam-vien",
+        "htm"
+      ]
     },
     {
       "id": "nhac-jazz",

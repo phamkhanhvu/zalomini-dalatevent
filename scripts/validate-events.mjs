@@ -60,6 +60,7 @@ for (const e of doc.events || []) {
   if (!CATEGORY.includes(e.category)) err(`${at}: category "${e.category}" không hợp lệ (${CATEGORY.join(", ")})`);
   if (e.series && !seriesIds.has(e.series)) err(`${at}: series "${e.series}" không tồn tại`);
   if (e.venue_id && !venueIds.has(e.venue_id)) err(`${at}: venue_id "${e.venue_id}" không tồn tại`);
+  for (const v of e.venue_ids || []) if (!venueIds.has(v)) err(`${at}: venue_ids có "${v}" không tồn tại`);
   if (!e.venue_id && !e.venue_name) err(`${at}: cần venue_id hoặc venue_name`);
   if (typeof e.tentative !== "boolean") err(`${at}: tentative phải là true hoặc false`);
   if (!Array.isArray(e.sessions) || !e.sessions.length) err(`${at}: cần ít nhất một suất trong sessions`);

@@ -1,0 +1,44 @@
+/* Phần bổ sung của website: trang show diễn và bố cục màn hình rộng */
+
+.show-list { display: flex; flex-direction: column; gap: 8px; }
+.show-row { width: 100%; display: flex; align-items: stretch; gap: 12px; padding: 10px; min-height: 68px; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; }
+.show-row.is-today { border: 2px solid var(--magenta); }
+.show-date { flex: 0 0 92px; border-radius: 12px; padding: 8px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2px; }
+.show-date b { font-family: var(--serif); font-size: 19px; line-height: 1.1; }
+.show-date i { font-style: normal; font-size: 11px; font-weight: 600; line-height: 1.25; color: var(--ink2); }
+.show-body { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 3px; }
+.show-title { font-weight: 600; font-size: 15px; line-height: 1.35; }
+.show-sub { font-size: 13px; color: var(--ink2); }
+.show-go { flex: none; align-self: center; display: inline-flex; align-items: center; gap: 2px; font-size: 13px; font-weight: 600; color: var(--magenta); padding-right: 4px; }
+.show-empty { padding: 16px; border-radius: 16px; background: var(--paper); border: 1px dashed var(--line); color: var(--ink2); font-size: 14px; }
+.stage + .stage { border-top: 1px solid var(--line); }
+.stage .btn { align-self: flex-start; }
+
+/* Trên trình duyệt (không phải app cài trên máy): chừa mép trên bình thường */
+html:not(.is-native) body { --zaui-safe-area-inset-top: 0px; }
+
+/* Màn hình rộng: nội dung nằm giữa, thanh điều hướng đưa lên đầu trang */
+@media (min-width: 900px) {
+  body { font-size: 16px; }
+  .shell { flex-direction: column-reverse; }
+  #footer.nx-nav { justify-content: center; gap: 4px; padding: 8px 24px; border-top: 0; border-bottom: 1px solid var(--line); }
+  .nx-nav .zaui-bottom-navigation-item { flex: 0 0 auto; flex-direction: row; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; }
+  .nx-nav .zaui-bottom-navigation-item-active { background: #ffe3f1; }
+  .nx-nav-label { font-size: 14px; }
+  .page > *, .page .scroll > * { max-width: 1040px; margin-left: auto; margin-right: auto; width: 100%; }
+  .band, .sec, .top, .hero { padding-left: 32px; padding-right: 32px; }
+  .hap, .list, .show-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .display { font-size: 64px; }
+  .h1 { font-size: 40px; }
+  .h2 { font-size: 28px; }
+  .nx-sheet-panel { left: 50%; right: auto; width: 560px; margin-left: -280px; bottom: 50%; transform: translateY(150%); border-radius: 20px; max-height: 80%; }
+  .nx-sheet.is-on .nx-sheet-panel { transform: translateY(50%); }
+  .nx-snack { left: 50%; right: auto; width: 420px; margin-left: -210px; bottom: 32px; }
+}
+
+@media (min-width: 900px) {
+  .hero-photo { aspect-ratio: 21 / 9; }
+  .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; padding: 0 32px 4px; }
+  .gallery figure { flex: none; }
+  .actions { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}

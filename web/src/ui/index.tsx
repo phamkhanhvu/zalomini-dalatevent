@@ -1,12 +1,12 @@
 /**
- * Bản thay thế zmp-ui cho app iOS: chỉ gồm những thành phần app đang dùng.
+ * Bộ thành phần giao diện dùng chung: thanh điều hướng, bảng trượt, thông báo ngắn.
  */
 import React, { createContext, FC, ReactElement, ReactNode, useCallback, useContext, useEffect, useRef, useState } from "react";
-import { MemoryRouter } from "react-router";
+import { HashRouter } from "react-router";
 
 export const App: FC<{ children?: ReactNode }> = ({ children }) => <>{children}</>;
 
-export const ZMPRouter: FC<{ children?: ReactNode }> = ({ children }) => <MemoryRouter>{children}</MemoryRouter>;
+export const AppRouter: FC<{ children?: ReactNode }> = ({ children }) => <HashRouter>{children}</HashRouter>;
 
 /* ---------- Thông báo ngắn ---------- */
 interface SnackOptions {

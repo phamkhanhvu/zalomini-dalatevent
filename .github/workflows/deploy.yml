@@ -7,6 +7,9 @@ on:
     branches: [main]
     paths-ignore:
       - "ios-app/**"
+      - "web/**"
+      - "data/**"
+      - "docs/**"
       - ".github/workflows/ios.yml"
       - "**.md"
   workflow_dispatch:

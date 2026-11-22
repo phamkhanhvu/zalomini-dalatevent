@@ -1,38 +1,63 @@
-# Kiểm tra app iOS: đóng gói phần web rồi biên dịch thử bằng Xcode (chạy trên máy ảo, chưa ký).
+# Build gói website tĩnh (web/) rồi biên dịch thử app iOS bằng Xcode (máy ảo, chưa ký).
+# Gói website đã build được lưu lại ở mục Artifacts của mỗi lần chạy, tải về là đưa lên máy chủ được.
 # Khi đã có tài khoản Apple Developer, thêm bước ký và tải lên TestFlight (xem ios-app/README.md).
-name: iOS app
+name: Web và app iOS
 
 on:
   push:
     branches: [main]
     paths:
+      - "web/**"
+      - "data/**"
       - "ios-app/**"
-      - "src/**"
       - ".github/workflows/ios.yml"
   workflow_dispatch:
 
 concurrency:
-  group: ios-build
+  group: web-ios-build
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: macos-26
-    defaults:
-      run:
-        working-directory: ios-app
+  web:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: ios-app/package-lock.json
+          cache-dependency-path: web/package-lock.json
+      - run: node scripts/validate-events.mjs
       - run: npm ci
+        working-directory: web
       - run: npm run typecheck
+        working-directory: web
       - run: npm run build
+        working-directory: web
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dalatevent-web
+          path: web/dist
+          retention-days: 30
+
+  ios:
+    needs: web
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          name: dalatevent-web
+          path: web/dist
+      - run: npm ci
+        working-directory: ios-app
       - run: npx cap sync ios
+        working-directory: ios-app
       - name: Biên dịch thử cho máy ảo iPhone
+        working-directory: ios-app
         run: |
           xcodebuild -version
           xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \

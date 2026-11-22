@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "about": "Mục \"Đang diễn ra và sắp tới\" tại Đà Lạt. Mỗi ngày cập nhật một lần.",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "updated_at": "2026-11-23T07:00:00+07:00",
+  "updated_label": "23.11.2026",
+  "items": [
+    {
+      "when": "20 — 24.11.2026",
+      "title": "K-Vietnam Wellness Festa & Expo in Đà Lạt 2026",
+      "desc": "Lễ hội Văn hóa Việt Nam tại Đà Lạt khai mạc tối 20.11 và kéo dài đến hết ngày 24.11 (Ngày Văn hóa Việt Nam) tại Quảng trường Lâm Viên (phường Xuân Hương – Đà Lạt): khoảng 200 gian hàng của doanh nghiệp Việt Nam và Hàn Quốc, 5 đêm biểu diễn nghệ thuật giao lưu Việt – Hàn, trình diễn hanbok – áo dài, lễ hội ẩm thực và âm nhạc đường phố. Hôm nay và ngày mai (23–24.11) là hai ngày cuối để ghé thăm.",
+      "live": true
+    },
+    {
+      "when": "16 — 26.11.2026 · Quảng trường Lâm Viên",
+      "title": "Triển lãm tranh cổ động Ngày Văn hóa Việt Nam",
+      "desc": "150 tranh cổ động tấm lớn tuyển chọn từ cuộc thi sáng tác toàn quốc, trưng bày tại khu vực đài phun nước Quảng trường Lâm Viên và quanh hồ Xuân Hương.",
+      "live": false
+    },
+    {
+      "when": "21.11 — 12.12.2026 · Đồi cỏ hồng Đạ Nghịt, phường Lang Biang – Đà Lạt",
+      "title": "Mùa hội cỏ hồng Lang Biang năm 2026",
+      "desc": "Khai mạc sáng 21.11, hưởng ứng Festival Hoa Đà Lạt lần thứ XI: hội thi trình diễn trang phục truyền thống các dân tộc, giải đua ngựa không yên cùng nhiều hoạt động văn hóa, thể thao, du lịch.",
+      "live": false
+    },
+    {
+      "when": "01 — 25.12.2026 · Công viên Trần Quốc Toản",
+      "title": "Trưng bày, triển lãm hoa, cây cảnh",
+      "desc": "Mở màn chuỗi chương trình Festival Hoa Đà Lạt lần thứ XI, do Hiệp hội Hoa Đà Lạt chủ trì.",
+      "live": false
+    },
+    {
+      "when": "20:00 · 12.12.2026 · Quảng trường Lâm Viên",
+      "title": "Khai mạc Festival Hoa Đà Lạt lần thứ XI",
+      "desc": "Đêm khai mạc tại Quảng trường Lâm Viên, mở đầu chuỗi chương trình kéo dài đến hết 03.01.2027.",
+      "live": false
+    }
+  ]
+}

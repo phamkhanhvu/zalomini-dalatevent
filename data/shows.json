@@ -1,0 +1,242 @@
+{
+  "schema": 1,
+  "about": "Lịch show của các điểm diễn tại Đà Lạt. Lịch và giá vé do từng điểm diễn công bố; mỗi mục có link về trang gốc.",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "updated_at": "2026-11-23T07:00:00+07:00",
+  "stages": [
+    {
+      "id": "may-lang-thang",
+      "name": "Mây Lang Thang",
+      "kind": "dated",
+      "source_url": "https://maylangthang.com.vn/",
+      "verified_at": "2026-11-23",
+      "intro": "Đêm nhạc tại Đà Lạt. Lịch và vé do Mây Lang Thang công bố, có thể thay đổi.",
+      "address": "Mây Lang Thang: 519 thôn Măng Lin, phường Lang Biang – Đà Lạt. Mây Heritage: khu Ga Đà Lạt, số 01 Quang Trung, phường Xuân Hương – Đà Lạt.",
+      "cta_label": "Xem vé",
+      "items": [
+        {
+          "date": "2026-11-27",
+          "time": "17:00",
+          "title": "Bạch Công Khanh – Dương Edward",
+          "url": "https://maylangthang.com.vn/shows/bckmatd2711",
+          "place": "Mây Lang Thang · Lang Biang"
+        },
+        {
+          "date": "2026-11-28",
+          "time": "17:00",
+          "title": "Trung Quân",
+          "url": "https://maylangthang.com.vn/shows/tq-2811",
+          "place": "Mây Lang Thang · Lang Biang"
+        },
+        {
+          "date": "2026-12-04",
+          "time": "17:00",
+          "title": "Jimmii Nguyễn cùng khách mời Ngọc Phạm – Dinh Dzu",
+          "url": "https://maylangthang.com.vn/shows/jm-0512",
+          "place": "Mây Lang Thang · Lang Biang"
+        },
+        {
+          "date": "2026-12-05",
+          "time": "17:00",
+          "title": "Văn Mai Hương",
+          "url": "https://maylangthang.com.vn/shows/vmh-0412",
+          "place": "Mây Lang Thang · Lang Biang"
+        },
+        {
+          "date": "2026-12-12",
+          "time": "17:00",
+          "title": "Phan Mạnh Quỳnh",
+          "url": "https://maylangthang.com.vn/shows/pmq-1212-dl",
+          "place": "Mây Lang Thang · Lang Biang"
+        },
+        {
+          "date": "2026-12-12",
+          "time": "19:00",
+          "title": "Thanh Duy cùng khách mời Phạm Trần Phương",
+          "url": "https://maylangthang.com.vn/shows/td-1212-dl",
+          "place": "Mây Heritage · Ga Đà Lạt"
+        },
+        {
+          "date": "2026-12-18",
+          "time": "17:00",
+          "title": "Trung Quân",
+          "url": "https://maylangthang.com.vn/shows/tq-1812",
+          "place": "Mây Lang Thang · Lang Biang"
+        },
+        {
+          "date": "2026-12-19",
+          "time": "17:00",
+          "title": "Quang Dũng – Lê Hiếu",
+          "url": "https://maylangthang.com.vn/shows/qdlh-dl1912",
+          "place": "Mây Lang Thang · Lang Biang"
+        },
+        {
+          "date": "2026-12-19",
+          "time": "19:00",
+          "title": "Ưng Hoàng Phúc cùng khách mời Thu Thủy",
+          "url": "https://maylangthang.com.vn/shows/uhp-1912-dl",
+          "place": "Mây Heritage · Ga Đà Lạt"
+        },
+        {
+          "date": "2026-12-25",
+          "time": "17:00",
+          "title": "Bạch Công Khanh – Nguyễn Kiều Oanh",
+          "url": "https://maylangthang.com.vn/shows/bck-2512-dl",
+          "place": "Mây Lang Thang · Lang Biang"
+        }
+      ]
+    },
+    {
+      "id": "lululola",
+      "name": "Lululola Show",
+      "kind": "dated",
+      "source_url": "https://lululolashow.com/",
+      "verified_at": "2026-11-23",
+      "intro": "Đêm diễn ca sĩ khách mời. Lịch và giá vé do Lululola Show công bố, có thể thay đổi.",
+      "address": "Lululola Show: số 32/2 đường 3/4, phường Xuân Hương – Đà Lạt. Ngoài các đêm ca sĩ khách mời, Lululola có đêm acoustic lúc 19:30 vào nhiều tối trong tuần, vé từ 150.000đ.",
+      "cta_label": "Xem vé",
+      "items": [
+        {
+          "date": "2026-11-28",
+          "time": "17:00",
+          "title": "Lê Hiếu và Nguyên Hà ft Khánh An Band",
+          "url": "https://lululolashow.com/show/2026-11-28-ns",
+          "price": "Vé từ 490.000đ"
+        },
+        {
+          "date": "2026-12-05",
+          "time": "17:00",
+          "title": "Hà Nhi ft Khánh An Band và Bè The Feel",
+          "url": "https://lululolashow.com/show/2026-12-05-ns",
+          "price": "Vé từ 590.000đ"
+        },
+        {
+          "date": "2026-12-12",
+          "time": "17:00",
+          "title": "Vũ Cát Tường ft 2Up Band",
+          "url": "https://lululolashow.com/show/2026-12-12-ns",
+          "price": "Vé từ 500.000đ"
+        },
+        {
+          "date": "2026-12-19",
+          "time": "17:00",
+          "title": "Võ Hạ Trâm ft Khánh An Band và Bè Cadillac",
+          "url": "https://lululolashow.com/show/2026-12-19-ns",
+          "price": "Vé từ 580.000đ"
+        },
+        {
+          "date": "2026-12-25",
+          "time": "17:00",
+          "title": "Tăng Phúc cùng khách mời Trương Thảo Nhi ft Khánh An Band và Bè Cadillac",
+          "url": "https://lululolashow.com/show/2026-12-25-ns",
+          "price": "Vé từ 500.000đ"
+        },
+        {
+          "date": "2026-12-26",
+          "time": "17:00",
+          "title": "Hiền Hồ và Vương Anh Tú ft On Air Band và Bè Cadillac",
+          "url": "https://lululolashow.com/show/2026-12-26-ns",
+          "price": "Vé từ 590.000đ"
+        },
+        {
+          "date": "2027-01-02",
+          "time": "17:00",
+          "title": "Anh Tú và LyLy ft Mr Quang Band và Bè Cadillac",
+          "url": "https://lululolashow.com/show/2027-01-02-ns",
+          "price": "Vé từ 590.000đ"
+        },
+        {
+          "date": "2027-01-09",
+          "time": "17:00",
+          "title": "Thuỳ Chi và Vương Bình ft Khánh An Band",
+          "url": "https://lululolashow.com/show/2027-01-09-ns",
+          "price": "Vé từ 590.000đ"
+        },
+        {
+          "date": "2027-01-16",
+          "time": "17:00",
+          "title": "Văn Mai Hương ft Khánh An Band",
+          "url": "https://lululolashow.com/show/2027-01-16-ns",
+          "price": "Vé từ 520.000đ"
+        },
+        {
+          "date": "2027-02-10",
+          "time": "17:00",
+          "title": "Vicky Nhung và Chu Thuý Quỳnh",
+          "url": "https://lululolashow.com/show/2027-02-10-db85",
+          "price": "Vé từ 390.000đ"
+        }
+      ]
+    },
+    {
+      "id": "sense-acoustic",
+      "name": "Sense Acoustic Cafe",
+      "kind": "weekly",
+      "source_url": "https://sensegroup.vn/sense-acoustic-cafe/",
+      "verified_at": "2026-11-23",
+      "intro": "Góc nhỏ rất riêng giữa một Đà Lạt yên bình. Quán mở cửa 17:00 – 23:00, nhạc sống 20:00 – 22:00 cả 7 tối trong tuần. Lịch band có thể thay đổi theo tuần.",
+      "address": "Sense Acoustic Cafe: 304 Hai Bà Trưng, Đà Lạt. Phiếu nước từ 115.000đ.",
+      "phone": "0912097502",
+      "phone_label": "Đặt bàn 0912 097 502",
+      "cta_label": "Xem lịch",
+      "items": [
+        {
+          "weekday": 1,
+          "weekday_label": "Thứ 2",
+          "time": "20:00 – 22:00",
+          "title": "Sharky Band",
+          "note": "Những bản tình ca sâu lắng mở đầu tuần.",
+          "url": "https://sensegroup.vn/sense-acoustic-cafe/#lich-nhac"
+        },
+        {
+          "weekday": 2,
+          "weekday_label": "Thứ 3",
+          "time": "20:00 – 22:00",
+          "title": "Chill Band",
+          "note": "Một tối thư giãn đúng như tên gọi.",
+          "url": "https://sensegroup.vn/sense-acoustic-cafe/#lich-nhac"
+        },
+        {
+          "weekday": 3,
+          "weekday_label": "Thứ 4",
+          "time": "20:00 – 22:00",
+          "title": "Sunsee Band",
+          "note": "Năng lượng tươi mới, trẻ trung.",
+          "url": "https://sensegroup.vn/sense-acoustic-cafe/#lich-nhac"
+        },
+        {
+          "weekday": 4,
+          "weekday_label": "Thứ 5",
+          "time": "20:00 – 22:00",
+          "title": "Sense Band",
+          "note": "Band nhạc “chủ nhà”, đa sắc màu.",
+          "url": "https://sensegroup.vn/sense-acoustic-cafe/#lich-nhac"
+        },
+        {
+          "weekday": 5,
+          "weekday_label": "Thứ 6",
+          "time": "20:00 – 22:00",
+          "title": "Wolf Band",
+          "note": "Cá tính, mạnh mẽ và nội lực.",
+          "url": "https://sensegroup.vn/sense-acoustic-cafe/#lich-nhac"
+        },
+        {
+          "weekday": 6,
+          "weekday_label": "Thứ 7",
+          "time": "20:00 – 22:00",
+          "title": "Sense Band",
+          "note": "Những bản hit hâm nóng đêm cuối tuần.",
+          "url": "https://sensegroup.vn/sense-acoustic-cafe/#lich-nhac"
+        },
+        {
+          "weekday": 0,
+          "weekday_label": "Chủ nhật",
+          "time": "20:00 – 22:00",
+          "title": "Wolf Band",
+          "note": "Khép lại tuần bằng những giai điệu bùng nổ.",
+          "url": "https://sensegroup.vn/sense-acoustic-cafe/#lich-nhac"
+        }
+      ]
+    }
+  ]
+}

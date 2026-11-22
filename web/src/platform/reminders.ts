@@ -3,7 +3,7 @@
  * trước giờ bắt đầu 2 tiếng. Bỏ lưu thì thông báo cũng được gỡ.
  */
 import { LocalNotifications } from "@capacitor/local-notifications";
-import { PROGRAMS } from "@shared/data/festival";
+import { PROGRAMS } from "../data/festival";
 
 const LEAD_MS = 2 * 60 * 60 * 1000;
 

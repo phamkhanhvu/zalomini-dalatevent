@@ -1,0 +1,37 @@
+# Mỗi lần đẩy code lên nhánh main, GitHub tự đóng gói và đưa bản Testing lên Zalo Mini App.
+# Cần tạo secret ZMP_TOKEN trong Settings > Secrets and variables > Actions (xem README).
+name: Deploy Zalo Mini App
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: zmp-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      APP_ID: "910950117743035041"
+      ZMP_TOKEN: ${{ secrets.ZMP_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Deploy bản Testing lên Zalo
+        if: env.ZMP_TOKEN != ''
+        run: |
+          npm install -g zmp-cli
+          printf 'APP_ID=%s\nZMP_TOKEN=%s\n' "$APP_ID" "$ZMP_TOKEN" > .env
+          zmp deploy --passive --existing --testing --desc "GitHub ${GITHUB_SHA::7}"
+      - name: Chưa có ZMP_TOKEN
+        if: env.ZMP_TOKEN == ''
+        run: echo "::warning::Chưa cấu hình secret ZMP_TOKEN nên chỉ build, chưa deploy lên Zalo."

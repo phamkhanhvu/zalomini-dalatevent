@@ -1,0 +1,15 @@
+{
+  "app": {
+    "title": "DalatEvent",
+    "textColor": "black",
+    "leftButton": "none",
+    "statusBar": "transparent",
+    "selfControlLoading": false,
+    "hideAndroidBottomNavigationBar": false,
+    "hideIOSSafeAreaBottom": false,
+    "actionBarHidden": true
+  },
+  "listCSS": [],
+  "listSyncJS": [],
+  "listAsyncJS": []
+}

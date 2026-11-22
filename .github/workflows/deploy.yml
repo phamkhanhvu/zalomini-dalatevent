@@ -31,7 +31,7 @@ jobs:
         run: |
           npm install -g zmp-cli
           printf 'APP_ID=%s\nZMP_TOKEN=%s\n' "$APP_ID" "$ZMP_TOKEN" > .env
-          zmp deploy --passive --existing --testing --desc "GitHub ${GITHUB_SHA::7}"
+          zmp deploy --passive --testing --desc "GitHub ${GITHUB_SHA::7}"
       - name: Chưa có ZMP_TOKEN
         if: env.ZMP_TOKEN == ''
         run: echo "::warning::Chưa cấu hình secret ZMP_TOKEN nên chỉ build, chưa deploy lên Zalo."

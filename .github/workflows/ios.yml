@@ -1,0 +1,40 @@
+# Kiểm tra app iOS: đóng gói phần web rồi biên dịch thử bằng Xcode (chạy trên máy ảo, chưa ký).
+# Khi đã có tài khoản Apple Developer, thêm bước ký và tải lên TestFlight (xem ios-app/README.md).
+name: iOS app
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "ios-app/**"
+      - "src/**"
+      - ".github/workflows/ios.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ios-build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-26
+    defaults:
+      run:
+        working-directory: ios-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: ios-app/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npx cap sync ios
+      - name: Biên dịch thử cho máy ảo iPhone
+        run: |
+          xcodebuild -version
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \
+            -sdk iphonesimulator -destination "generic/platform=iOS Simulator" \
+            CODE_SIGNING_ALLOWED=NO build | tail -n 40

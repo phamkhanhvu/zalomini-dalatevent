@@ -1,0 +1,44 @@
+/* Phần giao diện riêng của app iOS (thay cho zaui.css của Zalo) */
+html, body, #app { height: 100%; margin: 0; }
+body {
+  --zaui-safe-area-inset-top: env(safe-area-inset-top, 0px);
+  background: #FFF8EF;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+*, *::before, *::after { box-sizing: border-box; }
+button { font: inherit; }
+
+.nx-nav { display: flex; padding-bottom: env(safe-area-inset-bottom, 0px); }
+.nx-nav .zaui-bottom-navigation-item {
+  flex: 1; min-height: 56px; border: 0; background: none; padding: 8px 2px 6px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+}
+.nx-nav-icon { display: flex; height: 24px; align-items: center; }
+.nx-nav-label { font-size: 11px; font-weight: 600; line-height: 1.2; }
+
+.nx-snack {
+  position: fixed; left: 16px; right: 16px; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); z-index: 60;
+  padding: 12px 16px; border-radius: 14px; background: #1B1340; color: #fff; font-size: 14px; text-align: center;
+  opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity .2s, transform .2s;
+}
+.nx-snack.is-on { opacity: 1; transform: none; }
+
+.nx-sheet { position: fixed; inset: 0; z-index: 50; visibility: hidden; transition: visibility 0s .25s; }
+.nx-sheet.is-on { visibility: visible; transition-delay: 0s; }
+.nx-sheet-mask { position: absolute; inset: 0; background: rgba(27,19,64,.45); opacity: 0; transition: opacity .25s; }
+.nx-sheet.is-on .nx-sheet-mask { opacity: 1; }
+.nx-sheet-panel {
+  position: absolute; left: 0; right: 0; bottom: 0; max-height: 88%; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  background: #fff; border-radius: 20px 20px 0 0; transform: translateY(100%); transition: transform .25s ease;
+}
+.nx-sheet.is-on .nx-sheet-panel { transform: none; }
+.nx-sheet-handle { display: block; width: 100%; height: 24px; border: 0; background: none; position: relative; }
+.nx-sheet-handle::after {
+  content: ""; position: absolute; left: 50%; top: 9px; width: 40px; height: 5px; margin-left: -20px;
+  border-radius: 3px; background: rgba(27,19,64,.2);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nx-snack, .nx-sheet-mask, .nx-sheet-panel { transition: none; }
+}

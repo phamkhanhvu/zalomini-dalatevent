@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSnackbar } from "zmp-ui";
 import { Program } from "../data/festival";
 import { useSaved } from "../utils/saved";
+import { IS_ZALO, SHARE_FAIL } from "../utils/platform";
 import { ProgramSheet } from "./program-sheet";
 
 /** Gom phần mở chi tiết + lưu chương trình để các trang dùng chung */
@@ -13,9 +14,9 @@ export function useProgramSheet() {
   const toggleSave = (p: Program) => {
     const on = saved.toggle(p.id);
     openSnackbar({
-      text: on ? "Đã lưu vào mục Đã lưu" : "Đã bỏ lưu",
+      text: on ? (IS_ZALO ? "Đã lưu vào mục Đã lưu" : "Đã lưu. App sẽ nhắc bạn trước giờ diễn 2 tiếng") : "Đã bỏ lưu",
       type: "success",
-      duration: 1800,
+      duration: IS_ZALO ? 1800 : 2600,
     });
   };
 
@@ -26,7 +27,7 @@ export function useProgramSheet() {
       onClose={() => setOpen(null)}
       onToggleSave={toggleSave}
       onShared={(ok) => {
-        if (!ok) openSnackbar({ text: "Chưa chia sẻ được, hãy thử lại trong Zalo", duration: 2200 });
+        if (!ok) openSnackbar({ text: SHARE_FAIL, duration: 2200 });
       }}
     />
   );

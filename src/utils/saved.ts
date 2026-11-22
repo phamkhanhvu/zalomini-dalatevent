@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { storage } from "./zalo";
 
-const KEY = "dalatevent.saved.v1";
+export const SAVED_KEY = "dalatevent.saved.v1";
+/** Phát ra mỗi khi danh sách đã lưu thay đổi (app iOS dùng để hẹn thông báo nhắc lịch) */
+export const SAVED_EVENT = "dalatevent:saved";
+const KEY = SAVED_KEY;
 const listeners = new Set<() => void>();
 
 function read(): string[] {
@@ -38,6 +41,11 @@ export function useSaved() {
     cache = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id];
     storage.set(KEY, JSON.stringify(cache));
     listeners.forEach((fn) => fn());
+    try {
+      window.dispatchEvent(new Event(SAVED_EVENT));
+    } catch (e) {
+      /* bỏ qua */
+    }
     return cache.includes(id);
   }, []);
 

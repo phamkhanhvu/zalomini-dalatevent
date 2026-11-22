@@ -5,6 +5,7 @@ import { FESTIVAL, Happening, HAPPENING_FALLBACK, PROGRAMS, STATS_2024 } from ".
 import { countdown, statusOf } from "../utils/time";
 import { loadHappening } from "../utils/live";
 import { addFavorite, callPhone, openUrl, shareText } from "../utils/zalo";
+import { IS_ZALO, SHARE_FAIL } from "../utils/platform";
 import { ProgramCard } from "../components/program-card";
 import { useProgramSheet } from "../components/use-program-sheet";
 import { IconArrow, IconGlobe, IconHeart, IconPhone, IconPin, IconShare } from "../components/icons";
@@ -62,7 +63,7 @@ const HomePage: FC = () => {
     <div className="scroll page">
       <header className="hero">
         <div className="brand">
-          <span className="brand-name"><img className="brand-logo" src={logoImg} alt="" width={34} height={34} />Dalat<b>Event</b></span>
+          <span className="brand-name"><img className="brand-logo" src={logoImg} alt="" width={34} height={34} /><span>Dalat<b>Event</b></span></span>
           <span className="brand-tag">Kỳ thứ XI</span>
         </div>
         <p className="eyebrow">Tháng 12.2026 · Đà Lạt, Lâm Đồng</p>
@@ -182,25 +183,27 @@ const HomePage: FC = () => {
                 `Lịch ${FESTIVAL.name} ${FESTIVAL.edition}: 11 chương trình chính, khai mạc ${FESTIVAL.openingLabel.toLowerCase()}${FESTIVAL.openingTentative ? " (dự kiến)" : ""}. ${FESTIVAL.website}`,
                 "DalatEvent"
               );
-              if (!ok) openSnackbar({ text: "Chưa chia sẻ được, hãy thử lại trong Zalo", duration: 2200 });
+              if (!ok) openSnackbar({ text: SHARE_FAIL, duration: 2200 });
             }}
           >
             <IconShare />Chia sẻ
           </button>
-          <button
-            type="button"
-            className="act"
-            onClick={async () => {
-              const ok = await addFavorite();
-              openSnackbar({
-                text: ok ? "Đã thêm DalatEvent vào mục yêu thích" : "Chưa thêm được, hãy thử lại trong Zalo",
-                type: ok ? "success" : undefined,
-                duration: 2200,
-              });
-            }}
-          >
-            <IconHeart />Yêu thích
-          </button>
+          {IS_ZALO && (
+            <button
+              type="button"
+              className="act"
+              onClick={async () => {
+                const ok = await addFavorite();
+                openSnackbar({
+                  text: ok ? "Đã thêm DalatEvent vào mục yêu thích" : "Chưa thêm được, hãy thử lại trong Zalo",
+                  type: ok ? "success" : undefined,
+                  duration: 2200,
+                });
+              }}
+            >
+              <IconHeart />Yêu thích
+            </button>
+          )}
         </div>
         <p className="muted small">© 2026 DalatEvent · Sense Group · 304 Hai Bà Trưng, Đà Lạt</p>
       </section>

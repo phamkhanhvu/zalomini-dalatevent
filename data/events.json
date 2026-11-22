@@ -1,0 +1,309 @@
+{
+  "schema": 1,
+  "about": "Nguồn dữ liệu sự kiện của DalatEvent. Sửa file này rồi chạy `npm run validate:data`. Mô tả các trường: docs/architecture.md.",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "updated_at": "2026-11-23T06:30:00+07:00",
+  "series": [
+    {
+      "id": "festival-hoa-da-lat-2026",
+      "name": "Festival Hoa Đà Lạt lần thứ XI",
+      "start_at": "2026-12-19T20:00:00+07:00",
+      "end_at": "2027-01-03T23:59:59+07:00"
+    }
+  ],
+  "venues": [
+    {
+      "id": "lam-vien",
+      "name": "Quảng trường Lâm Viên",
+      "map_query": "Quảng trường Lâm Viên, Đà Lạt",
+      "lat": null,
+      "lng": null
+    },
+    {
+      "id": "xuan-huong",
+      "name": "Hồ Xuân Hương",
+      "map_query": "Hồ Xuân Hương, Đà Lạt",
+      "lat": null,
+      "lng": null
+    },
+    {
+      "id": "vuon-hoa",
+      "name": "Vườn hoa Đà Lạt",
+      "map_query": "Vườn hoa thành phố Đà Lạt",
+      "lat": null,
+      "lng": null
+    },
+    {
+      "id": "tqt",
+      "name": "Công viên Trần Quốc Toản",
+      "map_query": "Công viên Trần Quốc Toản, Đà Lạt",
+      "lat": null,
+      "lng": null
+    },
+    {
+      "id": "golf",
+      "name": "Dalat Palace Golf Club",
+      "map_query": "Dalat Palace Golf Club, Đà Lạt",
+      "lat": null,
+      "lng": null
+    },
+    {
+      "id": "sgdl",
+      "name": "Khách sạn Sài Gòn – Đà Lạt",
+      "map_query": "Khách sạn Sài Gòn Đà Lạt, Đà Lạt",
+      "lat": null,
+      "lng": null
+    },
+    {
+      "id": "htm",
+      "name": "Đường Hồ Tùng Mậu",
+      "map_query": "Đường Hồ Tùng Mậu, Đà Lạt",
+      "lat": null,
+      "lng": null
+    }
+  ],
+  "events": [
+    {
+      "id": "trong-hoa",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Chiến dịch “Người người trồng hoa, nhà nhà trồng hoa, cây xanh”",
+      "category": "khong-gian-hoa",
+      "description": "Chiến dịch chào mừng Festival Hoa Đà Lạt lần thứ XI.",
+      "venue_id": null,
+      "venue_name": "Toàn tỉnh Lâm Đồng",
+      "status": "published",
+      "tentative": false,
+      "sessions": [
+        {
+          "start_at": "2026-11-01T00:00:00+07:00",
+          "end_at": "2027-01-03T23:59:00+07:00",
+          "all_day": true
+        }
+      ],
+      "source_url": null,
+      "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
+      "verified_at": null,
+      "updated_at": "2026-11-23T06:30:00+07:00"
+    },
+    {
+      "id": "hoa-lan",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Triển lãm quốc tế hoa lan Hồ Điệp Lâm Đồng và triển lãm hoa tươi nghệ thuật quốc tế",
+      "category": "trien-lam",
+      "description": "Quy tụ đơn vị trong và ngoài nước.",
+      "venue_id": "tqt",
+      "venue_name": "Công viên Trần Quốc Toản",
+      "status": "published",
+      "tentative": true,
+      "sessions": [
+        {
+          "start_at": "2026-12-01T00:00:00+07:00",
+          "end_at": "2026-12-25T23:59:00+07:00",
+          "all_day": true
+        }
+      ],
+      "source_url": null,
+      "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
+      "verified_at": null,
+      "updated_at": "2026-11-23T06:30:00+07:00"
+    },
+    {
+      "id": "khong-gian-hoa",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Không gian hoa quanh hồ Xuân Hương",
+      "category": "khong-gian-hoa",
+      "description": "Các tiểu công viên Trần Hưng Đạo, Trần Quốc Toản, Yersin và nhiều tuyến đường có bờ kè.",
+      "venue_id": "xuan-huong",
+      "venue_name": "Quanh hồ Xuân Hương",
+      "status": "published",
+      "tentative": true,
+      "sessions": [
+        {
+          "start_at": "2026-12-18T00:00:00+07:00",
+          "end_at": "2027-01-03T23:59:00+07:00",
+          "all_day": true
+        }
+      ],
+      "source_url": null,
+      "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
+      "verified_at": null,
+      "updated_at": "2026-11-23T06:30:00+07:00"
+    },
+    {
+      "id": "cay-canh",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Trưng bày, triển lãm hoa và cây cảnh quốc tế",
+      "category": "trien-lam",
+      "description": "Hoa và cây cảnh từ nhiều quốc gia.",
+      "venue_id": "vuon-hoa",
+      "venue_name": "Vườn hoa Đà Lạt",
+      "status": "published",
+      "tentative": false,
+      "sessions": [
+        {
+          "start_at": "2026-12-18T00:00:00+07:00",
+          "end_at": "2027-01-03T23:59:00+07:00",
+          "all_day": true
+        }
+      ],
+      "source_url": null,
+      "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
+      "verified_at": null,
+      "updated_at": "2026-11-23T06:30:00+07:00"
+    },
+    {
+      "id": "golf",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Dalat Palace Floral Golf Invitational",
+      "category": "hoi-thao-the-thao",
+      "description": "Giải golf mang chủ đề hoa.",
+      "venue_id": "golf",
+      "venue_name": "Dalat Palace Golf Club",
+      "status": "published",
+      "tentative": false,
+      "sessions": [
+        {
+          "start_at": "2026-12-19T00:00:00+07:00",
+          "end_at": "2026-12-19T23:59:00+07:00",
+          "all_day": true
+        }
+      ],
+      "source_url": null,
+      "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
+      "verified_at": null,
+      "updated_at": "2026-11-23T06:30:00+07:00"
+    },
+    {
+      "id": "khai-mac",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Khai mạc Festival Hoa Đà Lạt lần thứ XI",
+      "category": "le-hoi",
+      "description": "Đêm khai mạc kết hợp âm nhạc, ánh sáng và công nghệ trình diễn tại Quảng trường Lâm Viên. Truyền hình trực tiếp trên VTV.",
+      "venue_id": "lam-vien",
+      "venue_name": "Quảng trường Lâm Viên",
+      "status": "published",
+      "tentative": false,
+      "sessions": [
+        {
+          "start_at": "2026-12-19T20:00:00+07:00",
+          "end_at": "2026-12-19T22:00:00+07:00",
+          "all_day": false
+        }
+      ],
+      "source_url": null,
+      "source_note": "Ngày giờ do chủ dự án ấn định ngày 23.11.2026",
+      "verified_at": "2026-11-23",
+      "updated_at": "2026-11-23T06:30:00+07:00"
+    },
+    {
+      "id": "hoi-thao",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Hội thảo khoa học, công nghệ và đổi mới sáng tạo",
+      "category": "hoi-thao-the-thao",
+      "description": "Phát triển bền vững chuỗi giá trị hoa Đà Lạt.",
+      "venue_id": "sgdl",
+      "venue_name": "Khách sạn Sài Gòn – Đà Lạt",
+      "status": "published",
+      "tentative": true,
+      "sessions": [
+        {
+          "start_at": "2026-12-22T00:00:00+07:00",
+          "end_at": "2026-12-22T23:59:00+07:00",
+          "all_day": true
+        }
+      ],
+      "source_url": null,
+      "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
+      "verified_at": null,
+      "updated_at": "2026-11-23T06:30:00+07:00"
+    },
+    {
+      "id": "tho-cam",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Lễ hội Văn hóa Thổ cẩm Việt Nam lần thứ III",
+      "category": "le-hoi",
+      "description": "Lễ hội văn hóa thổ cẩm Việt Nam năm 2026.",
+      "venue_id": "lam-vien",
+      "venue_name": "Quảng trường Lâm Viên",
+      "status": "published",
+      "tentative": true,
+      "sessions": [
+        {
+          "start_at": "2026-12-22T00:00:00+07:00",
+          "end_at": "2026-12-23T23:59:00+07:00",
+          "all_day": true
+        }
+      ],
+      "source_url": null,
+      "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
+      "verified_at": null,
+      "updated_at": "2026-11-23T06:30:00+07:00"
+    },
+    {
+      "id": "pho-tra",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Phố trà, cà phê, rượu vang, OCOP và Phiên chợ rau – hoa",
+      "category": "khong-gian-hoa",
+      "description": "Giới thiệu thương hiệu “Đà Lạt kết tinh kỳ diệu từ đất lành”.",
+      "venue_id": "lam-vien",
+      "venue_name": "Quảng trường Lâm Viên, đường Hồ Tùng Mậu",
+      "status": "published",
+      "tentative": true,
+      "sessions": [
+        {
+          "start_at": "2026-12-24T00:00:00+07:00",
+          "end_at": "2027-01-03T23:59:00+07:00",
+          "all_day": true
+        }
+      ],
+      "source_url": null,
+      "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
+      "verified_at": null,
+      "updated_at": "2026-11-23T06:30:00+07:00"
+    },
+    {
+      "id": "carnival",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Carnival ban nhạc và nhóm nhảy hiện đại",
+      "category": "le-hoi",
+      "description": "Âm nhạc và vũ đạo đường phố.",
+      "venue_id": "xuan-huong",
+      "venue_name": "Quanh hồ Xuân Hương",
+      "status": "published",
+      "tentative": true,
+      "sessions": [
+        {
+          "start_at": "2026-12-31T00:00:00+07:00",
+          "end_at": "2026-12-31T23:59:00+07:00",
+          "all_day": true
+        }
+      ],
+      "source_url": null,
+      "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
+      "verified_at": null,
+      "updated_at": "2026-11-23T06:30:00+07:00"
+    },
+    {
+      "id": "be-mac",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Chào năm mới 2027 kết hợp bế mạc Festival",
+      "category": "le-hoi",
+      "description": "Truyền hình trực tiếp trên Báo và Phát thanh, Truyền hình Lâm Đồng.",
+      "venue_id": "lam-vien",
+      "venue_name": "Quảng trường Lâm Viên",
+      "status": "published",
+      "tentative": false,
+      "sessions": [
+        {
+          "start_at": "2026-12-31T20:00:00+07:00",
+          "end_at": "2026-12-31T22:00:00+07:00",
+          "all_day": false
+        }
+      ],
+      "source_url": null,
+      "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
+      "verified_at": null,
+      "updated_at": "2026-11-23T06:30:00+07:00"
+    }
+  ]
+}

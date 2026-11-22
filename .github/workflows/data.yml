@@ -1,0 +1,23 @@
+# Kiểm tra dữ liệu sự kiện mỗi khi data/events.json thay đổi. Có lỗi thì báo đỏ, không tự sửa gì.
+name: Kiểm tra dữ liệu sự kiện
+
+on:
+  push:
+    paths:
+      - "data/**"
+      - "scripts/validate-events.mjs"
+      - ".github/workflows/data.yml"
+  pull_request:
+    paths:
+      - "data/**"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/validate-events.mjs

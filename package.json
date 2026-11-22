@@ -18,7 +18,8 @@
     "dev": "vite .",
     "build": "vite build . --outDir www --emptyOutDir",
     "deploy": "zmp deploy",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "validate:data": "node scripts/validate-events.mjs"
   },
   "dependencies": {
     "@fontsource/be-vietnam-pro": "^5.0.0",

@@ -116,3 +116,13 @@ Mọi thay đổi trang công khai làm trên bản nháp/nhánh riêng, anh duy
 - Quyền xem dự án Firebase `quay-hang-da-lat` (hoặc anh dán nội dung Firestore Rules và RTDB Rules).
 - Xác nhận ngày khai mạc kèm nguồn.
 - Quyết định về logo ở mục 5.1.
+
+## 10. Quyết định của chủ sản phẩm ngày 23.11.2026 và việc đã làm
+
+| Quyết định | Đã làm | Bằng chứng |
+|---|---|---|
+| Logo dùng đúng file đã gửi | Đầu trang web, favicon, đầu trang Mini App, icon và màn hình chờ app iOS đều dùng nguyên logo chính thức (chỉ thu nhỏ đều hai chiều, đặt trên nền trắng). Bỏ bản cắt riêng phần ghim và chữ tự dựng | Trang 1337 khối 1; media 1563, 1564; `src/static/img/dalatevent-logo.png`; `ios-app/assets/` |
+| Khai mạc ấn định 19.12 | Sửa thẻ khai mạc trong mục "Đang diễn ra" trên web và dữ liệu app thành 20:00 ngày 19.12.2026; tác vụ cập nhật hằng ngày được dặn giữ ngày này | Trang 1337 khối 2; `src/data/festival.ts` |
+| Em tự soạn quy tắc bảo mật Firebase | Đã soạn, chưa áp dụng lên Firebase | `docs/firebase/` |
+
+Còn lại: bản tiếng Anh, tiếng Hàn và trang Về chúng tôi chưa đổi logo.

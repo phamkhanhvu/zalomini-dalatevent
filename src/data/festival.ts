@@ -45,17 +45,17 @@ export const FESTIVAL = {
   edition: "lần thứ XI",
   year: 2026,
   theme: "Bản giao hòa của sắc hoa và âm nhạc",
-  /** Đêm khai mạc — phương án dự kiến theo cuộc họp ngày 18.11.2026 của UBND tỉnh Lâm Đồng */
-  opening: "2026-12-12T20:00:00+07:00",
-  openingLabel: "Tối 12.12.2026",
-  openingTentative: true,
+  /** Đêm khai mạc — ngày do chủ dự án ấn định (23.11.2026) */
+  opening: "2026-12-19T20:00:00+07:00",
+  openingLabel: "Tối 19.12.2026",
+  openingTentative: false,
   closing: "2026-12-31T22:00:00+07:00",
   end: "2027-01-03T23:59:59+07:00",
   website: "https://dalatevent.com/",
   registerUrl: "https://dalatevent.com/#lien-he",
   hotline: "0986338656",
   hotlineLabel: "0986 338 656",
-  updated: "22.11.2026",
+  updated: "23.11.2026",
 };
 
 export const PROGRAMS: Program[] = [
@@ -91,12 +91,11 @@ export const PROGRAMS: Program[] = [
     desc: "Đêm khai mạc kết hợp âm nhạc, ánh sáng và công nghệ trình diễn tại Quảng trường Lâm Viên. Truyền hình trực tiếp trên VTV.",
     venue: "Quảng trường Lâm Viên",
     mapQuery: "Quảng trường Lâm Viên, Đà Lạt",
-    start: "2026-12-12T20:00:00+07:00",
-    end: "2026-12-12T22:00:00+07:00",
-    day: "12.12",
+    start: "2026-12-19T20:00:00+07:00",
+    end: "2026-12-19T22:00:00+07:00",
+    day: "19.12",
     sub: "20:00",
-    tentative: true,
-    note: "Theo cuộc họp ngày 18.11 của UBND tỉnh Lâm Đồng, lễ khai mạc dự kiến tổ chức tối 12.12, sớm hơn một tuần so với kế hoạch trước (19.12). Lịch chính thức có thể còn thay đổi.",
+    tentative: false,
   },
   {
     id: "khong-gian-hoa",
@@ -203,6 +202,8 @@ export const PROGRAMS: Program[] = [
     tentative: false,
   },
 ];
+/** Xếp theo ngày bắt đầu */
+PROGRAMS.sort((a, b) => a.start.localeCompare(b.start));
 
 export interface Venue {
   id: string;

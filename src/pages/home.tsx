@@ -16,7 +16,7 @@ import g2 from "../static/img/ho-xuan-huong-suong-som.jpg";
 import g3 from "../static/img/cho-da-lat-mua-hoa.jpg";
 import g4 from "../static/img/ho-xuan-huong-hoang-hon.jpg";
 import g5 from "../static/img/ga-da-lat-vuon-hoa.jpg";
-import logoImg from "../static/img/dalatevent-icon.png";
+import logoImg from "../static/img/dalatevent-logo.png";
 
 const GALLERY = [
   { src: g1, alt: "Quảng trường Lâm Viên mùa hoa" },
@@ -63,7 +63,7 @@ const HomePage: FC = () => {
     <div className="scroll page">
       <header className="hero">
         <div className="brand">
-          <span className="brand-name"><img className="brand-logo" src={logoImg} alt="" width={34} height={34} /><span>Dalat<b>Event</b></span></span>
+          <img className="brand-logo" src={logoImg} alt="DalatEvent.com" width={90} height={72} />
           <span className="brand-tag">Kỳ thứ XI</span>
         </div>
         <p className="eyebrow">Tháng 12.2026 · Đà Lạt, Lâm Đồng</p>

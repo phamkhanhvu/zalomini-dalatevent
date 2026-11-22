@@ -1,0 +1,58 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "presence": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid",
+        ".validate": "newData.hasChildren(['t', 'n', 'x', 'z'])",
+        "t": { ".validate": "newData.isNumber() && newData.val() <= now" },
+        "n": { ".validate": "newData.isString() && newData.val().length <= 16" },
+        "x": { ".validate": "newData.isNumber()" },
+        "z": { ".validate": "newData.isNumber()" },
+        "a": { ".validate": "newData.isNumber()" },
+        "u": { ".validate": "newData.isNumber()" },
+        "m": { ".validate": "newData.isNumber() && (newData.val() === 0 || newData.val() === 1)" },
+        "o": { ".validate": "newData.isString() && newData.val().length <= 32" },
+        "lv": { ".validate": "newData.isNumber() && newData.val() >= 1" },
+        "mp": { ".validate": "newData.isString() && newData.val().length <= 8" },
+        "$other": { ".validate": false }
+      }
+    },
+
+    "booths": {
+      ".read": true,
+      "$event": {
+        "$booth": {
+          ".write": "auth != null && newData.exists() && newData.child('uid').val() === auth.uid && ( !data.exists() || (data.child('uid').val() === auth.uid && newData.child('price').val() === data.child('price').val()) || (data.child('uid').val() !== auth.uid && newData.child('price').val() >= data.child('price').val() * 1.5) )",
+          ".validate": "newData.hasChildren(['uid', 'owner', 'brand', 'color', 'price'])",
+          "uid": { ".validate": "newData.isString()" },
+          "owner": { ".validate": "newData.isString() && newData.val().length <= 16" },
+          "brand": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 24" },
+          "color": { ".validate": "newData.isString() && newData.val().length <= 16" },
+          "price": { ".validate": "newData.isNumber() && newData.val() > 0" },
+          "t": { ".validate": "newData.isNumber() && newData.val() <= now" },
+          "dc": { ".validate": "newData.isString() && newData.val().length <= 80" },
+          "$other": { ".validate": false }
+        }
+      }
+    },
+
+    "payouts": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        "$pid": {
+          ".write": "auth != null && ( (auth.uid === $uid && !newData.exists()) || (!data.exists() && newData.exists()) )",
+          ".validate": "newData.hasChildren(['coins', 't'])",
+          "coins": { ".validate": "newData.isNumber() && newData.val() > 0 && newData.val() <= 50000000" },
+          "booth": { ".validate": "newData.isString() && newData.val().length <= 40" },
+          "by": { ".validate": "newData.isString() && newData.val().length <= 16" },
+          "t": { ".validate": "newData.isNumber() && newData.val() <= now" },
+          "$other": { ".validate": false }
+        }
+      }
+    }
+  }
+}

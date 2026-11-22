@@ -1,0 +1,44 @@
+rules_version = '2';
+
+// Quy tắc bảo mật Cloud Firestore cho dự án quay-hang-da-lat (game DalatEvent).
+// Soạn theo đúng những gì mã nguồn game đang đọc/ghi (index.html, commit 23559b9).
+// Mặc định: khóa hết. Chỉ mở đúng hai nơi game đang dùng.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+
+    // Tiến trình chơi của từng người: chỉ chính chủ đọc và ghi.
+    // Game ghi { savedAt, state } (state là toàn bộ tiến trình, dưới 250 KB).
+    match /saves/{uid} {
+      allow read, delete: if isOwner(uid);
+      allow create, update: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['savedAt', 'state'])
+        && request.resource.data.state is map;
+    }
+
+    // Bảng xếp hạng: ai cũng xem được (tối đa 50 dòng mỗi lần),
+    // mỗi người chỉ ghi được dòng của chính mình và đúng 5 trường.
+    match /board/{uid} {
+      allow get: if true;
+      allow list: if request.query.limit <= 50;
+      allow delete: if isOwner(uid);
+      allow create, update: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['uid', 'name', 'level', 'score', 'updated'])
+        && request.resource.data.uid == uid
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 40
+        && request.resource.data.level is number
+        && request.resource.data.level >= 1
+        && request.resource.data.score is number
+        && request.resource.data.score >= 0
+        && request.resource.data.updated is number;
+    }
+
+    // Mọi thứ khác: không ai đọc, không ai ghi.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

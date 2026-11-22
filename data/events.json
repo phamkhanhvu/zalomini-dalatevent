@@ -2,12 +2,12 @@
   "schema": 1,
   "about": "Nguồn dữ liệu sự kiện của DalatEvent. Sửa file này rồi chạy `npm run validate:data`. Mô tả các trường: docs/architecture.md.",
   "timezone": "Asia/Ho_Chi_Minh",
-  "updated_at": "2026-11-23T06:45:00+07:00",
+  "updated_at": "2026-11-23T06:50:00+07:00",
   "series": [
     {
       "id": "festival-hoa-da-lat-2026",
       "name": "Festival Hoa Đà Lạt lần thứ XI",
-      "start_at": "2026-12-19T20:00:00+07:00",
+      "start_at": "2026-12-12T20:00:00+07:00",
       "end_at": "2027-01-03T23:59:59+07:00"
     }
   ],
@@ -23,13 +23,6 @@
       "id": "xuan-huong",
       "name": "Hồ Xuân Hương",
       "map_query": "Hồ Xuân Hương, Đà Lạt",
-      "lat": null,
-      "lng": null
-    },
-    {
-      "id": "vuon-hoa",
-      "name": "Vườn hoa Đà Lạt",
-      "map_query": "Vườn hoa thành phố Đà Lạt",
       "lat": null,
       "lng": null
     },
@@ -93,7 +86,7 @@
       "description": "Quy tụ đơn vị trong và ngoài nước.",
       "venue_id": "tqt",
       "venue_name": "Công viên Trần Quốc Toản",
-      "status": "pending",
+      "status": "draft",
       "tentative": true,
       "sessions": [
         {
@@ -105,8 +98,8 @@
       "source_url": null,
       "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
       "verified_at": null,
-      "updated_at": "2026-11-23T06:45:00+07:00",
-      "note": "Không thấy chương trình này trên cổng chính thức ngày 23.11.2026 (cổng chỉ có \"Trưng bày, triển lãm hoa, cây cảnh\" 01–25.12 tại Công viên Trần Quốc Toản). Web và app vẫn đang hiển thị theo poster."
+      "updated_at": "2026-11-23T06:50:00+07:00",
+      "note": "Không có trên cổng chính thức ngày 23.11.2026; đã gỡ khỏi web và app theo quyết định của chủ dự án (sửa cho khớp cổng chính thức)."
     },
     {
       "id": "cay-canh",
@@ -130,6 +123,30 @@
       "verified_at": "2026-11-23",
       "updated_at": "2026-11-23T06:45:00+07:00",
       "organizer": "Hiệp hội Hoa Đà Lạt"
+    },
+    {
+      "id": "khai-mac",
+      "series": "festival-hoa-da-lat-2026",
+      "title": "Khai mạc Festival Hoa Đà Lạt lần thứ XI",
+      "category": "le-hoi",
+      "description": "Đêm khai mạc kết hợp âm nhạc, ánh sáng và công nghệ trình diễn tại Quảng trường Lâm Viên. Truyền hình trực tiếp trên VTV.",
+      "venue_id": "lam-vien",
+      "venue_name": "Quảng trường Lâm Viên",
+      "status": "published",
+      "tentative": false,
+      "sessions": [
+        {
+          "start_at": "2026-12-12T20:00:00+07:00",
+          "end_at": "2026-12-12T22:00:00+07:00",
+          "all_day": false,
+          "end_estimated": true
+        }
+      ],
+      "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
+      "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
+      "verified_at": "2026-11-23",
+      "updated_at": "2026-11-23T06:50:00+07:00",
+      "organizer": "Tỉnh ủy - Ủy ban nhân dân tỉnh Lâm Đồng"
     },
     {
       "id": "khong-gian-hoa",
@@ -175,30 +192,6 @@
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
       "updated_at": "2026-11-23T06:45:00+07:00"
-    },
-    {
-      "id": "khai-mac",
-      "series": "festival-hoa-da-lat-2026",
-      "title": "Khai mạc Festival Hoa Đà Lạt lần thứ XI",
-      "category": "le-hoi",
-      "description": "Đêm khai mạc kết hợp âm nhạc, ánh sáng và công nghệ trình diễn tại Quảng trường Lâm Viên. Truyền hình trực tiếp trên VTV.",
-      "venue_id": "lam-vien",
-      "venue_name": "Quảng trường Lâm Viên",
-      "status": "published",
-      "tentative": false,
-      "sessions": [
-        {
-          "start_at": "2026-12-19T20:00:00+07:00",
-          "end_at": "2026-12-19T22:00:00+07:00",
-          "all_day": false
-        }
-      ],
-      "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
-      "source_note": "Ngày 19.12 do chủ dự án ấn định sáng 23.11.2026. Cổng chính thức đọc cùng ngày ghi 20:00 ngày 12.12.2026.",
-      "verified_at": null,
-      "updated_at": "2026-11-23T06:45:00+07:00",
-      "organizer": "Tỉnh ủy - Ủy ban nhân dân tỉnh Lâm Đồng",
-      "note": "CHỜ CHỦ DỰ ÁN QUYẾT: cổng chính thức ghi khai mạc 20:00 ngày 12.12.2026, khác với ngày 19.12 đang hiển thị."
     },
     {
       "id": "tho-cam",
@@ -273,10 +266,10 @@
       "series": "festival-hoa-da-lat-2026",
       "title": "Lễ hội nhạc Jazz Việt Nam 2026",
       "category": "am-nhac",
-      "description": "",
+      "description": "Các đêm nhạc Jazz trên mặt hồ Xuân Hương.",
       "venue_id": "xuan-huong",
       "venue_name": "Trên mặt hồ Xuân Hương",
-      "status": "pending",
+      "status": "published",
       "tentative": false,
       "sessions": [
         {
@@ -288,8 +281,7 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:45:00+07:00",
-      "note": "Có trên cổng chính thức nhưng chưa có trên web và app. Chờ chủ dự án duyệt để công bố."
+      "updated_at": "2026-11-23T06:50:00+07:00"
     },
     {
       "id": "carnival",

@@ -38,7 +38,7 @@ const ProgramPage: FC = () => {
           ))}
         </div>
         <p className="muted small pad foot">
-          Theo poster chính thức của Festival Hoa Đà Lạt lần thứ XI. Các mục ghi “dự kiến” có thể thay đổi.
+          Theo cổng thông tin chính thức festivaldalat.lamdongtructuyen.vn, đối chiếu ngày 23.11.2026. Lịch có thể thay đổi.
         </p>
       </div>
       {sheet}

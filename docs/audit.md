@@ -141,3 +141,5 @@ Nguồn anh gửi: https://festivaldalat.lamdongtructuyen.vn (cơ quan chủ qu�
 | Chiến dịch trồng hoa | 01.06.2026 – 03.01.2027 | "Từ nay đến 03.01.2027" | Khớp về ý |
 
 22 mục "hưởng ứng" còn lại trên cổng phần lớn mang ngày giờ giống nhau (30.11–31.12, 17:00), có vẻ là giá trị điền tạm, nên em chưa nhập.
+
+Cập nhật 23.11.2026, sau khi anh yêu cầu sửa cho khớp cổng chính thức: trang chủ tiếng Việt, app (Mini App và iOS) và `data/events.json` đã theo cổng chính thức: khai mạc 20:00 ngày 12.12.2026, Festival 12.12.2026 – 03.01.2027, thêm Lễ hội nhạc Jazz 25–27.12, đổi tên triển lãm tại Công viên Trần Quốc Toản, thêm giờ 10:00 cho Golf, Hội thảo, Carnival. Quyết định 19.12 ở mục 10 không còn hiệu lực. Bản tiếng Anh và tiếng Hàn do tác vụ tự động sửa, cần kiểm tra lại.

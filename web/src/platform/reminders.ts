@@ -4,6 +4,7 @@
  */
 import { LocalNotifications } from "@capacitor/local-notifications";
 import { PROGRAMS } from "../data/festival";
+import type { PlanItem } from "../utils/itinerary";
 
 const LEAD_MS = 2 * 60 * 60 * 1000;
 
@@ -13,7 +14,7 @@ function idOf(programId: string) {
   return h + 1;
 }
 
-export async function syncReminders(savedIds: string[], askPermission: boolean) {
+export async function syncReminders(savedIds: string[], askPermission: boolean, plan: PlanItem[] = []) {
   try {
     const pending = await LocalNotifications.getPending();
     if (pending.notifications.length) {
@@ -23,19 +24,27 @@ export async function syncReminders(savedIds: string[], askPermission: boolean) 
     const list = PROGRAMS.filter((p) => savedIds.includes(p.id))
       .map((p) => ({ p, at: new Date(p.start).getTime() - LEAD_MS }))
       .filter((x) => x.at > now);
-    if (!list.length) return;
+    // Show diễn và sự kiện khác trong lịch trình (mục có giờ cụ thể)
+    const extra = plan.filter((x) => !x.allDay && x.start - LEAD_MS > now).sort((a, b) => a.start - b.start).slice(0, 40); // iOS giới hạn 64 thông báo chờ
+    if (!list.length && !extra.length) return;
 
     let perm = await LocalNotifications.checkPermissions();
     if (perm.display !== "granted" && askPermission) perm = await LocalNotifications.requestPermissions();
     if (perm.display !== "granted") return;
 
     await LocalNotifications.schedule({
-      notifications: list.map(({ p, at }) => ({
+      notifications: [
+        ...extra.map((x) => {
+          const d = new Date(x.start + 7 * 3600000).toISOString();
+          return { id: idOf(x.id), title: x.title, body: `Bắt đầu ${d.slice(11, 16)} ngày ${d.slice(8, 10)}.${d.slice(5, 7)} tại ${x.venue}. Lịch có thể thay đổi, hãy kiểm tra lại trong app.`, schedule: { at: new Date(x.start - LEAD_MS) } };
+        }),
+        ...list.map(({ p, at }) => ({
         id: idOf(p.id),
         title: p.title,
         body: `Bắt đầu ${p.day}${p.sub ? ", " + p.sub : ""} tại ${p.venue}.` + (p.tentative ? " Lịch dự kiến, hãy kiểm tra lại trong app." : ""),
         schedule: { at: new Date(at) },
       })),
+      ],
     });
   } catch (e) {
     /* chạy trên trình duyệt hoặc máy không cho thông báo: bỏ qua */

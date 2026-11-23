@@ -6,6 +6,8 @@ import ProgramPage from "../pages/program";
 import MapPage from "../pages/map";
 import SavedPage from "../pages/saved";
 import ShowsPage from "../pages/shows";
+import EmbedPage from "../pages/embed";
+import EmbedInfoPage from "../pages/embed-info";
 
 const ScrollTop: FC = () => {
   const { pathname } = useLocation();
@@ -15,7 +17,11 @@ const ScrollTop: FC = () => {
   return null;
 };
 
-export const Layout: FC = () => (
+export const Layout: FC = () => {
+  const { pathname } = useLocation();
+  // Khung nhúng trên website của đối tác: chỉ có danh sách, không có thanh điều hướng
+  if (pathname === "/nhung") return <EmbedPage />;
+  return (
   <div className="shell">
     <ScrollTop />
     <div className="shell-main">
@@ -25,9 +31,12 @@ export const Layout: FC = () => (
         <Route path="/show" element={<ShowsPage />} />
         <Route path="/ban-do" element={<MapPage />} />
         <Route path="/da-luu" element={<SavedPage />} />
+        <Route path="/lich-trinh" element={<SavedPage />} />
+        <Route path="/nhung-lich" element={<EmbedInfoPage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
     </div>
     <Navigation />
   </div>
-);
+  );
+};

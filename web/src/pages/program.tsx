@@ -1,4 +1,6 @@
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router";
+import { onDataChange } from "../data/store";
 import { CATEGORIES, CatId, FESTIVAL, PROGRAMS, STATS_2024 } from "../data/festival";
 import f1 from "../static/img/quang-truong-lam-vien-hoa.jpg";
 import f2 from "../static/img/ho-xuan-huong-hoang-hon.jpg";
@@ -21,6 +23,15 @@ const GALLERY = [
 const ProgramPage: FC = () => {
   const [cat, setCat] = useState<CatId | "all">("all");
   const { sheet, openProgram, toggleSave, saved } = useProgramSheet();
+  // Link có ?xem=<mã> (từ mã QR hoặc chia sẻ) mở thẳng chương trình đó
+  const [params] = useSearchParams();
+  const want = params.get("xem");
+  const [tick, setTick] = useState(0);
+  useEffect(() => onDataChange(() => setTick((n) => n + 1)), []);
+  useEffect(() => {
+    const p = want ? PROGRAMS.find((x) => x.id === want) : undefined;
+    if (p) openProgram(p);
+  }, [want, tick]);
 
   const list = useMemo(
     () =>

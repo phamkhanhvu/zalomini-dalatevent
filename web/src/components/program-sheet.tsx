@@ -1,10 +1,14 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
+import QRCode from "qrcode";
 import { Sheet } from "../ui";
 import { FESTIVAL, Program } from "../data/festival";
 import { openDirections, shareText } from "../utils/device";
 import { statusOf } from "../utils/time";
 import { catOf } from "./program-card";
 import { IconBookmark, IconPin, IconRoute, IconShare } from "./icons";
+
+/** Link mở thẳng một chương trình */
+export const programLink = (id: string) => FESTIVAL.website + "#/chuong-trinh?xem=" + encodeURIComponent(id);
 
 interface Props {
   program: Program | null;
@@ -18,6 +22,23 @@ export const ProgramSheet: FC<Props> = ({ program, saved, onClose, onToggleSave,
   const p = program;
   const cat = p ? catOf(p.cat) : null;
   const status = p ? statusOf(p) : "upcoming";
+  const [qr, setQr] = useState("");
+  const [showQr, setShowQr] = useState(false);
+  useEffect(() => {
+    setShowQr(false);
+    setQr("");
+  }, [p?.id]);
+  const toggleQr = async () => {
+    if (!p) return;
+    if (!qr) {
+      try {
+        setQr(await QRCode.toDataURL(programLink(p.id), { width: 480, margin: 2, errorCorrectionLevel: "M", color: { dark: "#1b1440", light: "#ffffff" } }));
+      } catch (e) {
+        return;
+      }
+    }
+    setShowQr((v) => !v);
+  };
   return (
     <Sheet visible={!!p} onClose={onClose} autoHeight mask handler swipeToClose>
       {p && cat && (
@@ -53,7 +74,7 @@ export const ProgramSheet: FC<Props> = ({ program, saved, onClose, onToggleSave,
               className="btn btn-line"
               onClick={async () => {
                 const ok = await shareText(
-                  `${p.title} — ${p.day}${p.sub ? ", " + p.sub : ""} tại ${p.venue}. Xem lịch sự kiện Đà Lạt: ${FESTIVAL.website}`,
+                  `${p.title} — ${p.day}${p.sub ? ", " + p.sub : ""} tại ${p.venue}. Xem chi tiết: ${programLink(p.id)}`,
                   FESTIVAL.name + " " + FESTIVAL.edition
                 );
                 onShared?.(ok);
@@ -61,7 +82,17 @@ export const ProgramSheet: FC<Props> = ({ program, saved, onClose, onToggleSave,
             >
               <IconShare size={20} />Chia sẻ
             </button>
+            <button type="button" className="btn btn-line" aria-expanded={showQr} onClick={toggleQr}>
+              {showQr ? "Ẩn mã QR" : "Mã QR"}
+            </button>
           </div>
+          {showQr && qr && (
+            <div className="ps-qr">
+              <img src={qr} alt={"Mã QR mở chương trình " + p.title} width={200} height={200} />
+              <p>Quét để mở chương trình này trên DalatEvent.</p>
+              <a className="btn btn-line" href={qr} download={"dalatevent-" + p.id + "-qr.png"}>Tải ảnh QR</a>
+            </div>
+          )}
         </div>
       )}
     </Sheet>

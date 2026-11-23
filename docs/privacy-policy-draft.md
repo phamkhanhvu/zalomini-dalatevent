@@ -10,6 +10,7 @@ Website không yêu cầu tài khoản, không có biểu mẫu nhập thông ti
 
 ## 3. Dữ liệu lưu trên máy của bạn
 - Lịch trình (chương trình, sự kiện, show diễn bạn đã lưu): lưu trong bộ nhớ trình duyệt hoặc app trên máy bạn. Xóa dữ liệu trình duyệt hoặc gỡ app là mất.
+- Link chia sẻ lịch trình: khi bạn bấm "Chia sẻ lịch trình", danh sách mục đã lưu được ghi ngay trong link. Ai có link đều xem được danh sách đó; DalatEvent không lưu link này.
 - Bản sao dữ liệu lịch sự kiện: lưu tạm để mở nhanh và xem khi mạng yếu.
 
 ## 4. Vị trí

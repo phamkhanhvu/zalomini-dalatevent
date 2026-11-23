@@ -119,3 +119,54 @@ export function toIcs(items: PlanItem[], now: number, site = "https://dalatevent
   lines.push("END:VCALENDAR");
   return lines.map(fold).join("\r\n") + "\r\n";
 }
+
+/* ---------- Chia sẻ lịch trình bằng link ---------- */
+const MAX_SHARED = 60;
+const b64e = (s: string) => {
+  let bin = "";
+  for (const b of new TextEncoder().encode(s)) bin += String.fromCharCode(b);
+  return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+};
+const b64d = (s: string) => {
+  const bin = atob(s.replace(/-/g, "+").replace(/_/g, "/"));
+  return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
+};
+
+export interface SharedPlan { programIds: string[]; items: PlanItem[] }
+
+/** Nén lịch trình thành một chuỗi đặt được trong link. Chương trình Festival chỉ gửi mã, mục khác gửi bản chụp. */
+export function encodeShare(items: PlanItem[]): string {
+  const p = [...new Set(items.filter((x) => x.programId).map((x) => x.programId!))];
+  const x = items.filter((it) => !it.programId).slice(0, MAX_SHARED).map((it) => [it.kind, it.start, it.end, it.allDay ? 1 : 0, it.title, it.label, it.venue, it.url || "", it.endEstimated ? 1 : 0]);
+  return b64e(JSON.stringify({ v: 1, p, x }));
+}
+
+const str = (v: unknown, max: number) => (typeof v === "string" ? v.replace(/[\u0000-\u001f<>]/g, " ").trim().slice(0, max) : "");
+
+/**
+ * Đọc chuỗi trong link chia sẻ. Đây là dữ liệu từ bên ngoài nên kiểm tra từng trường:
+ * sai dạng thì bỏ, chữ bị cắt ngắn, link chỉ nhận https. Trả về null nếu chuỗi hỏng.
+ */
+export function decodeShare(code: string): SharedPlan | null {
+  try {
+    if (!code || code.length > 20000) return null;
+    const o = JSON.parse(b64d(code));
+    if (!o || o.v !== 1 || !Array.isArray(o.p) || !Array.isArray(o.x)) return null;
+    const programIds = o.p.filter((s: unknown) => typeof s === "string" && /^[a-z0-9-]{1,60}$/.test(s)).slice(0, MAX_SHARED);
+    const items: PlanItem[] = [];
+    for (const r of o.x.slice(0, MAX_SHARED)) {
+      if (!Array.isArray(r)) continue;
+      const [kind, start, end, allDay, title, label, venue, url, est] = r;
+      if ((kind !== "show" && kind !== "event") || !Number.isFinite(start) || !Number.isFinite(end) || end < start || end - start > 400 * DAY_MS) continue;
+      const t = str(title, 160);
+      if (!t) continue;
+      const u = str(url, 300);
+      const it: PlanItem = { id: "", kind, title: t, label: str(label, 60), venue: str(venue, 120), start, end, allDay: !!allDay, endEstimated: !!est || undefined, url: /^https:\/\/[^\s]+$/.test(u) ? u : undefined };
+      it.id = planId(it);
+      items.push(it);
+    }
+    return { programIds, items };
+  } catch (e) {
+    return null;
+  }
+}

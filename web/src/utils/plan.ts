@@ -1,11 +1,28 @@
 import { useCallback, useEffect, useState } from "react";
 import { storage } from "./device";
 import type { PlanItem } from "./itinerary";
+import { SAVED_EVENT } from "./saved";
 
 /** Show diễn và sự kiện khác mà người dùng thêm vào lịch trình, giữ trên máy của họ (chương trình Festival lưu ở utils/saved) */
 const KEY = "dalatevent.plan.v1";
 const listeners = new Set<() => void>();
 let cache: PlanItem[] | null = null;
+
+/** Đọc trực tiếp (dùng cho phần hẹn nhắc lịch của app) */
+export function readPlan(): PlanItem[] {
+  return current();
+}
+
+function commit(next: PlanItem[]) {
+  cache = next;
+  storage.set(KEY, JSON.stringify(cache));
+  listeners.forEach((fn) => fn());
+  try {
+    window.dispatchEvent(new Event(SAVED_EVENT));
+  } catch (e) {
+    /* bỏ qua */
+  }
+}
 
 function current(): PlanItem[] {
   if (!cache) {
@@ -31,10 +48,14 @@ export function usePlan() {
   const toggle = useCallback((it: PlanItem) => {
     const cur = current();
     const on = !cur.some((x) => x.id === it.id);
-    cache = on ? [...cur, it] : cur.filter((x) => x.id !== it.id);
-    storage.set(KEY, JSON.stringify(cache));
-    listeners.forEach((fn) => fn());
+    commit(on ? [...cur, it] : cur.filter((x) => x.id !== it.id));
     return on;
   }, []);
-  return { items, toggle, has: (id: string) => items.some((x) => x.id === id) };
+  const addMany = useCallback((list: PlanItem[]) => {
+    const cur = current();
+    const fresh = list.filter((it) => !cur.some((x) => x.id === it.id));
+    if (fresh.length) commit([...cur, ...fresh]);
+    return fresh.length;
+  }, []);
+  return { items, toggle, addMany, has: (id: string) => items.some((x) => x.id === id) };
 }

@@ -49,5 +49,19 @@ export function useSaved() {
     return cache.includes(id);
   }, []);
 
-  return { ids, toggle, has: (id: string) => ids.includes(id) };
+  const addMany = useCallback((list: string[]) => {
+    const cur = current();
+    const fresh = list.filter((id) => !cur.includes(id));
+    if (!fresh.length) return 0;
+    cache = [...cur, ...fresh];
+    storage.set(KEY, JSON.stringify(cache));
+    listeners.forEach((fn) => fn());
+    try {
+      window.dispatchEvent(new Event(SAVED_EVENT));
+    } catch (e) {
+      /* bỏ qua */
+    }
+    return fresh.length;
+  }, []);
+  return { ids, toggle, addMany, has: (id: string) => ids.includes(id) };
 }

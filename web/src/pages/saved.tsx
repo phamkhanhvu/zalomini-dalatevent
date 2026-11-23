@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { useSnackbar } from "../ui";
 import { FESTIVAL, PROGRAMS } from "../data/festival";
 import { onDataChange } from "../data/store";
@@ -7,7 +7,7 @@ import { agendaFor } from "../components/agenda";
 import { useProgramSheet } from "../components/use-program-sheet";
 import { IconArrow, IconBookmark, IconPin, IconShare } from "../components/icons";
 import { vnDate, vnDayMonth, vnTime, vnWeekday } from "../utils/agenda";
-import { arrangePlan, conflicts, PlanItem, toIcs, toPlanItem } from "../utils/itinerary";
+import { arrangePlan, conflicts, decodeShare, encodeShare, PlanItem, toIcs, toPlanItem } from "../utils/itinerary";
 import { usePlan } from "../utils/plan";
 import { IS_NATIVE, openUrl, shareText } from "../utils/device";
 import { SHARE_FAIL } from "../utils/platform";
@@ -24,6 +24,11 @@ const SavedPage: FC = () => {
   const { openSnackbar } = useSnackbar();
   const { sheet, openProgram, saved } = useProgramSheet();
   const plan = usePlan();
+  const [params] = useSearchParams();
+  const code = params.get("d") || "";
+  // Mở từ link chia sẻ: chỉ xem, chưa đụng vào lịch trình của người mở
+  const shared = useMemo(() => (code ? decodeShare(code) : null), [code]);
+  const isShared = !!code;
   const [tick, setTick] = useState(0);
   useEffect(() => onDataChange(() => setTick((n) => n + 1)), []);
   const [now, setNow] = useState(() => Date.now());
@@ -34,9 +39,10 @@ const SavedPage: FC = () => {
 
   // Chương trình Festival lấy giờ mới nhất từ dữ liệu (đổi lịch thì lịch trình đổi theo); mục khác dùng bản đã lưu
   const items = useMemo<PlanItem[]>(() => {
-    const fest = agendaFor(0, 8.64e15, now).filter((x) => x.programId && saved.has(x.programId)).map(toPlanItem);
-    return [...fest, ...plan.items];
-  }, [saved.ids, plan.items, tick, Math.floor(now / 60000)]);
+    const ids = isShared ? shared?.programIds || [] : saved.ids;
+    const fest = agendaFor(0, 8.64e15, now).filter((x) => x.programId && ids.includes(x.programId)).map(toPlanItem);
+    return [...fest, ...(isShared ? shared?.items || [] : plan.items)];
+  }, [saved.ids, plan.items, shared, isShared, tick, Math.floor(now / 60000)]);
   const view = useMemo(() => arrangePlan(items, now), [items]);
   const clash = useMemo(() => conflicts(items.filter((x) => x.end >= now)), [items]);
   const upcoming = items.filter((x) => x.end >= now);
@@ -67,8 +73,15 @@ const SavedPage: FC = () => {
   };
   const share = async () => {
     const lines = [...upcoming].sort((a, b) => a.start - b.start).map((it) => `• ${whenOf(it)}: ${it.title} (${it.venue})`);
-    const ok = await shareText(`Lịch trình Đà Lạt của tôi:\n${lines.join("\n")}\nXem lịch sự kiện Đà Lạt: ${FESTIVAL.website}`, "Lịch trình Đà Lạt");
+    const link = FESTIVAL.website + "#/lich-trinh?d=" + encodeShare(upcoming);
+    const ok = await shareText(`Lịch trình Đà Lạt của tôi:\n${lines.join("\n")}\nMở lịch trình này: ${link}`, "Lịch trình Đà Lạt");
     if (!ok) openSnackbar({ text: SHARE_FAIL, duration: 2200 });
+  };
+
+  const saveAll = () => {
+    const n = saved.addMany(shared?.programIds || []) + plan.addMany(shared?.items || []);
+    openSnackbar({ text: n ? `Đã thêm ${n} mục vào Lịch trình của bạn` : "Các mục này đã có trong Lịch trình của bạn", type: "success", duration: 2600 });
+    navigate("/da-luu");
   };
 
   const row = (it: PlanItem, past = false) => {
@@ -93,9 +106,11 @@ const SavedPage: FC = () => {
     return (
       <li key={it.id} className={"ag-item is-" + it.kind + (past ? " plan-past" : "")}>
         {clickable ? <button type="button" className={cls} onClick={() => open(it)}>{body}</button> : <div className={cls}>{body}</div>}
-        <button type="button" className="pc-save on" aria-label={"Bỏ " + it.title + " khỏi lịch trình"} onClick={() => remove(it)}>
-          <IconBookmark size={22} filled />
-        </button>
+        {!isShared && (
+          <button type="button" className="pc-save on" aria-label={"Bỏ " + it.title + " khỏi lịch trình"} onClick={() => remove(it)}>
+            <IconBookmark size={22} filled />
+          </button>
+        )}
       </li>
     );
   };
@@ -103,9 +118,15 @@ const SavedPage: FC = () => {
   return (
     <div className="page page-col">
       <header className="top">
-        <p className="eyebrow">{items.length ? `${upcoming.length} mục sắp tới · lưu trên máy của bạn` : "Lưu trên máy của bạn"}</p>
-        <h1 className="h1">Lịch trình <em>của tôi</em></h1>
-        {upcoming.length > 0 && (
+        <p className="eyebrow">{isShared ? `Lịch trình được chia sẻ · ${upcoming.length} mục sắp tới` : items.length ? `${upcoming.length} mục sắp tới · lưu trên máy của bạn` : "Lưu trên máy của bạn"}</p>
+        <h1 className="h1">Lịch trình <em>{isShared ? "được chia sẻ" : "của tôi"}</em></h1>
+        {isShared && items.length > 0 && (
+          <div className="plan-actions">
+            <button type="button" className="btn btn-ink" onClick={saveAll}>Lưu vào lịch trình của tôi</button>
+            <button type="button" className="btn btn-line" onClick={() => navigate("/da-luu")}>Xem lịch của tôi</button>
+          </div>
+        )}
+        {!isShared && upcoming.length > 0 && (
           <div className="plan-actions">
             {!IS_NATIVE && (
               <button type="button" className="btn btn-ink" onClick={exportIcs}>Thêm vào lịch máy</button>
@@ -118,8 +139,8 @@ const SavedPage: FC = () => {
         {items.length === 0 ? (
           <div className="empty">
             <span className="empty-ico"><IconBookmark size={30} /></span>
-            <h2>Chưa có mục nào</h2>
-            <p>Bấm biểu tượng dấu trang ở chương trình, sự kiện hoặc show diễn để xếp vào lịch trình theo ngày.</p>
+            <h2>{isShared ? "Link chia sẻ không đọc được" : "Chưa có mục nào"}</h2>
+            <p>{isShared ? "Link có thể bị cắt mất một đoạn khi gửi. Hãy nhờ người gửi chia sẻ lại." : "Bấm biểu tượng dấu trang ở chương trình, sự kiện hoặc show diễn để xếp vào lịch trình theo ngày."}</p>
             <button type="button" className="btn btn-ink" onClick={() => navigate("/")}>
               Khám phá sự kiện <IconArrow size={20} />
             </button>

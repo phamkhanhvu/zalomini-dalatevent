@@ -125,6 +125,9 @@ const HomePage: FC = () => {
           >
             <IconShare />Chia sẻ
           </button>
+          <button type="button" className="act" onClick={() => navigate("/nhung-lich")}>
+            <IconGlobe />Nhúng lịch và mã QR cho đối tác
+          </button>
         </div>
         <p className="muted small">© {new Date().getFullYear()} DalatEvent · Sense Group · 304 Hai Bà Trưng, Đà Lạt</p>
       </section>

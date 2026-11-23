@@ -69,3 +69,39 @@ test("tệp lịch: giờ đổi sang UTC, mục cả ngày kết thúc ở ngà
   assert.ok(ics.startsWith("BEGIN:VCALENDAR\r\n") && ics.endsWith("END:VCALENDAR\r\n"));
   for (const line of ics.split("\r\n")) assert.ok(new TextEncoder().encode(line).length <= 75, "dòng quá dài: " + line);
 });
+
+import { decodeShare, encodeShare } from "../src/utils/itinerary.ts";
+
+test("link chia sẻ: nén rồi đọc lại ra đúng lịch trình, giữ dấu tiếng Việt", () => {
+  const items = [
+    mk("p:khai-mac:1", "2026-12-12T20:00:00", "2026-12-12T22:00:00", { kind: "festival", programId: "khai-mac" }),
+    mk("x", "2026-11-28T17:00:00", "2026-11-28T19:00:00", { title: "Lê Hiếu và Nguyên Hà", label: "Lululola Show", venue: "Lululola Show", url: "https://lululola.vn/show", endEstimated: true }),
+  ];
+  const code = encodeShare(items);
+  assert.match(code, /^[A-Za-z0-9_-]+$/);
+  const back = decodeShare(code)!;
+  assert.deepEqual(back.programIds, ["khai-mac"]);
+  assert.equal(back.items.length, 1);
+  assert.equal(back.items[0].title, "Lê Hiếu và Nguyên Hà");
+  assert.equal(back.items[0].start, items[1].start);
+  assert.equal(back.items[0].url, "https://lululola.vn/show");
+  assert.equal(back.items[0].endEstimated, true);
+});
+
+test("link chia sẻ hỏng hoặc cố ý cài dữ liệu xấu bị loại", () => {
+  const enc = (o: unknown) => Buffer.from(JSON.stringify(o)).toString("base64url");
+  assert.equal(decodeShare(""), null);
+  assert.equal(decodeShare("@@@"), null);
+  assert.equal(decodeShare(enc({ v: 2, p: [], x: [] })), null);
+  const bad = decodeShare(enc({ v: 1, p: ["khai-mac", "../x", 5], x: [
+    ["show", 1, 2, 0, "<img src=x onerror=alert(1)>Tên", "L", "V", "javascript:alert(1)", 0],
+    ["festival", 1, 2, 0, "Giả festival", "L", "V", "", 0],
+    ["show", 5, 2, 0, "Kết thúc trước bắt đầu", "L", "V", "", 0],
+    ["show", "a", 2, 0, "Sai kiểu", "L", "V", "", 0],
+    ["show", 1, 2, 0, "", "L", "V", "", 0],
+  ] }))!;
+  assert.deepEqual(bad.programIds, ["khai-mac"]);
+  assert.equal(bad.items.length, 1);
+  assert.equal(bad.items[0].url, undefined);
+  assert.ok(!/[<>]/.test(bad.items[0].title));
+});

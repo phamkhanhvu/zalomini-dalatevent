@@ -87,3 +87,9 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 - S4-4 (phần không cần tài khoản) xong trên web: thêm được chương trình Festival, sự kiện khác và show diễn vào Lịch trình từ mọi danh sách; xếp theo ngày; cảnh báo trùng giờ; xuất tệp lịch `.ics`; chia sẻ dạng văn bản. 7 kiểm thử tự động (`web/tests/itinerary.test.ts`), tổng 39. Chưa có: chia sẻ bằng link, đồng bộ giữa các máy (chờ S4-1 đến S4-3). Tệp `.ics` mới thử tải về và đọc nội dung, CHƯA thử mở trên iPhone thật.
 - App iOS: nhắc lịch hiện chỉ áp dụng cho chương trình Festival, chưa cho show diễn.
 - S1-6: có bản nháp `docs/privacy-policy-draft.md`, chưa công bố, còn 4 chỗ CẦN XÁC MINH.
+
+## Chia sẻ bằng link, mã QR, khung nhúng (23.11.2026)
+- F03: chia sẻ lịch trình bằng link (`#/lich-trinh?d=...`), người nhận xem rồi bấm lưu về máy mình. Link từ bên ngoài được kiểm tra từng trường (2 kiểm thử). Link dài khoảng 200 ký tự cho mỗi show.
+- F04 (app iOS): nhắc trước 2 tiếng cho cả show diễn đã lưu, tối đa 40 mục. CHƯA thử trên máy thật.
+- F23: mỗi chương trình Festival có link riêng (`#/chuong-trinh?xem=<mã>`) và mã QR tải được; trang `#/nhung-lich` cho đối tác lấy mã nhúng (iframe `#/nhung?n=&loai=`) và mã QR của site. Chưa có: QR cho từng show diễn, đo lượt quét, widget theo từng nhà tổ chức.
+- Tổng 41 kiểm thử tự động.

@@ -22,6 +22,7 @@ import { initData } from "./data/store";
 import { IS_NATIVE } from "./utils/device";
 import { SAVED_EVENT, SAVED_KEY } from "./utils/saved";
 import { syncReminders } from "./platform/reminders";
+import { readPlan } from "./utils/plan";
 
 function savedIds(): string[] {
   try {
@@ -37,8 +38,8 @@ async function start() {
   await initData();
   // Nhắc lịch chỉ có trong app cài trên máy. Mở app: hẹn lại (không hỏi quyền). Lưu chương trình: hỏi quyền nếu cần.
   if (IS_NATIVE) {
-    syncReminders(savedIds(), false);
-    window.addEventListener(SAVED_EVENT, () => syncReminders(savedIds(), true));
+    syncReminders(savedIds(), false, readPlan());
+    window.addEventListener(SAVED_EVENT, () => syncReminders(savedIds(), true, readPlan()));
   }
   createRoot(document.getElementById("app")!).render(<App />);
 }

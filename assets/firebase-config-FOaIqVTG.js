@@ -1,0 +1,1 @@
+const a={apiKey:"AIzaSyD8DOLKoWWARoxtVmAh1tpkGcET8rCAngs",authDomain:"quay-hang-da-lat.firebaseapp.com",projectId:"quay-hang-da-lat",storageBucket:"quay-hang-da-lat.firebasestorage.app",messagingSenderId:"844175137729",appId:"1:844175137729:web:6ce0d932a26fe056d9ed40"};export{a as FB_CONFIG};

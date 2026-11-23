@@ -63,6 +63,14 @@ const HomePage: FC = () => {
 
       <Agenda onOpenProgram={openProgram} />
 
+      <section className="sec">
+        <button type="button" className="pass-card" onClick={() => navigate("/ho-chieu")}>
+          <span className="stamp-mark" aria-hidden="true">ĐL</span>
+          <span className="pass-card-text"><b>Hộ chiếu Đà Lạt</b><i>Đến nơi, đóng dấu, sưu tập đủ bộ dấu mộc của các địa điểm và chương trình.</i></span>
+          <IconArrow size={20} />
+        </button>
+      </section>
+
       <section className="sec feat" aria-labelledby="feat-h">
         <p className="eyebrow">Sự kiện nổi bật{FESTIVAL.editionShort ? " · " + FESTIVAL.editionShort : ""}</p>
         <h2 className="h1" id="feat-h">{FESTIVAL.name} <em>{FESTIVAL.start.slice(0, 4)}</em></h2>

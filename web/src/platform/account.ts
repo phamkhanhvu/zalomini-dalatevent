@@ -9,6 +9,8 @@ import { IS_NATIVE, storage } from "../utils/device";
 import { readPlan, replacePlan } from "../utils/plan";
 import { readSaved, replaceSaved, SAVED_EVENT } from "../utils/saved";
 import { cleanCloud, reconcile, toCloud } from "../utils/sync";
+import { cleanStamps, unionStamps } from "../utils/passport";
+import { readStamps, setStamps } from "../utils/stamps";
 
 export interface AccountState {
   /** off: chưa tải; loading: đang tải; out: chưa đăng nhập; in: đã đăng nhập */
@@ -77,6 +79,11 @@ const message = (e: unknown) => {
 };
 
 const local = () => ({ programIds: readSaved(), items: readPlan() });
+/** Bản ghi lên tài khoản: lịch trình, kèm dấu mộc nếu có (dấu chỉ thêm, không bao giờ bớt) */
+const cloudDoc = (now: number) => {
+  const stamps = readStamps();
+  return stamps.length ? { ...toCloud(local(), now), stamps } : toCloud(local(), now);
+};
 
 async function pull() {
   if (!db || !user) return;
@@ -87,6 +94,10 @@ async function pull() {
     const ref = doc(db, "plans", uid);
     const snap = await getDoc(ref);
     const remote = snap.exists() ? cleanCloud(snap.data()) : null;
+    const remoteStamps = snap.exists() ? cleanStamps(snap.data().stamps) : [];
+    const mine = readStamps();
+    const allStamps = unionStamps(mine, remoteStamps);
+    if (allStamps.length !== mine.length) setStamps(allStamps, true);
     const meta = readMeta();
     const linked = !!meta && meta.uid === uid;
     const r = reconcile(local(), remote, { linked, dirty: linked ? meta!.dirty : false });
@@ -100,7 +111,7 @@ async function pull() {
       }
     }
     const now = Date.now();
-    if (r.push) await setDoc(ref, toCloud(local(), now));
+    if (r.push || allStamps.length !== remoteStamps.length) await setDoc(ref, cloudDoc(now));
     if (user && user.uid === uid) {
       writeMeta({ uid, dirty: false, syncedAt: now });
       set({ syncing: false, syncedAt: now });
@@ -117,7 +128,7 @@ async function push() {
   try {
     const { doc, setDoc } = await import("firebase/firestore/lite");
     const now = Date.now();
-    await setDoc(doc(db, "plans", uid), toCloud(local(), now));
+    await setDoc(doc(db, "plans", uid), cloudDoc(now));
     writeMeta({ uid, dirty: false, syncedAt: now });
     set({ syncing: false, syncedAt: now });
   } catch (e) {

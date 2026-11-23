@@ -271,3 +271,23 @@ div.ag-row { text-align: left; }
 .adm-status.is-bad { background: #ffe5e5; color: #9b1c1c; }
 .adm-uid { font: 14px/1.4 ui-monospace, Menlo, monospace; padding: 10px 14px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line); word-break: break-all; user-select: all; }
 @media (min-width: 900px) { .adm { max-width: 760px; margin: 0 auto; } }
+
+/* Hộ chiếu Đà Lạt */
+.pass-bar { height: 10px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.pass-bar span { display: block; height: 100%; border-radius: 999px; background: var(--magenta); min-width: 0; transition: width 0.4s; }
+.pass-count { font-size: 14px; color: var(--ink2); }
+.pass-count b { font-family: var(--serif); font-size: 26px; color: var(--ink); }
+.stamps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.stamp { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 10px; border-radius: 18px; border: 1px solid var(--line); background: var(--paper); text-align: center; }
+.stamp b { font-size: 14px; line-height: 1.25; }
+.stamp i { font-style: normal; font-size: 12px; color: var(--ink2); }
+.stamp-mark { flex: none; display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; border: 2px dashed var(--line); color: var(--ink2); font-family: var(--serif); font-size: 22px; }
+.stamp.on { border-color: var(--magenta); background: #fff5fa; }
+.stamp.on .stamp-mark { border: 3px double var(--magenta); color: var(--magenta); transform: rotate(-8deg); background: #ffe3f1; }
+.stamp.missed { opacity: 0.55; }
+.pass-card { width: 100%; display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 20px; background: #fff5fa; border: 1.5px solid var(--magenta); text-align: left; }
+.pass-card .stamp-mark { border: 3px double var(--magenta); color: var(--magenta); transform: rotate(-8deg); background: #ffe3f1; width: 56px; height: 56px; font-size: 18px; }
+.pass-card-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.pass-card-text b { font-family: var(--serif); font-size: 19px; }
+.pass-card-text i { font-style: normal; font-size: 13px; color: var(--ink2); }
+@media (min-width: 900px) { .stamps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }

@@ -97,6 +97,7 @@ const PlacePage: FC = () => {
           >
             <IconShare size={20} />Chia sẻ
           </button>
+          {typeof place.lat === "number" && <button type="button" className="btn btn-line" onClick={() => navigate("/ho-chieu")}>Đóng dấu hộ chiếu</button>}
           <button type="button" className="btn btn-line" aria-expanded={showQr} onClick={toggleQr}>{showQr ? "Ẩn mã QR" : "Mã QR"}</button>
         </div>
         {showQr && qr && (

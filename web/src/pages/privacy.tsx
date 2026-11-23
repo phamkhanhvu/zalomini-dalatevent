@@ -31,14 +31,15 @@ const PrivacyPage: FC = () => {
         <ul>
           <li><b>Lịch trình</b> bạn lưu nằm trong bộ nhớ trình duyệt trên máy bạn. Xóa dữ liệu trình duyệt là mất.</li>
           <li><b>Link chia sẻ lịch trình</b> chứa sẵn danh sách mục bạn đã lưu. Ai có link đều xem được danh sách đó; DalatEvent không lưu link này.</li>
-          <li><b>Vị trí</b> chỉ được hỏi khi bạn bấm "Gần tôi" trên trang Bản đồ, chỉ dùng trên máy bạn để tính khoảng cách, không gửi đi và không lưu lại.</li>
+          <li><b>Vị trí</b> chỉ được hỏi khi bạn bấm "Gần tôi" trên trang Bản đồ hoặc "Đóng dấu tại đây" trong Hộ chiếu Đà Lạt, chỉ dùng trên máy bạn để tính khoảng cách, không gửi đi và không lưu lại.</li>
+          <li><b>Hộ chiếu Đà Lạt</b>: máy chỉ ghi tên dấu và thời điểm đóng dấu, không ghi tọa độ của bạn.</li>
         </ul>
 
         <h2 className="h2">Khi bạn đăng nhập (tùy chọn)</h2>
         <p>Đăng nhập bằng Google hoặc email dùng dịch vụ Firebase Authentication của Google, chung một tài khoản với trò chơi tại dalatevent.com/game. Khi đó chúng tôi lưu trên Firebase:</p>
         <ul>
           <li>Email và tên hiển thị của tài khoản (tên hiển thị chỉ có khi đăng nhập bằng Google).</li>
-          <li>Danh sách mục bạn đã thêm vào lịch trình, để đồng bộ giữa các máy.</li>
+          <li>Danh sách mục bạn đã thêm vào lịch trình và các dấu mộc đã đóng trong Hộ chiếu Đà Lạt, để đồng bộ giữa các máy.</li>
           <li>Nếu bạn chơi trò chơi: tiến trình chơi, tên nhân vật và điểm trên bảng xếp hạng (bảng xếp hạng ai cũng xem được), vị trí nhân vật khi đang trực tuyến và gian hàng bạn sở hữu trong trò chơi.</li>
         </ul>
         <p>Chúng tôi không bán và không chia sẻ các dữ liệu này cho bên khác.</p>

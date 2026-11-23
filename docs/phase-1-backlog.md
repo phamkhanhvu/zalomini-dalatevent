@@ -123,3 +123,8 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 ## Trang quản trị nội dung (23.11.2026)
 - F08 (bản đầu): xem `docs/admin.md`. Mã: `web/src/pages/admin.tsx` (tải riêng, khách thường không tải), `scripts/validate-core.mjs` (luật kiểm tra dùng chung), `scripts/cms-apply.mjs`, `scripts/cms-pull.mjs`, `.github/workflows/cms.yml`. 7 kiểm thử (`web/tests/cms.test.ts`), tổng 64.
 - CHƯA chạy thử trọn vòng với tài khoản quản trị thật: chưa có tài khoản nào được cấp quyền (cần UID của chủ dự án).
+
+## Hộ chiếu Đà Lạt (23.11.2026)
+- F09/F17 (bản đầu): trang `#/ho-chieu`. Mỗi địa điểm có tọa độ là một dấu "đã đến"; mỗi chương trình Festival đã công bố (có tọa độ) là một dấu "đã dự". Bấm "Đóng dấu tại đây": đứng trong 300 m, dấu sự kiện chỉ đóng được từ 1 giờ trước tới 1 giờ sau. Máy chỉ lưu tên dấu và thời điểm, không lưu tọa độ. Đồng bộ theo tài khoản (trường `stamps` trong `plans/{uid}`), gộp không mất dấu. 6 kiểm thử (`web/tests/passport.test.ts`), tổng 70.
+- Kiểm tra vị trí chạy trên máy người dùng nên có thể bị giả; KHÔNG dùng để phát quà có giá trị khi chưa có cách xác nhận phía máy chủ hoặc mã QR tại chỗ.
+- Chưa có: dấu bằng mã QR tại sự kiện, quà/ưu đãi, bảng xếp hạng, dấu cho địa điểm chưa có tọa độ (Công viên Trần Quốc Toản, Mây Lang Thang Lang Biang).

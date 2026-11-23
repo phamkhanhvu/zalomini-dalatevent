@@ -50,7 +50,8 @@ const PrivacyPage: FC = () => {
         <h2 className="h2">Xóa dữ liệu</h2>
         <ul>
           <li>Xóa lịch trình trên tài khoản: vào trang Lịch trình, bấm vào dải tài khoản, chọn "Xóa lịch trình trên tài khoản".</li>
-          <li>Xóa hẳn tài khoản cùng toàn bộ dữ liệu (kể cả tiến trình trò chơi): liên hệ <Contact subject="Yêu cầu xóa tài khoản DalatEvent" /> và cho biết email đã đăng ký.</li>
+          <li>Xóa hẳn tài khoản cùng toàn bộ dữ liệu (kể cả tiến trình trò chơi): vào trang Lịch trình, bấm vào dải tài khoản, chọn "Xóa tài khoản". Việc này không hoàn tác được.</li>
+          <li>Gian hàng bạn sở hữu trong trò chơi không tự xóa được từ phía bạn. Muốn xóa, hoặc không tự xóa tài khoản được, liên hệ <Contact subject="Yêu cầu xóa tài khoản DalatEvent" /> và cho biết email đã đăng ký.</li>
         </ul>
 
         <h2 className="h2">Dịch vụ của bên khác</h2>

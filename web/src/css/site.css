@@ -198,3 +198,7 @@ div.ag-row { text-align: left; }
 .prose a, .acc-link { color: var(--magenta); font-weight: 600; text-decoration: underline; }
 .prose .btn { align-self: flex-start; margin-top: 8px; }
 .link-left { align-self: flex-start; }
+.acc-list { padding-left: 20px; list-style: disc; display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+.acc-check { flex-direction: row !important; align-items: center; gap: 10px !important; min-height: 44px; font-size: 14px !important; color: var(--ink) !important; }
+.acc-check input { min-height: 0; width: 22px; height: 22px; padding: 0; flex: none; accent-color: #b42318; }
+.acc-del { color: #b42318; }

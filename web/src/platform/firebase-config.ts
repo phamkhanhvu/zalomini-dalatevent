@@ -9,5 +9,6 @@ export const FB_CONFIG = {
   projectId: "quay-hang-da-lat",
   storageBucket: "quay-hang-da-lat.firebasestorage.app",
   messagingSenderId: "844175137729",
+  databaseURL: "https://quay-hang-da-lat-default-rtdb.asia-southeast1.firebasedatabase.app",
   appId: "1:844175137729:web:6ce0d932a26fe056d9ed40",
 };

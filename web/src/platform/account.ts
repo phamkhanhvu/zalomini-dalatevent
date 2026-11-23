@@ -65,6 +65,9 @@ const ERRORS: Record<string, string> = {
   "auth/too-many-requests": "Thử quá nhiều lần. Hãy đợi vài phút rồi thử lại.",
   "auth/network-request-failed": "Mất kết nối mạng. Hãy thử lại.",
   "auth/popup-closed-by-user": "",
+  "auth/user-mismatch": "Tài khoản vừa chọn không trùng với tài khoản đang đăng nhập.",
+  "auth/requires-recent-login": "Cần xác nhận lại danh tính. Hãy thử lại.",
+  "auth/missing-password": "Hãy nhập mật khẩu.",
   "auth/cancelled-popup-request": "",
 };
 const message = (e: unknown) => {
@@ -199,4 +202,63 @@ export async function wipeCloud(): Promise<boolean> {
   }
   await signOutAccount();
   return true;
+}
+
+/** Tài khoản này đăng nhập bằng cách nào: quyết định bước xác nhận lại trước khi xóa */
+export function deleteNeeds(): "google" | "password" | "web-only" {
+  const ids = (user?.providerData || []).map((p) => p.providerId);
+  if (ids.includes("password")) return "password";
+  return CAN_GOOGLE ? "google" : "web-only";
+}
+
+/**
+ * Xóa hẳn tài khoản theo yêu cầu của chính người dùng. Thứ tự:
+ * 1. Xác nhận lại danh tính trước (để không rơi vào cảnh đã xóa dữ liệu mà tài khoản còn).
+ * 2. Xóa dữ liệu của chính họ: lịch trình, tiến trình trò chơi, dòng trên bảng xếp hạng, vị trí trực tuyến, các khoản hoàn xu.
+ *    Rules chỉ cho mỗi người xóa dữ liệu của chính mình. Gian hàng trong trò chơi không xóa được từ phía người dùng.
+ * 3. Xóa tài khoản đăng nhập.
+ * Lịch trình trên máy này được giữ lại.
+ */
+export async function deleteAccount(password: string): Promise<boolean> {
+  if (!auth || !db || !user) return false;
+  const u = user;
+  const uid = u.uid;
+  window.clearTimeout(timer);
+  set({ error: "" });
+  try {
+    const m = await import("firebase/auth");
+    const need = deleteNeeds();
+    if (need === "web-only") {
+      set({ error: "Tài khoản Google cần xóa trên website dalatevent.com (mục Lịch trình)." });
+      return false;
+    }
+    if (need === "password") await m.reauthenticateWithCredential(u, m.EmailAuthProvider.credential(u.email || "", password));
+    else await m.reauthenticateWithPopup(u, new m.GoogleAuthProvider());
+
+    const { doc, deleteDoc } = await import("firebase/firestore/lite");
+    try {
+      await Promise.all(["plans", "saves", "board"].map((c) => deleteDoc(doc(db!, c, uid))));
+    } catch (e) {
+      set({ error: "Chưa xóa được dữ liệu nên tài khoản vẫn được giữ nguyên. Hãy kiểm tra mạng rồi thử lại." });
+      return false;
+    }
+    // Dữ liệu thời gian thực của trò chơi: cố gắng xóa, không chặn việc xóa tài khoản nếu lỗi
+    try {
+      const r = await import("firebase/database");
+      const { getApp } = await import("firebase/app");
+      const rt = r.getDatabase(getApp());
+      await r.remove(r.ref(rt, "presence/" + uid)).catch(() => undefined);
+      const pay = await r.get(r.ref(rt, "payouts/" + uid)).catch(() => null);
+      const keys = pay && pay.exists() ? Object.keys(pay.val() || {}) : [];
+      await Promise.all(keys.map((k) => r.remove(r.ref(rt, "payouts/" + uid + "/" + k)).catch(() => undefined)));
+    } catch (e) {
+      /* bỏ qua */
+    }
+    writeMeta(null);
+    await m.deleteUser(u);
+    return true;
+  } catch (e) {
+    set({ error: message(e) });
+    return false;
+  }
 }

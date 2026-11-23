@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Sheet, useSnackbar } from "../ui";
-import { CAN_GOOGLE, getAccount, loadAccount, onAccount, registerEmail, signInEmail, signInGoogle, signOutAccount, wasLinked, wipeCloud } from "../platform/account";
+import { CAN_GOOGLE, deleteAccount, deleteNeeds, getAccount, loadAccount, onAccount, registerEmail, signInEmail, signInGoogle, signOutAccount, wasLinked, wipeCloud } from "../platform/account";
 
 function useAccount() {
   const [, force] = useState(0);
@@ -20,6 +20,8 @@ export const AccountPanel: FC = () => {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [confirmWipe, setConfirmWipe] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [agree, setAgree] = useState(false);
 
   // Máy đã từng đăng nhập thì tải phần tài khoản ngay để đồng bộ; chưa thì chờ người dùng bấm
   useEffect(() => {
@@ -27,6 +29,10 @@ export const AccountPanel: FC = () => {
   }, []);
 
   const openSheet = () => {
+    setDeleting(false);
+    setAgree(false);
+    setConfirmWipe(false);
+    setPassword("");
     setOpen(true);
     loadAccount();
   };
@@ -60,6 +66,37 @@ export const AccountPanel: FC = () => {
         <div className="ps acc">
           {acc.status === "loading" || acc.status === "off" ? (
             <p className="acc-note">{acc.error || "Đang tải…"}</p>
+          ) : signedIn && deleting ? (
+            <form
+              className="acc-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!agree) return;
+                act(async () => {
+                  const ok = await deleteAccount(password);
+                  if (ok) openSnackbar({ text: "Đã xóa tài khoản. Lịch trình trên máy này vẫn được giữ", duration: 3200 });
+                  return ok;
+                });
+              }}
+            >
+              <h2 className="ps-title">Xóa tài khoản</h2>
+              <p className="ps-desc">Tài khoản <b>{who}</b> sẽ bị xóa hẳn và <b>không khôi phục được</b>. Những thứ bị xóa cùng:</p>
+              <ul className="acc-list">
+                <li>Lịch trình đã đồng bộ trên tài khoản</li>
+                <li>Toàn bộ tiến trình trong trò chơi DalatEvent và dòng của bạn trên bảng xếp hạng</li>
+              </ul>
+              <p className="acc-note">Lịch trình trên máy này vẫn được giữ. Gian hàng bạn đang sở hữu trong trò chơi không tự xóa được; muốn xóa hãy liên hệ theo trang chính sách quyền riêng tư.</p>
+              {deleteNeeds() === "password" && (
+                <label>Nhập mật khẩu để xác nhận<input type="password" required autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} /></label>
+              )}
+              {deleteNeeds() === "google" && <p className="acc-note">Bấm nút xóa sẽ mở cửa sổ Google để bạn xác nhận lại tài khoản.</p>}
+              <label className="acc-check"><input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} /><span>Tôi hiểu việc này không hoàn tác được</span></label>
+              {acc.error && <p className="acc-err" role="alert">{acc.error}</p>}
+              <div className="ps-actions">
+                <button type="button" className="btn btn-line" disabled={busy} onClick={() => setDeleting(false)}>Quay lại</button>
+                <button type="submit" className="btn btn-danger" disabled={busy || !agree}>{busy ? "Đang xóa…" : "Xóa hẳn tài khoản"}</button>
+              </div>
+            </form>
           ) : signedIn ? (
             <React.Fragment>
               <h2 className="ps-title">Tài khoản</h2>
@@ -74,6 +111,7 @@ export const AccountPanel: FC = () => {
                 )}
               </div>
               <p className="acc-note">Xóa lịch trình trên tài khoản không xóa tài khoản và không ảnh hưởng tiến trình trong trò chơi. Bản trên máy này vẫn được giữ.</p>
+              <button type="button" className="acc-switch acc-del" onClick={() => { setDeleting(true); setAgree(false); setPassword(""); }}>Xóa tài khoản</button>
             </React.Fragment>
           ) : (
             <React.Fragment>

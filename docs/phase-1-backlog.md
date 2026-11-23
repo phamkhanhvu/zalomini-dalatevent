@@ -99,3 +99,7 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 - S4-2, S4-3: trang Lịch trình có đăng nhập Google hoặc email (chung tài khoản với trò chơi) và đồng bộ lịch trình qua `plans/{uid}`. Thư viện Firebase chỉ tải khi người dùng mở phần tài khoản. 6 kiểm thử cho quy tắc gộp (`web/tests/sync.test.ts`), tổng 47.
 - S4-5: mới có "Xóa lịch trình trên tài khoản". CHƯA có xóa hẳn tài khoản (sẽ xóa cả tiến trình trò chơi, cần chủ dự án quyết định cách làm).
 - App iOS: đăng nhập Google bằng cửa sổ bật lên không chạy trong app, nên trong app chỉ hiện đăng nhập email. Chưa thử trên máy thật.
+
+## Chính sách và xóa tài khoản (23.11.2026)
+- S1-6: trang `#/quyen-rieng-tu` đã công bố; email liên hệ lấy từ biến `CONTACT_EMAIL` của GitHub Actions.
+- S4-5: có nút "Xóa tài khoản" trong bảng tài khoản (trang Lịch trình): xác nhận lại danh tính (mật khẩu hoặc cửa sổ Google), xóa `plans`, `saves`, `board` của chính người dùng, dọn `presence` và `payouts`, rồi xóa tài khoản đăng nhập. CHƯA chạy thử thao tác xóa thật (không có tài khoản thử; không thử trên tài khoản của chủ dự án). Gian hàng trong trò chơi (`booths`) không xóa được từ phía người dùng do rules. Trong app iOS, tài khoản chỉ có Google phải xóa trên website.

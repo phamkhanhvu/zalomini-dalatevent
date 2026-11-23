@@ -93,3 +93,9 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 - F04 (app iOS): nhắc trước 2 tiếng cho cả show diễn đã lưu, tối đa 40 mục. CHƯA thử trên máy thật.
 - F23: mỗi chương trình Festival có link riêng (`#/chuong-trinh?xem=<mã>`) và mã QR tải được; trang `#/nhung-lich` cho đối tác lấy mã nhúng (iframe `#/nhung?n=&loai=`) và mã QR của site. Chưa có: QR cho từng show diễn, đo lượt quét, widget theo từng nhà tổ chức.
 - Tổng 41 kiểm thử tự động.
+
+## Tài khoản và đồng bộ lịch trình (23.11.2026)
+- S4-1: đã đọc rules thật trên Console. Rules sẵn có đủ chặt, giữ nguyên; chỉ thêm khối `plans/{uid}` cho lịch trình (xem `docs/firebase/applied/2026-11-23.md`).
+- S4-2, S4-3: trang Lịch trình có đăng nhập Google hoặc email (chung tài khoản với trò chơi) và đồng bộ lịch trình qua `plans/{uid}`. Thư viện Firebase chỉ tải khi người dùng mở phần tài khoản. 6 kiểm thử cho quy tắc gộp (`web/tests/sync.test.ts`), tổng 47.
+- S4-5: mới có "Xóa lịch trình trên tài khoản". CHƯA có xóa hẳn tài khoản (sẽ xóa cả tiến trình trò chơi, cần chủ dự án quyết định cách làm).
+- App iOS: đăng nhập Google bằng cửa sổ bật lên không chạy trong app, nên trong app chỉ hiện đăng nhập email. Chưa thử trên máy thật.

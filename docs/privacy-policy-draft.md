@@ -6,7 +6,10 @@ Trạng thái: nháp ngày 23.11.2026, chờ chủ dự án duyệt. Chưa đưa
 DalatEvent (dalatevent.com) do Sense Group vận hành. Địa chỉ: 304 Hai Bà Trưng, Đà Lạt. Liên hệ về quyền riêng tư: `CẦN XÁC MINH` (email nhận yêu cầu).
 
 ## 2. Dữ liệu chúng tôi KHÔNG thu thập
-Website không yêu cầu tài khoản, không có biểu mẫu nhập thông tin cá nhân, không gắn mã đo lường hay quảng cáo, không gửi dữ liệu người dùng về máy chủ của DalatEvent.
+Website dùng được đầy đủ mà không cần tài khoản, không gắn mã đo lường hay quảng cáo. Nếu bạn không đăng nhập, không có dữ liệu nào của bạn được gửi đi.
+
+## 2b. Khi bạn đăng nhập (tùy chọn)
+Đăng nhập bằng Google hoặc email dùng dịch vụ Firebase Authentication của Google, chung tài khoản với trò chơi tại /game/. Chúng tôi lưu trên Firebase: email, tên hiển thị (nếu đăng nhập Google) và danh sách mục bạn đã thêm vào lịch trình, để đồng bộ giữa các máy. Bạn có thể xóa bản lịch trình trên tài khoản ngay trong trang Lịch trình. Xóa hẳn tài khoản: `CẦN XÁC MINH` (chưa có nút trong web; cần có trước khi nộp App Store).
 
 ## 3. Dữ liệu lưu trên máy của bạn
 - Lịch trình (chương trình, sự kiện, show diễn bạn đã lưu): lưu trong bộ nhớ trình duyệt hoặc app trên máy bạn. Xóa dữ liệu trình duyệt hoặc gỡ app là mất.

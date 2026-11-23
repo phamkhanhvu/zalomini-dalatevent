@@ -24,6 +24,21 @@ function current() {
   return cache;
 }
 
+export function readSaved(): string[] {
+  return current();
+}
+/** Thay toàn bộ danh sách (dùng khi đồng bộ từ tài khoản về) */
+export function replaceSaved(ids: string[]) {
+  cache = [...new Set(ids)];
+  storage.set(KEY, JSON.stringify(cache));
+  listeners.forEach((fn) => fn());
+  try {
+    window.dispatchEvent(new Event(SAVED_EVENT));
+  } catch (e) {
+    /* bỏ qua */
+  }
+}
+
 /** Danh sách chương trình người dùng đã lưu, giữ trên máy của họ */
 export function useSaved() {
   const [ids, setIds] = useState<string[]>(current());

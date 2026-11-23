@@ -11,7 +11,7 @@
     "build": "npm run sync-data && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "node --test tests/agenda.test.ts tests/geo.test.ts tests/search.test.ts tests/itinerary.test.ts"
+    "test": "node --test tests/agenda.test.ts tests/geo.test.ts tests/search.test.ts tests/itinerary.test.ts tests/sync.test.ts"
   },
   "dependencies": {
     "@capacitor/app-launcher": "^8.0.0",
@@ -22,6 +22,7 @@
     "@fontsource/be-vietnam-pro": "^5.0.0",
     "@fontsource/playfair-display": "^5.0.0",
     "@types/qrcode": "^1.5.6",
+    "firebase": "^10.14.1",
     "qrcode": "^1.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

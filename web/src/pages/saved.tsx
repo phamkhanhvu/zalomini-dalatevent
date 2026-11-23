@@ -5,6 +5,7 @@ import { FESTIVAL, PROGRAMS } from "../data/festival";
 import { onDataChange } from "../data/store";
 import { agendaFor } from "../components/agenda";
 import { useProgramSheet } from "../components/use-program-sheet";
+import { AccountPanel } from "../components/account-panel";
 import { IconArrow, IconBookmark, IconPin, IconShare } from "../components/icons";
 import { vnDate, vnDayMonth, vnTime, vnWeekday } from "../utils/agenda";
 import { arrangePlan, conflicts, decodeShare, encodeShare, PlanItem, toIcs, toPlanItem } from "../utils/itinerary";
@@ -136,6 +137,7 @@ const SavedPage: FC = () => {
         )}
       </header>
       <div className="scroll grow">
+        {!isShared && <div className="pad acc-wrap"><AccountPanel /></div>}
         {items.length === 0 ? (
           <div className="empty">
             <span className="empty-ico"><IconBookmark size={30} /></span>

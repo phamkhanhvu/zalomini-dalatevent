@@ -13,6 +13,11 @@ export function readPlan(): PlanItem[] {
   return current();
 }
 
+/** Thay toàn bộ (dùng khi đồng bộ từ tài khoản về) */
+export function replacePlan(items: PlanItem[]) {
+  commit(items);
+}
+
 function commit(next: PlanItem[]) {
   cache = next;
   storage.set(KEY, JSON.stringify(cache));

@@ -203,5 +203,5 @@ div.ag-row { text-align: left; }
 .acc-check input { min-height: 0; width: 22px; height: 22px; padding: 0; flex: none; accent-color: #b42318; }
 .acc-del { color: #b42318; }
 .acc-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 999px; background: var(--line); }
-.acc-tabs button { min-height: 44px; border-radius: 999px; font-size: 15px; font-weight: 600; color: var(--ink2); }
+.acc-tabs button { text-align: center; min-height: 44px; border-radius: 999px; font-size: 15px; font-weight: 600; color: var(--ink2); }
 .acc-tabs button.on { background: var(--paper); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); }

@@ -17,7 +17,8 @@ export function vnIso(ms) {
   return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}+07:00`;
 }
 const clone = (x) => JSON.parse(JSON.stringify(x));
-const cleanName = (s) => (typeof s === "string" ? s.replace(/[\u0000-\u001f<>]/g, " ").trim().slice(0, 40) : "") || "quản trị viên";
+/** Tên người sửa đi vào thông điệp commit: chỉ giữ chữ, số, dấu cách và vài dấu thông dụng */
+const cleanName = (s) => (typeof s === "string" ? s.replace(/[^\p{L}\p{N} ._-]/gu, " ").replace(/\s+/g, " ").trim().slice(0, 40) : "") || "quản trị viên";
 
 function merge(file, current, incoming, now) {
   const next = clone(current);

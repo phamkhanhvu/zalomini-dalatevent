@@ -1,4 +1,10 @@
-# Chính sách quyền riêng tư — BẢN NHÁP, CHƯA CÔNG BỐ
+# Chính sách quyền riêng tư — ghi chú soạn thảo
+
+Bản công bố nằm ở `web/src/pages/privacy.tsx` (trang `#/quyen-rieng-tu`), công bố ngày 23.11.2026. Email liên hệ không viết trong mã nguồn: đặt biến `CONTACT_EMAIL` trong GitHub → Settings → Secrets and variables → Actions → Variables; chưa đặt thì trang hiện số điện thoại. Tệp này là bản nháp trước đó, giữ để tham khảo; khi sửa chính sách hãy sửa ở trang.
+
+---
+
+# Bản nháp cũ
 
 Trạng thái: nháp ngày 23.11.2026, chờ chủ dự án duyệt. Chưa đưa lên website. Mọi chỗ ghi `CẦN XÁC MINH` phải được điền trước khi công bố. Bản này mô tả đúng những gì mã nguồn trong `web/` đang làm ở thời điểm viết; nếu thêm đăng nhập, đo lường hay thông báo đẩy thì phải sửa lại.
 

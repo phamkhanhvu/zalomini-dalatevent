@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { Sheet, useSnackbar } from "../ui";
 import { CAN_GOOGLE, getAccount, loadAccount, onAccount, registerEmail, signInEmail, signInGoogle, signOutAccount, wasLinked, wipeCloud } from "../platform/account";
 
@@ -11,6 +12,7 @@ function useAccount() {
 /** Dải tài khoản trên trang Lịch trình: đăng nhập để đồng bộ giữa các máy */
 export const AccountPanel: FC = () => {
   const acc = useAccount();
+  const navigate = useNavigate();
   const { openSnackbar } = useSnackbar();
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<"in" | "new">("in");
@@ -95,6 +97,7 @@ export const AccountPanel: FC = () => {
               <button type="button" className="acc-switch" onClick={() => setMode(mode === "in" ? "new" : "in")}>
                 {mode === "in" ? "Chưa có tài khoản? Tạo tài khoản" : "Đã có tài khoản? Đăng nhập"}
               </button>
+              <p className="acc-note">Khi đăng nhập, bạn đồng ý với <button type="button" className="acc-link" onClick={() => { setOpen(false); navigate("/quyen-rieng-tu"); }}>chính sách quyền riêng tư</button>.</p>
             </React.Fragment>
           )}
         </div>

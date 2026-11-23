@@ -190,3 +190,11 @@ div.ag-row { text-align: left; }
 .acc-switch { align-self: center; min-height: 44px; font-size: 14px; font-weight: 600; color: var(--magenta); }
 .btn-danger { background: #b42318; color: #fff; }
 .btn[disabled] { opacity: 0.6; }
+
+/* Trang chính sách */
+.prose { display: flex; flex-direction: column; gap: 10px; }
+.prose h2 { margin-top: 10px; }
+.prose ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; list-style: disc; }
+.prose a, .acc-link { color: var(--magenta); font-weight: 600; text-decoration: underline; }
+.prose .btn { align-self: flex-start; margin-top: 8px; }
+.link-left { align-self: flex-start; }

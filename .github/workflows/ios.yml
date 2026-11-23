@@ -50,6 +50,7 @@ jobs:
         working-directory: web
         env:
           VITE_DATA_URL: https://raw.githubusercontent.com/${{ github.repository }}/main/data/
+          VITE_CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
         run: npx vite build --outDir ../site-dist --emptyOutDir
       - name: Đưa lên nhánh site
         # Thêm commit mới, KHÔNG ghi đè lịch sử: trang chủ đang trỏ tới một commit cụ thể của nhánh này,

@@ -8,6 +8,7 @@ import SavedPage from "../pages/saved";
 import ShowsPage from "../pages/shows";
 import EmbedPage from "../pages/embed";
 import EmbedInfoPage from "../pages/embed-info";
+import PrivacyPage from "../pages/privacy";
 
 const ScrollTop: FC = () => {
   const { pathname } = useLocation();
@@ -33,6 +34,7 @@ export const Layout: FC = () => {
         <Route path="/da-luu" element={<SavedPage />} />
         <Route path="/lich-trinh" element={<SavedPage />} />
         <Route path="/nhung-lich" element={<EmbedInfoPage />} />
+        <Route path="/quyen-rieng-tu" element={<PrivacyPage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
     </div>

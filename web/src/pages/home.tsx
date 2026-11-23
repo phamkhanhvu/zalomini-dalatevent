@@ -130,6 +130,7 @@ const HomePage: FC = () => {
           </button>
         </div>
         <p className="muted small">© {new Date().getFullYear()} DalatEvent · Sense Group · 304 Hai Bà Trưng, Đà Lạt</p>
+        <button type="button" className="acc-switch link-left" onClick={() => navigate("/quyen-rieng-tu")}>Chính sách quyền riêng tư</button>
       </section>
       {sheet}
     </div>

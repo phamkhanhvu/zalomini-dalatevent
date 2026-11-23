@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import { useSnackbar } from "../ui";
-import { FESTIVAL, PROGRAMS, STATS_2024 } from "../data/festival";
+import { FESTIVAL, PROGRAMS } from "../data/festival";
 import { onDataChange } from "../data/store";
 import { countdown, statusOf } from "../utils/time";
 import { callPhone, openUrl, shareText } from "../utils/device";
@@ -14,19 +14,8 @@ import { IconArrow, IconBookmark, IconCompass, IconGlobe, IconPhone, IconPin, Ic
 import f1 from "../static/img/quang-truong-lam-vien-hoa.jpg";
 import f2 from "../static/img/ho-xuan-huong-hoang-hon.jpg";
 import f3 from "../static/img/cho-da-lat-mua-hoa.jpg";
-import g2 from "../static/img/ho-xuan-huong-suong-som.jpg";
-import g5 from "../static/img/ga-da-lat-vuon-hoa.jpg";
-import g6 from "../static/img/ga-da-lat-cam-tu-cau.jpg";
 import logoImg from "../static/img/dalatevent-logo.png";
 
-const GALLERY = [
-  { src: f1, alt: "Quảng trường Lâm Viên mùa hoa" },
-  { src: g2, alt: "Hồ Xuân Hương trong sương sớm" },
-  { src: f3, alt: "Chợ Đà Lạt mùa hoa" },
-  { src: f2, alt: "Hồ Xuân Hương lúc hoàng hôn" },
-  { src: g5, alt: "Vườn hoa trước ga Đà Lạt" },
-  { src: g6, alt: "Ga Đà Lạt giữa mùa cẩm tú cầu" },
-];
 
 const HomePage: FC = () => {
   const navigate = useNavigate();
@@ -114,34 +103,6 @@ const HomePage: FC = () => {
             Xem {total} chương trình <IconArrow size={20} />
           </button>
         </div>
-      </section>
-
-      <section className="sec sec-flush">
-        <div className="sec-head pad">
-          <h2 className="h2">Đà Lạt mùa hoa</h2>
-        </div>
-        <div className="gallery">
-          {GALLERY.map((g) => (
-            <figure key={g.alt}>
-              <img src={g.src} alt={g.alt} loading="lazy" />
-              <figcaption>{g.alt}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-
-      <section className="band band-pink">
-        <p className="eyebrow">Nhìn lại kỳ X · 2024</p>
-        <h2 className="h2">Quy mô Festival Hoa Đà Lạt 2024</h2>
-        <div className="stats">
-          {STATS_2024.map((s) => (
-            <div key={s.label}>
-              <b>{s.value}</b>
-              <span>{s.label}</span>
-            </div>
-          ))}
-        </div>
-        <p className="muted small">Nguồn: Thời báo Tài chính Việt Nam, VOV, Báo Văn hóa, Sài Gòn Giải Phóng.</p>
       </section>
 
       <section className="sec about">

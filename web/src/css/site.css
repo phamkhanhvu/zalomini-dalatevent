@@ -325,3 +325,16 @@ div.ag-row { text-align: left; }
 .trip-links { display: flex; gap: 14px; }
 .trip-links button { display: inline-flex; align-items: center; gap: 4px; min-height: 36px; font-size: 13px; font-weight: 600; color: var(--magenta); }
 @media (min-width: 900px) { .trip, .as-understood { max-width: 760px; } }
+
+/* Dalat Deals */
+.deal-list { display: flex; flex-direction: column; gap: 10px; }
+.deal { width: 100%; display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 18px; background: var(--paper); border: 1.5px dashed var(--magenta); text-align: left; }
+.deal.is-soldout, .deal.is-upcoming { border-color: var(--line); }
+.deal.is-soldout { opacity: 0.65; }
+.deal-title { font-family: var(--serif); font-size: 20px; line-height: 1.2; }
+.deal-partner { font-size: 14px; font-weight: 600; }
+.deal-sum { font-size: 14px; color: var(--ink2); }
+.deal-meta { font-size: 12px; color: var(--ink2); }
+.voucher { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 18px 14px; border-radius: 18px; background: var(--mint); text-align: center; border: 2px solid var(--green); }
+.voucher-code { font: 700 40px/1 ui-monospace, Menlo, monospace; letter-spacing: 6px; color: var(--green); }
+.voucher-clock { font: 700 14px ui-monospace, Menlo, monospace; color: var(--ink); }

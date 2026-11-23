@@ -139,3 +139,9 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 - Ngân sách chỉ còn dùng để bỏ show có giá vượt mức, không hiện bảng giá.
 - Giới hạn: chưa tính quãng đường và thời gian di chuyển (danh mục không có tọa độ; điểm thứ hai buổi sáng dựa vào trường `related` của cẩm nang); quán ăn, cà phê chọn luân phiên trong khu Xuân Hương, chưa có đánh giá chất lượng; chưa xét giờ mở cửa.
 - `data/places.json` không tự cập nhật: chạy lại script khi cẩm nang đổi.
+
+## Dalat Deals (23.11.2026)
+- F20 (bản đầu): trang `#/uu-dai`, thẻ "Ưu đãi" trong trang quản trị. Ưu đãi có đối tác, điều kiện, thời hạn, số lượt; chỉ hiện khi đã công bố và đối tác đã xác nhận (ghi rõ xác nhận với ai). Dùng ưu đãi cần đăng nhập, mỗi tài khoản một lần, có màn hình mã 6 ký tự kèm đồng hồ chạy để đưa nhân viên xem. Số đã dùng do máy chủ đếm (đo chuyển đổi). Quy chế ưu đãi ghi ngay trên trang. 5 kiểm thử (`web/tests/deals.test.ts`), tổng 90.
+- CHƯA có ưu đãi thật nào: không tự tạo ưu đãi khi đối tác chưa xác nhận.
+- CHƯA chạy thử các bước cần đăng nhập (tạo ưu đãi, dùng, chặn dùng lần hai, chặn vượt lượt).
+- Chưa có: công cụ để đối tác tự tra mã, danh sách lượt dùng cho quản trị viên xem/xuất, ưu đãi gắn với sự kiện hoặc dấu hộ chiếu, hoàn lượt.

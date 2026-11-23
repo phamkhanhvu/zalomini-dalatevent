@@ -40,6 +40,7 @@ const PrivacyPage: FC = () => {
         <ul>
           <li>Email và tên hiển thị của tài khoản (tên hiển thị chỉ có khi đăng nhập bằng Google).</li>
           <li>Danh sách mục bạn đã thêm vào lịch trình và các dấu mộc đã đóng trong Hộ chiếu Đà Lạt, để đồng bộ giữa các máy.</li>
+          <li>Khi bạn dùng một ưu đãi trong Dalat Deals: tên hiển thị của tài khoản, thời điểm và mã đổi, để đối soát với đối tác cung cấp ưu đãi.</li>
           <li>Nếu bạn chơi trò chơi: tiến trình chơi, tên nhân vật và điểm trên bảng xếp hạng (bảng xếp hạng ai cũng xem được), vị trí nhân vật khi đang trực tuyến và gian hàng bạn sở hữu trong trò chơi.</li>
         </ul>
         <p>Chúng tôi không bán và không chia sẻ các dữ liệu này cho bên khác.</p>

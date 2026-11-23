@@ -9,6 +9,8 @@
 | Lịch nhạc Sense | `data/shows.json` → sân khấu `sense-acoustic` | 7 tối trong tuần. Mây Lang Thang, Lululola do tác vụ mỗi sáng lấy tự động. |
 | Festival | `data/events.json` → `events` | Sửa tên, mô tả, giờ, địa điểm, trạng thái. Chưa thêm được chương trình mới, chưa sửa danh sách địa điểm. |
 
+| Ưu đãi | Firestore `deals` | Dalat Deals. Lưu là có hiệu lực ngay (không qua GitHub). Chỉ công bố khi đối tác đã xác nhận. |
+
 ## Đường đi của một lần lưu
 1. Trang kiểm tra dữ liệu ngay trong trình duyệt (`scripts/validate-core.mjs`). Có lỗi thì không cho lưu.
 2. Lưu vào Firestore `cms/<tệp>` (chỉ tài khoản có trong `admins` ghi được).

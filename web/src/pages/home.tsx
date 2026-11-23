@@ -138,6 +138,9 @@ const HomePage: FC = () => {
           >
             <IconShare />Chia sẻ
           </button>
+          <button type="button" className="act" onClick={() => navigate("/uu-dai")}>
+            <IconBookmark />Dalat Deals: ưu đãi đối tác
+          </button>
           <button type="button" className="act" onClick={() => navigate("/nhung-lich")}>
             <IconGlobe />Nhúng lịch và mã QR cho đối tác
           </button>

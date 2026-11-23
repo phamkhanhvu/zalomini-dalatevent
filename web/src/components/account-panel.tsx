@@ -3,18 +3,75 @@ import { useNavigate } from "react-router";
 import { Sheet, useSnackbar } from "../ui";
 import { CAN_GOOGLE, deleteAccount, deleteNeeds, getAccount, loadAccount, onAccount, registerEmail, resetPassword, signInEmail, signInGoogle, signOutAccount, wasLinked, wipeCloud } from "../platform/account";
 
+/** Trạng thái mở bảng tài khoản, dùng chung cho nút trên thanh đầu trang và dải ở trang Lịch trình */
+let sheetOpen = false;
+const openSubs = new Set<() => void>();
+const setSheet = (v: boolean) => {
+  sheetOpen = v;
+  openSubs.forEach((fn) => fn());
+};
+export const openAccount = () => {
+  setSheet(true);
+  loadAccount();
+};
+function useSheetOpen() {
+  const [, force] = useState(0);
+  useEffect(() => {
+    const fn = () => force((n) => n + 1);
+    openSubs.add(fn);
+    return () => {
+      openSubs.delete(fn);
+    };
+  }, []);
+  return sheetOpen;
+}
+
 function useAccount() {
   const [, force] = useState(0);
   useEffect(() => onAccount(() => force((n) => n + 1)), []);
   return getAccount();
 }
 
-/** Dải tài khoản trên trang Lịch trình: đăng nhập để đồng bộ giữa các máy */
+const whoOf = (acc: ReturnType<typeof getAccount>) => acc.name || acc.email || "tài khoản của bạn";
+
+/** Dải tài khoản trên trang Lịch trình */
 export const AccountPanel: FC = () => {
+  const acc = useAccount();
+  const signedIn = acc.status === "in";
+  return (
+    <button type="button" className={"acc-strip" + (signedIn ? " is-in" : "")} onClick={openAccount}>
+      <span className="acc-dot" aria-hidden="true" />
+      <span className="acc-text">
+        {signedIn ? (
+          <React.Fragment><b>{acc.syncing ? "Đang đồng bộ…" : acc.error ? "Chưa đồng bộ được" : "Đã đồng bộ"}</b><i>{whoOf(acc)}</i></React.Fragment>
+        ) : (
+          <React.Fragment><b>Đăng nhập hoặc đăng ký</b><i>Để xem lịch trình này trên máy khác</i></React.Fragment>
+        )}
+      </span>
+      <span className="acc-go">{signedIn ? "Tài khoản" : "Mở"}</span>
+    </button>
+  );
+};
+
+/** Nút tài khoản ở góc trên bên phải, có trên mọi trang */
+export const AccountButton: FC = () => {
+  const acc = useAccount();
+  const signedIn = acc.status === "in";
+  const initial = (whoOf(acc).trim()[0] || "?").toUpperCase();
+  return (
+    <button type="button" className={"acc-top" + (signedIn ? " is-in" : "")} onClick={openAccount} aria-label={signedIn ? "Tài khoản: " + whoOf(acc) : "Đăng nhập hoặc đăng ký"}>
+      {signedIn ? <span className="acc-avatar" aria-hidden="true">{initial}</span> : "Đăng nhập"}
+    </button>
+  );
+};
+
+/** Bảng tài khoản: đăng nhập, đăng ký, đăng xuất, xóa. Chỉ đặt một lần trong khung trang. */
+export const AccountSheet: FC = () => {
   const acc = useAccount();
   const navigate = useNavigate();
   const { openSnackbar } = useSnackbar();
-  const [open, setOpen] = useState(false);
+  const open = useSheetOpen();
+  const setOpen = setSheet;
   const [mode, setMode] = useState<"in" | "new">("in");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,14 +85,13 @@ export const AccountPanel: FC = () => {
     if (wasLinked()) loadAccount();
   }, []);
 
-  const openSheet = () => {
+  useEffect(() => {
+    if (!open) return;
     setDeleting(false);
     setAgree(false);
     setConfirmWipe(false);
     setPassword("");
-    setOpen(true);
-    loadAccount();
-  };
+  }, [open]);
   const act = async (fn: () => Promise<boolean>) => {
     setBusy(true);
     const ok = await fn();
@@ -46,22 +102,10 @@ export const AccountPanel: FC = () => {
     }
   };
   const signedIn = acc.status === "in";
-  const who = acc.name || acc.email || "tài khoản của bạn";
+  const who = whoOf(acc);
 
   return (
     <React.Fragment>
-      <button type="button" className={"acc-strip" + (signedIn ? " is-in" : "")} onClick={openSheet}>
-        <span className="acc-dot" aria-hidden="true" />
-        <span className="acc-text">
-          {signedIn ? (
-            <React.Fragment><b>{acc.syncing ? "Đang đồng bộ…" : acc.error ? "Chưa đồng bộ được" : "Đã đồng bộ"}</b><i>{who}</i></React.Fragment>
-          ) : (
-            <React.Fragment><b>Đăng nhập hoặc đăng ký</b><i>Để xem lịch trình này trên máy khác</i></React.Fragment>
-          )}
-        </span>
-        <span className="acc-go">{signedIn ? "Tài khoản" : "Mở"}</span>
-      </button>
-
       <Sheet visible={open} onClose={() => setOpen(false)}>
         <div className="ps acc">
           {acc.status === "loading" || acc.status === "off" ? (

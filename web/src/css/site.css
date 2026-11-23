@@ -205,3 +205,12 @@ div.ag-row { text-align: left; }
 .acc-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 999px; background: var(--line); }
 .acc-tabs button { text-align: center; min-height: 44px; border-radius: 999px; font-size: 15px; font-weight: 600; color: var(--ink2); }
 .acc-tabs button.on { background: var(--paper); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); }
+
+/* Nút tài khoản góc trên bên phải */
+.acc-top { position: fixed; z-index: 30; top: calc(env(safe-area-inset-top, 0px) + 12px); right: 14px; min-height: 40px; padding: 0 16px; border-radius: 999px; background: var(--ink); color: var(--cream); font-size: 14px; font-weight: 600; box-shadow: 0 2px 10px rgba(27, 20, 64, 0.18); }
+.acc-top.is-in { padding: 0; width: 42px; height: 42px; background: var(--magenta); }
+.acc-avatar { display: block; text-align: center; font-size: 17px; line-height: 42px; }
+.top, .hero { padding-right: 0; }
+.top > .eyebrow:first-child { padding-right: 128px; min-height: 40px; }
+@media (min-width: 900px) { .top > .eyebrow:first-child { padding-right: 0; min-height: 0; } }
+@media (min-width: 900px) { .acc-top { top: 16px; right: 24px; } }

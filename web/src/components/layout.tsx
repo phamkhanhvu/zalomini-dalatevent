@@ -9,6 +9,7 @@ import ShowsPage from "../pages/shows";
 import EmbedPage from "../pages/embed";
 import EmbedInfoPage from "../pages/embed-info";
 import PrivacyPage from "../pages/privacy";
+import { AccountButton, AccountSheet } from "./account-panel";
 
 const ScrollTop: FC = () => {
   const { pathname } = useLocation();
@@ -39,6 +40,8 @@ export const Layout: FC = () => {
       </Routes>
     </div>
     <Navigation />
+    <AccountButton />
+    <AccountSheet />
   </div>
   );
 };

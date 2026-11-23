@@ -79,7 +79,66 @@ for (const e of doc.events || []) {
   }
 }
 
+// ---- Lịch show (data/shows.json) và mục "Đang diễn ra" (data/happening.json)
+const dir = file.replace(/[^/]*$/, "");
+const readOpt = (name) => {
+  try {
+    return JSON.parse(fs.readFileSync(dir + name, "utf8"));
+  } catch (e) {
+    err(`${name}: không đọc được (${e.message})`);
+    return null;
+  }
+};
+const DATE = /^\d{4}-\d{2}-\d{2}$/;
+const TIME = /^\d{2}:\d{2}( – \d{2}:\d{2})?$/;
+const shows = readOpt("shows.json");
+let showCount = 0;
+if (shows) {
+  if (shows.schema !== 1) err(`shows.json: schema phải là 1`);
+  if (!ISO.test(shows.updated_at || "")) err(`shows.json: updated_at sai dạng`);
+  if (!Array.isArray(shows.stages) || !shows.stages.length) err(`shows.json: thiếu stages`);
+  const seen = new Set();
+  for (const st of shows.stages || []) {
+    const at = `shows.json ${st.id}`;
+    if (!ID.test(st.id || "") || seen.has(st.id)) err(`${at}: id sai hoặc trùng`);
+    seen.add(st.id);
+    if (!["dated", "weekly"].includes(st.kind)) err(`${at}: kind phải là dated hoặc weekly`);
+    for (const k of ["name", "intro", "address", "cta_label"]) if (!st[k]) err(`${at}: thiếu ${k}`);
+    if (!/^https:\/\//.test(st.source_url || "")) err(`${at}: source_url phải bắt đầu bằng https://`);
+    if (!DATE.test(st.verified_at || "")) err(`${at}: verified_at phải có dạng 2026-11-23`);
+    if (!Array.isArray(st.items)) { err(`${at}: thiếu items`); continue; }
+    let prev = "";
+    for (const [i, it] of st.items.entries()) {
+      const ia = `${at} dòng ${i + 1}`;
+      showCount++;
+      if (!it.title) err(`${ia}: thiếu title`);
+      if (/[<>]/.test(it.title || "")) err(`${ia}: title không được chứa thẻ HTML`);
+      if (!/^https:\/\//.test(it.url || "")) err(`${ia}: url phải bắt đầu bằng https://`);
+      if (!TIME.test(it.time || "")) err(`${ia}: time phải có dạng 17:00 hoặc 20:00 – 22:00`);
+      if (st.kind === "dated") {
+        if (!DATE.test(it.date || "")) err(`${ia}: date phải có dạng 2026-12-12`);
+        const key = (it.date || "") + " " + (it.time || "");
+        if (key < prev) err(`${ia}: các dòng phải sắp theo ngày rồi giờ`);
+        prev = key;
+      } else if (!(Number.isInteger(it.weekday) && it.weekday >= 0 && it.weekday <= 6) || !it.weekday_label) err(`${ia}: cần weekday (0–6) và weekday_label`);
+    }
+  }
+}
+const hap = readOpt("happening.json");
+if (hap) {
+  if (hap.schema !== 1) err(`happening.json: schema phải là 1`);
+  if (!ISO.test(hap.updated_at || "")) err(`happening.json: updated_at sai dạng`);
+  if (!/^\d{2}\.\d{2}\.\d{4}$/.test(hap.updated_label || "")) err(`happening.json: updated_label phải có dạng 23.11.2026`);
+  if (!Array.isArray(hap.items) || !hap.items.length) err(`happening.json: cần ít nhất một mục`);
+  for (const [i, it] of (hap.items || []).entries()) {
+    for (const k of ["when", "title", "desc"]) if (!it[k] || typeof it[k] !== "string") err(`happening.json mục ${i + 1}: thiếu ${k}`);
+    if (/[<>]/.test((it.title || "") + (it.desc || "") + (it.when || ""))) err(`happening.json mục ${i + 1}: không được chứa thẻ HTML`);
+    if (it.live !== undefined && typeof it.live !== "boolean") err(`happening.json mục ${i + 1}: live phải là true hoặc false`);
+  }
+  if ((hap.items || []).filter((x) => x.live).length > 1) warn(`happening.json: có hơn một mục "đang diễn ra" nổi bật`);
+}
+
 for (const w of warnings) console.log(`cảnh báo  ${w}`);
 for (const m of errors) console.error(`LỖI       ${m}`);
-console.log(`\n${file}: ${(doc.events || []).length} sự kiện, ${(doc.venues || []).length} địa điểm, ${errors.length} lỗi, ${warnings.length} cảnh báo`);
+console.log(`\n${file}: ${(doc.events || []).length} sự kiện, ${(doc.venues || []).length} địa điểm, ${showCount} dòng lịch show, ${hap ? (hap.items || []).length : 0} mục đang diễn ra, ${errors.length} lỗi, ${warnings.length} cảnh báo`);
 process.exit(errors.length ? 1 : 0);

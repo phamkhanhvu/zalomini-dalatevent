@@ -17,6 +17,9 @@ concurrency:
   group: web-ios-build
   cancel-in-progress: true
 
+permissions:
+  contents: write
+
 jobs:
   web:
     runs-on: ubuntu-latest
@@ -39,6 +42,29 @@ jobs:
           name: dalatevent-web
           path: web/dist
           retention-days: 30
+      # Bản dùng cho dalatevent.com: tải dữ liệu mới từ thư mục data/ của repo, đưa lên nhánh "site".
+      # Trang chủ dalatevent.com nạp JS/CSS từ một commit cố định của nhánh này (qua cdn.jsdelivr.net).
+      - name: Build bản cho dalatevent.com
+        working-directory: web
+        env:
+          VITE_DATA_URL: https://raw.githubusercontent.com/${{ github.repository }}/main/data/
+        run: npx vite build --outDir ../site-dist --emptyOutDir
+      - name: Đưa lên nhánh site
+        # Thêm commit mới, KHÔNG ghi đè lịch sử: trang chủ đang trỏ tới một commit cụ thể của nhánh này,
+        # commit đó phải còn tồn tại thì JS/CSS mới tải được.
+        run: |
+          git clone -q --depth 1 --branch site "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" site-branch
+          cd site-branch
+          git rm -rq . && cp -r ../site-dist/. .
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "Không có thay đổi giao diện."; else
+            git commit -q -m "Site build từ ${GITHUB_SHA::7}"
+            git push -q origin site
+          fi
+          echo "Commit nhánh site hiện tại: $(git rev-parse HEAD)"
+          grep -o 'assets/index-[^"]*' index.html
 
   ios:
     needs: web

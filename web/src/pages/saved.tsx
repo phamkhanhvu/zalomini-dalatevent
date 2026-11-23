@@ -2,7 +2,9 @@ import React, { FC, useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { useSnackbar } from "../ui";
 import { FESTIVAL, PROGRAMS } from "../data/festival";
-import { onDataChange } from "../data/store";
+import { getData, onDataChange } from "../data/store";
+import { acknowledge, detectChanges, Snap, SnapMap } from "../utils/changes";
+import { storage } from "../utils/device";
 import { agendaFor } from "../components/agenda";
 import { useProgramSheet } from "../components/use-program-sheet";
 import { AccountPanel } from "../components/account-panel";
@@ -19,6 +21,17 @@ const whenOf = (it: PlanItem) =>
   it.allDay
     ? vnDate(it.start) === vnDate(it.end) ? "Cả ngày " + vnDayMonth(it.start) : vnDayMonth(it.start) + " – " + vnDayMonth(it.end)
     : vnTime(it.start) + (it.endEstimated ? "" : " – " + vnTime(it.end)) + ", " + vnDayMonth(it.start);
+
+const SNAP_KEY = "dalatevent.savedSnap.v1";
+const readSnaps = (): SnapMap => {
+  try {
+    const o = JSON.parse(storage.get(SNAP_KEY) || "{}");
+    return o && typeof o === "object" ? o : {};
+  } catch (e) {
+    return {};
+  }
+};
+const CHANGE_TEXT = { time: "Đã đổi giờ", postponed: "Tạm hoãn", cancelled: "Đã hủy", removed: "Không còn trong lịch" } as const;
 
 const SavedPage: FC = () => {
   const navigate = useNavigate();
@@ -47,6 +60,24 @@ const SavedPage: FC = () => {
   const view = useMemo(() => arrangePlan(items, now), [items]);
   const clash = useMemo(() => conflicts(items.filter((x) => x.end >= now)), [items]);
   const upcoming = items.filter((x) => x.end >= now);
+
+  // Chương trình Festival đã lưu có bị đổi giờ, hoãn, hủy so với lúc lưu không
+  const [snapTick, setSnapTick] = useState(0);
+  const currentMap = useMemo(() => {
+    const m: Record<string, Snap | undefined> = {};
+    for (const e of getData().events.events) if (e.sessions[0]) m[e.id] = { start: Date.parse(e.sessions[0].start_at), status: e.status };
+    return m;
+  }, [tick]);
+  const changed = useMemo(() => {
+    if (isShared) return new Map<string, { kind: keyof typeof CHANGE_TEXT; oldStart: number }>();
+    const r = detectChanges(saved.ids, readSnaps(), currentMap);
+    storage.set(SNAP_KEY, JSON.stringify(r.next));
+    return new Map(r.changes.map((c) => [c.id, c]));
+  }, [saved.ids, currentMap, snapTick, isShared]);
+  const ackChanges = () => {
+    storage.set(SNAP_KEY, JSON.stringify(acknowledge(readSnaps(), currentMap, [...changed.keys()])));
+    setSnapTick((n) => n + 1);
+  };
 
   const remove = (it: PlanItem) => {
     if (it.programId) saved.toggle(it.programId);
@@ -100,6 +131,9 @@ const SavedPage: FC = () => {
           <span className="pc-title">{it.title}</span>
           <span className="pc-venue"><IconPin size={15} />{it.venue}</span>
           {others && <span className="plan-warn">Trùng giờ với: {others.join(", ")}</span>}
+          {it.programId && changed.has(it.programId) && (
+            <span className="plan-warn plan-changed">{CHANGE_TEXT[changed.get(it.programId)!.kind]}. Lúc bạn lưu: {vnTime(changed.get(it.programId)!.oldStart)}, {vnDayMonth(changed.get(it.programId)!.oldStart)}</span>
+          )}
         </span>
       </React.Fragment>
     );
@@ -149,6 +183,12 @@ const SavedPage: FC = () => {
           </div>
         ) : (
           <div className="pad plan">
+            {changed.size > 0 && (
+              <div className="plan-summary plan-alert">
+                <span>{changed.size} chương trình bạn lưu đã thay đổi so với lúc lưu. Xem dòng cảnh báo ở từng mục.</span>
+                <button type="button" className="btn btn-line" onClick={ackChanges}>Đã biết</button>
+              </div>
+            )}
             {clash.size > 0 && <p className="plan-summary">Có {clash.size} mục bị trùng giờ. Xem dòng cảnh báo ở từng mục.</p>}
             {view.days.map((d) => (
               <section key={d.date}>

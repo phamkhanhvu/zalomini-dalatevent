@@ -214,3 +214,10 @@ div.ag-row { text-align: left; }
 .top > .eyebrow:first-child { padding-right: 128px; min-height: 40px; }
 @media (min-width: 900px) { .top > .eyebrow:first-child { padding-right: 0; min-height: 0; } }
 @media (min-width: 900px) { .acc-top { top: 16px; right: 24px; } }
+
+/* Ngoại tuyến, báo đổi lịch, báo sai thông tin */
+.offline { flex: none; padding: calc(env(safe-area-inset-top, 0px) + 6px) 130px 6px 16px; background: var(--ink); color: var(--cream); font-size: 13px; font-weight: 600; }
+.plan-changed { background: #ffe5e5; color: #9b1c1c; }
+.plan-alert { display: flex; flex-direction: column; gap: 8px; background: #ffe5e5; color: #9b1c1c; }
+.plan-alert .btn { align-self: flex-start; min-height: 40px; }
+.ps-report { align-self: flex-start; font-size: 13px; font-weight: 600; color: var(--ink2); text-decoration: underline; padding: 6px 0; }

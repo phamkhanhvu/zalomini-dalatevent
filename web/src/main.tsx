@@ -42,5 +42,12 @@ async function start() {
     window.addEventListener(SAVED_EVENT, () => syncReminders(savedIds(), true, readPlan()));
   }
   createRoot(document.getElementById("app")!).render(<App />);
+  // Giữ khung trang để mở được khi mất mạng. Không dùng trong app cài trên máy (app đã có sẵn tệp).
+  if (!IS_NATIVE && "serviceWorker" in navigator && (window.location.protocol === "https:" || window.location.hostname === "localhost")) {
+    const reg = () => navigator.serviceWorker.register("./sw.js").catch(() => undefined);
+    // Sự kiện "load" có thể đã xảy ra trước khi dữ liệu nạp xong
+    if (document.readyState === "complete") reg();
+    else window.addEventListener("load", reg);
+  }
 }
 start();

@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import QRCode from "qrcode";
+import { CONTACT_EMAIL, mailto } from "../utils/contact";
 import { Sheet } from "../ui";
 import { FESTIVAL, Program } from "../data/festival";
 import { openDirections, shareText } from "../utils/device";
@@ -86,6 +87,9 @@ export const ProgramSheet: FC<Props> = ({ program, saved, onClose, onToggleSave,
               {showQr ? "Ẩn mã QR" : "Mã QR"}
             </button>
           </div>
+          {CONTACT_EMAIL && (
+            <a className="ps-report" href={mailto("Báo sai thông tin: " + p.title, "Chương trình: " + p.title + "\nLink: " + programLink(p.id) + "\n\nThông tin sai hoặc thiếu:\n\nNguồn đúng (nếu có):\n")}>Thông tin chưa đúng? Báo cho DalatEvent</a>
+          )}
           {showQr && qr && (
             <div className="ps-qr">
               <img src={qr} alt={"Mã QR mở chương trình " + p.title} width={200} height={200} />

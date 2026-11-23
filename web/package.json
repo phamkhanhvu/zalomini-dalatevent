@@ -11,7 +11,7 @@
     "build": "npm run sync-data && vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "node --test tests/agenda.test.ts tests/geo.test.ts tests/search.test.ts tests/itinerary.test.ts tests/sync.test.ts"
+    "test": "node --test tests/agenda.test.ts tests/geo.test.ts tests/search.test.ts tests/itinerary.test.ts tests/sync.test.ts tests/changes.test.ts"
   },
   "dependencies": {
     "@capacitor/app-launcher": "^8.0.0",

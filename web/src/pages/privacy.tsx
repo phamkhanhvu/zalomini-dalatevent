@@ -2,13 +2,9 @@ import React, { FC } from "react";
 import { useNavigate } from "react-router";
 import { FESTIVAL } from "../data/festival";
 import { callPhone } from "../utils/device";
+import { CONTACT_EMAIL } from "../utils/contact";
 
-/**
- * Email nhận yêu cầu về quyền riêng tư. Không viết trong mã nguồn: chủ dự án đặt trong
- * GitHub → Settings → Secrets and variables → Actions → Variables, tên CONTACT_EMAIL.
- * Chưa đặt thì trang chỉ hiện số điện thoại.
- */
-const CONTACT: string = ((import.meta as unknown as { env?: Record<string, string> }).env?.VITE_CONTACT_EMAIL || "").trim();
+const CONTACT = CONTACT_EMAIL;
 const UPDATED = "23.11.2026";
 
 const Contact: FC<{ subject?: string }> = ({ subject }) =>

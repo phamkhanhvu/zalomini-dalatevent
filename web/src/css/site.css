@@ -307,7 +307,7 @@ div.ag-row { text-align: left; }
 
 /* Lịch trình gợi ý của trợ lý */
 .trip { display: flex; flex-direction: column; gap: 10px; }
-.trip-list { display: flex; flex-direction: column; gap: 10px; }
+.trip-list { display: flex; flex-direction: column; gap: 10px; padding: 0; margin: 0; list-style: none; }
 .trip-stop { display: flex; gap: 10px; align-items: flex-start; }
 .trip-time { flex: 0 0 58px; display: flex; flex-direction: column; align-items: center; padding: 8px 4px; border-radius: 12px; background: var(--line); }
 .trip-time b { font-family: var(--serif); font-size: 16px; }

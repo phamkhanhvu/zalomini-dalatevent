@@ -82,3 +82,8 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 - Đã làm (có code, 32 test, build, kiểm tra trình duyệt 390px và 1280px): trang chủ không còn chỉ nói về Festival; ô tìm kiếm hiểu tên sự kiện, địa điểm, nghệ sĩ và ngày tháng; ba nút "Khám phá sự kiện", "Xem lịch trình", "Mở bản đồ"; mục "Đang diễn ra tại Đà Lạt" gộp Festival, sự kiện khác (data/happening.json) và show diễn; số liệu Festival (đếm ngược, thời gian, kỳ, số chương trình, trạng thái) lấy từ data/events.json.
 - `data/happening.json` đổi cấu trúc: mỗi mục cần `start_date`, `end_date`, `venue`. Tác vụ cập nhật mỗi sáng CẦN sửa lời nhắc theo cấu trúc này.
 - CẦN XÁC MINH / chờ: ảnh thật của lễ hội (đêm khai mạc, sân khấu âm nhạc); hiện dùng ảnh phong cảnh có sẵn.
+
+## Lịch trình trên máy và nháp chính sách (23.11.2026)
+- S4-4 (phần không cần tài khoản) xong trên web: thêm được chương trình Festival, sự kiện khác và show diễn vào Lịch trình từ mọi danh sách; xếp theo ngày; cảnh báo trùng giờ; xuất tệp lịch `.ics`; chia sẻ dạng văn bản. 7 kiểm thử tự động (`web/tests/itinerary.test.ts`), tổng 39. Chưa có: chia sẻ bằng link, đồng bộ giữa các máy (chờ S4-1 đến S4-3). Tệp `.ics` mới thử tải về và đọc nội dung, CHƯA thử mở trên iPhone thật.
+- App iOS: nhắc lịch hiện chỉ áp dụng cho chương trình Festival, chưa cho show diễn.
+- S1-6: có bản nháp `docs/privacy-policy-draft.md`, chưa công bố, còn 4 chỗ CẦN XÁC MINH.

@@ -3,7 +3,11 @@ import { PROGRAMS, Program } from "../data/festival";
 import { getData, onDataChange } from "../data/store";
 import { AgendaItem, arrange, buildAgenda, Kind, Preset, upcomingOnly, vnDate, vnDayMonth, vnTime, windowOf } from "../utils/agenda";
 import { openUrl } from "../utils/device";
-import { IconArrow, IconPin } from "./icons";
+import { IconArrow, IconBookmark, IconPin } from "./icons";
+import { useSnackbar } from "../ui";
+import { useSaved } from "../utils/saved";
+import { usePlan } from "../utils/plan";
+import { planId, toPlanItem } from "../utils/itinerary";
 
 const PRESETS: { id: Preset; label: string }[] = [
   { id: "today", label: "Hôm nay" },
@@ -27,6 +31,14 @@ export function agendaFor(from: number, to: number, now: number): AgendaItem[] {
 
 /** Một dòng sự kiện, dùng chung cho mục "Đang diễn ra" và kết quả tìm kiếm */
 export const AgendaRow: FC<{ it: AgendaItem; showDate: boolean; now: number; onOpenProgram: (p: Program) => void }> = ({ it, showDate, now, onOpenProgram }) => {
+  const saved = useSaved();
+  const plan = usePlan();
+  const { openSnackbar } = useSnackbar();
+  const inPlan = it.programId ? saved.has(it.programId) : plan.has(planId(it));
+  const togglePlan = () => {
+    const on = it.programId ? saved.toggle(it.programId) : plan.toggle(toPlanItem(it));
+    openSnackbar({ text: on ? "Đã thêm vào Lịch trình" : "Đã bỏ khỏi Lịch trình", type: "success", duration: 2200 });
+  };
   const live = it.status === "published" && it.start <= now && now <= it.end;
   const sameDay = vnDate(it.start) === vnDate(it.end);
   let big: string;
@@ -60,7 +72,14 @@ export const AgendaRow: FC<{ it: AgendaItem; showDate: boolean; now: number; onO
     </React.Fragment>
   );
   const cls = "ag-row is-" + it.kind;
-  return <li>{action ? <button type="button" className={cls} onClick={action}>{body}</button> : <div className={cls}>{body}</div>}</li>;
+  return (
+    <li className={"ag-item is-" + it.kind}>
+      {action ? <button type="button" className={cls} onClick={action}>{body}</button> : <div className={cls}>{body}</div>}
+      <button type="button" className={"pc-save" + (inPlan ? " on" : "")} aria-label={inPlan ? "Bỏ khỏi lịch trình" : "Thêm vào lịch trình"} aria-pressed={inPlan} onClick={togglePlan}>
+        <IconBookmark size={22} filled={inPlan} />
+      </button>
+    </li>
+  );
 };
 
 /** Mục "Đang diễn ra tại Đà Lạt": Festival, sự kiện khác và show diễn, lọc theo ngày (giờ Việt Nam) */

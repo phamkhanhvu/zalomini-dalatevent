@@ -135,3 +135,18 @@ div.ag-row { text-align: left; }
   .tiles-in { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .feat-photos { aspect-ratio: 21 / 9; }
 }
+
+/* Dòng sự kiện có nút thêm vào lịch trình */
+.ag-item { display: flex; align-items: stretch; background: var(--cream); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+.ag-item > .ag-row { flex: 1; min-width: 0; border: 0; border-radius: 0; background: transparent; }
+.ag-item > .pc-save { flex: 0 0 48px; min-height: 48px; }
+.ag-item .ag-go { display: none; }
+
+/* Lịch trình của tôi */
+.plan-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.plan-actions .btn { min-height: 48px; justify-content: center; font-size: 14px; padding: 0 12px; }
+.plan-day { font-family: var(--serif); font-size: 19px; margin: 18px 0 8px; }
+.plan-day:first-child { margin-top: 4px; }
+.plan-warn { display: flex; gap: 6px; align-items: flex-start; padding: 8px 10px; border-radius: 10px; background: #fff1d6; color: #7a4b00; font-size: 13px; font-weight: 600; }
+.plan-summary { padding: 10px 14px; border-radius: 14px; background: #fff1d6; color: #7a4b00; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.plan-past { opacity: 0.6; }

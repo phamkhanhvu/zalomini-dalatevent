@@ -1,0 +1,83 @@
+# Đóng gói app iOS có ký và đưa lên TestFlight. Chỉ chạy khi chủ dự án bấm "Run workflow".
+# Cần tài khoản Apple Developer và 4 giá trị do chủ dự án tự đặt trong
+# GitHub → Settings → Secrets and variables → Actions → Secrets (không gửi qua chat, không ghi vào mã nguồn):
+#   APPLE_TEAM_ID        Mã nhóm 10 ký tự (developer.apple.com → Membership details)
+#   ASC_KEY_ID           Key ID của khóa App Store Connect API
+#   ASC_ISSUER_ID        Issuer ID của khóa đó
+#   ASC_KEY_P8           Toàn bộ nội dung tệp AuthKey_XXXX.p8
+# Chi tiết từng bước: docs/ios-release.md
+# CHƯA chạy thử lần nào (chưa có tài khoản Apple Developer).
+name: Đưa app iOS lên TestFlight
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Số phiên bản hiển thị trên App Store, ví dụ 1.0"
+        required: true
+        default: "1.0"
+
+jobs:
+  testflight:
+    runs-on: macos-26
+    env:
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+      APP_VERSION: ${{ inputs.version }}
+    steps:
+      - name: Kiểm tra đã đặt đủ 4 giá trị bí mật
+        run: |
+          for v in APPLE_TEAM_ID ASC_KEY_ID ASC_ISSUER_ID ASC_KEY_P8; do
+            if [ -z "${!v}" ]; then echo "::error::Chưa đặt secret $v. Xem docs/ios-release.md"; exit 1; fi
+          done
+          echo "$APP_VERSION" | grep -Eq '^[0-9]+(\.[0-9]+){1,2}$' || { echo "::error::Số phiên bản phải có dạng 1.0 hoặc 1.0.1"; exit 1; }
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Kiểm tra dữ liệu và dựng web cho app
+        env:
+          VITE_DATA_URL: https://raw.githubusercontent.com/${{ github.repository }}/main/data/
+          VITE_CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
+        run: |
+          node scripts/validate-events.mjs
+          cd web && npm ci && npm test && npm run build
+      - run: npm ci
+        working-directory: ios-app
+      - run: npx cap sync ios
+        working-directory: ios-app
+      - name: Đóng gói có ký (archive)
+        working-directory: ios-app
+        run: |
+          mkdir -p "$RUNNER_TEMP/keys"
+          KEY="$RUNNER_TEMP/keys/AuthKey_${ASC_KEY_ID}.p8"
+          printf '%s\n' "$ASC_KEY_P8" > "$KEY"
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release \
+            -destination "generic/platform=iOS" -archivePath "$RUNNER_TEMP/App.xcarchive" \
+            DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CODE_SIGN_STYLE=Automatic \
+            MARKETING_VERSION="$APP_VERSION" CURRENT_PROJECT_VERSION="$GITHUB_RUN_NUMBER" \
+            -allowProvisioningUpdates -authenticationKeyPath "$KEY" \
+            -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
+            archive | tail -n 40
+      - name: Đưa lên App Store Connect (TestFlight)
+        run: |
+          KEY="$RUNNER_TEMP/keys/AuthKey_${ASC_KEY_ID}.p8"
+          cat > "$RUNNER_TEMP/export.plist" <<PLIST
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>destination</key><string>upload</string>
+            <key>signingStyle</key><string>automatic</string>
+            <key>teamID</key><string>${APPLE_TEAM_ID}</string>
+          </dict></plist>
+          PLIST
+          xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/App.xcarchive" \
+            -exportOptionsPlist "$RUNNER_TEMP/export.plist" -exportPath "$RUNNER_TEMP/export" \
+            -allowProvisioningUpdates -authenticationKeyPath "$KEY" \
+            -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" | tail -n 40
+      - name: Xóa khóa khỏi máy dựng
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/keys"

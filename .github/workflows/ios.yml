@@ -85,10 +85,35 @@ jobs:
         working-directory: ios-app
       - run: npx cap sync ios
         working-directory: ios-app
-      - name: Biên dịch thử cho máy ảo iPhone
+      - name: Biên dịch cho máy ảo iPhone
         working-directory: ios-app
         run: |
           xcodebuild -version
           xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \
             -sdk iphonesimulator -destination "generic/platform=iOS Simulator" \
-            CODE_SIGNING_ALLOWED=NO build | tail -n 40
+            -derivedDataPath build CODE_SIGNING_ALLOWED=NO build | tail -n 25
+      - name: Chạy thử app trên máy ảo iPhone và chụp màn hình
+        working-directory: ios-app
+        run: |
+          APP=$(find build/Build/Products -name "App.app" -maxdepth 3 | head -1)
+          test -d "$APP" || { echo "Không tìm thấy App.app"; exit 1; }
+          DEV=$(xcrun simctl list devices available -j | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; c=[x for k,v in d.items() if 'iOS' in k for x in v if x['name'].startswith('iPhone')]; pro=[x for x in c if 'Pro Max' in x['name']] or c; print(pro[-1]['udid'])")
+          xcrun simctl list devices available | grep "$DEV" || true
+          xcrun simctl boot "$DEV"
+          xcrun simctl bootstatus "$DEV" -b
+          xcrun simctl install "$DEV" "$APP"
+          xcrun simctl launch "$DEV" vn.sensegroup.dalatevent
+          mkdir -p shots
+          sleep 30
+          xcrun simctl io "$DEV" screenshot shots/01-mo-app.png
+          sleep 12
+          xcrun simctl io "$DEV" screenshot shots/02-sau-12-giay.png
+          # App còn sống sau khi mở (không bị văng)
+          xcrun simctl spawn "$DEV" launchctl list | grep -i "vn.sensegroup.dalatevent" || { echo "App không còn chạy sau khi mở"; exit 1; }
+          xcrun simctl shutdown "$DEV"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ios-may-ao-anh-chup
+          path: ios-app/shots
+          retention-days: 14

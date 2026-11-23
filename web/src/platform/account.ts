@@ -152,7 +152,9 @@ export function loadAccount(): Promise<void> {
     try {
       const [{ initializeApp }, authMod, { getFirestore }, { FB_CONFIG }] = await Promise.all([import("firebase/app"), import("firebase/auth"), import("firebase/firestore/lite"), import("./firebase-config")]);
       const app = initializeApp(FB_CONFIG);
-      auth = authMod.getAuth(app);
+      // Trong app cài trên máy, getAuth() cố tải khung đăng nhập bật lên của Google và có thể treo;
+      // ở đó chỉ dùng đăng nhập email nên khởi tạo bản gọn, lưu phiên bằng IndexedDB.
+      auth = IS_NATIVE ? authMod.initializeAuth(app, { persistence: authMod.indexedDBLocalPersistence }) : authMod.getAuth(app);
       db = getFirestore(app);
       window.addEventListener(SAVED_EVENT, onLocalChange);
       await new Promise<void>((resolve) => {

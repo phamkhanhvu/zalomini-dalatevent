@@ -1,0 +1,22 @@
+{
+  "name": "DalatEvent",
+  "short_name": "DalatEvent",
+  "description": "Đà Lạt có gì vui? Lịch Festival Hoa Đà Lạt và show diễn.",
+  "lang": "vi",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FFF8EF",
+  "theme_color": "#FFF8EF",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

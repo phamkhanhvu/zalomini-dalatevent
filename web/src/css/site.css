@@ -221,3 +221,24 @@ div.ag-row { text-align: left; }
 .plan-alert { display: flex; flex-direction: column; gap: 8px; background: #ffe5e5; color: #9b1c1c; }
 .plan-alert .btn { align-self: flex-start; min-height: 40px; }
 .ps-report { align-self: flex-start; font-size: 13px; font-weight: 600; color: var(--ink2); text-decoration: underline; padding: 6px 0; }
+
+/* Ảnh đầu trang Show diễn */
+.top-photo { position: relative; margin-top: 6px; border-radius: 20px; overflow: hidden; }
+.top-photo img { display: block; width: 100%; aspect-ratio: 16 / 8; object-fit: cover; }
+.top-photo figcaption { position: absolute; right: 10px; bottom: 8px; padding: 2px 8px; border-radius: 999px; background: rgba(27, 20, 64, 0.6); color: #fff; font-size: 11px; }
+@media (min-width: 900px) { .top-photo img { aspect-ratio: 21 / 8; } .gallery { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+
+/* Banner đầu trang chủ */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.bn { position: relative; margin: 0 -16px; }
+.bn-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.bn-track::-webkit-scrollbar { display: none; }
+.bn-track img { flex: 0 0 100%; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; scroll-snap-align: center; background: var(--mint); }
+.bn-dots { display: flex; justify-content: center; gap: 2px; padding-top: 4px; }
+.bn-dots button { width: 22px; height: 24px; position: relative; }
+.bn-dots button::after { content: ""; position: absolute; left: 7px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+.bn-dots button.on::after { background: var(--magenta); left: 3px; width: 16px; border-radius: 4px; }
+@media (min-width: 900px) {
+  .bn { margin: 0; width: 100%; max-width: 960px; }
+  .bn-track { border-radius: 24px; }
+}

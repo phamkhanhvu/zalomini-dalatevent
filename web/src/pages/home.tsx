@@ -8,12 +8,13 @@ import { callPhone, openUrl, shareText } from "../utils/device";
 import { SHARE_FAIL } from "../utils/platform";
 import { Agenda } from "../components/agenda";
 import { SearchBox } from "../components/search-box";
+import { Banners } from "../components/banners";
 import { useProgramSheet } from "../components/use-program-sheet";
 import { IconArrow, IconBookmark, IconCompass, IconGlobe, IconPhone, IconPin, IconShare } from "../components/icons";
 
-import f1 from "../static/img/quang-truong-lam-vien-hoa.jpg";
-import f2 from "../static/img/ho-xuan-huong-hoang-hon.jpg";
-import f3 from "../static/img/cho-da-lat-mua-hoa.jpg";
+import f1 from "../static/img/md-vuon-hoa.jpg";
+import f2 from "../static/img/md-dem-nhac-acoustic.jpg";
+import f3 from "../static/img/md-cho-dem.jpg";
 import logoImg from "../static/img/dalatevent-logo.png";
 
 
@@ -43,9 +44,8 @@ const HomePage: FC = () => {
         <div className="brand">
           <img className="brand-logo" src={logoImg} alt="DalatEvent.com" width={90} height={72} />
         </div>
-        <h1 className="display">
-          Đà Lạt <em>có gì vui?</em>
-        </h1>
+        <h1 className="sr-only">Đà Lạt có gì vui?</h1>
+        <Banners />
         <p className="lead">Lễ hội, sự kiện và show diễn đang và sắp diễn ra tại Đà Lạt, cập nhật mỗi ngày.</p>
         <SearchBox onOpenProgram={openProgram} />
         <div className="quick">
@@ -68,14 +68,15 @@ const HomePage: FC = () => {
         <h2 className="h1" id="feat-h">{FESTIVAL.name} <em>{FESTIVAL.start.slice(0, 4)}</em></h2>
         {FESTIVAL.theme && <p className="lead">{FESTIVAL.theme}.</p>}
         <div className="feat-photos">
-          <img className="feat-a" src={f1} alt="Quảng trường Lâm Viên, nơi diễn ra đêm khai mạc và bế mạc" />
-          <img className="feat-b" src={f2} alt="Hồ Xuân Hương, không gian hoa và sân khấu trên mặt hồ" />
-          <img className="feat-c" src={f3} alt="Đường phố Đà Lạt mùa hoa" loading="lazy" />
+          <img className="feat-a" src={f1} alt="Du khách dạo chơi và chụp ảnh giữa vườn hoa (ảnh minh họa)" />
+          <img className="feat-b" src={f2} alt="Đêm nhạc acoustic ngoài trời (ảnh minh họa)" />
+          <img className="feat-c" src={f3} alt="Chợ đêm với món nướng và dâu tây (ảnh minh họa)" loading="lazy" />
           <div className="count">
             <b>{cd.big}</b>
             <span>{cd.small}</span>
           </div>
         </div>
+        <p className="muted small">Ảnh minh họa không khí mùa lễ hội, không phải ảnh chụp tại sự kiện.</p>
         <div className="tiles tiles-in">
           <div className="tile tile-pink">
             <span className="tile-k">Thời gian</span>

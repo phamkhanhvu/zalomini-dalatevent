@@ -2,22 +2,31 @@ import React, { FC, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 import { onDataChange } from "../data/store";
 import { CATEGORIES, CatId, FESTIVAL, PROGRAMS, STATS_2024 } from "../data/festival";
-import f1 from "../static/img/quang-truong-lam-vien-hoa.jpg";
-import f2 from "../static/img/ho-xuan-huong-hoang-hon.jpg";
-import f3 from "../static/img/cho-da-lat-mua-hoa.jpg";
-import g2 from "../static/img/ho-xuan-huong-suong-som.jpg";
-import g5 from "../static/img/ga-da-lat-vuon-hoa.jpg";
-import g6 from "../static/img/ga-da-lat-cam-tu-cau.jpg";
+import m0 from "../static/img/md-san-may-binh-minh.jpg";
+import m1 from "../static/img/md-vuon-hoa.jpg";
+import m2 from "../static/img/md-cho-dem.jpg";
+import m3 from "../static/img/md-dem-nhac-acoustic.jpg";
+import m4 from "../static/img/md-dap-xe-ho.jpg";
+import m5 from "../static/img/md-ca-phe-doi-thong.jpg";
+import m6 from "../static/img/md-hai-dau.jpg";
+import m7 from "../static/img/md-cam-trai.jpg";
+import m8 from "../static/img/md-hoang-hon-doi-co.jpg";
+import m9 from "../static/img/md-sang-ben-ho.jpg";
 import { ProgramCard } from "../components/program-card";
 import { useProgramSheet } from "../components/use-program-sheet";
 
+/** Ảnh minh họa do chủ dự án cung cấp ngày 23.11.2026 (ảnh tạo bằng AI, không phải ảnh chụp tại sự kiện) */
 const GALLERY = [
-  { src: f1, alt: "Quảng trường Lâm Viên mùa hoa" },
-  { src: g2, alt: "Hồ Xuân Hương trong sương sớm" },
-  { src: f3, alt: "Chợ Đà Lạt mùa hoa" },
-  { src: f2, alt: "Hồ Xuân Hương lúc hoàng hôn" },
-  { src: g5, alt: "Vườn hoa trước ga Đà Lạt" },
-  { src: g6, alt: "Ga Đà Lạt giữa mùa cẩm tú cầu" },
+  { src: m0, alt: "Đón bình minh trên biển mây" },
+  { src: m1, alt: "Dạo vườn hoa giữa mùa cẩm tú cầu" },
+  { src: m2, alt: "Chợ đêm: bắp nướng, sữa đậu nành, dâu tây" },
+  { src: m3, alt: "Đêm nhạc acoustic bên đồi" },
+  { src: m4, alt: "Đạp xe quanh hồ" },
+  { src: m5, alt: "Cà phê sáng giữa rừng thông" },
+  { src: m6, alt: "Hái dâu tại vườn" },
+  { src: m7, alt: "Cắm trại trên đồi thông" },
+  { src: m8, alt: "Ngắm hoàng hôn trên đồi cỏ" },
+  { src: m9, alt: "Săn ảnh buổi sớm" },
 ];
 
 const ProgramPage: FC = () => {
@@ -69,6 +78,7 @@ const ProgramPage: FC = () => {
         <section className="sec sec-flush">
           <div className="sec-head pad">
             <h2 className="h2">Đà Lạt mùa hoa</h2>
+            <p className="muted small">Ảnh minh họa trải nghiệm tại Đà Lạt.</p>
           </div>
           <div className="gallery">
             {GALLERY.map((g) => (

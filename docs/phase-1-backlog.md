@@ -109,3 +109,7 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 - F03: trang Lịch trình báo khi chương trình Festival đã lưu bị đổi giờ, hoãn, hủy hoặc bị gỡ so với lúc lưu; nút "Đã biết". 5 kiểm thử (`web/tests/changes.test.ts`), tổng 52. Chỉ báo khi người dùng mở trang, chưa có thông báo đẩy.
 - F25 (một phần): link "Thông tin chưa đúng? Báo cho DalatEvent" trong từng chương trình, mở email soạn sẵn tới `CONTACT_EMAIL`.
 - Nút Đăng nhập ở góc trên bên phải mọi trang; bảng tài khoản có thẻ Đăng nhập / Đăng ký, quên mật khẩu, xóa tài khoản.
+
+## Banner và ảnh minh họa (23.11.2026)
+- Chủ dự án gửi 10 banner "Đà Lạt có gì vui?" (chữ nằm sẵn trong ảnh) và 10 ảnh cùng chủ đề không chữ, đều là ảnh tạo bằng AI. Trang chủ có băng chuyền 10 banner (`web/src/components/banners.tsx`); ảnh không chữ dùng cho khối Festival nổi bật, thư viện ảnh trang Festival và đầu trang Show diễn, đều ghi rõ "ảnh minh họa". Ảnh chia sẻ mạng xã hội (`og-image.jpg`) đổi sang banner "Săn ảnh đẹp".
+- Vẫn CẦN ảnh chụp thật tại sự kiện cho từng chương trình Festival.

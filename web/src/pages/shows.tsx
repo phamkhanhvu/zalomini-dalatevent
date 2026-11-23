@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { getData, onDataChange, ShowItem, Stage } from "../data/store";
 import { callPhone, openUrl } from "../utils/device";
 import { IconArrow, IconPhone } from "../components/icons";
+import heroImg from "../static/img/md-dem-nhac-acoustic.jpg";
 
 const WEEKDAYS = ["Chủ nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
 const TINTS: Record<string, string> = { "may-lang-thang": "#DCEEFF", lululola: "#C9F2DA", "sense-acoustic": "#FFE0CC" };
@@ -49,6 +50,10 @@ const ShowsPage: FC = () => {
         <p className="eyebrow">Đêm nhạc tại Đà Lạt</p>
         <h1 className="h1">Lịch <em>show diễn</em></h1>
         <p className="muted">Lịch và giá vé do từng điểm diễn công bố, có thể thay đổi. Bấm vào từng đêm diễn để mở trang gốc.</p>
+        <figure className="top-photo">
+          <img src={heroImg} alt="Đêm nhạc acoustic ngoài trời (ảnh minh họa)" />
+          <figcaption>Ảnh minh họa</figcaption>
+        </figure>
       </header>
       {stages.map((stage) => {
         const items = stage.kind === "dated" ? stage.items.filter((it) => (it.date || "") >= today.date) : stage.items;

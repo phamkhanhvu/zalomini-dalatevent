@@ -19,6 +19,9 @@
 
 Lịch sử sửa và hoàn tác: xem lịch sử commit của thư mục `data/` trên GitHub.
 
+## Đưa lên trang ngay
+Lịch 10 phút của GitHub không đáng tin (ngày 23.11.2026 không tự chạy lần nào trong nhiều giờ). Trang quản trị có khối "Đưa lên trang ngay": dán một token GitHub loại fine-grained, chỉ chọn repo `zalomini-dalatevent`, chỉ bật quyền Actions: Read and write. Token lưu trong trình duyệt của máy đó (localStorage), không gửi đi đâu ngoài api.github.com. Có token thì mỗi lần lưu trang tự gọi chạy tác vụ `cms.yml`, nội dung lên sau 1 đến 2 phút. Thu hồi: xóa token trong GitHub → Settings → Developer settings → Personal access tokens.
+
 ## Cấp và thu hồi quyền
 1. Người cần quyền đăng nhập trên dalatevent.com rồi mở `#/quan-tri`. Trang hiện "Tài khoản chưa có quyền quản trị" kèm một mã.
 2. Chủ dự án mở Firebase Console → Firestore → Data → bộ sưu tập `admins` → thêm tài liệu có Document ID đúng bằng mã đó (trường tùy ý, ví dụ `name`).

@@ -83,7 +83,7 @@ const HappeningEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, c
   };
   const save = () => {
     const out = items
-      .map((x) => ({ ...x, title: clean(x.title), venue: clean(x.venue || ""), desc: clean(x.desc), when: whenOf(x.start_date, x.end_date, clean(x.venue || "")) }))
+      .map((x) => ({ ...x, title: clean(x.title), venue: clean(x.venue || ""), desc: clean(x.desc), when: whenOf(x.start_date, x.end_date, "") }))
       .sort((a, b) => a.start_date.localeCompare(b.start_date));
     const doc = { ...data.happening, items: out };
     return onSave("happening", doc, { ...data, happening: doc });
@@ -172,7 +172,8 @@ const FestivalEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, ch
     const before: EventRecord[] = JSON.parse(original);
     const stamp = nowIso();
     const out = events.map((e, i) => {
-      const venue = data.events.venues.find((v) => v.id === e.venue_id);
+      // Chỉ đổi tên địa điểm khi người sửa chọn địa điểm khác; không thì giữ tên chi tiết đang có (ví dụ "Trên mặt hồ Xuân Hương")
+      const venue = e.venue_id !== before[i].venue_id ? data.events.venues.find((v) => v.id === e.venue_id) : undefined;
       const next = { ...e, title: clean(e.title), description: clean(e.description), note: e.note ? clean(e.note) : undefined, venue_name: venue ? venue.name : e.venue_name };
       if (!next.note) delete next.note;
       return JSON.stringify(next) === JSON.stringify(before[i]) ? before[i] : { ...next, updated_at: stamp };

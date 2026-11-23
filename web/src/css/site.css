@@ -215,7 +215,7 @@ div.ag-row { text-align: left; }
 @media (min-width: 900px) { .acc-top { top: 16px; right: 24px; } }
 
 /* Ngoại tuyến, báo đổi lịch, báo sai thông tin */
-.offline { flex: none; padding: calc(env(safe-area-inset-top, 0px) + 6px) 130px 6px 16px; background: var(--ink); color: var(--cream); font-size: 13px; font-weight: 600; }
+.offline { flex: none; padding: 6px 130px 6px 16px; background: var(--ink); color: var(--cream); font-size: 13px; font-weight: 600; }
 .plan-changed { background: #ffe5e5; color: #9b1c1c; }
 .plan-alert { display: flex; flex-direction: column; gap: 8px; background: #ffe5e5; color: #9b1c1c; }
 .plan-alert .btn { align-self: flex-start; min-height: 40px; }
@@ -341,3 +341,7 @@ div.ag-row { text-align: left; }
 .adm-now { margin-top: 8px; }
 .adm-steps { padding-left: 20px; list-style: decimal; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
 .adm-steps a { color: var(--magenta); font-weight: 600; text-decoration: underline; }
+
+/* Vùng an toàn phía trên (tai thỏ, đồng hồ) khi chạy trong app hoặc khi thêm vào màn hình chính */
+.shell { padding-top: env(safe-area-inset-top, 0px); }
+.embed { padding-top: calc(env(safe-area-inset-top, 0px) + 14px); }

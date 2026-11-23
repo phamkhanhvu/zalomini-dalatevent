@@ -2,7 +2,7 @@
   "schema": 1,
   "about": "Nguồn dữ liệu sự kiện của DalatEvent. Sửa file này rồi chạy `npm run validate:data`. Mô tả các trường: docs/architecture.md.",
   "timezone": "Asia/Ho_Chi_Minh",
-  "updated_at": "2026-11-23T08:35:00+07:00",
+  "updated_at": "2026-11-23T13:56:10+07:00",
   "series": [
     {
       "id": "festival-hoa-da-lat-2026",
@@ -167,7 +167,7 @@
       "category": "khong-gian-hoa",
       "description": "Các tiểu công viên Trần Hưng Đạo, Trần Quốc Toản, Yersin và nhiều tuyến đường có bờ kè.",
       "venue_id": "xuan-huong",
-      "venue_name": "Hồ Xuân Hương, các công viên và tuyến đường hoa tại Đà Lạt",
+      "venue_name": "Hồ Xuân Hương",
       "status": "published",
       "tentative": false,
       "sessions": [
@@ -180,7 +180,7 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:45:00+07:00"
+      "updated_at": "2026-11-23T13:44:14+07:00"
     },
     {
       "id": "golf",
@@ -257,7 +257,7 @@
       "category": "khong-gian-hoa",
       "description": "Giới thiệu thương hiệu “Đà Lạt kết tinh kỳ diệu từ đất lành”.",
       "venue_id": "lam-vien",
-      "venue_name": "Đài phun nước Quảng trường Lâm Viên và đường Hồ Tùng Mậu",
+      "venue_name": "Quảng trường Lâm Viên",
       "status": "published",
       "tentative": false,
       "sessions": [
@@ -270,7 +270,7 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:45:00+07:00",
+      "updated_at": "2026-11-23T13:44:14+07:00",
       "organizer": "Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng",
       "venue_ids": [
         "lam-vien",
@@ -284,7 +284,7 @@
       "category": "am-nhac",
       "description": "Các đêm nhạc Jazz trên mặt hồ Xuân Hương.",
       "venue_id": "xuan-huong",
-      "venue_name": "Trên mặt hồ Xuân Hương",
+      "venue_name": "Hồ Xuân Hương",
       "status": "published",
       "tentative": false,
       "sessions": [
@@ -297,7 +297,7 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:50:00+07:00"
+      "updated_at": "2026-11-23T13:44:14+07:00"
     },
     {
       "id": "carnival",
@@ -306,7 +306,7 @@
       "category": "le-hoi",
       "description": "Âm nhạc và vũ đạo đường phố.",
       "venue_id": "xuan-huong",
-      "venue_name": "Xung quanh hồ Xuân Hương",
+      "venue_name": "Hồ Xuân Hương",
       "status": "published",
       "tentative": false,
       "sessions": [
@@ -320,7 +320,7 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:45:00+07:00"
+      "updated_at": "2026-11-23T13:44:14+07:00"
     },
     {
       "id": "be-mac",

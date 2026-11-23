@@ -11,6 +11,7 @@ import EmbedInfoPage from "../pages/embed-info";
 import PrivacyPage from "../pages/privacy";
 import PlacePage from "../pages/place";
 import PassportPage from "../pages/passport";
+import AssistantPage from "../pages/assistant";
 
 // Trang quản trị chỉ vài người dùng: tách thành tệp riêng, khách thường không phải tải
 const AdminPage = React.lazy(() => import("../pages/admin"));
@@ -63,6 +64,7 @@ export const Layout: FC = () => {
         <Route path="/quyen-rieng-tu" element={<PrivacyPage />} />
         <Route path="/dia-diem/:id" element={<PlacePage />} />
         <Route path="/ho-chieu" element={<PassportPage />} />
+        <Route path="/tro-ly" element={<AssistantPage />} />
         <Route path="/quan-tri" element={<React.Suspense fallback={<p className="muted pad">Đang tải…</p>}><AdminPage /></React.Suspense>} />
         <Route path="*" element={<HomePage />} />
       </Routes>

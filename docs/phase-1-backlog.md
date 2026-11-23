@@ -128,3 +128,8 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 - F09/F17 (bản đầu): trang `#/ho-chieu`. Mỗi địa điểm có tọa độ là một dấu "đã đến"; mỗi chương trình Festival đã công bố (có tọa độ) là một dấu "đã dự". Bấm "Đóng dấu tại đây": đứng trong 300 m, dấu sự kiện chỉ đóng được từ 1 giờ trước tới 1 giờ sau. Máy chỉ lưu tên dấu và thời điểm, không lưu tọa độ. Đồng bộ theo tài khoản (trường `stamps` trong `plans/{uid}`), gộp không mất dấu. 6 kiểm thử (`web/tests/passport.test.ts`), tổng 70.
 - Kiểm tra vị trí chạy trên máy người dùng nên có thể bị giả; KHÔNG dùng để phát quà có giá trị khi chưa có cách xác nhận phía máy chủ hoặc mã QR tại chỗ.
 - Chưa có: dấu bằng mã QR tại sự kiện, quà/ưu đãi, bảng xếp hạng, dấu cho địa điểm chưa có tọa độ (Công viên Trần Quốc Toản, Mây Lang Thang Lang Biang).
+
+## Trợ lý "Hôm nay đi đâu?" (23.11.2026)
+- F11 (bản theo luật, KHÔNG dùng mô hình AI): trang `#/tro-ly`, vào từ trang chủ. `web/src/utils/assistant.ts` đọc câu tiếng Việt (thời gian, số người, ngân sách, sở thích, gần đâu) rồi lọc dữ liệu đã đối chiếu. Giá chỉ lấy từ dữ liệu (giá ghi ở đêm diễn; phiếu nước của sân khấu có lịch tuần); không có giá thì xếp vào nhóm "chưa rõ giá". 8 kiểm thử (`web/tests/assistant.test.ts`), tổng 78, gồm đúng câu mẫu trong PRD.
+- Giới hạn: không hiểu câu ngoài các mẫu đã lập trình (ví dụ "chỗ nào lãng mạn", "tránh đông người"); không trò chuyện qua lại. Bản dùng AI thật cần máy chủ trung gian và khóa API có trả phí, phải được chủ dự án duyệt.
+- Dữ liệu giá còn mỏng: Mây Lang Thang và các chương trình Festival chưa có giá trong dữ liệu.

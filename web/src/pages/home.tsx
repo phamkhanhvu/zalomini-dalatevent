@@ -48,6 +48,10 @@ const HomePage: FC = () => {
         <Banners />
         <p className="lead">Lễ hội, sự kiện và show diễn đang và sắp diễn ra tại Đà Lạt, cập nhật mỗi ngày.</p>
         <SearchBox onOpenProgram={openProgram} />
+        <button type="button" className="as-entry" onClick={() => navigate("/tro-ly")}>
+          <span><b>Hôm nay đi đâu?</b><i>Nhắn kiểu "tối nay hai người, 500k, nghe nhạc" để được gợi ý</i></span>
+          <IconArrow size={20} />
+        </button>
         <div className="quick">
           <button type="button" className="quick-btn quick-main" onClick={toAgenda}>
             <IconCompass size={22} /><span>Khám phá sự kiện</span>

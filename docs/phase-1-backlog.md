@@ -133,3 +133,9 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 - F11 (bản theo luật, KHÔNG dùng mô hình AI): trang `#/tro-ly`, vào từ trang chủ. `web/src/utils/assistant.ts` đọc câu tiếng Việt (thời gian, số người, ngân sách, sở thích, gần đâu) rồi lọc dữ liệu đã đối chiếu. Giá chỉ lấy từ dữ liệu (giá ghi ở đêm diễn; phiếu nước của sân khấu có lịch tuần); không có giá thì xếp vào nhóm "chưa rõ giá". 8 kiểm thử (`web/tests/assistant.test.ts`), tổng 78, gồm đúng câu mẫu trong PRD.
 - Giới hạn: không hiểu câu ngoài các mẫu đã lập trình (ví dụ "chỗ nào lãng mạn", "tránh đông người"); không trò chuyện qua lại. Bản dùng AI thật cần máy chủ trung gian và khóa API có trả phí, phải được chủ dự án duyệt.
 - Dữ liệu giá còn mỏng: Mây Lang Thang và các chương trình Festival chưa có giá trong dữ liệu.
+
+## Trợ lý xếp lịch trình từ cẩm nang Đà Lạt Đi Đâu (23.11.2026)
+- Theo yêu cầu chủ dự án: trợ lý không liệt kê chi tiết giá nữa mà xếp một lịch trình theo buổi (sáng, trưa, chiều, tối). Điểm tham quan và quán lấy từ `data/places.json` (438 địa điểm, đồng bộ từ https://sensegroup.vn/di-da-lat/ bằng `node scripts/sync-places.mjs`, bỏ nhóm Lưu trú); sự kiện và show đặt đúng giờ thật. Mã: `web/src/utils/daytrip.ts`, 7 kiểm thử (`web/tests/daytrip.test.ts`), tổng 85.
+- Ngân sách chỉ còn dùng để bỏ show có giá vượt mức, không hiện bảng giá.
+- Giới hạn: chưa tính quãng đường và thời gian di chuyển (danh mục không có tọa độ; điểm thứ hai buổi sáng dựa vào trường `related` của cẩm nang); quán ăn, cà phê chọn luân phiên trong khu Xuân Hương, chưa có đánh giá chất lượng; chưa xét giờ mở cửa.
+- `data/places.json` không tự cập nhật: chạy lại script khi cẩm nang đổi.

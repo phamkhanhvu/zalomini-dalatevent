@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 const here = path.dirname(fileURLToPath(import.meta.url));
 const src = path.join(here, "../../data");
 const targets = [path.join(here, "../public/data"), path.join(here, "../src/data/bundled")];
-const files = ["events.json", "shows.json", "happening.json"];
+const files = ["events.json", "shows.json", "happening.json", "places.json"];
 
 if (!fs.existsSync(src)) {
   console.log("Không thấy ../data, dùng dữ liệu đang có trong gói web.");

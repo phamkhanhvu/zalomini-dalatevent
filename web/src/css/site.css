@@ -304,3 +304,24 @@ div.ag-row { text-align: left; }
 .as-note { margin: -4px 0 6px; padding: 6px 12px; border-radius: 10px; background: var(--mint); color: var(--green); font-size: 13px; font-weight: 600; }
 .as-note.is-unknown { background: #fff1d6; color: #7a4b00; font-weight: 400; }
 @media (min-width: 900px) { .as-entry, .as-form { max-width: 680px; } .hero .as-entry { text-align: left; } }
+
+/* Lịch trình gợi ý của trợ lý */
+.trip { display: flex; flex-direction: column; gap: 10px; }
+.trip-list { display: flex; flex-direction: column; gap: 10px; }
+.trip-stop { display: flex; gap: 10px; align-items: flex-start; }
+.trip-time { flex: 0 0 58px; display: flex; flex-direction: column; align-items: center; padding: 8px 4px; border-radius: 12px; background: var(--line); }
+.trip-time b { font-family: var(--serif); font-size: 16px; }
+.trip-time i { font-style: normal; font-size: 11px; color: var(--ink2); }
+.trip-stop.is-am .trip-time { background: #fff1d6; }
+.trip-stop.is-noon .trip-time { background: var(--mint); }
+.trip-stop.is-pm .trip-time { background: #dceeff; }
+.trip-stop.is-eve .trip-time { background: #ffe3f1; }
+.trip-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.trip-title { font-size: 16px; }
+.trip-note { font-size: 13px; color: var(--ink2); }
+.trip-place { display: flex; flex-direction: column; gap: 3px; padding: 8px 12px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line); font-size: 13px; }
+.trip-place b { font-size: 14px; }
+.trip-place span { color: var(--ink2); }
+.trip-links { display: flex; gap: 14px; }
+.trip-links button { display: inline-flex; align-items: center; gap: 4px; min-height: 36px; font-size: 13px; font-weight: 600; color: var(--magenta); }
+@media (min-width: 900px) { .trip, .as-understood { max-width: 760px; } }

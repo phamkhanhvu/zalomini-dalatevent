@@ -1,0 +1,37 @@
+# Nhận nội dung từ trang quản trị (dalatevent.com/#/quan-tri) về repo.
+# Quản trị viên lưu trên trang → nội dung nằm ở Firestore → tác vụ này đọc, kiểm tra rồi ghi vào data/.
+# Website đọc data/ trực tiếp từ GitHub nên thay đổi hiện ra sau vài phút, không cần build lại.
+name: Nhận nội dung từ trang quản trị
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cms
+  cancel-in-progress: false
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - id: pull
+        run: node scripts/cms-pull.mjs
+      - run: node scripts/validate-events.mjs
+      - name: Ghi vào repo nếu có thay đổi
+        run: |
+          if [ -z "$(git status --porcelain data/)" ]; then echo "Không có gì để ghi."; exit 0; fi
+          git config user.name "DalatEvent CMS"
+          git config user.email "cms@users.noreply.github.com"
+          git add data/
+          git commit -m "${{ steps.pull.outputs.message }}"
+          git pull --rebase origin main
+          git push origin HEAD:main

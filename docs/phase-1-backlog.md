@@ -119,3 +119,7 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 - F23: khung nhúng nhận thêm `noi=<mã địa điểm>` để một quán hoặc sân khấu chỉ nhúng lịch của mình; trang `#/nhung-lich` có ô chọn địa điểm.
 - Chưa có: trang cho đơn vị tổ chức của Festival (dữ liệu `organizer` mới có ở 4 chương trình), ảnh và mô tả riêng cho từng địa điểm.
 - Sửa lỗi: phần đầu trang bị mất lề phải trên điện thoại từ lúc thêm nút Đăng nhập (khoảng 11:27 đến lần cập nhật này).
+
+## Trang quản trị nội dung (23.11.2026)
+- F08 (bản đầu): xem `docs/admin.md`. Mã: `web/src/pages/admin.tsx` (tải riêng, khách thường không tải), `scripts/validate-core.mjs` (luật kiểm tra dùng chung), `scripts/cms-apply.mjs`, `scripts/cms-pull.mjs`, `.github/workflows/cms.yml`. 7 kiểm thử (`web/tests/cms.test.ts`), tổng 64.
+- CHƯA chạy thử trọn vòng với tài khoản quản trị thật: chưa có tài khoản nào được cấp quyền (cần UID của chủ dự án).

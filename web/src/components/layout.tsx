@@ -10,6 +10,9 @@ import EmbedPage from "../pages/embed";
 import EmbedInfoPage from "../pages/embed-info";
 import PrivacyPage from "../pages/privacy";
 import PlacePage from "../pages/place";
+
+// Trang quản trị chỉ vài người dùng: tách thành tệp riêng, khách thường không phải tải
+const AdminPage = React.lazy(() => import("../pages/admin"));
 import { getData } from "../data/store";
 import { AccountButton, AccountSheet } from "./account-panel";
 
@@ -58,6 +61,7 @@ export const Layout: FC = () => {
         <Route path="/nhung-lich" element={<EmbedInfoPage />} />
         <Route path="/quyen-rieng-tu" element={<PrivacyPage />} />
         <Route path="/dia-diem/:id" element={<PlacePage />} />
+        <Route path="/quan-tri" element={<React.Suspense fallback={<p className="muted pad">Đang tải…</p>}><AdminPage /></React.Suspense>} />
         <Route path="*" element={<HomePage />} />
       </Routes>
     </div>

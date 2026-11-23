@@ -155,6 +155,7 @@ export const AccountSheet: FC = () => {
                 )}
               </div>
               <p className="acc-note">Xóa lịch trình trên tài khoản không xóa tài khoản và không ảnh hưởng tiến trình trong trò chơi. Bản trên máy này vẫn được giữ.</p>
+              <button type="button" className="acc-switch" onClick={() => { setOpen(false); navigate("/quan-tri"); }}>Quản trị nội dung</button>
               <button type="button" className="acc-switch acc-del" onClick={() => { setDeleting(true); setAgree(false); setPassword(""); }}>Xóa tài khoản</button>
             </React.Fragment>
           ) : (

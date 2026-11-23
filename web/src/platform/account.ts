@@ -266,3 +266,39 @@ export async function deleteAccount(password: string): Promise<boolean> {
     return false;
   }
 }
+
+/* ---------- Trang quản trị nội dung ---------- */
+export const currentUid = () => (user ? user.uid : "");
+
+/** Tài khoản đang đăng nhập có trong danh sách quản trị không (Firestore: admins/{uid}, do chủ dự án tạo trong Console) */
+export async function isAdmin(): Promise<boolean> {
+  if (!db || !user) return false;
+  try {
+    const { doc, getDoc } = await import("firebase/firestore/lite");
+    return (await getDoc(doc(db, "admins", user.uid))).exists();
+  } catch (e) {
+    return false;
+  }
+}
+
+export interface CmsDoc { json: string; savedAt: number; byName: string }
+/** Bản quản trị viên đã lưu gần nhất cho một tệp (có thể chưa được đưa vào repo) */
+export async function readCms(file: string): Promise<CmsDoc | null> {
+  if (!db) return null;
+  try {
+    const { doc, getDoc } = await import("firebase/firestore/lite");
+    const snap = await getDoc(doc(db, "cms", file));
+    const d = snap.exists() ? snap.data() : null;
+    return d && typeof d.json === "string" && typeof d.savedAt === "number" ? { json: d.json, savedAt: d.savedAt, byName: String(d.byName || "") } : null;
+  } catch (e) {
+    return null;
+  }
+}
+/** Lưu nội dung để tác vụ trên GitHub nhận về. Rules chỉ cho quản trị viên ghi. */
+export async function writeCms(file: string, json: string): Promise<number> {
+  if (!db || !user) throw new Error("Chưa đăng nhập");
+  const { doc, setDoc } = await import("firebase/firestore/lite");
+  const savedAt = Date.now();
+  await setDoc(doc(db, "cms", file), { json, savedAt, by: user.uid, byName: (user.displayName || "Quản trị viên").slice(0, 40) });
+  return savedAt;
+}

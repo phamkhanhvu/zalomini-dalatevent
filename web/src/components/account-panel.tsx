@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Sheet, useSnackbar } from "../ui";
-import { CAN_GOOGLE, deleteAccount, deleteNeeds, getAccount, loadAccount, onAccount, registerEmail, signInEmail, signInGoogle, signOutAccount, wasLinked, wipeCloud } from "../platform/account";
+import { CAN_GOOGLE, deleteAccount, deleteNeeds, getAccount, loadAccount, onAccount, registerEmail, resetPassword, signInEmail, signInGoogle, signOutAccount, wasLinked, wipeCloud } from "../platform/account";
 
 function useAccount() {
   const [, force] = useState(0);
@@ -56,10 +56,10 @@ export const AccountPanel: FC = () => {
           {signedIn ? (
             <React.Fragment><b>{acc.syncing ? "Đang đồng bộ…" : acc.error ? "Chưa đồng bộ được" : "Đã đồng bộ"}</b><i>{who}</i></React.Fragment>
           ) : (
-            <React.Fragment><b>Đăng nhập để đồng bộ</b><i>Xem lịch trình này trên máy khác</i></React.Fragment>
+            <React.Fragment><b>Đăng nhập hoặc đăng ký</b><i>Để xem lịch trình này trên máy khác</i></React.Fragment>
           )}
         </span>
-        <span className="acc-go">{signedIn ? "Tài khoản" : "Đăng nhập"}</span>
+        <span className="acc-go">{signedIn ? "Tài khoản" : "Mở"}</span>
       </button>
 
       <Sheet visible={open} onClose={() => setOpen(false)}>
@@ -115,10 +115,14 @@ export const AccountPanel: FC = () => {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <h2 className="ps-title">{mode === "in" ? "Đăng nhập" : "Tạo tài khoản"}</h2>
+              <div className="acc-tabs" role="tablist" aria-label="Đăng nhập hoặc đăng ký">
+                <button type="button" role="tab" aria-selected={mode === "in"} className={mode === "in" ? "on" : ""} onClick={() => setMode("in")}>Đăng nhập</button>
+                <button type="button" role="tab" aria-selected={mode === "new"} className={mode === "new" ? "on" : ""} onClick={() => setMode("new")}>Đăng ký</button>
+              </div>
+              <h2 className="ps-title">{mode === "in" ? "Đăng nhập" : "Đăng ký tài khoản mới"}</h2>
               <p className="ps-desc">Dùng chung tài khoản với trò chơi DalatEvent. Chúng tôi chỉ lưu danh sách mục bạn đã thêm vào lịch trình.</p>
               {CAN_GOOGLE && (
-                <button type="button" className="btn btn-ink btn-wide" disabled={busy} onClick={() => act(signInGoogle)}>Tiếp tục với Google</button>
+                <button type="button" className="btn btn-ink btn-wide" disabled={busy} onClick={() => act(signInGoogle)}>{mode === "in" ? "Đăng nhập bằng Google" : "Đăng ký bằng Google"}</button>
               )}
               <form
                 className="acc-form"
@@ -128,14 +132,29 @@ export const AccountPanel: FC = () => {
                 }}
               >
                 <label>Email<input type="email" required autoComplete="email" inputMode="email" value={email} onChange={(e) => setEmail(e.target.value)} /></label>
-                <label>Mật khẩu<input type="password" required minLength={6} autoComplete={mode === "in" ? "current-password" : "new-password"} value={password} onChange={(e) => setPassword(e.target.value)} /></label>
+                <label>{mode === "in" ? "Mật khẩu" : "Đặt mật khẩu (ít nhất 6 ký tự)"}<input type="password" required minLength={6} autoComplete={mode === "in" ? "current-password" : "new-password"} value={password} onChange={(e) => setPassword(e.target.value)} /></label>
                 {acc.error && <p className="acc-err" role="alert">{acc.error}</p>}
-                <button type="submit" className={"btn btn-wide " + (CAN_GOOGLE ? "btn-line" : "btn-ink")} disabled={busy}>{busy ? "Đang xử lý…" : mode === "in" ? "Đăng nhập bằng email" : "Tạo tài khoản"}</button>
+                <button type="submit" className={"btn btn-wide " + (CAN_GOOGLE ? "btn-line" : "btn-ink")} disabled={busy}>{busy ? "Đang xử lý…" : mode === "in" ? "Đăng nhập bằng email" : "Đăng ký bằng email"}</button>
               </form>
-              <button type="button" className="acc-switch" onClick={() => setMode(mode === "in" ? "new" : "in")}>
-                {mode === "in" ? "Chưa có tài khoản? Tạo tài khoản" : "Đã có tài khoản? Đăng nhập"}
+              {mode === "in" && (
+                <button
+                  type="button"
+                  className="acc-switch"
+                  disabled={busy}
+                  onClick={async () => {
+                    setBusy(true);
+                    const ok = await resetPassword(email);
+                    setBusy(false);
+                    if (ok) openSnackbar({ text: "Đã gửi email đặt lại mật khẩu. Hãy kiểm tra hộp thư", type: "success", duration: 3200 });
+                  }}
+                >
+                  Quên mật khẩu? Gửi email đặt lại
+                </button>
+              )}
+<button type="button" className="acc-switch" onClick={() => setMode(mode === "in" ? "new" : "in")}>
+                {mode === "in" ? "Chưa có tài khoản? Đăng ký" : "Đã có tài khoản? Đăng nhập"}
               </button>
-              <p className="acc-note">Khi đăng nhập, bạn đồng ý với <button type="button" className="acc-link" onClick={() => { setOpen(false); navigate("/quyen-rieng-tu"); }}>chính sách quyền riêng tư</button>.</p>
+              <p className="acc-note">Khi đăng nhập hoặc đăng ký, bạn đồng ý với <button type="button" className="acc-link" onClick={() => { setOpen(false); navigate("/quyen-rieng-tu"); }}>chính sách quyền riêng tư</button>.</p>
             </React.Fragment>
           )}
         </div>

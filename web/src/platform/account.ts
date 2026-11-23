@@ -68,6 +68,7 @@ const ERRORS: Record<string, string> = {
   "auth/user-mismatch": "Tài khoản vừa chọn không trùng với tài khoản đang đăng nhập.",
   "auth/requires-recent-login": "Cần xác nhận lại danh tính. Hãy thử lại.",
   "auth/missing-password": "Hãy nhập mật khẩu.",
+  "auth/missing-email": "Hãy nhập email trước.",
   "auth/cancelled-popup-request": "",
 };
 const message = (e: unknown) => {
@@ -181,6 +182,9 @@ export const CAN_GOOGLE = !IS_NATIVE;
 export const signInGoogle = () => run((m, a) => m.signInWithPopup(a, new m.GoogleAuthProvider()));
 export const signInEmail = (email: string, password: string) => run((m, a) => m.signInWithEmailAndPassword(a, email.trim(), password));
 export const registerEmail = (email: string, password: string) => run((m, a) => m.createUserWithEmailAndPassword(a, email.trim(), password));
+
+/** Gửi email đặt lại mật khẩu (Firebase gửi thư, không qua máy chủ của DalatEvent) */
+export const resetPassword = (email: string) => run((m, a) => m.sendPasswordResetEmail(a, email.trim()));
 
 /** Đăng xuất: lịch trình vẫn ở lại trên máy này, chỉ ngừng đồng bộ */
 export async function signOutAccount() {

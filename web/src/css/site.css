@@ -68,3 +68,23 @@ html:not(.is-native) body { --zaui-safe-area-inset-top: 0px; }
 @media (min-width: 900px) {
   .ag-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 }
+
+/* Bản đồ gần tôi */
+.near { display: flex; flex-direction: column; gap: 10px; padding-top: 14px; padding-bottom: 6px; }
+.near-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.near-pick { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--ink2); }
+.near-pick select { font: inherit; color: var(--ink); min-height: 44px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--ink); background: var(--paper); max-width: 220px; }
+.near-msg { padding: 12px 14px; border-radius: 14px; background: #fff1d6; color: #7a4b00; font-size: 14px; }
+.near .btn[disabled] { opacity: 0.6; }
+.link-inline { display: inline; color: var(--magenta); font-weight: 600; text-decoration: underline; padding: 6px 0; }
+.mapframe { width: 100%; height: 260px; border: 0; border-radius: 18px; background: var(--mint); display: block; margin: 8px 0 6px; }
+.venue.is-current { border: 2px solid var(--magenta); }
+.venue-head h2 { flex: 1; min-width: 0; }
+.venue-km { flex: none; font-size: 13px; font-weight: 700; color: var(--magenta); background: #ffe3f1; padding: 4px 10px; border-radius: 999px; }
+.venue-kind { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink2); }
+.venue-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.venue-actions .btn { padding: 0 10px; font-size: 14px; }
+@media (min-width: 900px) {
+  .mapframe { height: 380px; }
+  .near { padding-left: 32px; padding-right: 32px; }
+}

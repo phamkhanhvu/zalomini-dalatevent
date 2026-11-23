@@ -2,7 +2,7 @@
   "schema": 1,
   "about": "Lịch show của các điểm diễn tại Đà Lạt. Lịch và giá vé do từng điểm diễn công bố; mỗi mục có link về trang gốc.",
   "timezone": "Asia/Ho_Chi_Minh",
-  "updated_at": "2026-11-23T07:00:00+07:00",
+  "updated_at": "2026-11-23T08:05:00+07:00",
   "stages": [
     {
       "id": "may-lang-thang",
@@ -83,6 +83,24 @@
           "title": "Bạch Công Khanh – Nguyễn Kiều Oanh",
           "url": "https://maylangthang.com.vn/shows/bck-2512-dl",
           "place": "Mây Lang Thang · Lang Biang"
+        }
+      ],
+      "places": [
+        {
+          "label": "Mây Lang Thang · Lang Biang",
+          "name": "Mây Lang Thang",
+          "map_query": "Mây Lang Thang, 519 Măng Lin, Lang Biang, Đà Lạt",
+          "lat": null,
+          "lng": null,
+          "geo_note": "Chưa tìm thấy tọa độ đáng tin cậy trên OpenStreetMap."
+        },
+        {
+          "label": "Mây Heritage · Ga Đà Lạt",
+          "name": "Mây Heritage (Ga Đà Lạt)",
+          "map_query": "Ga Đà Lạt, 01 Quang Trung, Đà Lạt",
+          "lat": 11.9416,
+          "lng": 108.45443,
+          "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026 (vị trí Ga Đà Lạt)"
         }
       ]
     },
@@ -166,6 +184,16 @@
           "url": "https://lululolashow.com/show/2027-02-10-db85",
           "price": "Vé từ 390.000đ"
         }
+      ],
+      "places": [
+        {
+          "label": "",
+          "name": "Lululola Show",
+          "map_query": "Lululola Show, 32/2 đường 3 tháng 4, Đà Lạt",
+          "lat": 11.92012,
+          "lng": 108.44212,
+          "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
+        }
       ]
     },
     {
@@ -235,6 +263,16 @@
           "title": "Wolf Band",
           "note": "Khép lại tuần bằng những giai điệu bùng nổ.",
           "url": "https://sensegroup.vn/sense-acoustic-cafe/#lich-nhac"
+        }
+      ],
+      "places": [
+        {
+          "label": "",
+          "name": "Sense Acoustic Cafe",
+          "map_query": "Sense Acoustic Cafe, 304 Hai Bà Trưng, Đà Lạt",
+          "lat": 11.95202,
+          "lng": 108.43172,
+          "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026 (theo số nhà 304 Hai Bà Trưng)"
         }
       ]
     }

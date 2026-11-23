@@ -106,6 +106,12 @@ if (shows) {
     for (const k of ["name", "intro", "address", "cta_label"]) if (!st[k]) err(`${at}: thiếu ${k}`);
     if (!/^https:\/\//.test(st.source_url || "")) err(`${at}: source_url phải bắt đầu bằng https://`);
     if (!DATE.test(st.verified_at || "")) err(`${at}: verified_at phải có dạng 2026-11-23`);
+    for (const [i, pl] of (st.places || []).entries()) {
+      if (!pl.name || !pl.map_query) err(`${at} places ${i + 1}: thiếu name hoặc map_query`);
+      const a = typeof pl.lat === "number", b = typeof pl.lng === "number";
+      if (a !== b) err(`${at} places ${i + 1}: lat và lng phải cùng có hoặc cùng trống`);
+      if (a && (pl.lat < 11 || pl.lat > 13 || pl.lng < 107 || pl.lng > 109.5)) err(`${at} places ${i + 1}: tọa độ nằm ngoài vùng Lâm Đồng`);
+    }
     if (!Array.isArray(st.items)) { err(`${at}: thiếu items`); continue; }
     let prev = "";
     for (const [i, it] of st.items.entries()) {

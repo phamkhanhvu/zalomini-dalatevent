@@ -59,6 +59,8 @@ export interface Venue {
   /** id các chương trình diễn ra tại đây */
   programs: string[];
   color: string;
+  lat: number | null;
+  lng: number | null;
 }
 
 export interface Happening {
@@ -145,7 +147,7 @@ export function rebuild(now = Date.now()) {
     const at = list.filter((e) => e.venue_id === v.id || (e.venue_ids || []).includes(v.id));
     if (!at.length) continue;
     const cat = CATEGORIES.find((c) => c.id === (CAT_OF[at[0].category] || "le"))!;
-    venues.push({ id: v.id, name: v.name, mapQuery: v.map_query, programs: at.map((e) => e.id), color: cat.color });
+    venues.push({ id: v.id, name: v.name, mapQuery: v.map_query, programs: at.map((e) => e.id), color: cat.color, lat: v.lat, lng: v.lng });
   }
   VENUES.splice(0, VENUES.length, ...venues);
 

@@ -2,7 +2,7 @@
   "schema": 1,
   "about": "Nguồn dữ liệu sự kiện của DalatEvent. Sửa file này rồi chạy `npm run validate:data`. Mô tả các trường: docs/architecture.md.",
   "timezone": "Asia/Ho_Chi_Minh",
-  "updated_at": "2026-11-23T06:50:00+07:00",
+  "updated_at": "2026-11-23T08:05:00+07:00",
   "series": [
     {
       "id": "festival-hoa-da-lat-2026",
@@ -16,43 +16,49 @@
       "id": "lam-vien",
       "name": "Quảng trường Lâm Viên",
       "map_query": "Quảng trường Lâm Viên, Đà Lạt",
-      "lat": null,
-      "lng": null
+      "lat": 11.93884,
+      "lng": 108.44501,
+      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
     },
     {
       "id": "xuan-huong",
       "name": "Hồ Xuân Hương",
       "map_query": "Hồ Xuân Hương, Đà Lạt",
-      "lat": null,
-      "lng": null
+      "lat": 11.94508,
+      "lng": 108.44872,
+      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
     },
     {
       "id": "tqt",
       "name": "Công viên Trần Quốc Toản",
       "map_query": "Công viên Trần Quốc Toản, Đà Lạt",
       "lat": null,
-      "lng": null
+      "lng": null,
+      "geo_note": "Chưa tìm thấy tọa độ đáng tin cậy trên OpenStreetMap; chỉ đường dùng tên địa điểm."
     },
     {
       "id": "golf",
       "name": "Dalat Palace Golf Club",
       "map_query": "Dalat Palace Golf Club, Đà Lạt",
-      "lat": null,
-      "lng": null
+      "lat": 11.94788,
+      "lng": 108.4458,
+      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
     },
     {
       "id": "sgdl",
       "name": "Khách sạn Sài Gòn – Đà Lạt",
       "map_query": "Khách sạn Sài Gòn Đà Lạt, Đà Lạt",
-      "lat": null,
-      "lng": null
+      "lat": 11.9393,
+      "lng": 108.42963,
+      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
     },
     {
       "id": "htm",
       "name": "Đường Hồ Tùng Mậu",
       "map_query": "Đường Hồ Tùng Mậu, Đà Lạt",
-      "lat": null,
-      "lng": null
+      "lat": 11.93789,
+      "lng": 108.44438,
+      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
     }
   ],
   "events": [
@@ -333,5 +339,6 @@
       "updated_at": "2026-11-23T06:45:00+07:00",
       "organizer": "Sở Văn hóa, Thể thao và Du lịch tỉnh Lâm Đồng"
     }
-  ]
+  ],
+  "geo_attribution": "Tọa độ địa điểm: © OpenStreetMap contributors (ODbL)"
 }

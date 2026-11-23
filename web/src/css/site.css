@@ -42,3 +42,29 @@ html:not(.is-native) body { --zaui-safe-area-inset-top: 0px; }
   .gallery figure { flex: none; }
   .actions { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
+
+/* Mục "Đà Lạt có gì?" */
+.agenda { background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.agenda .filters { margin-top: 2px; }
+.filters-sub { margin-top: 0; }
+.fb-sm { min-height: 36px !important; padding: 0 14px !important; font-size: 13px !important; }
+.fb-date { position: relative; display: inline-flex; align-items: center; cursor: pointer; }
+.fb-date input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border: 0; padding: 0; }
+.ag-list { display: flex; flex-direction: column; gap: 8px; }
+.ag-row { width: 100%; display: flex; align-items: stretch; gap: 12px; padding: 10px; min-height: 72px; background: var(--cream); border: 1px solid var(--line); border-radius: 18px; }
+.ag-time { flex: 0 0 76px; border-radius: 12px; padding: 8px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 2px; background: #ffe3f1; color: var(--magenta); }
+.ag-row.is-show .ag-time { background: #dceeff; color: #1d5fa8; }
+.ag-time b { font-family: var(--serif); font-size: 20px; line-height: 1.1; }
+.ag-time i { font-style: normal; font-size: 11px; font-weight: 600; color: var(--ink2); }
+.ag-body { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; }
+.ag-body .chip { color: var(--ink2); }
+.ag-body .chip-live { color: #fff; }
+.chip-warn { color: #fff !important; background: var(--orange); padding: 2px 8px; border-radius: 999px; }
+.ag-src { font-size: 11px; color: var(--ink2); }
+.ag-go { flex: none; align-self: center; color: var(--ink2); padding-right: 4px; }
+.ag-sub { margin-top: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink2); }
+.ag-empty { display: flex; flex-direction: column; gap: 4px; padding: 20px 16px; border-radius: 18px; background: var(--cream); border: 1px dashed var(--line); font-size: 14px; color: var(--ink2); }
+.ag-empty b { color: var(--ink); }
+@media (min-width: 900px) {
+  .ag-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+}

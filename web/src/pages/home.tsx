@@ -6,6 +6,7 @@ import { countdown, statusOf } from "../utils/time";
 import { loadHappening } from "../utils/live";
 import { callPhone, openUrl, shareText } from "../utils/device";
 import { SHARE_FAIL } from "../utils/platform";
+import { Agenda } from "../components/agenda";
 import { ProgramCard } from "../components/program-card";
 import { useProgramSheet } from "../components/use-program-sheet";
 import { IconArrow, IconGlobe, IconPhone, IconPin, IconShare } from "../components/icons";
@@ -101,6 +102,8 @@ const HomePage: FC = () => {
           <IconPin size={20} />Bản đồ
         </button>
       </div>
+
+      <Agenda onOpenProgram={openProgram} />
 
       <section className="band band-blue">
         <p className="eyebrow">Tại Đà Lạt lúc này</p>

@@ -69,3 +69,10 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 | Tài khoản Apple Developer | Thử trên iPhone thật |
 | Lịch Mây Lang Thang, Lululola, Sense Acoustic có phải nội dung tài trợ không | Nếu có thì phải gắn nhãn (F21) |
 | Gói Blaze cho Firebase | Chỉ cần khi tới S5-3 hoặc vé QR |
+
+## Cập nhật 23.11.2026
+
+- Chủ dự án quyết định: làm xong các chức năng dự kiến trên website tĩnh (tiếng Việt) trước; bản tiếng Anh, tiếng Hàn và việc đưa sang các app (Zalo Mini App, App Store) làm sau.
+- Website tĩnh nằm ở `web/`, đã thay trang chủ dalatevent.com. Dữ liệu ở `data/`.
+- Sprint 1: S1-3 (lịch show và "Đang diễn ra" vào dữ liệu chung) xong; S1-4 xong cho 10 trên 11 chương trình (theo cổng chính thức); S1-5 xong cho web và vỏ iOS, Zalo Mini App vẫn dùng mã riêng.
+- Sprint 2 (F01 "Đà Lạt có gì?"): S2-1 đến S2-4 và S2-6 xong trên web. Lọc Hôm nay / Tối nay / Ngày mai / Cuối tuần / Chọn ngày theo giờ Việt Nam, lọc Festival hoặc Show diễn, ẩn sự kiện đã hủy, gắn nhãn tạm hoãn, có màn hình rỗng, mỗi dòng ghi nguồn và ngày đối chiếu. 12 kiểm thử tự động (`web/tests/agenda.test.ts`), chạy mỗi lần đẩy code. Chưa có lọc "miễn phí/có vé" vì dữ liệu chưa có trường giá cho sự kiện Festival.

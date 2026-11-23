@@ -9,6 +9,7 @@ import ShowsPage from "../pages/shows";
 import EmbedPage from "../pages/embed";
 import EmbedInfoPage from "../pages/embed-info";
 import PrivacyPage from "../pages/privacy";
+import PlacePage from "../pages/place";
 import { getData } from "../data/store";
 import { AccountButton, AccountSheet } from "./account-panel";
 
@@ -56,6 +57,7 @@ export const Layout: FC = () => {
         <Route path="/lich-trinh" element={<SavedPage />} />
         <Route path="/nhung-lich" element={<EmbedInfoPage />} />
         <Route path="/quyen-rieng-tu" element={<PrivacyPage />} />
+        <Route path="/dia-diem/:id" element={<PlacePage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
     </div>

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { PROGRAMS, Program, VENUES } from "../data/festival";
 import { getData, onDataChange } from "../data/store";
@@ -53,6 +54,7 @@ function buildPlaces(today: string, weekday: number): Place[] {
 
 const MapPage: FC = () => {
   const { sheet, openProgram } = useProgramSheet();
+  const navigate = useNavigate();
   const [, setTick] = useState(0);
   useEffect(() => onDataChange(() => setTick((n) => n + 1)), []);
 
@@ -141,6 +143,9 @@ const MapPage: FC = () => {
       <div className="venue-actions">
         <button type="button" className="btn btn-line" onClick={() => setSelected(p.id)}>
           <IconPin size={20} />Xem trên bản đồ
+        </button>
+        <button type="button" className="btn btn-line" onClick={() => navigate("/dia-diem/" + p.id.replace(/:/g, "-"))}>
+          Trang địa điểm
         </button>
         <button type="button" className="btn btn-ink" onClick={() => openDirections(typeof p.lat === "number" ? p.lat + "," + p.lng : p.mapQuery)}>
           <IconRoute size={20} />Chỉ đường

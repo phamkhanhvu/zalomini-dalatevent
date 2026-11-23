@@ -2,6 +2,8 @@ import React, { FC, useEffect, useState } from "react";
 import QRCode from "qrcode";
 import { useSnackbar } from "../ui";
 import { FESTIVAL } from "../data/festival";
+import { getData } from "../data/store";
+import { listPlaces } from "../utils/places";
 
 const KINDS = [
   { id: "", label: "Tất cả" },
@@ -15,12 +17,14 @@ const EmbedInfoPage: FC = () => {
   const { openSnackbar } = useSnackbar();
   const [kind, setKind] = useState("");
   const [n, setN] = useState(6);
+  const [place, setPlace] = useState("");
+  const places = listPlaces(getData().events.venues, getData().shows.stages);
   const [qr, setQr] = useState("");
   useEffect(() => {
     QRCode.toDataURL(FESTIVAL.website, { width: 600, margin: 2, errorCorrectionLevel: "M", color: { dark: "#1b1440", light: "#ffffff" } }).then(setQr).catch(() => setQr(""));
   }, []);
 
-  const query = "?n=" + n + (kind ? "&loai=" + kind : "");
+  const query = "?n=" + n + (kind ? "&loai=" + kind : "") + (place ? "&noi=" + place : "");
   const src = FESTIVAL.website + "#/nhung" + query;
   const height = 96 + n * 64;
   const code = `<iframe src="${src}" title="Lịch sự kiện Đà Lạt từ DalatEvent" width="100%" height="${height}" style="border:0;max-width:480px" loading="lazy"></iframe>`;
@@ -52,6 +56,12 @@ const EmbedInfoPage: FC = () => {
             <button key={x} type="button" role="tab" aria-selected={n === x} className={"fb fb-sm" + (n === x ? " on" : "")} onClick={() => setN(x)}>{x} dòng</button>
           ))}
         </div>
+        <label className="embed-pick">Chỉ hiện lịch tại một địa điểm (ví dụ quán, sân khấu của bạn)
+          <select value={place} onChange={(e) => setPlace(e.target.value)}>
+            <option value="">Tất cả địa điểm</option>
+            {places.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
+          </select>
+        </label>
         <textarea className="embed-code" readOnly rows={5} value={code} aria-label="Mã nhúng" onFocus={(e) => e.currentTarget.select()} />
         <button type="button" className="btn btn-ink btn-wide" onClick={copy}>Chép mã nhúng</button>
         <p className="eyebrow">Xem trước</p>

@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { getData, onDataChange, ShowItem, Stage } from "../data/store";
 import { callPhone, openUrl } from "../utils/device";
 import { IconArrow, IconPhone } from "../components/icons";
@@ -39,6 +40,7 @@ const Row: FC<{ it: ShowItem; stage: Stage; today: { date: string; weekday: numb
 };
 
 const ShowsPage: FC = () => {
+  const navigate = useNavigate();
   const [, setTick] = useState(0);
   useEffect(() => onDataChange(() => setTick((n) => n + 1)), []);
   const { stages } = getData().shows;
@@ -61,7 +63,7 @@ const ShowsPage: FC = () => {
           <section className="sec stage" key={stage.id}>
             <div className="sec-head">
               <h2 className="h2">{stage.name}</h2>
-              <button type="button" className="link" onClick={() => openUrl(stage.source_url)}>Trang gốc</button>
+              <button type="button" className="link" onClick={() => navigate("/dia-diem/s-" + stage.id + "-0")}>Địa điểm, chỉ đường</button>
             </div>
             <p className="muted small">{stage.intro}</p>
             {items.length === 0 ? (

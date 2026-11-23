@@ -1,19 +1,17 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import { Program, VENUES } from "../data/festival";
+import { Program } from "../data/festival";
 import { getData, onDataChange } from "../data/store";
 import { search, SearchPlace } from "../utils/search";
+import { listPlaces } from "../utils/places";
 import { AgendaRow, agendaFor } from "./agenda";
 import { IconPin, IconSearch } from "./icons";
 
 const HINTS = ["Hôm nay", "Cuối tuần", "12.12", "Jazz", "Lâm Viên"];
 
 function places(): SearchPlace[] {
-  const out: SearchPlace[] = VENUES.map((v) => ({ id: "f:" + v.id, name: v.name, hint: "Địa điểm Festival" }));
-  for (const st of getData().shows.stages) {
-    for (const pl of st.places && st.places.length ? st.places : [{ name: st.name }]) out.push({ id: "s:" + st.id + ":" + pl.name, name: pl.name, hint: "Điểm diễn show · " + st.name });
-  }
-  return out;
+  const d = getData();
+  return listPlaces(d.events.venues, d.shows.stages).map((p) => ({ id: p.id, name: p.name, hint: p.kind === "festival" ? "Địa điểm Festival" : "Điểm diễn show" + (p.stageName && p.stageName !== p.name ? " · " + p.stageName : "") }));
 }
 
 /** Ô tìm kiếm: sự kiện, địa điểm, nghệ sĩ, hoạt động; hiểu cả ngày tháng trong câu tìm */
@@ -58,7 +56,7 @@ export const SearchBox: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenP
           {res.places.length > 0 && (
             <div className="search-places">
               {res.places.map((p) => (
-                <button key={p.id} type="button" className="search-place" onClick={() => navigate("/ban-do")}>
+                <button key={p.id} type="button" className="search-place" onClick={() => navigate("/dia-diem/" + p.id)}>
                   <IconPin size={18} /><span><b>{p.name}</b><i>{p.hint}</i></span>
                 </button>
               ))}

@@ -1,5 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import QRCode from "qrcode";
+import { useNavigate } from "react-router";
+import { getData } from "../data/store";
 import { CONTACT_EMAIL, mailto } from "../utils/contact";
 import { Sheet } from "../ui";
 import { FESTIVAL, Program } from "../data/festival";
@@ -23,6 +25,8 @@ export const ProgramSheet: FC<Props> = ({ program, saved, onClose, onToggleSave,
   const p = program;
   const cat = p ? catOf(p.cat) : null;
   const status = p ? statusOf(p) : "upcoming";
+  const navigate = useNavigate();
+  const venueId = p ? getData().events.events.find((e) => e.id === p.id)?.venue_id : null;
   const [qr, setQr] = useState("");
   const [showQr, setShowQr] = useState(false);
   useEffect(() => {
@@ -55,7 +59,11 @@ export const ProgramSheet: FC<Props> = ({ program, saved, onClose, onToggleSave,
           </div>
           <h2 className="ps-title">{p.title}</h2>
           <p className="ps-desc">{p.desc}</p>
-          <p className="ps-venue"><IconPin size={18} />{p.venue}</p>
+          {venueId ? (
+            <button type="button" className="ps-venue ps-venue-link" onClick={() => { onClose(); navigate("/dia-diem/f-" + venueId); }}><IconPin size={18} />{p.venue}</button>
+          ) : (
+            <p className="ps-venue"><IconPin size={18} />{p.venue}</p>
+          )}
           {p.note && <p className="ps-note">{p.note}</p>}
           {p.tentative && !p.note && (
             <p className="ps-note">Lịch dự kiến, có thể thay đổi. Vui lòng kiểm tra lại trước khi đến.</p>

@@ -113,3 +113,9 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 ## Banner và ảnh minh họa (23.11.2026)
 - Chủ dự án gửi 10 banner "Đà Lạt có gì vui?" (chữ nằm sẵn trong ảnh) và 10 ảnh cùng chủ đề không chữ, đều là ảnh tạo bằng AI. Trang chủ có băng chuyền 10 banner (`web/src/components/banners.tsx`); ảnh không chữ dùng cho khối Festival nổi bật, thư viện ảnh trang Festival và đầu trang Show diễn, đều ghi rõ "ảnh minh họa". Ảnh chia sẻ mạng xã hội (`og-image.jpg`) đổi sang banner "Săn ảnh đẹp".
 - Vẫn CẦN ảnh chụp thật tại sự kiện cho từng chương trình Festival.
+
+## Trang địa điểm (23.11.2026)
+- F18 (một phần): mỗi địa điểm Festival và mỗi điểm diễn show có trang riêng `#/dia-diem/<mã>` (ví dụ `f-lam-vien`, `s-lululola-0`): chỉ đường, bản đồ, liên hệ, lịch 60 ngày tới tại đó, chia sẻ, mã QR. Vào từ tìm kiếm, bản đồ, bảng chương trình, trang Show diễn. 5 kiểm thử (`web/tests/places.test.ts`), tổng 57.
+- F23: khung nhúng nhận thêm `noi=<mã địa điểm>` để một quán hoặc sân khấu chỉ nhúng lịch của mình; trang `#/nhung-lich` có ô chọn địa điểm.
+- Chưa có: trang cho đơn vị tổ chức của Festival (dữ liệu `organizer` mới có ở 4 chương trình), ảnh và mô tả riêng cho từng địa điểm.
+- Sửa lỗi: phần đầu trang bị mất lề phải trên điện thoại từ lúc thêm nút Đăng nhập (khoảng 11:27 đến lần cập nhật này).

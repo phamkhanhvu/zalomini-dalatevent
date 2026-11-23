@@ -47,3 +47,9 @@ export const IconHeart = ({ size = 24 }: P) => (
 export const IconMusic = ({ size = 24 }: P) => (
   <svg {...base(size)}><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></svg>
 );
+export const IconSearch = ({ size = 24 }: P) => (
+  <svg {...base(size)}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+);
+export const IconCompass = ({ size = 24 }: P) => (
+  <svg {...base(size)}><circle cx="12" cy="12" r="9" /><path d="m15.5 8.5-2 5-5 2 2-5Z" /></svg>
+);

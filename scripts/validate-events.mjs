@@ -135,13 +135,14 @@ if (hap) {
   if (hap.schema !== 1) err(`happening.json: schema phải là 1`);
   if (!ISO.test(hap.updated_at || "")) err(`happening.json: updated_at sai dạng`);
   if (!/^\d{2}\.\d{2}\.\d{4}$/.test(hap.updated_label || "")) err(`happening.json: updated_label phải có dạng 23.11.2026`);
-  if (!Array.isArray(hap.items) || !hap.items.length) err(`happening.json: cần ít nhất một mục`);
+  if (!Array.isArray(hap.items)) err(`happening.json: thiếu items`);
   for (const [i, it] of (hap.items || []).entries()) {
     for (const k of ["when", "title", "desc"]) if (!it[k] || typeof it[k] !== "string") err(`happening.json mục ${i + 1}: thiếu ${k}`);
     if (/[<>]/.test((it.title || "") + (it.desc || "") + (it.when || ""))) err(`happening.json mục ${i + 1}: không được chứa thẻ HTML`);
-    if (it.live !== undefined && typeof it.live !== "boolean") err(`happening.json mục ${i + 1}: live phải là true hoặc false`);
+    if (!DATE.test(it.start_date || "") || !DATE.test(it.end_date || "")) err(`happening.json mục ${i + 1}: cần start_date và end_date dạng 2026-11-23`);
+    else if (it.end_date < it.start_date) err(`happening.json mục ${i + 1}: end_date trước start_date`);
+    if (it.venue !== undefined && typeof it.venue !== "string") err(`happening.json mục ${i + 1}: venue phải là chữ`);
   }
-  if ((hap.items || []).filter((x) => x.live).length > 1) warn(`happening.json: có hơn một mục "đang diễn ra" nổi bật`);
 }
 
 for (const w of warnings) console.log(`cảnh báo  ${w}`);

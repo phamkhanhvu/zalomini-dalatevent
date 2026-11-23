@@ -15,8 +15,8 @@ const SavedPage: FC = () => {
   return (
     <div className="page page-col">
       <header className="top">
-        <p className="eyebrow">Lịch của bạn</p>
-        <h1 className="h1">Chương trình <em>đã lưu</em></h1>
+        <p className="eyebrow">Các chương trình bạn đã lưu</p>
+        <h1 className="h1">Lịch trình <em>của tôi</em></h1>
       </header>
       <div className="scroll grow">
         {list.length === 0 ? (

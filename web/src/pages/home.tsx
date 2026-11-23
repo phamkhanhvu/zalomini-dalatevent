@@ -1,141 +1,120 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import { useSnackbar } from "../ui";
-import { FESTIVAL, Happening, HAPPENING_FALLBACK, PROGRAMS, STATS_2024 } from "../data/festival";
+import { FESTIVAL, PROGRAMS, STATS_2024 } from "../data/festival";
+import { onDataChange } from "../data/store";
 import { countdown, statusOf } from "../utils/time";
-import { loadHappening } from "../utils/live";
 import { callPhone, openUrl, shareText } from "../utils/device";
 import { SHARE_FAIL } from "../utils/platform";
 import { Agenda } from "../components/agenda";
-import { ProgramCard } from "../components/program-card";
+import { SearchBox } from "../components/search-box";
 import { useProgramSheet } from "../components/use-program-sheet";
-import { IconArrow, IconGlobe, IconPhone, IconPin, IconShare } from "../components/icons";
+import { IconArrow, IconBookmark, IconCompass, IconGlobe, IconPhone, IconPin, IconShare } from "../components/icons";
 
-import heroImg from "../static/img/ga-da-lat-cam-tu-cau.jpg";
-import g1 from "../static/img/quang-truong-lam-vien-hoa.jpg";
+import f1 from "../static/img/quang-truong-lam-vien-hoa.jpg";
+import f2 from "../static/img/ho-xuan-huong-hoang-hon.jpg";
+import f3 from "../static/img/cho-da-lat-mua-hoa.jpg";
 import g2 from "../static/img/ho-xuan-huong-suong-som.jpg";
-import g3 from "../static/img/cho-da-lat-mua-hoa.jpg";
-import g4 from "../static/img/ho-xuan-huong-hoang-hon.jpg";
 import g5 from "../static/img/ga-da-lat-vuon-hoa.jpg";
+import g6 from "../static/img/ga-da-lat-cam-tu-cau.jpg";
 import logoImg from "../static/img/dalatevent-logo.png";
 
 const GALLERY = [
-  { src: g1, alt: "Quảng trường Lâm Viên mùa hoa" },
+  { src: f1, alt: "Quảng trường Lâm Viên mùa hoa" },
   { src: g2, alt: "Hồ Xuân Hương trong sương sớm" },
-  { src: g3, alt: "Chợ Đà Lạt mùa hoa" },
-  { src: g4, alt: "Hồ Xuân Hương lúc hoàng hôn" },
+  { src: f3, alt: "Chợ Đà Lạt mùa hoa" },
+  { src: f2, alt: "Hồ Xuân Hương lúc hoàng hôn" },
   { src: g5, alt: "Vườn hoa trước ga Đà Lạt" },
+  { src: g6, alt: "Ga Đà Lạt giữa mùa cẩm tú cầu" },
 ];
 
 const HomePage: FC = () => {
   const navigate = useNavigate();
   const { openSnackbar } = useSnackbar();
-  const { sheet, openProgram, toggleSave, saved } = useProgramSheet();
-  const [happening, setHappening] = useState<Happening[]>(HAPPENING_FALLBACK);
-  const [updated, setUpdated] = useState<string>(FESTIVAL.updated);
-
+  const { sheet, openProgram } = useProgramSheet();
+  const [tick, setTick] = useState(0);
+  useEffect(() => onDataChange(() => setTick((n) => n + 1)), []);
+  const [minute, setMinute] = useState(() => Math.floor(Date.now() / 60000));
   useEffect(() => {
-    let alive = true;
-    loadHappening().then((r) => {
-      if (!alive) return;
-      setHappening(r.items);
-      if (r.updated) setUpdated(r.updated);
-    });
-    return () => {
-      alive = false;
-    };
+    const t = window.setInterval(() => setMinute(Math.floor(Date.now() / 60000)), 60000);
+    return () => window.clearInterval(t);
   }, []);
 
-  const cd = useMemo(
-    () => countdown(FESTIVAL.opening, FESTIVAL.end, FESTIVAL.openingTentative),
-    []
-  );
-
-  const next = useMemo(
-    () =>
-      PROGRAMS.filter((p) => statusOf(p) !== "ended")
-        .sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
-        .filter((p) => p.id !== "trong-hoa")
-        .slice(0, 3),
-    []
-  );
+  // Mọi con số dưới đây tính từ dữ liệu (data/events.json), không viết cứng
+  const cd = useMemo(() => countdown(FESTIVAL.opening, FESTIVAL.end, FESTIVAL.openingTentative), [tick, minute]);
+  const total = PROGRAMS.length;
+  const live = useMemo(() => PROGRAMS.filter((p) => statusOf(p) === "live").length, [tick, minute]);
+  const done = useMemo(() => PROGRAMS.filter((p) => statusOf(p) === "ended").length, [tick, minute]);
+  const others = Math.max(0, FESTIVAL.totalActivities - total);
+  const toAgenda = () => document.getElementById("dang-dien-ra")?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   return (
     <div className="scroll page">
       <header className="hero">
         <div className="brand">
           <img className="brand-logo" src={logoImg} alt="DalatEvent.com" width={90} height={72} />
-          <span className="brand-tag">Kỳ thứ XI</span>
         </div>
-        <p className="eyebrow">Tháng 12.2026 · Đà Lạt, Lâm Đồng</p>
         <h1 className="display">
-          Festival Hoa <em>Đà Lạt</em> 2026
+          Đà Lạt <em>có gì vui?</em>
         </h1>
-        <p className="lead">{FESTIVAL.theme}.</p>
-        <div className="hero-photo">
-          <img src={heroImg} alt="Ga Đà Lạt giữa mùa cẩm tú cầu" />
+        <p className="lead">Lễ hội, sự kiện và show diễn đang và sắp diễn ra tại Đà Lạt, cập nhật mỗi ngày.</p>
+        <SearchBox onOpenProgram={openProgram} />
+        <div className="quick">
+          <button type="button" className="quick-btn quick-main" onClick={toAgenda}>
+            <IconCompass size={22} /><span>Khám phá sự kiện</span>
+          </button>
+          <button type="button" className="quick-btn" onClick={() => navigate("/da-luu")}>
+            <IconBookmark size={22} /><span>Xem lịch trình</span>
+          </button>
+          <button type="button" className="quick-btn" onClick={() => navigate("/ban-do")}>
+            <IconPin size={22} /><span>Mở bản đồ</span>
+          </button>
+        </div>
+      </header>
+
+      <Agenda onOpenProgram={openProgram} />
+
+      <section className="sec feat" aria-labelledby="feat-h">
+        <p className="eyebrow">Sự kiện nổi bật{FESTIVAL.editionShort ? " · " + FESTIVAL.editionShort : ""}</p>
+        <h2 className="h1" id="feat-h">{FESTIVAL.name} <em>{FESTIVAL.start.slice(0, 4)}</em></h2>
+        {FESTIVAL.theme && <p className="lead">{FESTIVAL.theme}.</p>}
+        <div className="feat-photos">
+          <img className="feat-a" src={f1} alt="Quảng trường Lâm Viên, nơi diễn ra đêm khai mạc và bế mạc" />
+          <img className="feat-b" src={f2} alt="Hồ Xuân Hương, không gian hoa và sân khấu trên mặt hồ" />
+          <img className="feat-c" src={f3} alt="Đường phố Đà Lạt mùa hoa" loading="lazy" />
           <div className="count">
             <b>{cd.big}</b>
             <span>{cd.small}</span>
           </div>
         </div>
-      </header>
-
-      <section className="tiles">
-        <div className="tile tile-pink">
-          <span className="tile-k">Khai mạc</span>
-          <b>{FESTIVAL.openingLabel}</b>
-          <span className="tile-s"><IconPin size={14} />Quảng trường Lâm Viên{FESTIVAL.openingTentative ? " · dự kiến" : ""}</span>
+        <div className="tiles tiles-in">
+          <div className="tile tile-pink">
+            <span className="tile-k">Thời gian</span>
+            <b>{FESTIVAL.dateRange}</b>
+            <span className="tile-s">{FESTIVAL.place}</span>
+          </div>
+          <div className="tile tile-mint">
+            <span className="tile-k">Khai mạc</span>
+            <b>{FESTIVAL.openingLabel}</b>
+            <span className="tile-s"><IconPin size={14} />{FESTIVAL.openingVenue}{FESTIVAL.openingTentative ? " · dự kiến" : ""}</span>
+          </div>
+          <div className="tile tile-blue">
+            <span className="tile-k">Quy mô</span>
+            <b>{total} chương trình chính</b>
+            <span className="tile-s">{others > 0 ? `cùng ${others} hoạt động khác` : "theo cổng chính thức"}</span>
+          </div>
+          <div className="tile tile-yellow">
+            <span className="tile-k">Trạng thái</span>
+            <b>{live > 0 ? `${live} đang diễn ra` : done === total && total > 0 ? "Đã kết thúc" : "Chưa bắt đầu"}</b>
+            <span className="tile-s">{total - live - done} sắp tới{done > 0 ? ` · ${done} đã xong` : ""}</span>
+          </div>
         </div>
-        <div className="tile tile-mint">
-          <span className="tile-k">Quy mô</span>
-          <b>11 chương trình chính</b>
-          <span className="tile-s">cùng 25 hoạt động hưởng ứng</span>
+        <div className="cta cta-in">
+          <button type="button" className="btn btn-ink btn-wide" onClick={() => navigate("/chuong-trinh")}>
+            Xem {total} chương trình <IconArrow size={20} />
+          </button>
         </div>
       </section>
-
-      <div className="cta">
-        <button type="button" className="btn btn-ink btn-wide" onClick={() => navigate("/chuong-trinh")}>
-          Xem {PROGRAMS.length} chương trình <IconArrow size={20} />
-        </button>
-        <button type="button" className="btn btn-line" onClick={() => navigate("/ban-do")}>
-          <IconPin size={20} />Bản đồ
-        </button>
-      </div>
-
-      <Agenda onOpenProgram={openProgram} />
-
-      <section className="band band-blue">
-        <p className="eyebrow">Tại Đà Lạt lúc này</p>
-        <h2 className="h2">Đang diễn ra và sắp tới</h2>
-        <p className="muted">Cập nhật đến ngày {updated}. Lịch có thể thay đổi, hãy kiểm tra lại trước khi đến.</p>
-        <div className="hap">
-          {happening.slice(0, 6).map((h, i) => (
-            <article className="hap-item" key={i}>
-              <div className="hap-when">
-                {h.live && <span className="chip chip-live">Đang diễn ra</span>}
-                <span>{h.when}</span>
-              </div>
-              <h3>{h.title}</h3>
-              <p>{h.desc}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {next.length > 0 && (
-        <section className="sec">
-          <div className="sec-head">
-            <h2 className="h2">Sắp tới trong festival</h2>
-            <button type="button" className="link" onClick={() => navigate("/chuong-trinh")}>Tất cả</button>
-          </div>
-          <div className="list">
-            {next.map((p) => (
-              <ProgramCard key={p.id} program={p} saved={saved.has(p.id)} onOpen={openProgram} onToggleSave={toggleSave} />
-            ))}
-          </div>
-        </section>
-      )}
 
       <section className="sec sec-flush">
         <div className="sec-head pad">
@@ -167,13 +146,10 @@ const HomePage: FC = () => {
 
       <section className="sec about">
         <h2 className="h2">Về DalatEvent</h2>
-        <p>
-          DalatEvent là cổng thông tin sự kiện Đà Lạt do Sense Group vận hành — đơn vị truyền thông chính thức của
-          Festival Hoa Đà Lạt lần thứ XI.
-        </p>
+        <p>DalatEvent là cổng thông tin sự kiện Đà Lạt do Sense Group vận hành.</p>
         <div className="actions">
-          <button type="button" className="act" onClick={() => openUrl(FESTIVAL.website)}>
-            <IconGlobe />dalatevent.com
+          <button type="button" className="act" onClick={() => openUrl(FESTIVAL.sourceUrl)}>
+            <IconGlobe />Cổng Festival chính thức
           </button>
           <button type="button" className="act" onClick={() => callPhone(FESTIVAL.hotline)}>
             <IconPhone />{FESTIVAL.hotlineLabel}
@@ -182,17 +158,14 @@ const HomePage: FC = () => {
             type="button"
             className="act"
             onClick={async () => {
-              const ok = await shareText(
-                `Lịch ${FESTIVAL.name} ${FESTIVAL.edition}: 11 chương trình chính, khai mạc ${FESTIVAL.openingLabel.toLowerCase()}${FESTIVAL.openingTentative ? " (dự kiến)" : ""}. ${FESTIVAL.website}`,
-                "DalatEvent"
-              );
+              const ok = await shareText(`Đà Lạt có gì vui? Lịch ${FESTIVAL.name} ${FESTIVAL.edition} (${FESTIVAL.dateRange}) và các show diễn tại Đà Lạt: ${FESTIVAL.website}`, "DalatEvent");
               if (!ok) openSnackbar({ text: SHARE_FAIL, duration: 2200 });
             }}
           >
             <IconShare />Chia sẻ
           </button>
         </div>
-        <p className="muted small">© 2026 DalatEvent · Sense Group · 304 Hai Bà Trưng, Đà Lạt</p>
+        <p className="muted small">© {new Date().getFullYear()} DalatEvent · Sense Group · 304 Hai Bà Trưng, Đà Lạt</p>
       </section>
       {sheet}
     </div>

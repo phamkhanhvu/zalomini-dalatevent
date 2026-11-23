@@ -102,17 +102,24 @@ function toProgram(e: EventRecord, mapQuery: string | undefined, now: number): P
   };
 }
 
+/** Thông tin Festival, lấy toàn bộ từ data/events.json (mục series và sự kiện khai mạc). Không viết cứng ở đây. */
 export const FESTIVAL = {
   name: "Festival Hoa Đà Lạt",
-  edition: "lần thứ XI",
-  year: 2026,
-  theme: "Bản giao hòa của sắc hoa và âm nhạc",
+  edition: "",
+  editionShort: "",
+  theme: "",
+  place: "",
+  /** Tổng số chương trình, hoạt động theo nguồn chính thức (0 nếu chưa có số liệu) */
+  totalActivities: 0,
+  /** Khoảng thời gian, ví dụ "12.12.2026 – 03.01.2027" */
+  dateRange: "",
+  start: "",
   opening: "",
   openingLabel: "",
+  openingVenue: "",
   openingTentative: false,
   end: "",
   website: "https://dalatevent.com/",
-  registerUrl: "https://dalatevent.com/#lien-he",
   sourceUrl: "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
   hotline: "0986338656",
   hotlineLabel: "0986 338 656",
@@ -153,12 +160,21 @@ export function rebuild(now = Date.now()) {
 
   HAPPENING_FALLBACK.splice(0, HAPPENING_FALLBACK.length, ...happening.items);
 
-  const series = events.series.find((x) => x.id === SERIES);
+  const series = events.series.find((x) => x.id === SERIES) as (typeof events.series)[number] & { edition?: string; edition_short?: string; theme?: string; place?: string; total_activities?: number } | undefined;
   const opening = list.find((e) => e.id === "khai-mac");
-  FESTIVAL.opening = opening ? opening.sessions[0].start_at : series ? series.start_at : "";
-  FESTIVAL.openingLabel = FESTIVAL.opening ? "Tối " + dmy(FESTIVAL.opening) : "";
-  FESTIVAL.openingTentative = opening ? opening.tentative : false;
+  FESTIVAL.name = series ? series.name.replace(/\s+lần thứ.*$/i, "") : FESTIVAL.name;
+  FESTIVAL.edition = series?.edition || "";
+  FESTIVAL.editionShort = series?.edition_short || "";
+  FESTIVAL.theme = series?.theme || "";
+  FESTIVAL.place = series?.place || "";
+  FESTIVAL.totalActivities = series?.total_activities || 0;
+  FESTIVAL.start = series ? series.start_at : "";
   FESTIVAL.end = series ? series.end_at : "";
+  FESTIVAL.dateRange = series ? dmy(series.start_at) + " – " + dmy(series.end_at) : "";
+  FESTIVAL.opening = opening ? opening.sessions[0].start_at : FESTIVAL.start;
+  FESTIVAL.openingLabel = FESTIVAL.opening ? FESTIVAL.opening.slice(11, 16) + " · " + dmy(FESTIVAL.opening) : "";
+  FESTIVAL.openingVenue = opening ? opening.venue_name : "";
+  FESTIVAL.openingTentative = opening ? opening.tentative : false;
   FESTIVAL.updated = happening.updated_label || dmy(events.updated_at);
 }
 

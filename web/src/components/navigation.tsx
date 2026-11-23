@@ -8,7 +8,7 @@ const tabs = [
   { path: "/chuong-trinh", label: "Festival", icon: <IconCalendar /> },
   { path: "/show", label: "Show diễn", icon: <IconMusic /> },
   { path: "/ban-do", label: "Bản đồ", icon: <IconPin /> },
-  { path: "/da-luu", label: "Đã lưu", icon: <IconBookmark />, activeIcon: <IconBookmark filled /> },
+  { path: "/da-luu", label: "Lịch trình", icon: <IconBookmark />, activeIcon: <IconBookmark filled /> },
 ];
 
 export const Navigation: FC = () => {

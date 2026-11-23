@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { addDays, arrange, buildAgenda, vnDate, vnMidnight, vnWeekday, windowOf } from "../src/utils/agenda.ts";
+import { addDays, arrange, buildAgenda, upcomingOnly, vnDate, vnMidnight, vnWeekday, windowOf } from "../src/utils/agenda.ts";
 import type { InEvent, InStage } from "../src/utils/agenda.ts";
 
 const at = (iso: string) => Date.parse(iso);
@@ -109,4 +109,20 @@ test("lịch hằng tuần không được suy ra quá mốc cho phép", () => {
   assert.deepEqual(far, []);
   const near = windowOf("date", at("2026-12-01T08:00:00+07:00"), "2026-12-05");
   assert.deepEqual(buildAgenda(EVENTS, STAGES, near.from, near.to, at("2026-12-15T08:00:00+07:00")).map((x) => x.title), ["trien-lam", "Band thứ Bảy"]);
+});
+
+test("sự kiện khác (có ngày bắt đầu, kết thúc) vào chung danh sách với loại 'event'", () => {
+  const w = windowOf("today", at("2026-11-23T08:00:00+07:00"));
+  const hap = [{ title: "Hội chợ", desc: "", when: "", start_date: "2026-11-20", end_date: "2026-11-24", venue: "Lâm Viên" }, { title: "Đã qua", desc: "", when: "", start_date: "2026-11-01", end_date: "2026-11-22" }, { title: "Sai ngày", desc: "", when: "", start_date: "20.11", end_date: "24.11" }];
+  const list = buildAgenda([], [], w.from, w.to, Infinity, hap);
+  assert.deepEqual(list.map((x) => [x.title, x.kind, x.allDay]), [["Hội chợ", "event", true]]);
+});
+
+test("Sắp diễn ra: từ ngày mai, trong 30 ngày, bỏ cái đang diễn ra và lịch hằng tuần", () => {
+  const now = at("2026-12-10T08:00:00+07:00");
+  const w = windowOf("upcoming", now);
+  assert.equal(vnDate(w.from), "2026-12-11");
+  assert.equal(vnDate(w.to - 1), "2027-01-09");
+  const up = upcomingOnly(buildAgenda(EVENTS, STAGES, w.from, w.to), w.from, 12).map((x) => x.title);
+  assert.deepEqual(up, ["hoan", "Show chiều", "Show tối", "khai-mac", "qua-dem", "Show CN", "tho-cam"]);
 });

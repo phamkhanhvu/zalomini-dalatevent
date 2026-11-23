@@ -53,7 +53,7 @@ export const ProgramSheet: FC<Props> = ({ program, saved, onClose, onToggleSave,
               className="btn btn-line"
               onClick={async () => {
                 const ok = await shareText(
-                  `${p.title} — ${p.day}${p.sub ? ", " + p.sub : ""} tại ${p.venue}. Lịch ${FESTIVAL.name} ${FESTIVAL.edition}: ${FESTIVAL.website}`,
+                  `${p.title} — ${p.day}${p.sub ? ", " + p.sub : ""} tại ${p.venue}. Xem lịch sự kiện Đà Lạt: ${FESTIVAL.website}`,
                   FESTIVAL.name + " " + FESTIVAL.edition
                 );
                 onShared?.(ok);

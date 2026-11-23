@@ -11,8 +11,11 @@ export const LONG_RUNNING_DAYS = 14;
 /** "Tối nay" tính từ 17:00 */
 export const EVENING_HOUR = 17;
 
-export type Preset = "today" | "tonight" | "tomorrow" | "weekend" | "date";
-export type Kind = "festival" | "show";
+export type Preset = "today" | "tonight" | "tomorrow" | "weekend" | "upcoming" | "date";
+/** festival: chương trình thuộc một chuỗi lễ hội; event: sự kiện khác; show: đêm diễn của điểm diễn */
+export type Kind = "festival" | "event" | "show";
+/** "Sắp diễn ra" nhìn trước ngần này ngày */
+export const UPCOMING_DAYS = 30;
 
 export interface AgendaItem {
   key: string;
@@ -35,11 +38,16 @@ export interface AgendaItem {
   programId?: string;
   sourceUrl?: string;
   verifiedAt?: string;
+  /** Mô tả ngắn (sự kiện khác) */
+  desc?: string;
+  /** Dòng sinh ra từ lịch hằng tuần */
+  weekly?: boolean;
 }
 
 /* ---------- Dữ liệu đầu vào (cùng dạng với data/events.json và data/shows.json) ---------- */
 export interface InSession { start_at: string; end_at: string; all_day: boolean; end_estimated?: boolean }
-export interface InEvent { id: string; title: string; category: string; venue_name: string; status: string; tentative: boolean; sessions: InSession[]; source_url: string | null; verified_at: string | null }
+export interface InHappening { title: string; desc: string; when: string; start_date: string; end_date: string; venue?: string }
+export interface InEvent { series?: string; description?: string; id: string; title: string; category: string; venue_name: string; status: string; tentative: boolean; sessions: InSession[]; source_url: string | null; verified_at: string | null }
 export interface InShow { date?: string; time: string; title: string; url: string; place?: string; price?: string; weekday?: number; note?: string }
 export interface InStage { id: string; name: string; kind: "dated" | "weekly"; source_url: string; verified_at: string; items: InShow[] }
 
@@ -69,6 +77,7 @@ export function windowOf(preset: Preset, now: number, pickedDate?: string): Wind
   if (preset === "today") return { from: t0, to: t0 + DAY_MS, label: "Hôm nay" };
   if (preset === "tonight") return { from: t0 + EVENING_HOUR * 3600000, to: t0 + DAY_MS, label: "Tối nay" };
   if (preset === "tomorrow") return { from: t0 + DAY_MS, to: t0 + 2 * DAY_MS, label: "Ngày mai" };
+  if (preset === "upcoming") return { from: t0 + DAY_MS, to: t0 + (UPCOMING_DAYS + 1) * DAY_MS, label: "Sắp diễn ra" };
   if (preset === "weekend") {
     const wd = vnWeekday(now);
     // Thứ Bảy và Chủ nhật của tuần này; nếu hôm nay là Chủ nhật thì chỉ còn hôm nay
@@ -106,8 +115,15 @@ function parseTimeRange(time: string): [number, number] {
  * Gom sự kiện đã công bố (và đã hoãn) cùng các đêm show rơi vào khoảng [from, to).
  * Lịch hằng tuần chỉ được suy ra tới mốc `weeklyUntil` (lịch band đổi theo tuần, không nên đoán xa).
  */
-export function buildAgenda(events: InEvent[], stages: InStage[], from: number, to: number, weeklyUntil = Infinity): AgendaItem[] {
+export function buildAgenda(events: InEvent[], stages: InStage[], from: number, to: number, weeklyUntil = Infinity, happening: InHappening[] = []): AgendaItem[] {
   const out: AgendaItem[] = [];
+  happening.forEach((h, i) => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(h.start_date || "") || !/^\d{4}-\d{2}-\d{2}$/.test(h.end_date || "")) return;
+    const start = vnMidnight(h.start_date);
+    const end = vnMidnight(h.end_date) + DAY_MS - 60000;
+    if (!(start < to && end >= from)) return;
+    out.push({ key: "h:" + i + ":" + h.start_date, kind: "event", title: h.title, label: "Sự kiện", venue: h.venue || "Đà Lạt", start, end, allDay: true, status: "published", desc: h.desc });
+  });
   for (const e of events) {
     if (e.status !== "published" && e.status !== "postponed") continue; // nháp, chờ duyệt, đã hủy, đã xong: không hiện
     e.sessions.forEach((s, i) => {
@@ -116,8 +132,9 @@ export function buildAgenda(events: InEvent[], stages: InStage[], from: number, 
       if (!(start < to && end >= from)) return;
       out.push({
         key: e.id + ":" + i,
-        kind: "festival",
+        kind: e.series ? "festival" : "event",
         title: e.title,
+        desc: e.description || undefined,
         label: CAT_LABEL[e.category] || "Sự kiện",
         venue: e.venue_name,
         start,
@@ -133,7 +150,7 @@ export function buildAgenda(events: InEvent[], stages: InStage[], from: number, 
     });
   }
   for (const st of stages) {
-    const push = (it: InShow, date: string, n: number) => {
+    const push = (it: InShow, date: string, n: number, weekly = false) => {
       const [s, e] = parseTimeRange(it.time);
       const start = vnMidnight(date) + s;
       if (!(start < to && start >= from)) return; // show tính theo giờ bắt đầu
@@ -149,6 +166,7 @@ export function buildAgenda(events: InEvent[], stages: InStage[], from: number, 
         endEstimated: !/–/.test(it.time),
         status: "published",
         url: it.url,
+        weekly: weekly || undefined,
         sourceUrl: st.source_url,
         verifiedAt: st.verified_at,
       });
@@ -158,7 +176,7 @@ export function buildAgenda(events: InEvent[], stages: InStage[], from: number, 
       // Lịch hằng tuần: sinh một dòng cho mỗi ngày trong khoảng (tối đa 14 ngày)
       for (let d = vnDate(from), k = 0; vnMidnight(d) < to && vnMidnight(d) < weeklyUntil && k < 14; d = addDays(d, 1), k++) {
         const wd = vnWeekday(vnMidnight(d));
-        st.items.forEach((it, n) => it.weekday === wd && push(it, d, n));
+        st.items.forEach((it, n) => it.weekday === wd && push(it, d, n, true));
       }
     }
   }
@@ -190,4 +208,12 @@ export function vnTime(ms: number): string {
 export function vnDayMonth(ms: number): string {
   const d = vnDate(ms);
   return d.slice(8, 10) + "." + d.slice(5, 7);
+}
+
+/** "Sắp diễn ra": chỉ những gì bắt đầu trong khoảng, bỏ lịch hằng tuần, xếp theo ngày, lấy tối đa `limit` */
+export function upcomingOnly(items: AgendaItem[], from: number, limit = 12): AgendaItem[] {
+  return items
+    .filter((x) => x.start >= from && !x.weekly)
+    .sort((a, b) => a.start - b.start || a.title.localeCompare(b.title, "vi"))
+    .slice(0, limit);
 }

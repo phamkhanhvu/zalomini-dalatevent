@@ -2,13 +2,19 @@
   "schema": 1,
   "about": "Nguồn dữ liệu sự kiện của DalatEvent. Sửa file này rồi chạy `npm run validate:data`. Mô tả các trường: docs/architecture.md.",
   "timezone": "Asia/Ho_Chi_Minh",
-  "updated_at": "2026-11-23T08:05:00+07:00",
+  "updated_at": "2026-11-23T08:35:00+07:00",
   "series": [
     {
       "id": "festival-hoa-da-lat-2026",
       "name": "Festival Hoa Đà Lạt lần thứ XI",
       "start_at": "2026-12-12T20:00:00+07:00",
-      "end_at": "2027-01-03T23:59:59+07:00"
+      "end_at": "2027-01-03T23:59:59+07:00",
+      "edition": "lần thứ XI",
+      "edition_short": "Kỳ thứ XI",
+      "theme": "Bản giao hòa của sắc hoa và âm nhạc",
+      "place": "Đà Lạt, Lâm Đồng",
+      "total_activities": 36,
+      "total_activities_source": "Cổng chính thức festivaldalat.lamdongtructuyen.vn, đọc ngày 23.11.2026 (11 chương trình trọng tâm trong tổng số 36 chương trình, hoạt động)"
     }
   ],
   "venues": [

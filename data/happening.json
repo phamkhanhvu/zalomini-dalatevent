@@ -2,9 +2,17 @@
   "schema": 1,
   "about": "Các sự kiện khác đang và sắp diễn ra tại Đà Lạt (ngoài chương trình Festival Hoa trong events.json). Mỗi mục có ngày bắt đầu và kết thúc để lọc theo ngày.",
   "timezone": "Asia/Ho_Chi_Minh",
-  "updated_at": "2026-11-23T08:35:00+07:00",
+  "updated_at": "2026-11-23T13:56:10+07:00",
   "updated_label": "23.11.2026",
   "items": [
+    {
+      "title": "Triển lãm tranh cổ động Ngày Văn hóa Việt Nam",
+      "start_date": "2026-11-16",
+      "end_date": "2026-11-26",
+      "venue": "Quảng trường Lâm Viên",
+      "when": "16 — 26.11.2026",
+      "desc": "150 tranh cổ động tấm lớn tuyển chọn từ cuộc thi sáng tác toàn quốc, trưng bày tại khu vực đài phun nước Quảng trường Lâm Viên và quanh hồ Xuân Hương."
+    },
     {
       "title": "K-Vietnam Wellness Festa & Expo in Đà Lạt 2026",
       "start_date": "2026-11-20",
@@ -14,19 +22,11 @@
       "desc": "Lễ hội Văn hóa Việt Nam tại Đà Lạt khai mạc tối 20.11 và kéo dài đến hết ngày 24.11 (Ngày Văn hóa Việt Nam) tại Quảng trường Lâm Viên (phường Xuân Hương – Đà Lạt): khoảng 200 gian hàng của doanh nghiệp Việt Nam và Hàn Quốc, 5 đêm biểu diễn nghệ thuật giao lưu Việt – Hàn, trình diễn hanbok – áo dài, lễ hội ẩm thực và âm nhạc đường phố."
     },
     {
-      "title": "Triển lãm tranh cổ động Ngày Văn hóa Việt Nam",
-      "start_date": "2026-11-16",
-      "end_date": "2026-11-26",
-      "venue": "Quảng trường Lâm Viên",
-      "when": "16 — 26.11.2026 · Quảng trường Lâm Viên",
-      "desc": "150 tranh cổ động tấm lớn tuyển chọn từ cuộc thi sáng tác toàn quốc, trưng bày tại khu vực đài phun nước Quảng trường Lâm Viên và quanh hồ Xuân Hương."
-    },
-    {
       "title": "Mùa hội cỏ hồng Lang Biang năm 2026",
       "start_date": "2026-11-21",
       "end_date": "2026-12-12",
       "venue": "Đồi cỏ hồng Đạ Nghịt, phường Lang Biang – Đà Lạt",
-      "when": "21.11 — 12.12.2026 · Đồi cỏ hồng Đạ Nghịt, phường Lang Biang – Đà Lạt",
+      "when": "21.11 — 12.12.2026",
       "desc": "Khai mạc sáng 21.11, hưởng ứng Festival Hoa Đà Lạt lần thứ XI: hội thi trình diễn trang phục truyền thống các dân tộc, giải đua ngựa không yên cùng nhiều hoạt động văn hóa, thể thao, du lịch."
     }
   ]

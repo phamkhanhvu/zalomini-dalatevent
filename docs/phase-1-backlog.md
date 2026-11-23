@@ -145,3 +145,7 @@ F05 đăng ký và vé QR: cần máy chủ và cần ít nhất một nhà tổ
 - CHƯA có ưu đãi thật nào: không tự tạo ưu đãi khi đối tác chưa xác nhận.
 - CHƯA chạy thử các bước cần đăng nhập (tạo ưu đãi, dùng, chặn dùng lần hai, chặn vượt lượt).
 - Chưa có: công cụ để đối tác tự tra mã, danh sách lượt dùng cho quản trị viên xem/xuất, ưu đãi gắn với sự kiện hoặc dấu hộ chiếu, hoàn lượt.
+
+## Quản trị: lưu là hiện ngay (23.11.2026)
+- Bỏ cách dùng token GitHub. Site tự đọc nội dung quản trị viên đã lưu (Firestore `cms`) mỗi lần khách mở trang và áp ngay; tác vụ GitHub chỉ còn vai trò lưu trữ vào repo. 9 kiểm thử cho luật áp nội dung, tổng 92; đã thử trên trình duyệt với dữ liệu giả lập (nội dung mới hiện ngay, nội dung ngoài phạm vi và nội dung lỗi bị bỏ, mất mạng thì dùng dữ liệu gốc).
+- Mỗi lượt mở trang tốn thêm 3 lượt đọc Firestore (gói miễn phí 50.000 lượt đọc/ngày, tương đương khoảng 16.000 lượt mở trang/ngày). Vượt mức đó cần gộp `cms` thành một tài liệu hoặc nâng gói.

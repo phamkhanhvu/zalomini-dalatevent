@@ -20,5 +20,7 @@ if (!fs.existsSync(src)) {
 for (const dir of targets) {
   fs.mkdirSync(dir, { recursive: true });
   for (const f of files) fs.copyFileSync(path.join(src, f), path.join(dir, f));
+  // Trạng thái nội dung quản trị: chỉ cần cho bản tải khi chạy
+  if (dir.endsWith("public/data") && fs.existsSync(path.join(src, "cms-status.json"))) fs.copyFileSync(path.join(src, "cms-status.json"), path.join(dir, "cms-status.json"));
 }
 console.log(`Đã chép ${files.length} tệp dữ liệu vào gói web.`);

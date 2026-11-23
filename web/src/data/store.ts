@@ -7,6 +7,8 @@ import eventsBundled from "./bundled/events.json";
 import showsBundled from "./bundled/shows.json";
 import happeningBundled from "./bundled/happening.json";
 import { IS_NATIVE } from "../utils/device";
+// @ts-ignore — luật áp nội dung quản trị dùng chung với tác vụ trên GitHub
+import { applyCms, FILES as CMS_FILES } from "../../../scripts/cms-apply.mjs";
 
 export interface EventSession { start_at: string; end_at: string; all_day: boolean; end_estimated?: boolean }
 export interface EventRecord {
@@ -77,6 +79,35 @@ async function fetchJson(name: string, signal: AbortSignal) {
   return res.json();
 }
 
+const CMS_REST = "https://firestore.googleapis.com/v1/projects/quay-hang-da-lat/databases/(default)/documents";
+
+/**
+ * Nội dung quản trị viên đã lưu ở trang quản trị (Firestore "cms", ai cũng đọc được, chỉ quản trị viên ghi được).
+ * Áp ngay lên dữ liệu vừa tải để khách thấy thay đổi tức thì, không phải chờ nội dung được chép vào repo.
+ * Dùng đúng luật của tác vụ GitHub (phạm vi sửa hẹp, kiểm tra trước khi nhận); lỗi gì thì giữ nguyên dữ liệu gốc.
+ */
+async function withCms(base: DataSet, signal: AbortSignal): Promise<DataSet> {
+  try {
+    const names = (CMS_FILES as string[]).map((f) => "projects/quay-hang-da-lat/databases/(default)/documents/cms/" + f);
+    const [res, status] = await Promise.all([
+      fetch(CMS_REST + ":batchGet", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ documents: names }), signal }),
+      fetch(DATA_URL + "cms-status.json", { signal, cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    ]);
+    if (!res.ok) return base;
+    const rows = (await res.json()) as { found?: { name: string; fields?: Record<string, { stringValue?: string; integerValue?: string; doubleValue?: number }> } }[];
+    const incoming: Record<string, { json?: string; savedAt: number; byName?: string }> = {};
+    for (const r of rows) {
+      const f = r.found && r.found.fields;
+      if (!r.found || !f) continue;
+      incoming[r.found.name.split("/").pop() as string] = { json: f.json && f.json.stringValue, savedAt: Number((f.savedAt && (f.savedAt.integerValue ?? f.savedAt.doubleValue)) ?? NaN), byName: f.byName && f.byName.stringValue };
+    }
+    const out = applyCms(base, incoming, status, Date.now()) as { next: DataSet; changed: string[] };
+    return out.changed.length && valid(out.next) ? out.next : base;
+  } catch (e) {
+    return base;
+  }
+}
+
 async function refresh(): Promise<boolean> {
   const ctrl = new AbortController();
   const timer = window.setTimeout(() => ctrl.abort(), 8000);
@@ -86,9 +117,10 @@ async function refresh(): Promise<boolean> {
       fetchJson("shows.json", ctrl.signal),
       fetchJson("happening.json", ctrl.signal),
     ]);
-    const d = { events, shows, happening };
-    if (!valid(d)) return false;
-    if (stamp(d) < stamp(bundled)) return false; // bản trên mạng cũ hơn bản đóng gói: bỏ qua
+    const repo = { events, shows, happening };
+    if (!valid(repo)) return false;
+    if (stamp(repo) < stamp(bundled)) return false; // bản trên mạng cũ hơn bản đóng gói: bỏ qua
+    const d = await withCms(repo, ctrl.signal);
     try {
       window.localStorage.setItem(CACHE_KEY, JSON.stringify(d));
     } catch (e) {

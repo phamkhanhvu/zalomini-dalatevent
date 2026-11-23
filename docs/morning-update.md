@@ -8,7 +8,7 @@ Hẹn ngay lời nhắc cho 05:47 sáng hôm sau (giờ Asia/Ho_Chi_Minh) với 
 ## Phạm vi
 Chỉ sửa `data/happening.json` và hai stage `may-lang-thang`, `lululola` trong `data/shows.json`. Không sửa `data/events.json`, `data/cms-status.json`, stage `sense-acoustic`, mã nguồn, workflow hay WordPress. Không gửi email, không đăng gì khác.
 
-Trước khi sửa: `git pull --rebase origin main`.
+Trước khi sửa: chạy `gh workflow run cms.yml -R phamkhanhvu/zalomini-dalatevent --ref main`, chờ khoảng 60 giây cho tác vụ chép nội dung từ trang quản trị vào repo, rồi `git pull --rebase origin main`.
 
 ## Việc 1 — data/happening.json (sự kiện khác, ngoài Festival Hoa)
 1. Lấy ngày hôm nay theo giờ Việt Nam.

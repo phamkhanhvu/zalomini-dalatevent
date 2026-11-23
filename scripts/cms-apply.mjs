@@ -6,6 +6,10 @@
  * - shows: chỉ "items" của sân khấu sense-acoustic (lịch band hằng tuần). Mây Lang Thang và Lululola do tác vụ mỗi sáng cập nhật.
  * - events: danh sách "events" (chương trình Festival). Không sửa series và venues.
  * Mỗi tệp được kiểm tra bằng validate-core trước khi nhận; có lỗi thì giữ nguyên bản cũ và ghi lại lý do.
+ *
+ * Hàm applyCms chạy ở hai nơi với cùng một luật:
+ * 1. Trong trình duyệt của khách (web/src/data/store.ts): nội dung quản trị viên vừa lưu hiện ngay trên trang.
+ * 2. Trong tác vụ GitHub (scripts/cms-pull.mjs): chép nội dung đó vào repo để lưu lâu dài.
  */
 import { validate } from "./validate-core.mjs";
 
@@ -20,25 +24,38 @@ const clone = (x) => JSON.parse(JSON.stringify(x));
 /** Tên người sửa đi vào thông điệp commit: chỉ giữ chữ, số, dấu cách và vài dấu thông dụng */
 const cleanName = (s) => (typeof s === "string" ? s.replace(/[^\p{L}\p{N} ._-]/gu, " ").replace(/\s+/g, " ").trim().slice(0, 40) : "") || "quản trị viên";
 
-function merge(file, current, incoming, now) {
+/**
+ * savedAt: lúc quản trị viên bấm lưu. Dùng làm mốc "cập nhật lúc" để ngày hiển thị trên trang là ngày sửa thật,
+ * dù nội dung được áp vào lúc nào (ngay trên trang khi khách mở, hay sau đó trong repo).
+ */
+function merge(file, current, incoming, savedAt) {
   const next = clone(current);
-  const stamp = vnIso(now);
+  const stamp = vnIso(savedAt);
   if (file === "happening") {
     if (!Array.isArray(incoming.items)) throw new Error("thiếu items");
-    next.items = incoming.items;
-    next.updated_at = stamp;
-    next.updated_label = `${stamp.slice(8, 10)}.${stamp.slice(5, 7)}.${stamp.slice(0, 4)}`;
+    const repoAt = Date.parse(current.updated_at || "");
+    if (repoAt > savedAt) {
+      // Repo đã được cập nhật SAU lần lưu này (tác vụ mỗi sáng): giữ các mục tự động mới của repo,
+      // và lấy các mục nhập tay theo bản quản trị viên đã lưu.
+      const manual = incoming.items.filter((x) => x && x.manual === true);
+      const auto = (current.items || []).filter((x) => x.manual !== true && !manual.some((m) => m.title === x.title));
+      next.items = [...auto, ...manual].sort((a, b) => String(a.start_date).localeCompare(String(b.start_date)));
+    } else {
+      next.items = incoming.items;
+      next.updated_at = stamp;
+      next.updated_label = `${stamp.slice(8, 10)}.${stamp.slice(5, 7)}.${stamp.slice(0, 4)}`;
+    }
   } else if (file === "shows") {
     const from = (incoming.stages || []).find((s) => s.id === "sense-acoustic");
     const to = next.stages.find((s) => s.id === "sense-acoustic");
     if (!from || !to || !Array.isArray(from.items)) throw new Error("thiếu lịch sense-acoustic");
     to.items = from.items;
     to.verified_at = stamp.slice(0, 10);
-    next.updated_at = stamp;
+    if (!(Date.parse(current.updated_at || "") > savedAt)) next.updated_at = stamp;
   } else {
     if (!Array.isArray(incoming.events)) throw new Error("thiếu events");
     next.events = incoming.events;
-    next.updated_at = stamp;
+    if (!(Date.parse(current.updated_at || "") > savedAt)) next.updated_at = stamp;
   }
   return next;
 }
@@ -62,7 +79,7 @@ export function applyCms(current, incoming, status, now) {
     const entry = { savedAt: inc.savedAt, at: vnIso(now), by };
     try {
       if (typeof inc.json !== "string" || inc.json.length > 400000) throw new Error("nội dung quá lớn hoặc sai dạng");
-      const candidate = merge(file, next[file], JSON.parse(inc.json), now);
+      const candidate = merge(file, next[file], JSON.parse(inc.json), inc.savedAt);
       const trial = { ...next, [file]: candidate };
       const { errors } = validate(trial.events, trial.shows, trial.happening);
       if (errors.length) {

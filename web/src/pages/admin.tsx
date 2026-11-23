@@ -8,28 +8,6 @@ import { currentUid, getAccount, isAdmin, loadAccount, onAccount, readCms, write
 import type { EventRecord, EventsDoc, HappeningDoc, HappeningItem, ShowsDoc } from "../data/store";
 
 const RAW = "https://raw.githubusercontent.com/phamkhanhvu/zalomini-dalatevent/main/data/";
-const DISPATCH = "https://api.github.com/repos/phamkhanhvu/zalomini-dalatevent/actions/workflows/cms.yml/dispatches";
-const TOKEN_KEY = "dalatevent.ghToken";
-const readToken = () => {
-  try {
-    return window.localStorage.getItem(TOKEN_KEY) || "";
-  } catch (e) {
-    return "";
-  }
-};
-
-/**
- * Yêu cầu GitHub chạy ngay tác vụ nhận nội dung, thay vì chờ lịch 10 phút (lịch của GitHub hay trễ).
- * Cần một token do chính quản trị viên tạo, chỉ có quyền Actions của đúng repo này; token chỉ nằm trong trình duyệt của họ.
- */
-async function publishNow(token: string): Promise<"ok" | "denied" | "error"> {
-  try {
-    const res = await fetch(DISPATCH, { method: "POST", headers: { authorization: "Bearer " + token, accept: "application/vnd.github+json", "content-type": "application/json", "x-github-api-version": "2022-11-28" }, body: JSON.stringify({ ref: "main" }) });
-    return res.status === 204 ? "ok" : res.status === 401 || res.status === 403 || res.status === 404 ? "denied" : "error";
-  } catch (e) {
-    return "error";
-  }
-}
 type FileId = "happening" | "shows" | "events";
 interface Status { savedAt: number; status: "applied" | "rejected"; at: string; by: string; errors?: string[] }
 interface Loaded { events: EventsDoc; shows: ShowsDoc; happening: HappeningDoc; status: Partial<Record<FileId, Status>>; pending: Partial<Record<FileId, number>> }
@@ -88,9 +66,9 @@ const StatusLine: FC<{ file: FileId; data: Loaded; sentAt?: number }> = ({ file,
   const st = data.status[file];
   const pending = sentAt || data.pending[file];
   const t = (ms: number) => new Date(ms).toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh", hour: "2-digit", minute: "2-digit", day: "2-digit", month: "2-digit" });
-  if (pending) return <p className="adm-status is-wait">Đã lưu lúc {t(pending)}, đang chờ đưa lên trang. Bấm "Tải lại dữ liệu mới nhất" sau vài phút để xem kết quả.</p>;
+  if (pending) return <p className="adm-status is-ok">Đã lưu lúc {t(pending)} và đang hiện trên trang. Khách mở lại trang là thấy.</p>;
   if (st?.status === "rejected") return <div className="adm-status is-bad"><b>Lần lưu gần nhất bị từ chối:</b><ul>{(st.errors || []).map((e) => <li key={e}>{e}</li>)}</ul></div>;
-  if (st?.status === "applied") return <p className="adm-status is-ok">Lần lưu gần nhất (bởi {st.by}) đã lên trang lúc {st.at.slice(11, 16)} ngày {dmy(st.at.slice(0, 10))}.</p>;
+  if (st?.status === "applied") return <p className="adm-status is-ok">Lần lưu gần nhất (bởi {st.by}) đang hiện trên trang và đã được lưu trữ vào kho dữ liệu ngày {dmy(st.at.slice(0, 10))}.</p>;
   return null;
 };
 
@@ -135,7 +113,7 @@ const HappeningEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, c
         </div>
       ))}
       <button type="button" className="btn btn-line" onClick={add}>+ Thêm sự kiện</button>
-      <button type="button" className="btn btn-ink btn-wide" onClick={save}>Lưu và đưa lên trang</button>
+      <button type="button" className="btn btn-ink btn-wide" onClick={save}>Lưu và đưa lên trang ngay</button>
     </div>
   );
 };
@@ -164,7 +142,7 @@ const BandEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, check:
           <Field label="Ghi chú"><input value={it.note || ""} maxLength={160} onChange={(e) => set(i, { note: e.target.value })} /></Field>
         </div>
       ))}
-      <button type="button" className="btn btn-ink btn-wide" onClick={save}>Lưu và đưa lên trang</button>
+      <button type="button" className="btn btn-ink btn-wide" onClick={save}>Lưu và đưa lên trang ngay</button>
     </div>
   );
 };
@@ -250,7 +228,7 @@ const FestivalEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, ch
           )}
         </div>
       ))}
-      <button type="button" className="btn btn-ink btn-wide" onClick={save}>Lưu và đưa lên trang</button>
+      <button type="button" className="btn btn-ink btn-wide" onClick={save}>Lưu và đưa lên trang ngay</button>
     </div>
   );
 };
@@ -280,41 +258,6 @@ const AdminPage: FC = () => {
   const [sent, setSent] = useState<Partial<Record<FileId, number>>>({});
   const [busy, setBusy] = useState(false);
   const [round, setRound] = useState(0);
-  const [token, setToken] = useState(readToken);
-  const [tokenDraft, setTokenDraft] = useState("");
-  const [tokenOpen, setTokenOpen] = useState(false);
-  const pushNow = async (quiet = false) => {
-    if (!token) return false;
-    const r = await publishNow(token);
-    if (r === "ok") openSnackbar({ text: "Đã yêu cầu đưa lên trang. Thường xong sau 1 đến 2 phút", type: "success", duration: 3500 });
-    else if (!quiet || r === "denied") openSnackbar({ text: r === "denied" ? "GitHub từ chối token (sai, hết hạn hoặc thiếu quyền Actions). Hãy tạo lại token" : "Chưa gọi được GitHub. Nội dung đã lưu, sẽ lên khi lịch tự chạy", duration: 4500 });
-    return r === "ok";
-  };
-  const saveToken = () => {
-    const t = tokenDraft.trim();
-    if (!/^(github_pat_|ghp_)[A-Za-z0-9_]{20,}$/.test(t)) {
-      openSnackbar({ text: "Token chưa đúng dạng (bắt đầu bằng github_pat_)", duration: 3000 });
-      return;
-    }
-    try {
-      window.localStorage.setItem(TOKEN_KEY, t);
-    } catch (e) {
-      /* bỏ qua */
-    }
-    setToken(t);
-    setTokenDraft("");
-    setTokenOpen(false);
-    openSnackbar({ text: "Đã lưu token trên máy này", type: "success", duration: 2500 });
-  };
-  const dropToken = () => {
-    try {
-      window.localStorage.removeItem(TOKEN_KEY);
-    } catch (e) {
-      /* bỏ qua */
-    }
-    setToken("");
-  };
-
   useEffect(() => {
     setAdmin(null);
     if (acc.status === "in") isAdmin().then(setAdmin);
@@ -338,7 +281,7 @@ const AdminPage: FC = () => {
     try {
       const at = await writeCms(file, JSON.stringify(doc));
       setSent((s) => ({ ...s, [file]: at }));
-      if (!(await pushNow(true))) openSnackbar({ text: token ? "Đã lưu" : "Đã lưu. Chưa bật \"đưa lên ngay\" nên phải chờ lịch tự chạy", type: "success", duration: 3500 });
+      openSnackbar({ text: "Đã lưu. Thay đổi đã hiện trên trang", type: "success", duration: 3500 });
     } catch (e) {
       openSnackbar({ text: "Chưa lưu được. Hãy kiểm tra mạng hoặc quyền quản trị", duration: 3500 });
     }
@@ -378,37 +321,6 @@ const AdminPage: FC = () => {
       {tab === "events" && <FestivalEditor key={"e" + round} data={data} onSave={onSave} />}
       {tab === "deals" && <DealsEditor key={"d" + round} />}
       <button type="button" className="acc-switch" onClick={() => setRound((n) => n + 1)}>Tải lại dữ liệu mới nhất (bỏ thay đổi chưa lưu)</button>
-      {tab !== "deals" && (
-        <div className="adm-card adm-body adm-now">
-          <b>Đưa lên trang ngay</b>
-          {token ? (
-            <React.Fragment>
-              <p className="muted small">Đã bật trên máy này: mỗi lần lưu, nội dung lên trang sau khoảng 1 đến 2 phút. Bấm nút dưới đây để đưa lên cả nội dung người khác đã lưu.</p>
-              <button type="button" className="btn btn-ink" onClick={() => pushNow()}>Đưa lên trang ngay</button>
-              <button type="button" className="acc-switch link-left" onClick={dropToken}>Gỡ token khỏi máy này</button>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <p className="muted small">Chưa bật. Hiện nội dung đã lưu phải chờ lịch tự chạy của GitHub, có khi rất lâu. Bật một lần trên máy này bằng token GitHub của chủ dự án.</p>
-              {!tokenOpen ? (
-                <button type="button" className="btn btn-line" onClick={() => setTokenOpen(true)}>Bật bằng token GitHub</button>
-              ) : (
-                <React.Fragment>
-                  <ol className="adm-steps">
-                    <li>Mở <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">trang tạo token của GitHub</a> (đăng nhập tài khoản chủ repo).</li>
-                    <li>Token name: DalatEvent quan tri. Expiration: chọn thời hạn bạn muốn.</li>
-                    <li>Repository access: Only select repositories → chọn zalomini-dalatevent.</li>
-                    <li>Permissions → Repository permissions → Actions: Read and write. Không bật quyền nào khác.</li>
-                    <li>Generate token, chép dãy bắt đầu bằng github_pat_ rồi dán vào ô dưới.</li>
-                  </ol>
-                  <Field label="Token (chỉ lưu trong trình duyệt của máy này)"><input type="password" autoComplete="off" value={tokenDraft} onChange={(e) => setTokenDraft(e.target.value)} /></Field>
-                  <button type="button" className="btn btn-ink" onClick={saveToken}>Lưu token</button>
-                </React.Fragment>
-              )}
-            </React.Fragment>
-          )}
-        </div>
-      )}
     </div>
   );
 

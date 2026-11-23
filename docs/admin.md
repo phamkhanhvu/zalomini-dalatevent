@@ -14,13 +14,10 @@
 ## Đường đi của một lần lưu
 1. Trang kiểm tra dữ liệu ngay trong trình duyệt (`scripts/validate-core.mjs`). Có lỗi thì không cho lưu.
 2. Lưu vào Firestore `cms/<tệp>` (chỉ tài khoản có trong `admins` ghi được).
-3. Cứ khoảng 10 phút, tác vụ GitHub `.github/workflows/cms.yml` đọc về, kiểm tra lại, chỉ nhận đúng phạm vi ở bảng trên (`scripts/cms-apply.mjs`) rồi ghi vào `data/` kèm tên người sửa trong thông điệp commit.
-4. Website đọc `data/` trực tiếp nên thay đổi hiện ra sau khoảng 10 đến 30 phút. Kết quả (đã nhận hoặc bị từ chối kèm lý do) ghi ở `data/cms-status.json` và hiện lại trên trang quản trị.
+3. **Hiện ngay trên trang:** mỗi khi khách mở dalatevent.com, site đọc `cms` (một yêu cầu, không cần đăng nhập) và áp lên dữ liệu vừa tải, theo đúng luật ở `scripts/cms-apply.mjs` (phạm vi sửa hẹp, kiểm tra lại, lỗi thì bỏ qua). Mã: `withCms` trong `web/src/data/store.ts`. Không cần token, không phải chờ.
+4. **Lưu trữ vào repo:** tác vụ GitHub `.github/workflows/cms.yml` chép nội dung đó vào `data/` kèm tên người sửa. Lịch 10 phút của GitHub không đáng tin, nên quy trình cập nhật mỗi sáng (`docs/morning-update.md`) gọi tác vụ này trước khi làm việc khác. Việc lưu trữ chậm không ảnh hưởng tới những gì khách thấy.
 
 Lịch sử sửa và hoàn tác: xem lịch sử commit của thư mục `data/` trên GitHub.
-
-## Đưa lên trang ngay
-Lịch 10 phút của GitHub không đáng tin (ngày 23.11.2026 không tự chạy lần nào trong nhiều giờ). Trang quản trị có khối "Đưa lên trang ngay": dán một token GitHub loại fine-grained, chỉ chọn repo `zalomini-dalatevent`, chỉ bật quyền Actions: Read and write. Token lưu trong trình duyệt của máy đó (localStorage), không gửi đi đâu ngoài api.github.com. Có token thì mỗi lần lưu trang tự gọi chạy tác vụ `cms.yml`, nội dung lên sau 1 đến 2 phút. Thu hồi: xóa token trong GitHub → Settings → Developer settings → Personal access tokens.
 
 ## Cấp và thu hồi quyền
 1. Người cần quyền đăng nhập trên dalatevent.com rồi mở `#/quan-tri`. Trang hiện "Tài khoản chưa có quyền quản trị" kèm một mã.

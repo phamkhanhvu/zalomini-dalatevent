@@ -7,7 +7,9 @@ import { applyCms, vnIso } from "../../scripts/cms-apply.mjs";
 const load = (f: string) => JSON.parse(fs.readFileSync(new URL("../../data/" + f, import.meta.url), "utf8"));
 const current = () => ({ events: load("events.json"), shows: load("shows.json"), happening: load("happening.json") });
 const NOW = Date.parse("2026-11-24T09:15:00+07:00");
-const send = (o: unknown, savedAt = 1000, byName = "Vũ") => ({ json: JSON.stringify(o), savedAt, byName });
+// Mặc định: lưu lúc 09:00 ngày 24.11, sau mọi mốc cập nhật đang có trong repo
+const SAVED = Date.parse("2026-11-24T09:00:00+07:00");
+const send = (o: unknown, savedAt = SAVED, byName = "Vũ") => ({ json: JSON.stringify(o), savedAt, byName });
 const item = { title: "Hội chợ thử", start_date: "2026-12-01", end_date: "2026-12-03", venue: "Quảng trường Lâm Viên", when: "01 — 03.12.2026", desc: "Mô tả.", manual: true };
 
 test("giờ Việt Nam đúng dạng dữ liệu yêu cầu", () => {
@@ -35,12 +37,12 @@ test("nội dung có lỗi bị từ chối, dữ liệu cũ giữ nguyên, lý 
 
 test("lần gửi đã xử lý không bị áp lại (tác vụ mỗi sáng sửa sau đó không bị ghi đè)", () => {
   const cur = current();
-  const first = applyCms(cur, { happening: send({ items: [item] }, 1000) }, null, NOW);
+  const first = applyCms(cur, { happening: send({ items: [item] }) }, null, NOW);
   const morning = { ...first.next, happening: { ...first.next.happening, items: [] } };
-  const again = applyCms(morning, { happening: send({ items: [item] }, 1000) }, first.status, NOW + 600000);
+  const again = applyCms(morning, { happening: send({ items: [item] }) }, first.status, NOW + 600000);
   assert.deepEqual(again.changed, []);
   assert.equal(again.statusChanged, false);
-  const newer = applyCms(morning, { happening: send({ items: [item] }, 2000) }, first.status, NOW + 600000);
+  const newer = applyCms(morning, { happening: send({ items: [item] }, SAVED + 5000) }, first.status, NOW + 600000);
   assert.deepEqual(newer.changed, ["happening"]);
 });
 
@@ -76,7 +78,24 @@ test("chương trình Festival: nhận thay đổi hợp lệ; hoãn mà thiếu
 
 test("chuỗi không phải JSON hoặc quá lớn bị từ chối an toàn", () => {
   const cur = current();
-  const r = applyCms(cur, { happening: { json: "{hỏng", savedAt: 5, byName: "<b>x</b>" } }, null, NOW);
+  const r = applyCms(cur, { happening: { json: "{hỏng", savedAt: SAVED, byName: "<b>x</b>" } }, null, NOW);
   assert.equal(r.status.files.happening.status, "rejected");
   assert.ok(!/[<>]/.test(r.status.files.happening.by));
+});
+
+test("ngày cập nhật hiển thị là ngày quản trị viên lưu, không phải lúc nội dung được áp", () => {
+  const cur = current();
+  const r = applyCms(cur, { happening: send({ items: [item] }) }, null, NOW + 3 * 86400000);
+  assert.equal(r.next.happening.updated_label, "24.11.2026");
+  assert.equal(r.next.happening.updated_at, "2026-11-24T09:00:00+07:00");
+});
+
+test("repo được tác vụ mỗi sáng cập nhật SAU lần lưu chưa kịp nhận: giữ mục tự động mới, vẫn lấy mục nhập tay của quản trị viên", () => {
+  const cur = current();
+  const auto = { title: "Sự kiện tự động mới", start_date: "2026-11-27", end_date: "2026-11-28", venue: "V", when: "27 — 28.11.2026", desc: "d" };
+  const morning = { ...cur, happening: { ...cur.happening, updated_at: "2026-11-25T05:50:00+07:00", updated_label: "25.11.2026", items: [auto] } };
+  const r = applyCms(morning, { happening: send({ items: [{ ...cur.happening.items[0] }, item] }) }, null, NOW + 86400000);
+  const titles = r.next.happening.items.map((x: { title: string }) => x.title);
+  assert.deepEqual(titles, ["Sự kiện tự động mới", "Hội chợ thử"]);
+  assert.equal(r.next.happening.updated_label, "25.11.2026");
 });

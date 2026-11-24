@@ -5,6 +5,7 @@
  */
 import type { Auth, User } from "firebase/auth";
 import type { Firestore } from "firebase/firestore/lite";
+import { registerPlugin } from "@capacitor/core";
 import { IS_NATIVE, storage } from "../utils/device";
 import { readPlan, replacePlan } from "../utils/plan";
 import { readSaved, replaceSaved, SAVED_EVENT } from "../utils/saved";
@@ -190,9 +191,50 @@ async function run(fn: (m: typeof import("firebase/auth"), a: Auth) => Promise<u
   }
 }
 
-/** Đăng nhập Google bằng cửa sổ bật lên; trong app cài trên máy không dùng được nên ẩn nút này */
-export const CAN_GOOGLE = !IS_NATIVE;
-export const signInGoogle = () => run((m, a) => m.signInWithPopup(a, new m.GoogleAuthProvider()));
+/**
+ * Đăng nhập Google: trên web dùng cửa sổ bật lên; trong app iOS dùng khung đăng nhập gốc của máy
+ * (plugin @capacitor-firebase/authentication, chỉ lấy chứng thực rồi đăng nhập bằng Firebase JS như web).
+ * Apple: chỉ có trong app iOS (Apple yêu cầu khi app có đăng nhập Google).
+ */
+type NativeCred = { credential?: { idToken?: string; accessToken?: string; nonce?: string; authorizationCode?: string } };
+type NativeAuthPlugin = { signInWithGoogle(): Promise<NativeCred>; signInWithApple(): Promise<NativeCred>; signOut(): Promise<void> };
+const NativeAuth = IS_NATIVE ? registerPlugin<NativeAuthPlugin>("FirebaseAuthentication") : null;
+export const CAN_GOOGLE = true;
+export const CAN_APPLE = IS_NATIVE;
+let appleCode = "";
+
+class Cancelled extends Error {}
+async function nativeCredential(m: typeof import("firebase/auth"), kind: "google" | "apple") {
+  try {
+    if (kind === "google") {
+      const r = await NativeAuth!.signInWithGoogle();
+      return m.GoogleAuthProvider.credential(r.credential?.idToken || null, r.credential?.accessToken || null);
+    }
+    const r = await NativeAuth!.signInWithApple();
+    appleCode = r.credential?.authorizationCode || "";
+    return new m.OAuthProvider("apple.com").credential({ idToken: r.credential?.idToken || "", rawNonce: r.credential?.nonce || undefined });
+  } catch (e) {
+    const t = String((e as { message?: string; code?: string })?.message || "") + String((e as { code?: string })?.code || "");
+    if (/cancel|1001|-5/i.test(t)) throw new Cancelled();
+    throw e;
+  }
+}
+async function signInWith(kind: "google" | "apple") {
+  await loadAccount();
+  if (!auth) return false;
+  set({ error: "" });
+  try {
+    const m = await import("firebase/auth");
+    if (!IS_NATIVE) await m.signInWithPopup(auth, new m.GoogleAuthProvider());
+    else await m.signInWithCredential(auth, await nativeCredential(m, kind));
+    return true;
+  } catch (e) {
+    if (!(e instanceof Cancelled)) set({ error: message(e) });
+    return false;
+  }
+}
+export const signInGoogle = () => signInWith("google");
+export const signInApple = () => signInWith("apple");
 export const signInEmail = (email: string, password: string) => run((m, a) => m.signInWithEmailAndPassword(a, email.trim(), password));
 export const registerEmail = (email: string, password: string) => run((m, a) => m.createUserWithEmailAndPassword(a, email.trim(), password));
 
@@ -203,6 +245,7 @@ export const resetPassword = (email: string) => run((m, a) => m.sendPasswordRese
 export async function signOutAccount() {
   window.clearTimeout(timer);
   writeMeta(null);
+  if (NativeAuth) await NativeAuth.signOut().catch(() => undefined);
   await run((m, a) => m.signOut(a));
 }
 
@@ -222,10 +265,12 @@ export async function wipeCloud(): Promise<boolean> {
 }
 
 /** Tài khoản này đăng nhập bằng cách nào: quyết định bước xác nhận lại trước khi xóa */
-export function deleteNeeds(): "google" | "password" | "web-only" {
+export function deleteNeeds(): "google" | "apple" | "password" | "web-only" {
   const ids = (user?.providerData || []).map((p) => p.providerId);
   if (ids.includes("password")) return "password";
-  return CAN_GOOGLE ? "google" : "web-only";
+  if (ids.includes("apple.com") && IS_NATIVE) return "apple";
+  if (ids.includes("google.com")) return "google";
+  return "web-only";
 }
 
 /**
@@ -246,10 +291,11 @@ export async function deleteAccount(password: string): Promise<boolean> {
     const m = await import("firebase/auth");
     const need = deleteNeeds();
     if (need === "web-only") {
-      set({ error: "Tài khoản Google cần xóa trên website dalatevent.com (mục Lịch trình)." });
+      set({ error: "Tài khoản này cần xóa trong app DalatEvent trên iPhone (mục Lịch trình)." });
       return false;
     }
     if (need === "password") await m.reauthenticateWithCredential(u, m.EmailAuthProvider.credential(u.email || "", password));
+    else if (IS_NATIVE) await m.reauthenticateWithCredential(u, await nativeCredential(m, need));
     else await m.reauthenticateWithPopup(u, new m.GoogleAuthProvider());
 
     const { doc, deleteDoc } = await import("firebase/firestore/lite");
@@ -272,6 +318,8 @@ export async function deleteAccount(password: string): Promise<boolean> {
       /* bỏ qua */
     }
     writeMeta(null);
+    // Tài khoản Apple: thu hồi quyền đăng nhập Apple (Apple yêu cầu khi xóa tài khoản); lỗi thì vẫn xóa tiếp
+    if (need === "apple" && appleCode) await m.revokeAccessToken(auth, appleCode).catch(() => undefined);
     await m.deleteUser(u);
     return true;
   } catch (e) {

@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Sheet, useSnackbar } from "../ui";
-import { CAN_GOOGLE, deleteAccount, deleteNeeds, getAccount, loadAccount, onAccount, registerEmail, resetPassword, signInEmail, signInGoogle, signOutAccount, wasLinked, wipeCloud } from "../platform/account";
+import { CAN_APPLE, CAN_GOOGLE, deleteAccount, deleteNeeds, getAccount, loadAccount, onAccount, registerEmail, resetPassword, signInEmail, signInApple, signInGoogle, signOutAccount, wasLinked, wipeCloud } from "../platform/account";
 
 /** Trạng thái mở bảng tài khoản, dùng chung cho nút trên thanh đầu trang và dải ở trang Lịch trình */
 let sheetOpen = false;
@@ -134,6 +134,7 @@ export const AccountSheet: FC = () => {
                 <label>Nhập mật khẩu để xác nhận<input type="password" required autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} /></label>
               )}
               {deleteNeeds() === "google" && <p className="acc-note">Bấm nút xóa sẽ mở cửa sổ Google để bạn xác nhận lại tài khoản.</p>}
+              {deleteNeeds() === "apple" && <p className="acc-note">Bấm nút xóa sẽ mở bước xác nhận của Apple. Quyền đăng nhập bằng Apple của DalatEvent cũng được thu hồi.</p>}
               <label className="acc-check"><input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} /><span>Tôi hiểu việc này không hoàn tác được</span></label>
               {acc.error && <p className="acc-err" role="alert">{acc.error}</p>}
               <div className="ps-actions">
@@ -166,8 +167,14 @@ export const AccountSheet: FC = () => {
               </div>
               <h2 className="ps-title">{mode === "in" ? "Đăng nhập" : "Đăng ký tài khoản mới"}</h2>
               <p className="ps-desc">Dùng chung tài khoản với trò chơi DalatEvent. Chúng tôi chỉ lưu danh sách mục bạn đã thêm vào lịch trình.</p>
+              {CAN_APPLE && (
+                <button type="button" className="btn btn-apple btn-wide" disabled={busy} onClick={() => act(signInApple)}>
+                  <svg viewBox="0 0 17 20" width="15" height="18" aria-hidden="true"><path fill="currentColor" d="M14.1 10.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.7-1-2.7-4.1zM11.6 3c.7-.9 1.2-2 1.1-3.2-1 0-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.1 1.1.1 2.3-.6 3-1.5z"/></svg>
+                  {mode === "in" ? "Đăng nhập bằng Apple" : "Đăng ký bằng Apple"}
+                </button>
+              )}
               {CAN_GOOGLE && (
-                <button type="button" className="btn btn-ink btn-wide" disabled={busy} onClick={() => act(signInGoogle)}>{mode === "in" ? "Đăng nhập bằng Google" : "Đăng ký bằng Google"}</button>
+                <button type="button" className={"btn btn-wide " + (CAN_APPLE ? "btn-line" : "btn-ink")} disabled={busy} onClick={() => act(signInGoogle)}>{mode === "in" ? "Đăng nhập bằng Google" : "Đăng ký bằng Google"}</button>
               )}
               <form
                 className="acc-form"

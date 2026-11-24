@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>844175137729-vhcau47oucf0jhp6mvc2pek32k49anke.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.844175137729-vhcau47oucf0jhp6mvc2pek32k49anke</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBJ-j5NI1b_HdY5n5lJr7bdnBpb0tbgNBI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>844175137729</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>vn.sensegroup.dalatevent</string>
+	<key>PROJECT_ID</key>
+	<string>quay-hang-da-lat</string>
+	<key>STORAGE_BUCKET</key>
+	<string>quay-hang-da-lat.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:844175137729:ios:f75fb94b8cd0005ad9ed40</string>
+	<key>DATABASE_URL</key>
+	<string>https://quay-hang-da-lat-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>

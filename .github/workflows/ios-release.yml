@@ -62,6 +62,12 @@ jobs:
             CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO \
             MARKETING_VERSION="$APP_VERSION" CURRENT_PROJECT_VERSION="$GITHUB_RUN_NUMBER" \
             archive | tail -n 40
+          # Archive không ký nên chưa mang quyền (entitlements). Ký tạm để gắn quyền "Đăng nhập bằng Apple";
+          # bước xuất bên dưới ký lại bằng chứng chỉ phân phối và giữ nguyên các quyền này.
+          APP="$RUNNER_TEMP/App.xcarchive/Products/Applications/App.app"
+          test -d "$APP"
+          codesign --force --sign - --entitlements ios/App/App/App.entitlements "$APP"
+          codesign -d --entitlements - "$APP" 2>/dev/null | grep -q applesignin
       - name: Đưa lên App Store Connect (TestFlight)
         shell: bash
         run: |

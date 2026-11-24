@@ -85,6 +85,8 @@ em { font-style: italic; color: var(--magenta); }
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 18px; border-radius: 999px; font-weight: 600; font-size: 15px; white-space: nowrap; }
 .btn:active { transform: scale(0.98); }
 .btn-ink { background: var(--ink); color: var(--cream); }
+.btn-apple { background: #000; color: #fff; gap: 8px; }
+.btn-apple + .btn { margin-top: 10px; }
 .btn-line { border: 1.5px solid var(--ink); color: var(--ink); }
 .btn-soft { background: #ffe3f1; color: var(--magenta); }
 .btn-wide { flex: 1; width: 100%; }

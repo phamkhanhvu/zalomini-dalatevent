@@ -18,6 +18,7 @@ import DealsPage from "../pages/deals";
 const AdminPage = React.lazy(() => import("../pages/admin"));
 import { getData } from "../data/store";
 import { AccountButton, AccountSheet } from "./account-panel";
+import { AssistantFab } from "./assistant-fab";
 
 const ScrollTop: FC = () => {
   const { pathname } = useLocation();
@@ -70,6 +71,7 @@ export const Layout: FC = () => {
         <Route path="/quan-tri" element={<React.Suspense fallback={<p className="muted pad">Đang tải…</p>}><AdminPage /></React.Suspense>} />
         <Route path="*" element={<HomePage />} />
       </Routes>
+      <AssistantFab />
     </div>
     <Navigation />
     <AccountButton />

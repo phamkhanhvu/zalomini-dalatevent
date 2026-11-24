@@ -2,8 +2,8 @@
 # Tài khoản Apple Developer: nhóm Pham Hoang Khanh Vu, Team ID LHRS82G34C (đã kích hoạt 24.11.2026).
 # Cần 3 giá trị do chủ dự án tự đặt trong
 # GitHub → Settings → Secrets and variables → Actions → Secrets (không gửi qua chat, không ghi vào mã nguồn):
-#   ASC_KEY_ID           Key ID của khóa App Store Connect API
-#   ASC_ISSUER_ID        Issuer ID của khóa đó
+#   ASC_KEY_ID           (biến hoặc secret) Key ID, không bí mật
+#   ASC_ISSUER_ID        (biến hoặc secret) Issuer ID, không bí mật
 #   ASC_KEY_P8           Toàn bộ nội dung tệp AuthKey_XXXX.p8
 # Chi tiết từng bước: docs/ios-release.md
 # CHƯA chạy thử lần nào.
@@ -23,8 +23,8 @@ jobs:
     env:
       # Team ID không phải bí mật (có sẵn trong mọi app đã ký), nên ghi thẳng ở đây
       APPLE_TEAM_ID: LHRS82G34C
-      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID || vars.ASC_KEY_ID || '42RU4QN633' }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID || vars.ASC_ISSUER_ID }}
       ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
       APP_VERSION: ${{ inputs.version }}
     steps:

@@ -367,3 +367,15 @@ div.ag-row { text-align: left; }
 .pass-art { flex: none; width: 104px; height: auto; margin: 44px 4px 0 0; transform: rotate(4deg); filter: drop-shadow(0 6px 10px rgba(27, 20, 64, 0.18)); }
 .pass-card-art { flex: none; width: 56px; height: auto; transform: rotate(-6deg); filter: drop-shadow(0 3px 6px rgba(27, 20, 64, 0.18)); }
 @media (min-width: 900px) { .pass-art { width: 150px; margin: 0 80px 0 0; } }
+
+/* Dalat Deals nổi bật trên trang chủ */
+.deals-banner { position: relative; width: 100%; display: flex; align-items: center; gap: 12px; margin-top: 12px; padding: 14px 14px 14px 12px; border-radius: 20px; text-align: left; color: #3a1d00; background: linear-gradient(120deg, #ffd23f 0%, #ff9f43 60%, #ff7a59 100%); box-shadow: 0 6px 18px rgba(255, 122, 89, 0.3); overflow: hidden; }
+.deals-banner::before { content: ""; position: absolute; right: -30px; top: -30px; width: 110px; height: 110px; border-radius: 50%; background: rgba(255, 255, 255, 0.22); }
+.deals-badge { flex: none; width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: #fff; color: #e0218a; transform: rotate(-8deg); box-shadow: 0 3px 8px rgba(58, 29, 0, 0.15); }
+.deals-text { position: relative; flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.deals-kicker { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.deals-text b { font-family: var(--serif); font-size: 18px; line-height: 1.25; }
+.deals-text i { font-style: normal; font-size: 13px; opacity: .85; }
+.deals-go { position: relative; flex: none; align-self: center; padding: 8px 12px; border-radius: 999px; background: #3a1d00; color: #fff; font-size: 13px; font-weight: 700; }
+@media (max-width: 600px) { .deals-go { padding: 0; width: 34px; height: 34px; display: grid; place-items: center; font-size: 0; } .deals-go::after { content: "→"; font-size: 18px; } }
+@media (min-width: 900px) { .deals-banner { max-width: 680px; text-align: left; } }

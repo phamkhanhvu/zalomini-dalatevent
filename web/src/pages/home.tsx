@@ -17,6 +17,7 @@ import f2 from "../static/img/md-dem-nhac-acoustic.jpg";
 import f3 from "../static/img/md-cho-dem.jpg";
 import logoImg from "../static/img/dalatevent-logo.png";
 import passportSmall from "../static/img/passport-160.webp";
+import { DealsBanner } from "../components/deals-banner";
 
 
 const HomePage: FC = () => {
@@ -64,6 +65,7 @@ const HomePage: FC = () => {
             <IconPin size={22} /><span>Mở bản đồ</span>
           </button>
         </div>
+        <DealsBanner />
       </header>
 
       <Agenda onOpenProgram={openProgram} />

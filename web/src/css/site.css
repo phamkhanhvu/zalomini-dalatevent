@@ -361,3 +361,9 @@ div.ag-row { text-align: left; }
 @keyframes fab-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @media (min-width: 900px) { .fab-wrap { right: 24px; bottom: 24px; } }
 .shell-main > .scroll { padding-bottom: 80px; }
+
+/* Ảnh hộ chiếu */
+.pass-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pass-art { flex: none; width: 104px; height: auto; margin: 44px 4px 0 0; transform: rotate(4deg); filter: drop-shadow(0 6px 10px rgba(27, 20, 64, 0.18)); }
+.pass-card-art { flex: none; width: 56px; height: auto; transform: rotate(-6deg); filter: drop-shadow(0 3px 6px rgba(27, 20, 64, 0.18)); }
+@media (min-width: 900px) { .pass-art { width: 150px; margin: 0 80px 0 0; } }

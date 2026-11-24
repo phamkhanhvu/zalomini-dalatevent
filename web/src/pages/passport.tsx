@@ -10,6 +10,7 @@ import { shareText } from "../utils/device";
 import { catalogue, GRACE_MS, RADIUS_M, StampDef, stampHere } from "../utils/passport";
 import { SHARE_FAIL } from "../utils/platform";
 import { addStamps, useStamps } from "../utils/stamps";
+import passportImg from "../static/img/passport-560.webp";
 
 const meters = (m: number) => (m >= 1000 ? (m / 1000).toFixed(m >= 10000 ? 0 : 1).replace(".", ",") + " km" : m + " m");
 const initials = (s: string) => s.split(/\s+/).filter((w) => /^[\p{L}\p{N}]/u.test(w)).slice(0, 2).map((w) => w[0].toUpperCase()).join("");
@@ -90,8 +91,13 @@ const PassportPage: FC = () => {
   return (
     <div className="scroll page">
       <header className="top">
-        <p className="eyebrow">Sưu tập dấu mộc</p>
-        <h1 className="h1">Hộ chiếu <em>Đà Lạt</em></h1>
+        <div className="pass-head">
+          <div>
+            <p className="eyebrow">Sưu tập dấu mộc</p>
+            <h1 className="h1">Hộ chiếu <em>Đà Lạt</em></h1>
+          </div>
+          <img className="pass-art" src={passportImg} alt="" width={112} height={141} />
+        </div>
         <p className="muted">Đến một địa điểm hoặc dự một chương trình, bấm Đóng dấu để ghi lại. Cần cho phép định vị; vị trí chỉ dùng trên máy bạn để kiểm tra khoảng cách, không được gửi đi.</p>
         <div className="pass-bar" role="img" aria-label={`Đã có ${have} trên ${defs.length} dấu`}>
           <span style={{ width: (defs.length ? (have / defs.length) * 100 : 0) + "%" }} />

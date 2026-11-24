@@ -16,6 +16,7 @@ import f1 from "../static/img/md-vuon-hoa.jpg";
 import f2 from "../static/img/md-dem-nhac-acoustic.jpg";
 import f3 from "../static/img/md-cho-dem.jpg";
 import logoImg from "../static/img/dalatevent-logo.png";
+import passportSmall from "../static/img/passport-160.webp";
 
 
 const HomePage: FC = () => {
@@ -69,7 +70,7 @@ const HomePage: FC = () => {
 
       <section className="sec">
         <button type="button" className="pass-card" onClick={() => navigate("/ho-chieu")}>
-          <span className="stamp-mark" aria-hidden="true">ĐL</span>
+          <img className="pass-card-art" src={passportSmall} alt="" width={56} height={70} />
           <span className="pass-card-text"><b>Hộ chiếu Đà Lạt</b><i>Đến nơi, đóng dấu, sưu tập đủ bộ dấu mộc của các địa điểm và chương trình.</i></span>
           <IconArrow size={20} />
         </button>

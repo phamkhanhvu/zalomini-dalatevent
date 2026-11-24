@@ -24,7 +24,7 @@ jobs:
       # Team ID không phải bí mật (có sẵn trong mọi app đã ký), nên ghi thẳng ở đây
       APPLE_TEAM_ID: LHRS82G34C
       ASC_KEY_ID: ${{ secrets.ASC_KEY_ID || vars.ASC_KEY_ID || '42RU4QN633' }}
-      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID || vars.ASC_ISSUER_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID || vars.ASC_ISSUER_ID || 'e2b50f6b-b197-4dad-a991-a8c60868a27f' }}
       ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
       APP_VERSION: ${{ inputs.version }}
     steps:

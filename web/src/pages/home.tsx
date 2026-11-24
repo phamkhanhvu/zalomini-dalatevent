@@ -18,6 +18,7 @@ import f3 from "../static/img/md-cho-dem.jpg";
 import logoImg from "../static/img/dalatevent-logo.png";
 import passportSmall from "../static/img/passport-160.webp";
 import { DealsBanner } from "../components/deals-banner";
+import { WeatherCard } from "../components/weather-card";
 
 
 const HomePage: FC = () => {
@@ -66,6 +67,7 @@ const HomePage: FC = () => {
           </button>
         </div>
         <DealsBanner />
+        <WeatherCard />
       </header>
 
       <Agenda onOpenProgram={openProgram} />

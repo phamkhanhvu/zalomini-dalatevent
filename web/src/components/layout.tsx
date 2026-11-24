@@ -13,6 +13,7 @@ import PlacePage from "../pages/place";
 import PassportPage from "../pages/passport";
 import AssistantPage from "../pages/assistant";
 import DealsPage from "../pages/deals";
+import WeatherPage from "../pages/weather";
 
 // Trang quản trị chỉ vài người dùng: tách thành tệp riêng, khách thường không phải tải
 const AdminPage = React.lazy(() => import("../pages/admin"));
@@ -68,6 +69,7 @@ export const Layout: FC = () => {
         <Route path="/ho-chieu" element={<PassportPage />} />
         <Route path="/tro-ly" element={<AssistantPage />} />
         <Route path="/uu-dai" element={<DealsPage />} />
+        <Route path="/thoi-tiet" element={<WeatherPage />} />
         <Route path="/quan-tri" element={<React.Suspense fallback={<p className="muted pad">Đang tải…</p>}><AdminPage /></React.Suspense>} />
         <Route path="*" element={<HomePage />} />
       </Routes>

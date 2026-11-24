@@ -1,5 +1,7 @@
 # Đưa DalatEvent lên App Store
 
+Tài khoản Apple Developer: cá nhân, nhóm Pham Hoang Khanh Vu, Team ID `LHRS82G34C`, có hiệu lực đến 24.11.2027 (đã ghi sẵn trong workflow và dự án Xcode).
+
 Trạng thái ngày 23.11.2026: app dựng và chạy được trên máy ảo iPhone trong GitHub Actions (có ảnh chụp ở artifact `ios-may-ao-anh-chup` của workflow "Web và app iOS"). CHƯA ký, CHƯA lên TestFlight vì chưa có tài khoản Apple Developer. Workflow phát hành `.github/workflows/ios-release.yml` đã viết sẵn nhưng CHƯA chạy thử lần nào.
 
 Mã định danh app: `vn.sensegroup.dalatevent`. Chỉ cho iPhone, iOS 15 trở lên, màn hình dọc.
@@ -8,8 +10,7 @@ Mã định danh app: `vn.sensegroup.dalatevent`. Chỉ cho iPhone, iOS 15 trở
 1. **Đăng ký Apple Developer Program** (99 USD/năm) tại https://developer.apple.com/programs/enroll/ . Nên đăng ký dưới tên công ty (cần mã D-U-N-S) để tên người bán trên App Store là Sense Group; đăng ký cá nhân nhanh hơn nhưng tên người bán là tên cá nhân.
 2. **Tạo app trong App Store Connect**: https://appstoreconnect.apple.com → Apps → dấu cộng → New App. Platform iOS, Name `DalatEvent`, Primary language Vietnamese, Bundle ID `vn.sensegroup.dalatevent` (nếu chưa có trong danh sách: developer.apple.com → Identifiers → dấu cộng → App IDs → nhập đúng mã này), SKU `dalatevent`.
 3. **Tạo khóa API**: App Store Connect → Users and Access → Integrations → App Store Connect API → dấu cộng. Name `GitHub`, Access `Admin` (cần mức này để máy dựng tự tạo chứng chỉ ký). Tải tệp `.p8` về (chỉ tải được một lần), ghi lại Key ID và Issuer ID.
-4. **Đặt 4 secret** tại https://github.com/phamkhanhvu/zalomini-dalatevent/settings/secrets/actions (New repository secret):
-   - `APPLE_TEAM_ID`: 10 ký tự, xem ở developer.apple.com → Account → Membership details.
+4. **Đặt 3 secret** tại https://github.com/phamkhanhvu/zalomini-dalatevent/settings/secrets/actions (New repository secret):
    - `ASC_KEY_ID`, `ASC_ISSUER_ID`: từ bước 3.
    - `ASC_KEY_P8`: mở tệp `.p8` bằng trình soạn văn bản, chép toàn bộ (cả dòng BEGIN và END).
    Không gửi các giá trị này qua chat hay email.

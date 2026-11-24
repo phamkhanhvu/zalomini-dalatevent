@@ -1,12 +1,12 @@
 # Đóng gói app iOS có ký và đưa lên TestFlight. Chỉ chạy khi chủ dự án bấm "Run workflow".
-# Cần tài khoản Apple Developer và 4 giá trị do chủ dự án tự đặt trong
+# Tài khoản Apple Developer: nhóm Pham Hoang Khanh Vu, Team ID LHRS82G34C (đã kích hoạt 24.11.2026).
+# Cần 3 giá trị do chủ dự án tự đặt trong
 # GitHub → Settings → Secrets and variables → Actions → Secrets (không gửi qua chat, không ghi vào mã nguồn):
-#   APPLE_TEAM_ID        Mã nhóm 10 ký tự (developer.apple.com → Membership details)
 #   ASC_KEY_ID           Key ID của khóa App Store Connect API
 #   ASC_ISSUER_ID        Issuer ID của khóa đó
 #   ASC_KEY_P8           Toàn bộ nội dung tệp AuthKey_XXXX.p8
 # Chi tiết từng bước: docs/ios-release.md
-# CHƯA chạy thử lần nào (chưa có tài khoản Apple Developer).
+# CHƯA chạy thử lần nào.
 name: Đưa app iOS lên TestFlight
 
 on:
@@ -21,15 +21,16 @@ jobs:
   testflight:
     runs-on: macos-26
     env:
-      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      # Team ID không phải bí mật (có sẵn trong mọi app đã ký), nên ghi thẳng ở đây
+      APPLE_TEAM_ID: LHRS82G34C
       ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
       ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
       ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
       APP_VERSION: ${{ inputs.version }}
     steps:
-      - name: Kiểm tra đã đặt đủ 4 giá trị bí mật
+      - name: Kiểm tra đã đặt đủ 3 giá trị bí mật
         run: |
-          for v in APPLE_TEAM_ID ASC_KEY_ID ASC_ISSUER_ID ASC_KEY_P8; do
+          for v in ASC_KEY_ID ASC_ISSUER_ID ASC_KEY_P8; do
             if [ -z "${!v}" ]; then echo "::error::Chưa đặt secret $v. Xem docs/ios-release.md"; exit 1; fi
           done
           echo "$APP_VERSION" | grep -Eq '^[0-9]+(\.[0-9]+){1,2}$' || { echo "::error::Số phiên bản phải có dạng 1.0 hoặc 1.0.1"; exit 1; }

@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 /**
  * Bộ thành phần giao diện dùng chung: thanh điều hướng, bảng trượt, thông báo ngắn.
  */
@@ -87,7 +88,8 @@ interface SheetProps {
 }
 export const Sheet: FC<SheetProps> = ({ visible, onClose, children }) => {
   const startY = useRef<number | null>(null);
-  return (
+  // Gắn thẳng vào body để luôn nằm trên thanh điều hướng và nút Trợ lý
+  return createPortal(
     <div className={"nx-sheet" + (visible ? " is-on" : "")} aria-hidden={!visible}>
       <div className="nx-sheet-mask" onClick={onClose} />
       <div
@@ -105,6 +107,7 @@ export const Sheet: FC<SheetProps> = ({ visible, onClose, children }) => {
         <button type="button" className="nx-sheet-handle" aria-label="Đóng" onClick={onClose} />
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };

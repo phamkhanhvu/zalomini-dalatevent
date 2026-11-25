@@ -42,3 +42,6 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .nx-snack, .nx-sheet-mask, .nx-sheet-panel { transition: none; }
 }
+
+/* Khi đang mở bảng trượt: ẩn nút Trợ lý nổi để không che nút bấm */
+body:has(.nx-sheet.is-on) .fab-wrap { display: none; }

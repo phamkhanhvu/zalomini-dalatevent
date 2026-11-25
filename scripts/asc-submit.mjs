@@ -98,11 +98,34 @@ Schedules can change; please check before you go.`,
 };
 const SUPPORT_URL = "https://dalatevent.com/";
 const COPYRIGHT = "© 2026 Sense Group";
-const REVIEW_NOTES = `No sign-in is needed for the main features (calendar, search, map, assistant, weather, passport).
-Sign-in is optional (Sign in with Apple, Google or email) and only syncs the user's saved plan and passport stamps across devices.
-Account deletion: tab "My plan" (Lịch trình) → tap the account strip → "Delete account" (Xóa tài khoản).
-Location is requested only when the user taps "Use my location" (Map) or "Stamp here" (Passport); it is processed on the device and never sent.
-Language: tap EN/VI at the top of any page. No in-app purchases, no ads, no tracking.`;
+const VIDEO_URL = process.env.REVIEW_VIDEO_URL || "";
+const REVIEW_NOTES = `1) SCREEN RECORDING (physical iPhone, latest iOS): ${VIDEO_URL || "(link will be added)"}
+It starts at app launch and shows browsing events, the assistant, map, passport, weather, language switch, and account registration, sign-in, sign-out and account deletion.
+
+2) PURPOSE AND AUDIENCE
+DalatEvent is a free events guide for Da Lat, Vietnam, run by Sense Group (a local Da Lat company). Audience: domestic and international visitors and residents. Problem it solves: event information in Da Lat (Flower Festival 2026, exhibitions, live music) is scattered across many sites; DalatEvent gathers it in one daily-updated, source-checked calendar and helps users plan their day.
+
+3) HOW TO USE / ACCESS
+No login is required for any core feature: Home (Today / Tonight / Weekend filters, search), Festival tab, Shows tab, Map tab ("Use my location" is optional), assistant (pink "Assistant" button: type e.g. "Saturday, two people, live music"), Weather & cloud forecast (strip on Home), Da Lat Passport (stamps only work within 300 m of a venue), Dalat Deals (offers from partners; currently none published).
+Account is optional and only syncs the saved plan and passport stamps across devices. To test: tap "Sign in" (top right) → "Sign up" tab → create an account with any email and a 6+ character password, or use Sign in with Apple / Google.
+Account deletion: "My plan" tab → tap the account strip → "Delete account" → confirm. This deletes the account and all its data.
+Language: tap EN / VI at the top of any page.
+There is no user-generated content shared with other users (a user's plan is private; a plan share link only contains the user's own list). No paid content, no in-app purchases, no ads, no tracking.
+
+4) EXTERNAL SERVICES
+- Firebase Authentication and Cloud Firestore (Google): optional accounts and plan sync.
+- Sign in with Apple, Google Sign-In.
+- GitHub (raw.githubusercontent.com): hosts the public event data files, updated daily by our team.
+- Open-Meteo (api.open-meteo.com): weather forecast for central Da Lat (no user location sent).
+- Google Maps: embedded maps and directions links.
+- OpenStreetMap: venue coordinates.
+No AI services, no payment processors.
+
+5) REGIONS
+The app works the same in all regions. Content is about Da Lat, Vietnam, in Vietnamese and English. Not distributed in mainland China.
+
+6) REGULATED INDUSTRY / THIRD-PARTY MATERIAL
+Not a regulated industry. Event information is factual schedule data checked against public official sources (festival portal, venue websites) with links back to them. Images in the app are Sense Group's own illustrations.`;
 
 /* ---------- Các bước ---------- */
 async function main() {

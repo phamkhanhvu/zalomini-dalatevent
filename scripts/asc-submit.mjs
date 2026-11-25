@@ -289,18 +289,34 @@ async function main() {
 
   // 9. Gửi duyệt
   let sub;
-  try {
-    sub = (await api("POST", `/v1/reviewSubmissions`, { data: { type: "reviewSubmissions", attributes: { platform: "IOS" }, relationships: { app: { data: { type: "apps", id: app.id } } } } })).data;
-  } catch (e) {
-    // Đã có lần nộp đang mở (chờ nộp, hoặc bị trả về cần bổ sung): dùng lại lần nộp đó
-    const open = await api("GET", `/v1/reviewSubmissions?filter[app]=${app.id}&filter[platform]=IOS&filter[state]=UNRESOLVED_ISSUES,READY_FOR_REVIEW`);
-    sub = open.data[0];
-    if (!sub) throw e;
+  // Tìm các lần nộp đang mở, kèm danh sách mục bên trong
+  const open = await api("GET", `/v1/reviewSubmissions?filter[app]=${app.id}&filter[platform]=IOS&filter[state]=UNRESOLVED_ISSUES,READY_FOR_REVIEW,WAITING_FOR_REVIEW&include=items&limit=20`);
+  const items = open.included || [];
+  const itemsOf = (s) => (s.relationships?.items?.data || []).map((r) => items.find((i) => i.id === r.id)).filter(Boolean);
+  for (const s of open.data) console.log("  lần nộp", s.id, s.attributes.state, "mục:", itemsOf(s).map((i) => i.attributes.state).join(",") || "(trống)");
+  sub = open.data.find((s) => s.attributes.state === "UNRESOLVED_ISSUES") || open.data.find((s) => itemsOf(s).length) || open.data[0];
+  // Huỷ các lần nộp rỗng thừa
+  for (const s of open.data) {
+    if (s.id !== sub?.id && s.attributes.state === "READY_FOR_REVIEW" && !itemsOf(s).length) {
+      try { await api("PATCH", `/v1/reviewSubmissions/${s.id}`, { data: { type: "reviewSubmissions", id: s.id, attributes: { canceled: true } } }); console.log("  đã huỷ lần nộp rỗng", s.id); } catch (e) { console.log("  không huỷ được", s.id, e.message); }
+    }
   }
-  try {
-    await api("POST", `/v1/reviewSubmissionItems`, { data: { type: "reviewSubmissionItems", relationships: { reviewSubmission: { data: { type: "reviewSubmissions", id: sub.id } }, appStoreVersion: { data: { type: "appStoreVersions", id: ver.id } } } } });
-  } catch (e) {
-    if (e.status !== 409) throw e;
+  if (!sub) sub = (await api("POST", `/v1/reviewSubmissions`, { data: { type: "reviewSubmissions", attributes: { platform: "IOS" }, relationships: { app: { data: { type: "apps", id: app.id } } } } })).data;
+  console.log("  dùng lần nộp", sub.id, sub.attributes.state);
+  const mine = itemsOf(sub);
+  // Mục bị trả về: đánh dấu đã xử lý
+  for (const it of mine) {
+    if (it.attributes.state !== "READY_FOR_REVIEW") {
+      try { await api("PATCH", `/v1/reviewSubmissionItems/${it.id}`, { data: { type: "reviewSubmissionItems", id: it.id, attributes: { resolved: true } } }); console.log("  mục", it.id, "→ resolved"); } catch (e) { console.log("  mục", it.id, e.message); }
+    }
+  }
+  if (!mine.length) {
+    try {
+      await api("POST", `/v1/reviewSubmissionItems`, { data: { type: "reviewSubmissionItems", relationships: { reviewSubmission: { data: { type: "reviewSubmissions", id: sub.id } }, appStoreVersion: { data: { type: "appStoreVersions", id: ver.id } } } } });
+      console.log("  đã thêm phiên bản vào lần nộp");
+    } catch (e) {
+      console.log("  thêm mục lỗi:", e.message);
+    }
   }
   await api("PATCH", `/v1/reviewSubmissions/${sub.id}`, { data: { type: "reviewSubmissions", id: sub.id, attributes: { submitted: true } } });
   console.log("\nĐÃ GỬI DUYỆT phiên bản " + VERSION + " (build " + build.attributes.version + ").");

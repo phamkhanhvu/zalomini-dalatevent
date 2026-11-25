@@ -137,7 +137,7 @@ async function main() {
   // Câu dạng mức độ ghi "NONE", câu có/không ghi false. Câu chưa rõ kiểu: thử "NONE", API báo sai kiểu thì đổi sang false.
   try {
     const decl = await api("GET", `/v1/appInfos/${info.id}/ageRatingDeclaration`);
-    const SKIP = /^(kidsAgeBand|ageRatingOverride.*|koreaAgeRatingOverride|developerAgeRatingInfoUrl)$/;
+    const SKIP = /^(kidsAgeBand|ageRatingOverride.*|koreaAgeRatingOverride|developerAgeRatingInfoUrl|.*[Cc]lassification.*|.*Url)$/;
     const attrs = {};
     for (const [k, v] of Object.entries(decl.data.attributes || {})) {
       if (SKIP.test(k)) continue;
@@ -192,8 +192,26 @@ async function main() {
     });
     log("Vùng phát hành:", terr.length, "nước (trừ Trung Quốc đại lục)");
   } catch (e) {
-    if (e.status === 409) log("Vùng phát hành đã đặt trước đó");
-    else warn("Chưa đặt được vùng phát hành qua API:\n" + e.message);
+    if (e.status !== 409) warn("Chưa đặt được vùng phát hành qua API:\n" + e.message);
+    else {
+      // Đã đặt trước đó: chỉ cần chắc Trung Quốc đại lục đang tắt
+      try {
+        const av = await api("GET", `/v1/apps/${app.id}/appAvailabilityV2`);
+        let next = `/v2/appAvailabilities/${av.data.id}/territoryAvailabilities?limit=200&include=territory`;
+        let chn = null;
+        while (next && !chn) {
+          const r = await api("GET", next);
+          chn = r.data.find((t) => t.relationships?.territory?.data?.id === "CHN") || null;
+          next = r.links && r.links.next;
+        }
+        if (chn && chn.attributes.available) {
+          await api("PATCH", `/v1/territoryAvailabilities/${chn.id}`, { data: { type: "territoryAvailabilities", id: chn.id, attributes: { available: false } } });
+          log("Vùng phát hành: đã tắt Trung Quốc đại lục");
+        } else log("Vùng phát hành đã đặt, Trung Quốc đại lục đang tắt");
+      } catch (e2) {
+        warn("Không kiểm tra được vùng phát hành Trung Quốc:\n" + e2.message);
+      }
+    }
   }
 
   // 6. Phiên bản: bản quyền, phát hành ngay sau khi duyệt, gắn bản build
@@ -231,10 +249,15 @@ async function main() {
   } catch (e) {
     rd = null;
   }
+  const hasContact = !!(c.contactEmail && c.contactPhone && c.contactFirstName && c.contactLastName);
   if (rd) await api("PATCH", `/v1/appStoreReviewDetails/${rd.id}`, { data: { type: "appStoreReviewDetails", id: rd.id, attributes: reviewAttrs } });
-  else await api("POST", `/v1/appStoreReviewDetails`, { data: { type: "appStoreReviewDetails", attributes: reviewAttrs, relationships: { appStoreVersion: { data: { type: "appStoreVersions", id: ver.id } } } } });
-  log("Thông tin cho người duyệt" + (c.contactEmail && c.contactPhone ? "" : " (CHƯA có liên hệ: cần tên, số điện thoại, email)"));
-  if (!(c.contactEmail && c.contactPhone && c.contactFirstName && c.contactLastName)) warn("Thiếu thông tin liên hệ cho người duyệt (App Review Information).");
+  else if (!hasContact) {
+    warn("Thiếu thông tin liên hệ cho người duyệt (tên, họ, số điện thoại dạng +84…, email).");
+    if (MODE === "submit") throw new Error("Không gửi duyệt được khi thiếu thông tin liên hệ cho người duyệt");
+    console.log("\nĐã chuẩn bị xong phần còn lại, CHƯA gửi duyệt.");
+    return;
+  } else await api("POST", `/v1/appStoreReviewDetails`, { data: { type: "appStoreReviewDetails", attributes: reviewAttrs, relationships: { appStoreVersion: { data: { type: "appStoreVersions", id: ver.id } } } } });
+  log("Thông tin cho người duyệt");
 
   if (MODE !== "submit") {
     console.log("\nĐã chuẩn bị xong, CHƯA gửi duyệt. Việc còn lại trên web: App Privacy (nhãn quyền riêng tư).");

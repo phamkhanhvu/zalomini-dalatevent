@@ -292,7 +292,8 @@ async function main() {
   try {
     sub = (await api("POST", `/v1/reviewSubmissions`, { data: { type: "reviewSubmissions", attributes: { platform: "IOS" }, relationships: { app: { data: { type: "apps", id: app.id } } } } })).data;
   } catch (e) {
-    const open = await api("GET", `/v1/reviewSubmissions?filter[app]=${app.id}&filter[platform]=IOS&filter[state]=READY_FOR_REVIEW`);
+    // Đã có lần nộp đang mở (chờ nộp, hoặc bị trả về cần bổ sung): dùng lại lần nộp đó
+    const open = await api("GET", `/v1/reviewSubmissions?filter[app]=${app.id}&filter[platform]=IOS&filter[state]=UNRESOLVED_ISSUES,READY_FOR_REVIEW`);
     sub = open.data[0];
     if (!sub) throw e;
   }

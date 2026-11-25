@@ -17,6 +17,18 @@ on:
         description: "Số bản build (trống = mới nhất)"
         required: false
         default: ""
+      contact_first:
+        description: "Tên người liên hệ cho người duyệt Apple"
+        required: false
+        default: ""
+      contact_last:
+        description: "Họ người liên hệ"
+        required: false
+        default: ""
+      contact_phone:
+        description: "Số điện thoại dạng +84 ..."
+        required: false
+        default: ""
 
 jobs:
   asc:
@@ -29,9 +41,9 @@ jobs:
       APP_VERSION: ${{ inputs.version }}
       BUILD_NUMBER: ${{ inputs.build }}
       # Liên hệ cho người duyệt của Apple: chủ dự án đặt trong Settings → Secrets and variables → Actions → Variables
-      CONTACT_FIRST: ${{ vars.REVIEW_CONTACT_FIRST }}
-      CONTACT_LAST: ${{ vars.REVIEW_CONTACT_LAST }}
-      CONTACT_PHONE: ${{ vars.REVIEW_CONTACT_PHONE }}
+      CONTACT_FIRST: ${{ inputs.contact_first || vars.REVIEW_CONTACT_FIRST }}
+      CONTACT_LAST: ${{ inputs.contact_last || vars.REVIEW_CONTACT_LAST }}
+      CONTACT_PHONE: ${{ inputs.contact_phone || vars.REVIEW_CONTACT_PHONE }}
       CONTACT_EMAIL: ${{ vars.REVIEW_CONTACT_EMAIL || vars.CONTACT_EMAIL }}
     steps:
       - uses: actions/checkout@v4

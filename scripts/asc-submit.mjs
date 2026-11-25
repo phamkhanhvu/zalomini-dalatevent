@@ -209,7 +209,7 @@ async function main() {
           log("Vùng phát hành: đã tắt Trung Quốc đại lục");
         } else log("Vùng phát hành đã đặt, Trung Quốc đại lục đang tắt");
       } catch (e2) {
-        warn("Không kiểm tra được vùng phát hành Trung Quốc:\n" + e2.message);
+        warn("Chưa đặt được vùng phát hành:\n" + e.message + "\n" + e2.message);
       }
     }
   }

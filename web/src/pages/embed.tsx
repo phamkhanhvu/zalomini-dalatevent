@@ -7,6 +7,7 @@ import { programLink } from "../components/program-sheet";
 import { itemsAt, listPlaces } from "../utils/places";
 import { getData } from "../data/store";
 import { Kind, UPCOMING_DAYS, upcomingOnly, vnDate, vnDayMonth, vnTime, vnMidnight } from "../utils/agenda";
+import { tr } from "../i18n";
 
 const KINDS: Kind[] = ["festival", "event", "show"];
 
@@ -38,9 +39,9 @@ const EmbedPage: FC = () => {
 
   return (
     <div className="embed">
-      <p className="embed-head">{placeName ? "Sắp diễn ra tại " + placeName : "Sắp diễn ra tại Đà Lạt"}</p>
+      <p className="embed-head">{tr("Sắp diễn ra tại ", "Coming up in ") + (placeName || tr("Đà Lạt", "Da Lat"))}</p>
       {list.length === 0 ? (
-        <p className="embed-empty">Chưa có sự kiện nào trong {UPCOMING_DAYS} ngày tới.</p>
+        <p className="embed-empty">{tr(`Chưa có sự kiện nào trong ${UPCOMING_DAYS} ngày tới.`, `Nothing listed in the next ${UPCOMING_DAYS} days.`)}</p>
       ) : (
         <ul className="embed-list">
           {list.map((it) => {
@@ -48,15 +49,15 @@ const EmbedPage: FC = () => {
             return (
               <li key={it.key}>
                 <a href={href} target="_blank" rel="noopener noreferrer">
-                  <span className="embed-when"><b>{vnDayMonth(it.start)}</b><i>{it.allDay ? (vnDate(it.start) === vnDate(it.end) ? "cả ngày" : "đến " + vnDayMonth(it.end)) : vnTime(it.start)}</i></span>
-                  <span className="embed-body"><b>{it.title}</b><i>{it.venue}{it.tentative ? " · dự kiến" : ""}</i></span>
+                  <span className="embed-when"><b>{vnDayMonth(it.start)}</b><i>{it.allDay ? (vnDate(it.start) === vnDate(it.end) ? tr("cả ngày", "all day") : tr("đến ", "until ") + vnDayMonth(it.end)) : vnTime(it.start)}</i></span>
+                  <span className="embed-body"><b>{it.title}</b><i>{it.venue}{it.tentative ? tr(" · dự kiến", " · tentative") : ""}</i></span>
                 </a>
               </li>
             );
           })}
         </ul>
       )}
-      <a className="embed-foot" href={FESTIVAL.website} target="_blank" rel="noopener noreferrer">Xem đầy đủ trên DalatEvent.com →</a>
+      <a className="embed-foot" href={FESTIVAL.website} target="_blank" rel="noopener noreferrer">{tr("Xem đầy đủ trên DalatEvent.com →", "See everything on DalatEvent.com →")}</a>
     </div>
   );
 };

@@ -6,6 +6,7 @@
 import type { Auth, User } from "firebase/auth";
 import type { Firestore } from "firebase/firestore/lite";
 import { registerPlugin } from "@capacitor/core";
+import { tr } from "../i18n";
 import { IS_NATIVE, storage } from "../utils/device";
 import { readPlan, replacePlan } from "../utils/plan";
 import { readSaved, replaceSaved, SAVED_EVENT } from "../utils/saved";
@@ -58,25 +59,25 @@ let loading: Promise<void> | null = null;
 let applying = false;
 let timer = 0;
 
-const ERRORS: Record<string, string> = {
-  "auth/invalid-email": "Email chưa đúng định dạng.",
-  "auth/invalid-credential": "Email hoặc mật khẩu chưa đúng.",
-  "auth/wrong-password": "Email hoặc mật khẩu chưa đúng.",
-  "auth/user-not-found": "Chưa có tài khoản với email này.",
-  "auth/email-already-in-use": "Email này đã có tài khoản. Hãy đăng nhập.",
-  "auth/weak-password": "Mật khẩu cần ít nhất 6 ký tự.",
-  "auth/too-many-requests": "Thử quá nhiều lần. Hãy đợi vài phút rồi thử lại.",
-  "auth/network-request-failed": "Mất kết nối mạng. Hãy thử lại.",
-  "auth/popup-closed-by-user": "",
-  "auth/user-mismatch": "Tài khoản vừa chọn không trùng với tài khoản đang đăng nhập.",
-  "auth/requires-recent-login": "Cần xác nhận lại danh tính. Hãy thử lại.",
-  "auth/missing-password": "Hãy nhập mật khẩu.",
-  "auth/missing-email": "Hãy nhập email trước.",
-  "auth/cancelled-popup-request": "",
+const ERRORS: Record<string, [string, string]> = {
+  "auth/invalid-email": ["Email chưa đúng định dạng.", "That email address isn't valid."],
+  "auth/invalid-credential": ["Email hoặc mật khẩu chưa đúng.", "Wrong email or password."],
+  "auth/wrong-password": ["Email hoặc mật khẩu chưa đúng.", "Wrong email or password."],
+  "auth/user-not-found": ["Chưa có tài khoản với email này.", "No account with this email."],
+  "auth/email-already-in-use": ["Email này đã có tài khoản. Hãy đăng nhập.", "This email already has an account. Please sign in."],
+  "auth/weak-password": ["Mật khẩu cần ít nhất 6 ký tự.", "Password needs at least 6 characters."],
+  "auth/too-many-requests": ["Thử quá nhiều lần. Hãy đợi vài phút rồi thử lại.", "Too many attempts. Wait a few minutes and try again."],
+  "auth/network-request-failed": ["Mất kết nối mạng. Hãy thử lại.", "Network connection lost. Please try again."],
+  "auth/popup-closed-by-user": ["", ""],
+  "auth/user-mismatch": ["Tài khoản vừa chọn không trùng với tài khoản đang đăng nhập.", "The account you chose doesn't match the signed-in account."],
+  "auth/requires-recent-login": ["Cần xác nhận lại danh tính. Hãy thử lại.", "Please confirm it's you and try again."],
+  "auth/missing-password": ["Hãy nhập mật khẩu.", "Please enter your password."],
+  "auth/missing-email": ["Hãy nhập email trước.", "Please enter your email first."],
+  "auth/cancelled-popup-request": ["", ""],
 };
 const message = (e: unknown) => {
   const code = (e as { code?: string })?.code || "";
-  return code in ERRORS ? ERRORS[code] : "Chưa làm được, hãy thử lại sau.";
+  return code in ERRORS ? tr(ERRORS[code][0], ERRORS[code][1]) : tr("Chưa làm được, hãy thử lại sau.", "That didn't work. Please try again later.");
 };
 
 const local = () => ({ programIds: readSaved(), items: readPlan() });
@@ -118,7 +119,7 @@ async function pull() {
       set({ syncing: false, syncedAt: now });
     }
   } catch (e) {
-    set({ syncing: false, error: "Chưa đồng bộ được. Lịch trình vẫn nằm trên máy này." });
+    set({ syncing: false, error: tr("Chưa đồng bộ được. Lịch trình vẫn nằm trên máy này.", "Couldn't sync. Your plan is still on this device.") });
   }
 }
 
@@ -133,7 +134,7 @@ async function push() {
     writeMeta({ uid, dirty: false, syncedAt: now });
     set({ syncing: false, syncedAt: now });
   } catch (e) {
-    set({ syncing: false, error: "Chưa đồng bộ được. Sẽ thử lại khi bạn mở lại trang." });
+    set({ syncing: false, error: tr("Chưa đồng bộ được. Sẽ thử lại khi bạn mở lại trang.", "Couldn't sync. We'll retry when you reopen the page.") });
   }
 }
 
@@ -172,7 +173,7 @@ export function loadAccount(): Promise<void> {
       });
     } catch (e) {
       loading = null;
-      set({ status: "off", error: "Chưa tải được phần tài khoản. Hãy kiểm tra mạng rồi thử lại." });
+      set({ status: "off", error: tr("Chưa tải được phần tài khoản. Hãy kiểm tra mạng rồi thử lại.", "Couldn't load accounts. Check your connection and try again.") });
     }
   })();
   return loading;
@@ -257,7 +258,7 @@ export async function wipeCloud(): Promise<boolean> {
     const { doc, deleteDoc } = await import("firebase/firestore/lite");
     await deleteDoc(doc(db, "plans", user.uid));
   } catch (e) {
-    set({ error: "Chưa xóa được bản trên tài khoản. Hãy thử lại." });
+    set({ error: tr("Chưa xóa được bản trên tài khoản. Hãy thử lại.", "Couldn't delete the account copy. Please try again.") });
     return false;
   }
   await signOutAccount();
@@ -291,7 +292,7 @@ export async function deleteAccount(password: string): Promise<boolean> {
     const m = await import("firebase/auth");
     const need = deleteNeeds();
     if (need === "web-only") {
-      set({ error: "Tài khoản này cần xóa trong app DalatEvent trên iPhone (mục Lịch trình)." });
+      set({ error: tr("Tài khoản này cần xóa trong app DalatEvent trên iPhone (mục Lịch trình).", "This account must be deleted in the DalatEvent iPhone app (My plan).") });
       return false;
     }
     if (need === "password") await m.reauthenticateWithCredential(u, m.EmailAuthProvider.credential(u.email || "", password));
@@ -302,7 +303,7 @@ export async function deleteAccount(password: string): Promise<boolean> {
     try {
       await Promise.all(["plans", "saves", "board"].map((c) => deleteDoc(doc(db!, c, uid))));
     } catch (e) {
-      set({ error: "Chưa xóa được dữ liệu nên tài khoản vẫn được giữ nguyên. Hãy kiểm tra mạng rồi thử lại." });
+      set({ error: tr("Chưa xóa được dữ liệu nên tài khoản vẫn được giữ nguyên. Hãy kiểm tra mạng rồi thử lại.", "Couldn't delete your data, so the account was kept. Check your connection and try again.") });
       return false;
     }
     // Dữ liệu thời gian thực của trò chơi: cố gắng xóa, không chặn việc xóa tài khoản nếu lỗi

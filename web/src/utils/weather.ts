@@ -5,6 +5,8 @@
  * Không dùng gì của trình duyệt để chạy được trong kiểm thử tự động.
  */
 
+import { tr } from "../i18n.ts";
+
 export const DALAT = { lat: 11.9404, lon: 108.4583 };
 
 export function forecastUrl(days = 7): string {
@@ -117,32 +119,33 @@ export function cloudMorning(hours: Hour[], date: string): CloudMorning | null {
 
   let score = 0;
   const reasons: string[] = [];
-  if (rh >= 95) { score += 35; reasons.push("độ ẩm rất cao"); }
-  else if (rh >= 90) { score += 25; reasons.push("độ ẩm cao"); }
+  if (rh >= 95) { score += 35; reasons.push(tr("độ ẩm rất cao", "very humid")); }
+  else if (rh >= 90) { score += 25; reasons.push(tr("độ ẩm cao", "humid")); }
   else if (rh >= 85) score += 10;
-  else reasons.push("không khí khá khô");
+  else reasons.push(tr("không khí khá khô", "fairly dry air"));
 
   if (spread <= 1) score += 15;
   else if (spread <= 2) score += 8;
 
-  if (wind <= 8) { score += 15; reasons.push("lặng gió"); }
+  if (wind <= 8) { score += 15; reasons.push(tr("lặng gió", "calm wind")); }
   else if (wind <= 14) score += 7;
-  else if (wind > 20) { score -= 10; reasons.push("gió mạnh"); }
+  else if (wind > 20) { score -= 10; reasons.push(tr("gió mạnh", "strong wind")); }
 
   if (low >= 60) score += 10;
 
-  if (upper <= 30) { score += 15; reasons.push("trời phía trên quang"); }
-  else if (upper >= 70) { score -= 10; reasons.push("mây dày phía trên, khó thấy bình minh"); }
+  if (upper <= 30) { score += 15; reasons.push(tr("trời phía trên quang", "clear sky above")); }
+  else if (upper >= 70) { score -= 10; reasons.push(tr("mây dày phía trên, khó thấy bình minh", "thick cloud above, sunrise hard to see")); }
 
-  if (rainNow > 0.5) { score -= 25; reasons.push("có mưa lúc sáng sớm"); }
-  if (rainBefore >= 1) { score += 10; reasons.push("chiều tối hôm trước có mưa"); }
+  if (rainNow > 0.5) { score -= 25; reasons.push(tr("có mưa lúc sáng sớm", "rain at dawn")); }
+  if (rainBefore >= 1) { score += 10; reasons.push(tr("chiều tối hôm trước có mưa", "rain the evening before")); }
 
   score = Math.max(0, Math.min(100, Math.round(score)));
   const level: CloudLevel = score >= 70 ? "cao" : score >= 50 ? "kha" : score >= 30 ? "thap" : "kho";
   return { score, level, reasons };
 }
 
-export const CLOUD_LABEL: Record<CloudLevel, string> = { cao: "Nhiều khả năng có mây", kha: "Có thể có mây", thap: "Ít khả năng", kho: "Khó có mây" };
+const CLOUD_TEXT: Record<CloudLevel, [string, string]> = { cao: ["Nhiều khả năng có mây", "Clouds likely"], kha: ["Có thể có mây", "Clouds possible"], thap: ["Ít khả năng", "Unlikely"], kho: ["Khó có mây", "Very unlikely"] };
+export const cloudLabel = (l: CloudLevel) => tr(CLOUD_TEXT[l][0], CLOUD_TEXT[l][1]);
 
 export type Afternoon = "indoor" | "raincoat" | "free";
 export interface AfternoonAdvice {
@@ -160,19 +163,20 @@ export function afternoon(hours: Hour[], date: string): AfternoonAdvice | null {
   const kind: Afternoon = thunder || pop >= 70 || rain >= 5 ? "indoor" : pop >= 40 || rain >= 1 ? "raincoat" : "free";
   return { kind, pop, thunder };
 }
-export const AFTERNOON_LABEL: Record<Afternoon, string> = { indoor: "Chiều nên ở trong nhà", raincoat: "Chiều mang theo áo mưa", free: "Chiều đi chơi thoải mái" };
+const AFTER_TEXT: Record<Afternoon, [string, string]> = { indoor: ["Chiều nên ở trong nhà", "Stay indoors this afternoon"], raincoat: ["Chiều mang theo áo mưa", "Bring a raincoat this afternoon"], free: ["Chiều đi chơi thoải mái", "Fine afternoon for going out"] };
+export const afternoonLabel = (k: Afternoon) => tr(AFTER_TEXT[k][0], AFTER_TEXT[k][1]);
 
 /** Mô tả ngắn theo mã thời tiết WMO */
 export function codeLabel(code: number): string {
-  if (code === 0) return "Trời quang";
-  if (code <= 2) return "Ít mây";
-  if (code === 3) return "Nhiều mây";
-  if (code === 45 || code === 48) return "Sương mù";
-  if (code >= 51 && code <= 57) return "Mưa phùn";
-  if (code >= 61 && code <= 67) return "Mưa";
-  if (code >= 80 && code <= 82) return "Mưa rào";
-  if (code >= 95) return "Dông";
-  return "Nhiều mây";
+  if (code === 0) return tr("Trời quang", "Clear");
+  if (code <= 2) return tr("Ít mây", "Partly cloudy");
+  if (code === 3) return tr("Nhiều mây", "Cloudy");
+  if (code === 45 || code === 48) return tr("Sương mù", "Fog");
+  if (code >= 51 && code <= 57) return tr("Mưa phùn", "Drizzle");
+  if (code >= 61 && code <= 67) return tr("Mưa", "Rain");
+  if (code >= 80 && code <= 82) return tr("Mưa rào", "Showers");
+  if (code >= 95) return tr("Dông", "Thunderstorms");
+  return tr("Nhiều mây", "Cloudy");
 }
 
 export interface DayPlan {

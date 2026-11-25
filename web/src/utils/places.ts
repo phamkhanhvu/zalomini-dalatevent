@@ -4,6 +4,7 @@
  */
 import type { AgendaItem } from "./agenda.ts";
 import { fold } from "./search.ts";
+import { loc } from "../i18n.ts";
 
 export interface PlaceInfo {
   /** Mã trong link, ví dụ f-lam-vien, s-may-lang-thang-1 */
@@ -25,10 +26,10 @@ interface InStage { id: string; name: string; places?: { label: string; name: st
 interface InEvent { id: string; venue_id: string | null; venue_ids?: string[] }
 
 export function listPlaces(venues: InVenue[], stages: InStage[]): PlaceInfo[] {
-  const out: PlaceInfo[] = venues.map((v) => ({ id: "f-" + v.id, kind: "festival", name: v.name, mapQuery: v.map_query, lat: v.lat, lng: v.lng }));
+  const out: PlaceInfo[] = venues.map((v) => ({ id: "f-" + v.id, kind: "festival", name: loc(v, "name"), mapQuery: v.map_query, lat: v.lat, lng: v.lng }));
   for (const st of stages) {
     const places = st.places && st.places.length ? st.places : [{ label: "", name: st.name, map_query: st.name + ", Đà Lạt", lat: null, lng: null }];
-    places.forEach((pl, i) => out.push({ id: "s-" + st.id + "-" + i, kind: "show", name: pl.name, mapQuery: pl.map_query, lat: pl.lat, lng: pl.lng, stageId: st.id, stageName: st.name, placeLabel: pl.label, only: places.length === 1 }));
+    places.forEach((pl, i) => out.push({ id: "s-" + st.id + "-" + i, kind: "show", name: loc(pl, "name"), mapQuery: pl.map_query, lat: pl.lat, lng: pl.lng, stageId: st.id, stageName: loc(st, "name"), placeLabel: pl.label, only: places.length === 1 }));
   }
   return out;
 }

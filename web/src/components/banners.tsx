@@ -19,6 +19,7 @@ import san_anhL from "../static/img/bn-san-anh-1280.jpg";
 import san_anhS from "../static/img/bn-san-anh-720.jpg";
 import hoang_honL from "../static/img/bn-hoang-hon-1280.jpg";
 import hoang_honS from "../static/img/bn-hoang-hon-720.jpg";
+import { tr } from "../i18n";
 
 /** Banner "Đà Lạt có gì vui?" do chủ dự án cung cấp ngày 23.11.2026 (ảnh minh họa, chữ nằm sẵn trong ảnh) */
 const BANNERS = [
@@ -63,7 +64,7 @@ export const Banners: FC = () => {
     };
   }, []);
   return (
-    <div className="bn" role="region" aria-roledescription="băng chuyền" aria-label="Đà Lạt có gì vui?">
+    <div className="bn" role="region" aria-roledescription={tr("băng chuyền", "carousel")} aria-label={tr("Đà Lạt có gì vui?", "What's on in Da Lat?")}>
       <div
         className="bn-track"
         ref={box}

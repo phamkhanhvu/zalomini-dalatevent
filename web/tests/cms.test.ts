@@ -5,7 +5,14 @@ import fs from "node:fs";
 import { applyCms, vnIso } from "../../scripts/cms-apply.mjs";
 
 const load = (f: string) => JSON.parse(fs.readFileSync(new URL("../../data/" + f, import.meta.url), "utf8"));
-const current = () => ({ events: load("events.json"), shows: load("shows.json"), happening: load("happening.json") });
+// Dữ liệu repo đổi mỗi sáng: đặt mốc cập nhật về trước NOW để kiểm thử không phụ thuộc ngày chạy
+const current = () => {
+  const happening = load("happening.json");
+  happening.updated_at = "2026-11-23T05:50:00+07:00";
+  happening.updated_label = "23.11.2026";
+  happening.items = happening.items.filter((x: { manual?: boolean }) => !x.manual);
+  return { events: load("events.json"), shows: load("shows.json"), happening };
+};
 const NOW = Date.parse("2026-11-24T09:15:00+07:00");
 // Mặc định: lưu lúc 09:00 ngày 24.11, sau mọi mốc cập nhật đang có trong repo
 const SAVED = Date.parse("2026-11-24T09:00:00+07:00");

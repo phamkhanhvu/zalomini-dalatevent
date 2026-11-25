@@ -5,6 +5,7 @@
  */
 import { addDays, DAY_MS, vnDate, vnMidnight, vnWeekday, windowOf } from "./agenda.ts";
 import type { AgendaItem } from "./agenda.ts";
+import { tr, wdLong } from "../i18n.ts";
 
 /** Bỏ dấu, viết thường, gom khoảng trắng */
 export function fold(s: string): string {
@@ -30,7 +31,8 @@ const WEEKDAY_WORDS: [RegExp, number][] = [
   [/\bthu (sau|6)\b/, 5],
   [/\bthu (bay|7)\b/, 6],
 ];
-const WEEKDAY_NAMES = ["Chủ nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
+const WEEKDAY_EN: [RegExp, number][] = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"].map((w, i) => [new RegExp("\\b" + w + "\\b"), i]);
+const MONTHS_EN = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
 const dmy = (d: string) => d.slice(8, 10) + "." + d.slice(5, 7) + "." + d.slice(0, 4);
 
 /**
@@ -61,19 +63,22 @@ export function parseDateQuery(query: string, now: number): DateQuery | null {
     q = q.replace(re, " ").replace(/\s+/g, " ").trim();
     return true;
   };
-  if (take(/\b(toi nay|dem nay)\b/)) return { ...windowOf("tonight", now), rest: q };
-  if (take(/\bhom nay\b/)) return { ...windowOf("today", now), rest: q };
-  if (take(/\b(ngay mai|toi mai|mai)\b/)) return { ...windowOf("tomorrow", now), rest: q };
-  if (take(/\bcuoi tuan\b/)) return { ...windowOf("weekend", now), rest: q };
-  for (const [re, wd] of WEEKDAY_WORDS) {
+  if (take(/\b(toi nay|dem nay|tonight)\b/)) return { ...windowOf("tonight", now), rest: q };
+  if (take(/\b(hom nay|today)\b/)) return { ...windowOf("today", now), rest: q };
+  if (take(/\b(ngay mai|toi mai|mai|tomorrow)\b/)) return { ...windowOf("tomorrow", now), rest: q };
+  if (take(/\b(cuoi tuan|this weekend|weekend)\b/)) return { ...windowOf("weekend", now), rest: q };
+  for (const [re, wd] of [...WEEKDAY_WORDS, ...WEEKDAY_EN]) {
     if (take(re)) {
       const today = vnDate(now);
       const delta = (wd - vnWeekday(now) + 7) % 7; // hôm nay đúng thứ đó thì lấy hôm nay
       const d = addDays(today, delta);
       const from = vnMidnight(d);
-      return { from, to: from + DAY_MS, label: WEEKDAY_NAMES[wd] + " " + dmy(d), rest: q };
+      return { from, to: from + DAY_MS, label: wdLong(wd) + " " + dmy(d), rest: q };
     }
   }
+  // "may" trùng chữ "mây" khi bỏ dấu nên không nhận tháng 5 bằng tiếng Anh
+  const en = MONTHS_EN.findIndex((m) => m !== "may" && new RegExp("\\b" + m + "\\b").test(q));
+  if (en >= 0) q = q.replace(new RegExp("\\b" + MONTHS_EN[en] + "\\b"), "thang " + (en + 1));
   const mo = q.match(/\bthang (\d{1,2})\b/);
   if (mo && +mo[1] >= 1 && +mo[1] <= 12) {
     const today = vnDate(now);
@@ -83,7 +88,7 @@ export function parseDateQuery(query: string, now: number): DateQuery | null {
     const from = vnMidnight(`${y}-${mm}-01`);
     const next = +mo[1] === 12 ? `${y + 1}-01-01` : `${y}-${String(+mo[1] + 1).padStart(2, "0")}-01`;
     q = q.replace(mo[0], " ").replace(/\s+/g, " ").trim();
-    return { from, to: vnMidnight(next), label: "Tháng " + +mo[1] + "." + y, rest: q };
+    return { from, to: vnMidnight(next), label: tr("Tháng " + +mo[1] + "." + y, MONTHS_EN[+mo[1] - 1].replace(/^./, (c) => c.toUpperCase()) + " " + y), rest: q };
   }
   return null;
 }

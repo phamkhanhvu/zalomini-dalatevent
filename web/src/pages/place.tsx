@@ -10,7 +10,8 @@ import { IconArrow, IconPhone, IconRoute, IconShare } from "../components/icons"
 import { vnDate, vnMidnight } from "../utils/agenda";
 import { callPhone, openDirections, openUrl, shareText } from "../utils/device";
 import { itemsAt, listPlaces } from "../utils/places";
-import { SHARE_FAIL } from "../utils/platform";
+import { shareFail } from "../utils/platform";
+import { loc, tr } from "../i18n";
 
 const DAYS = 60;
 export const placeLink = (id: string) => FESTIVAL.website + "#/dia-diem/" + encodeURIComponent(id);
@@ -55,9 +56,9 @@ const PlacePage: FC = () => {
     return (
       <div className="page page-col">
         <div className="empty">
-          <h2>Không tìm thấy địa điểm này</h2>
-          <p>Link có thể đã cũ. Xem tất cả địa điểm trên bản đồ.</p>
-          <button type="button" className="btn btn-ink" onClick={() => navigate("/ban-do")}>Mở bản đồ <IconArrow size={20} /></button>
+          <h2>{tr("Không tìm thấy địa điểm này", "Place not found")}</h2>
+          <p>{tr("Link có thể đã cũ. Xem tất cả địa điểm trên bản đồ.", "The link may be outdated. See all places on the map.")}</p>
+          <button type="button" className="btn btn-ink" onClick={() => navigate("/ban-do")}>{tr("Mở bản đồ", "Open map")} <IconArrow size={20} /></button>
         </div>
       </div>
     );
@@ -80,54 +81,54 @@ const PlacePage: FC = () => {
   return (
     <div className="scroll page">
       <header className="top">
-        <p className="eyebrow">{place.kind === "show" ? "Điểm diễn show" + (stage && stage.name !== place.name ? " · " + stage.name : "") : "Địa điểm " + FESTIVAL.name}</p>
+        <p className="eyebrow">{place.kind === "show" ? tr("Điểm diễn show", "Show venue") + (stage && stage.name !== place.name ? " · " + loc(stage, "name") : "") : tr("Địa điểm ", "Venue · ") + FESTIVAL.name}</p>
         <h1 className="h1">{place.name}</h1>
-        {stage && <p className="muted">{stage.intro}</p>}
-        {stage?.address && <p className="muted small">{stage.address}</p>}
+        {stage && <p className="muted">{loc(stage, "intro")}</p>}
+        {stage?.address && <p className="muted small">{loc(stage, "address")}</p>}
         <div className="ps-actions">
-          <button type="button" className="btn btn-ink" onClick={() => openDirections(dest)}><IconRoute size={20} />Chỉ đường</button>
+          <button type="button" className="btn btn-ink" onClick={() => openDirections(dest)}><IconRoute size={20} />{tr("Chỉ đường", "Directions")}</button>
           {stage?.phone && <button type="button" className="btn btn-line" onClick={() => callPhone(stage.phone!)}><IconPhone size={20} />{stage.phone_label}</button>}
           <button
             type="button"
             className="btn btn-line"
             onClick={async () => {
-              const ok = await shareText(`${place.name}: xem những gì sắp diễn ra tại đây ${link}`, place.name);
-              if (!ok) openSnackbar({ text: SHARE_FAIL, duration: 2200 });
+              const ok = await shareText(tr(`${place.name}: xem những gì sắp diễn ra tại đây ${link}`, `${place.name}: see what's coming up here ${link}`), place.name);
+              if (!ok) openSnackbar({ text: shareFail(), duration: 2200 });
             }}
           >
-            <IconShare size={20} />Chia sẻ
+            <IconShare size={20} />{tr("Chia sẻ", "Share")}
           </button>
-          {typeof place.lat === "number" && <button type="button" className="btn btn-line" onClick={() => navigate("/ho-chieu")}>Đóng dấu hộ chiếu</button>}
-          <button type="button" className="btn btn-line" aria-expanded={showQr} onClick={toggleQr}>{showQr ? "Ẩn mã QR" : "Mã QR"}</button>
+          {typeof place.lat === "number" && <button type="button" className="btn btn-line" onClick={() => navigate("/ho-chieu")}>{tr("Đóng dấu hộ chiếu", "Get a passport stamp")}</button>}
+          <button type="button" className="btn btn-line" aria-expanded={showQr} onClick={toggleQr}>{showQr ? tr("Ẩn mã QR", "Hide QR") : tr("Mã QR", "QR code")}</button>
         </div>
         {showQr && qr && (
           <div className="ps-qr">
-            <img src={qr} alt={"Mã QR mở trang " + place.name} width={200} height={200} />
-            <p>Quét để xem lịch tại {place.name} trên DalatEvent.</p>
-            <a className="btn btn-line" href={qr} download={"dalatevent-" + place.id + "-qr.png"}>Tải ảnh QR</a>
+            <img src={qr} alt={tr("Mã QR mở trang ", "QR code for ") + place.name} width={200} height={200} />
+            <p>{tr("Quét để xem lịch tại ", "Scan to see the schedule at ")}{place.name}{tr(" trên DalatEvent.", " on DalatEvent.")}</p>
+            <a className="btn btn-line" href={qr} download={"dalatevent-" + place.id + "-qr.png"}>{tr("Tải ảnh QR", "Download QR")}</a>
           </div>
         )}
       </header>
 
       <section className="sec">
-        <h2 className="h2">Sắp diễn ra <em>tại đây</em></h2>
+        <h2 className="h2">{tr("Sắp diễn ra ", "Coming up ")}<em>{tr("tại đây", "here")}</em></h2>
         {items.length === 0 ? (
           <div className="ag-empty">
-            <b>Chưa có lịch nào trong {DAYS} ngày tới.</b>
-            {stage && <span>Xem trang của điểm diễn để biết lịch mới nhất.</span>}
+            <b>{tr(`Chưa có lịch nào trong ${DAYS} ngày tới.`, `Nothing listed in the next ${DAYS} days.`)}</b>
+            {stage && <span>{tr("Xem trang của điểm diễn để biết lịch mới nhất.", "See the venue's page for the latest schedule.")}</span>}
           </div>
         ) : (
           <ul className="ag-list">
             {items.map((it) => <AgendaRow key={it.key} it={it} showDate now={now} onOpenProgram={openProgram} />)}
           </ul>
         )}
-        {stage && <button type="button" className="btn btn-line" onClick={() => openUrl(stage.source_url)}>Trang của {stage.name} <IconArrow size={18} /></button>}
+        {stage && <button type="button" className="btn btn-line" onClick={() => openUrl(stage.source_url)}>{tr("Trang của ", "")}{loc(stage, "name")}{tr("", " website")} <IconArrow size={18} /></button>}
       </section>
 
       <section className="sec">
-        <h2 className="h2">Bản đồ</h2>
-        <iframe className="mapframe" title={"Bản đồ: " + place.name} src={mapSrc} loading="lazy" referrerPolicy="no-referrer" allowFullScreen />
-        <p className="muted small">{typeof place.lat === "number" ? "Bản đồ do Google Maps cung cấp." : "Chưa có tọa độ chính xác, bản đồ tìm theo tên địa điểm. Bản đồ do Google Maps cung cấp."}</p>
+        <h2 className="h2">{tr("Bản đồ", "Map")}</h2>
+        <iframe className="mapframe" title={tr("Bản đồ: ", "Map: ") + place.name} src={mapSrc} loading="lazy" referrerPolicy="no-referrer" allowFullScreen />
+        <p className="muted small">{typeof place.lat === "number" ? tr("Bản đồ do Google Maps cung cấp.", "Map by Google Maps.") : tr("Chưa có tọa độ chính xác, bản đồ tìm theo tên địa điểm. Bản đồ do Google Maps cung cấp.", "No exact coordinates yet; the map searches by name. Map by Google Maps.")}</p>
       </section>
       {sheet}
     </div>

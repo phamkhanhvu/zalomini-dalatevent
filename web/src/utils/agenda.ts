@@ -3,6 +3,7 @@
  * Mọi phép tính ngày giờ đều theo giờ Việt Nam (UTC+7, không đổi giờ mùa), không phụ thuộc múi giờ của máy.
  * File này không dùng gì của trình duyệt để chạy được trong kiểm thử tự động.
  */
+import { loc, tr } from "../i18n.ts";
 
 export const VN_OFFSET_MS = 7 * 3600000;
 export const DAY_MS = 86400000;
@@ -74,15 +75,15 @@ export interface Window { from: number; to: number; label: string }
 export function windowOf(preset: Preset, now: number, pickedDate?: string): Window {
   const today = vnDate(now);
   const t0 = vnMidnight(today);
-  if (preset === "today") return { from: t0, to: t0 + DAY_MS, label: "Hôm nay" };
-  if (preset === "tonight") return { from: t0 + EVENING_HOUR * 3600000, to: t0 + DAY_MS, label: "Tối nay" };
-  if (preset === "tomorrow") return { from: t0 + DAY_MS, to: t0 + 2 * DAY_MS, label: "Ngày mai" };
-  if (preset === "upcoming") return { from: t0 + DAY_MS, to: t0 + (UPCOMING_DAYS + 1) * DAY_MS, label: "Sắp diễn ra" };
+  if (preset === "today") return { from: t0, to: t0 + DAY_MS, label: tr("Hôm nay", "Today") };
+  if (preset === "tonight") return { from: t0 + EVENING_HOUR * 3600000, to: t0 + DAY_MS, label: tr("Tối nay", "Tonight") };
+  if (preset === "tomorrow") return { from: t0 + DAY_MS, to: t0 + 2 * DAY_MS, label: tr("Ngày mai", "Tomorrow") };
+  if (preset === "upcoming") return { from: t0 + DAY_MS, to: t0 + (UPCOMING_DAYS + 1) * DAY_MS, label: tr("Sắp diễn ra", "Coming up") };
   if (preset === "weekend") {
     const wd = vnWeekday(now);
     // Thứ Bảy và Chủ nhật của tuần này; nếu hôm nay là Chủ nhật thì chỉ còn hôm nay
     const sat = wd === 0 ? t0 - DAY_MS : t0 + (6 - wd) * DAY_MS;
-    return { from: Math.max(sat, t0), to: sat + 2 * DAY_MS, label: "Cuối tuần" };
+    return { from: Math.max(sat, t0), to: sat + 2 * DAY_MS, label: tr("Cuối tuần", "This weekend") };
   }
   const d = pickedDate && /^\d{4}-\d{2}-\d{2}$/.test(pickedDate) ? pickedDate : today;
   const m = vnMidnight(d);
@@ -90,15 +91,19 @@ export function windowOf(preset: Preset, now: number, pickedDate?: string): Wind
 }
 
 /* ---------- Dựng danh sách ---------- */
-const CAT_LABEL: Record<string, string> = {
-  "le-hoi": "Lễ hội",
-  "am-nhac": "Âm nhạc",
-  "trien-lam": "Triển lãm",
-  "khong-gian-hoa": "Không gian hoa",
-  "hoi-thao-the-thao": "Hội thảo và thể thao",
-  "the-thao": "Thể thao",
-  workshop: "Workshop",
-  khac: "Sự kiện",
+const CAT_LABEL: Record<string, [string, string]> = {
+  "le-hoi": ["Lễ hội", "Festival"],
+  "am-nhac": ["Âm nhạc", "Music"],
+  "trien-lam": ["Triển lãm", "Exhibition"],
+  "khong-gian-hoa": ["Không gian hoa", "Flower space"],
+  "hoi-thao-the-thao": ["Hội thảo và thể thao", "Talks & sports"],
+  "the-thao": ["Thể thao", "Sports"],
+  workshop: ["Workshop", "Workshop"],
+  khac: ["Sự kiện", "Event"],
+};
+const catLabel = (c: string) => {
+  const l = CAT_LABEL[c] || CAT_LABEL.khac;
+  return tr(l[0], l[1]);
 };
 /** Show chỉ công bố giờ bắt đầu: coi như kéo dài 2 tiếng khi cần so khoảng thời gian */
 const SHOW_LENGTH_MS = 2 * 3600000;
@@ -122,7 +127,7 @@ export function buildAgenda(events: InEvent[], stages: InStage[], from: number, 
     const start = vnMidnight(h.start_date);
     const end = vnMidnight(h.end_date) + DAY_MS - 60000;
     if (!(start < to && end >= from)) return;
-    out.push({ key: "h:" + i + ":" + h.start_date, kind: "event", title: h.title, label: "Sự kiện", venue: h.venue || "Đà Lạt", start, end, allDay: true, status: "published", desc: h.desc });
+    out.push({ key: "h:" + i + ":" + h.start_date, kind: "event", title: loc(h, "title"), label: tr("Sự kiện", "Event"), venue: loc(h, "venue") || tr("Đà Lạt", "Da Lat"), start, end, allDay: true, status: "published", desc: loc(h, "desc") });
   });
   for (const e of events) {
     if (e.status !== "published" && e.status !== "postponed") continue; // nháp, chờ duyệt, đã hủy, đã xong: không hiện
@@ -133,10 +138,10 @@ export function buildAgenda(events: InEvent[], stages: InStage[], from: number, 
       out.push({
         key: e.id + ":" + i,
         kind: e.series ? "festival" : "event",
-        title: e.title,
-        desc: e.description || undefined,
-        label: CAT_LABEL[e.category] || "Sự kiện",
-        venue: e.venue_name,
+        title: loc(e, "title"),
+        desc: loc(e, "description") || undefined,
+        label: catLabel(e.category),
+        venue: loc(e, "venue_name"),
         start,
         end,
         allDay: s.all_day,
@@ -157,9 +162,9 @@ export function buildAgenda(events: InEvent[], stages: InStage[], from: number, 
       out.push({
         key: st.id + ":" + date + ":" + n,
         kind: "show",
-        title: it.title,
-        label: st.name,
-        venue: it.place || st.name,
+        title: loc(it, "title"),
+        label: loc(st, "name"),
+        venue: loc(it, "place") || loc(st, "name"),
         start,
         end: vnMidnight(date) + e,
         allDay: false,

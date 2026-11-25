@@ -52,6 +52,12 @@ export function validate(doc, shows, hap) {
     if (e.venue_id && !venueIds.has(e.venue_id)) err(`${at}: venue_id "${e.venue_id}" không tồn tại`);
     for (const v of e.venue_ids || []) if (!venueIds.has(v)) err(`${at}: venue_ids có "${v}" không tồn tại`);
     if (!e.venue_id && !e.venue_name) err(`${at}: cần venue_id hoặc venue_name`);
+    // Bản tiếng Anh (tùy chọn): nếu có thì phải là chữ thường, không có thẻ HTML
+    for (const k of ["title_en", "description_en", "venue_name_en", "note_en"]) {
+      if (e[k] === undefined || e[k] === null) continue;
+      if (typeof e[k] !== "string") err(`${at}: ${k} phải là chữ`);
+      else if (/[<>]/.test(e[k])) err(`${at}: ${k} không được chứa thẻ HTML`);
+    }
     if (typeof e.tentative !== "boolean") err(`${at}: tentative phải là true hoặc false`);
     if (!Array.isArray(e.sessions) || !e.sessions.length) err(`${at}: cần ít nhất một suất trong sessions`);
     for (const [i, s] of (e.sessions || []).entries()) {
@@ -117,7 +123,8 @@ export function validate(doc, shows, hap) {
     for (const [i, it] of (hap.items || []).entries()) {
       for (const k of ["when", "title", "desc"]) if (!it[k] || typeof it[k] !== "string") err(`happening.json mục ${i + 1}: thiếu ${k}`);
       if (it.manual !== undefined && typeof it.manual !== "boolean") err(`happening.json mục ${i + 1}: manual phải là true hoặc false`);
-      if (/[<>]/.test((it.title || "") + (it.desc || "") + (it.when || "") + (it.venue || ""))) err(`happening.json mục ${i + 1}: không được chứa thẻ HTML`);
+      if (/[<>]/.test((it.title || "") + (it.desc || "") + (it.when || "") + (it.venue || "") + (it.title_en || "") + (it.desc_en || "") + (it.venue_en || ""))) err(`happening.json mục ${i + 1}: không được chứa thẻ HTML`);
+      for (const k of ["title_en", "desc_en", "venue_en"]) if (it[k] !== undefined && typeof it[k] !== "string") err(`happening.json mục ${i + 1}: ${k} phải là chữ`);
       if (!DATE.test(it.start_date || "") || !DATE.test(it.end_date || "")) err(`happening.json mục ${i + 1}: cần start_date và end_date dạng 2026-11-23`);
       else if (it.end_date < it.start_date) err(`happening.json mục ${i + 1}: end_date trước start_date`);
       if (it.venue !== undefined && typeof it.venue !== "string") err(`happening.json mục ${i + 1}: venue phải là chữ`);

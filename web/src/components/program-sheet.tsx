@@ -9,6 +9,7 @@ import { openDirections, shareText } from "../utils/device";
 import { statusOf } from "../utils/time";
 import { catOf } from "./program-card";
 import { IconBookmark, IconPin, IconRoute, IconShare } from "./icons";
+import { tr } from "../i18n";
 
 /** Link mở thẳng một chương trình */
 export const programLink = (id: string) => FESTIVAL.website + "#/chuong-trinh?xem=" + encodeURIComponent(id);
@@ -50,12 +51,12 @@ export const ProgramSheet: FC<Props> = ({ program, saved, onClose, onToggleSave,
         <div className="ps">
           <div className="ps-head" style={{ background: cat.tint }}>
             <span className="ps-day" style={{ color: cat.color }}>{p.day}</span>
-            <span className="ps-sub">{p.sub}{p.tentative ? " · dự kiến" : ""}</span>
+            <span className="ps-sub">{p.sub}{p.tentative ? tr(" · dự kiến", " · tentative") : ""}</span>
           </div>
           <div className="pc-tags">
             <span className="chip" style={{ color: cat.color }}>{cat.label}</span>
-            {status === "live" && <span className="chip chip-live">Đang diễn ra</span>}
-            {status === "ended" && <span className="chip chip-muted">Đã kết thúc</span>}
+            {status === "live" && <span className="chip chip-live">{tr("Đang diễn ra", "Live now")}</span>}
+            {status === "ended" && <span className="chip chip-muted">{tr("Đã kết thúc", "Ended")}</span>}
           </div>
           <h2 className="ps-title">{p.title}</h2>
           <p className="ps-desc">{p.desc}</p>
@@ -66,16 +67,16 @@ export const ProgramSheet: FC<Props> = ({ program, saved, onClose, onToggleSave,
           )}
           {p.note && <p className="ps-note">{p.note}</p>}
           {p.tentative && !p.note && (
-            <p className="ps-note">Lịch dự kiến, có thể thay đổi. Vui lòng kiểm tra lại trước khi đến.</p>
+            <p className="ps-note">{tr("Lịch dự kiến, có thể thay đổi. Vui lòng kiểm tra lại trước khi đến.", "Tentative schedule, subject to change. Please check before you go.")}</p>
           )}
           <div className="ps-actions">
             <button type="button" className={"btn " + (saved ? "btn-soft" : "btn-ink")} onClick={() => onToggleSave(p)}>
               <IconBookmark size={20} filled={saved} />
-              {saved ? "Đã lưu" : "Lưu chương trình"}
+              {saved ? tr("Đã lưu", "Saved") : tr("Lưu chương trình", "Save")}
             </button>
             {p.mapQuery && (
               <button type="button" className="btn btn-line" onClick={() => openDirections(p.mapQuery!)}>
-                <IconRoute size={20} />Chỉ đường
+                <IconRoute size={20} />{tr("Chỉ đường", "Directions")}
               </button>
             )}
             <button
@@ -83,26 +84,26 @@ export const ProgramSheet: FC<Props> = ({ program, saved, onClose, onToggleSave,
               className="btn btn-line"
               onClick={async () => {
                 const ok = await shareText(
-                  `${p.title} — ${p.day}${p.sub ? ", " + p.sub : ""} tại ${p.venue}. Xem chi tiết: ${programLink(p.id)}`,
+                  tr(`${p.title} — ${p.day}${p.sub ? ", " + p.sub : ""} tại ${p.venue}. Xem chi tiết: ${programLink(p.id)}`, `${p.title} — ${p.day}${p.sub ? ", " + p.sub : ""} at ${p.venue}. Details: ${programLink(p.id)}`),
                   FESTIVAL.name + " " + FESTIVAL.edition
                 );
                 onShared?.(ok);
               }}
             >
-              <IconShare size={20} />Chia sẻ
+              <IconShare size={20} />{tr("Chia sẻ", "Share")}
             </button>
             <button type="button" className="btn btn-line" aria-expanded={showQr} onClick={toggleQr}>
-              {showQr ? "Ẩn mã QR" : "Mã QR"}
+              {showQr ? tr("Ẩn mã QR", "Hide QR") : tr("Mã QR", "QR code")}
             </button>
           </div>
           {CONTACT_EMAIL && (
-            <a className="ps-report" href={mailto("Báo sai thông tin: " + p.title, "Chương trình: " + p.title + "\nLink: " + programLink(p.id) + "\n\nThông tin sai hoặc thiếu:\n\nNguồn đúng (nếu có):\n")}>Thông tin chưa đúng? Báo cho DalatEvent</a>
+            <a className="ps-report" href={mailto("Báo sai thông tin: " + p.title, "Chương trình: " + p.title + "\nLink: " + programLink(p.id) + "\n\nThông tin sai hoặc thiếu:\n\nNguồn đúng (nếu có):\n")}>{tr("Thông tin chưa đúng? Báo cho DalatEvent", "Something wrong? Tell DalatEvent")}</a>
           )}
           {showQr && qr && (
             <div className="ps-qr">
-              <img src={qr} alt={"Mã QR mở chương trình " + p.title} width={200} height={200} />
-              <p>Quét để mở chương trình này trên DalatEvent.</p>
-              <a className="btn btn-line" href={qr} download={"dalatevent-" + p.id + "-qr.png"}>Tải ảnh QR</a>
+              <img src={qr} alt={tr("Mã QR mở chương trình ", "QR code for ") + p.title} width={200} height={200} />
+              <p>{tr("Quét để mở chương trình này trên DalatEvent.", "Scan to open this programme on DalatEvent.")}</p>
+              <a className="btn btn-line" href={qr} download={"dalatevent-" + p.id + "-qr.png"}>{tr("Tải ảnh QR", "Download QR")}</a>
             </div>
           )}
         </div>

@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { fetchPublicDeals } from "../platform/deals";
 import { Deal, dealState, visibleDeals } from "../utils/deals";
+import { tr } from "../i18n";
 
 /** Khung Dalat Deals nổi bật trên trang chủ: nói rõ đang có bao nhiêu ưu đãi mở và một ưu đãi tiêu biểu */
 export const DealsBanner: FC = () => {
@@ -28,11 +29,11 @@ export const DealsBanner: FC = () => {
         </svg>
       </span>
       <span className="deals-text">
-        <span className="deals-kicker">Dalat Deals{active.length ? " · " + active.length + " ưu đãi đang mở" : ""}</span>
-        <b>{top ? top.title : "Ưu đãi từ quán và điểm diễn đối tác"}</b>
-        <i>{top ? top.partner + (top.place ? " · " + top.place : "") : "Đăng nhập, bấm dùng, đưa mã cho nhân viên. Mỗi tài khoản một lượt."}</i>
+        <span className="deals-kicker">Dalat Deals{active.length ? " · " + active.length + tr(" ưu đãi đang mở", active.length === 1 ? " offer open" : " offers open") : ""}</span>
+        <b>{top ? top.title : tr("Ưu đãi từ quán và điểm diễn đối tác", "Offers from partner cafés and venues")}</b>
+        <i>{top ? top.partner + (top.place ? " · " + top.place : "") : tr("Đăng nhập, bấm dùng, đưa mã cho nhân viên. Mỗi tài khoản một lượt.", "Sign in, tap Use, show the code to staff. One use per account.")}</i>
       </span>
-      <span className="deals-go">Xem ưu đãi</span>
+      <span className="deals-go">{tr("Xem ưu đãi", "See offers")}</span>
     </button>
   );
 };

@@ -84,7 +84,15 @@ const HappeningEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, c
   };
   const save = () => {
     const out = items
-      .map((x) => ({ ...x, title: clean(x.title), venue: clean(x.venue || ""), desc: clean(x.desc), when: whenOf(x.start_date, x.end_date, "") }))
+      .map((x) => {
+        const o: HapItem = { ...x, title: clean(x.title), venue: clean(x.venue || ""), desc: clean(x.desc), when: whenOf(x.start_date, x.end_date, "") };
+        for (const k of ["title_en", "desc_en", "venue_en"] as const) {
+          const v = clean(o[k] || "");
+          if (v) o[k] = v;
+          else delete o[k];
+        }
+        return o;
+      })
       .sort((a, b) => a.start_date.localeCompare(b.start_date));
     const doc = { ...data.happening, items: out };
     return onSave("happening", doc, { ...data, happening: doc });
@@ -107,6 +115,12 @@ const HappeningEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, c
               </div>
               <Field label="Địa điểm"><input value={it.venue || ""} maxLength={120} onChange={(e) => set(i, { venue: e.target.value })} /></Field>
               <Field label="Mô tả (1 đến 3 câu)"><textarea rows={4} value={it.desc} maxLength={500} onChange={(e) => set(i, { desc: e.target.value })} /></Field>
+              <details className="adm-en">
+                <summary>Bản tiếng Anh (tùy chọn, để trống thì khách nước ngoài thấy bản tiếng Việt)</summary>
+                <Field label="Tên tiếng Anh"><input value={it.title_en || ""} maxLength={120} onChange={(e) => set(i, { title_en: e.target.value })} /></Field>
+                <Field label="Địa điểm tiếng Anh"><input value={it.venue_en || ""} maxLength={120} onChange={(e) => set(i, { venue_en: e.target.value })} /></Field>
+                <Field label="Mô tả tiếng Anh"><textarea rows={3} value={it.desc_en || ""} maxLength={500} onChange={(e) => set(i, { desc_en: e.target.value })} /></Field>
+              </details>
               <button type="button" className="btn btn-line adm-del" onClick={() => { if (window.confirm("Gỡ sự kiện này khỏi danh sách?")) { setItems((l) => l.filter((_, k) => k !== i)); setOpen(null); } }}>Gỡ sự kiện này</button>
             </div>
           )}
@@ -175,8 +189,9 @@ const FestivalEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, ch
     const out = events.map((e, i) => {
       // Chỉ đổi tên địa điểm khi người sửa chọn địa điểm khác; không thì giữ tên chi tiết đang có (ví dụ "Trên mặt hồ Xuân Hương")
       const venue = e.venue_id !== before[i].venue_id ? data.events.venues.find((v) => v.id === e.venue_id) : undefined;
-      const next = { ...e, title: clean(e.title), description: clean(e.description), note: e.note ? clean(e.note) : undefined, venue_name: venue ? venue.name : e.venue_name };
+      const next = { ...e, title: clean(e.title), description: clean(e.description), note: e.note ? clean(e.note) : undefined, venue_name: venue ? venue.name : e.venue_name, venue_name_en: venue ? venue.name_en : e.venue_name_en, title_en: clean(e.title_en || ""), description_en: clean(e.description_en || "") };
       if (!next.note) delete next.note;
+      for (const k of ["venue_name_en", "title_en", "description_en"] as const) if (!next[k]) delete next[k];
       return JSON.stringify(next) === JSON.stringify(before[i]) ? before[i] : { ...next, updated_at: stamp };
     });
     const doc = { ...data.events, events: out };
@@ -195,6 +210,11 @@ const FestivalEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, ch
             <div className="adm-body">
               <Field label="Tên chương trình"><input value={e.title} maxLength={160} onChange={(ev) => set(i, { title: ev.target.value })} /></Field>
               <Field label="Mô tả"><textarea rows={4} value={e.description} maxLength={800} onChange={(ev) => set(i, { description: ev.target.value })} /></Field>
+              <details className="adm-en">
+                <summary>Bản tiếng Anh (tùy chọn)</summary>
+                <Field label="Tên tiếng Anh"><input value={e.title_en || ""} maxLength={160} onChange={(ev) => set(i, { title_en: ev.target.value })} /></Field>
+                <Field label="Mô tả tiếng Anh"><textarea rows={3} value={e.description_en || ""} maxLength={800} onChange={(ev) => set(i, { description_en: ev.target.value })} /></Field>
+              </details>
               <Field label="Địa điểm">
                 <select value={e.venue_id || ""} onChange={(ev) => set(i, { venue_id: ev.target.value || null })}>
                   <option value="">(theo tên: {e.venue_name})</option>

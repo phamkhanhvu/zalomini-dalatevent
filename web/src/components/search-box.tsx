@@ -6,12 +6,13 @@ import { search, SearchPlace } from "../utils/search";
 import { listPlaces } from "../utils/places";
 import { AgendaRow, agendaFor } from "./agenda";
 import { IconPin, IconSearch } from "./icons";
+import { tr } from "../i18n";
 
-const HINTS = ["Hôm nay", "Cuối tuần", "12.12", "Jazz", "Lâm Viên"];
+const HINTS = () => [tr("Hôm nay", "Today"), tr("Cuối tuần", "Weekend"), "12.12", "Jazz", "Lâm Viên"];
 
 function places(): SearchPlace[] {
   const d = getData();
-  return listPlaces(d.events.venues, d.shows.stages).map((p) => ({ id: p.id, name: p.name, hint: p.kind === "festival" ? "Địa điểm Festival" : "Điểm diễn show" + (p.stageName && p.stageName !== p.name ? " · " + p.stageName : "") }));
+  return listPlaces(d.events.venues, d.shows.stages).map((p) => ({ id: p.id, name: p.name, hint: p.kind === "festival" ? tr("Địa điểm Festival", "Festival venue") : tr("Điểm diễn show", "Show venue") + (p.stageName && p.stageName !== p.name ? " · " + p.stageName : "") }));
 }
 
 /** Ô tìm kiếm: sự kiện, địa điểm, nghệ sĩ, hoạt động; hiểu cả ngày tháng trong câu tìm */
@@ -32,16 +33,16 @@ export const SearchBox: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenP
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Tìm sự kiện, địa điểm, nghệ sĩ, ngày…"
-          aria-label="Tìm sự kiện, địa điểm, nghệ sĩ hoặc hoạt động theo ngày"
+          placeholder={tr("Tìm sự kiện, địa điểm, nghệ sĩ, ngày…", "Search events, places, artists, dates…")}
+          aria-label={tr("Tìm sự kiện, địa điểm, nghệ sĩ hoặc hoạt động theo ngày", "Search events, places, artists or a date")}
           autoComplete="off"
           enterKeyHint="search"
         />
-        {q && <button type="button" className="search-clear" aria-label="Xóa câu tìm" onClick={() => setQ("")}>×</button>}
+        {q && <button type="button" className="search-clear" aria-label={tr("Xóa câu tìm", "Clear search")} onClick={() => setQ("")}>×</button>}
       </label>
       {!active && (
-        <div className="search-hints" aria-label="Gợi ý tìm kiếm">
-          {HINTS.map((h) => (
+        <div className="search-hints" aria-label={tr("Gợi ý tìm kiếm", "Search suggestions")}>
+          {HINTS().map((h) => (
             <button key={h} type="button" className="search-hint" onClick={() => setQ(h)}>{h}</button>
           ))}
         </div>
@@ -50,8 +51,8 @@ export const SearchBox: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenP
         <div className="search-results" aria-live="polite">
           <p className="search-meta">
             {res.empty
-              ? "Không tìm thấy kết quả. Thử tên nghệ sĩ, địa điểm, hoặc một ngày như 12.12."
-              : `${res.items.length} sự kiện${res.places.length ? ", " + res.places.length + " địa điểm" : ""}${res.date ? " · " + res.date.label : " · từ hôm nay trở đi"}`}
+              ? tr("Không tìm thấy kết quả. Thử tên nghệ sĩ, địa điểm, hoặc một ngày như 12.12.", "No results. Try an artist, a place, or a date like 12.12.")
+              : `${res.items.length} ${tr("sự kiện", res.items.length === 1 ? "event" : "events")}${res.places.length ? ", " + res.places.length + tr(" địa điểm", " places") : ""}${res.date ? " · " + res.date.label : tr(" · từ hôm nay trở đi", " · from today on")}`}
           </p>
           {res.places.length > 0 && (
             <div className="search-places">

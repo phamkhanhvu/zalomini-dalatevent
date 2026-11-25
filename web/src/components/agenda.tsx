@@ -8,18 +8,19 @@ import { useSnackbar } from "../ui";
 import { useSaved } from "../utils/saved";
 import { usePlan } from "../utils/plan";
 import { planId, toPlanItem } from "../utils/itinerary";
+import { tr } from "../i18n";
 
-const PRESETS: { id: Preset; label: string }[] = [
-  { id: "today", label: "Hôm nay" },
-  { id: "tonight", label: "Tối nay" },
-  { id: "weekend", label: "Cuối tuần" },
-  { id: "upcoming", label: "Sắp diễn ra" },
+const PRESETS = (): { id: Preset; label: string }[] => [
+  { id: "today", label: tr("Hôm nay", "Today") },
+  { id: "tonight", label: tr("Tối nay", "Tonight") },
+  { id: "weekend", label: tr("Cuối tuần", "Weekend") },
+  { id: "upcoming", label: tr("Sắp diễn ra", "Coming up") },
 ];
-const KINDS: { id: Kind | "all"; label: string }[] = [
-  { id: "all", label: "Tất cả" },
-  { id: "festival", label: "Festival Hoa" },
-  { id: "event", label: "Sự kiện khác" },
-  { id: "show", label: "Show diễn" },
+const KINDS = (): { id: Kind | "all"; label: string }[] => [
+  { id: "all", label: tr("Tất cả", "All") },
+  { id: "festival", label: tr("Festival Hoa", "Flower Festival") },
+  { id: "event", label: tr("Sự kiện khác", "Other events") },
+  { id: "show", label: tr("Show diễn", "Shows") },
 ];
 const dmy = (iso: string) => iso.slice(8, 10) + "." + iso.slice(5, 7) + "." + iso.slice(0, 4);
 
@@ -37,7 +38,7 @@ export const AgendaRow: FC<{ it: AgendaItem; showDate: boolean; now: number; onO
   const inPlan = it.programId ? saved.has(it.programId) : plan.has(planId(it));
   const togglePlan = () => {
     const on = it.programId ? saved.toggle(it.programId) : plan.toggle(toPlanItem(it));
-    openSnackbar({ text: on ? "Đã thêm vào Lịch trình" : "Đã bỏ khỏi Lịch trình", type: "success", duration: 2200 });
+    openSnackbar({ text: on ? tr("Đã thêm vào Lịch trình", "Added to My plan") : tr("Đã bỏ khỏi Lịch trình", "Removed from My plan"), type: "success", duration: 2200 });
   };
   const live = it.status === "published" && it.start <= now && now <= it.end;
   const sameDay = vnDate(it.start) === vnDate(it.end);
@@ -45,11 +46,11 @@ export const AgendaRow: FC<{ it: AgendaItem; showDate: boolean; now: number; onO
   let small: string;
   if (it.allDay) {
     const started = it.start <= now;
-    big = sameDay ? (showDate ? vnDayMonth(it.start) : "Cả ngày") : started ? "Đến" : vnDayMonth(it.start);
-    small = sameDay ? (showDate ? "cả ngày" : vnDayMonth(it.start)) : started ? vnDayMonth(it.end) : "đến " + vnDayMonth(it.end);
+    big = sameDay ? (showDate ? vnDayMonth(it.start) : tr("Cả ngày", "All day")) : started ? tr("Đến", "Until") : vnDayMonth(it.start);
+    small = sameDay ? (showDate ? tr("cả ngày", "all day") : vnDayMonth(it.start)) : started ? vnDayMonth(it.end) : tr("đến ", "until ") + vnDayMonth(it.end);
   } else {
     big = vnTime(it.start);
-    small = showDate ? vnDayMonth(it.start) : it.endEstimated ? "bắt đầu" : "đến " + vnTime(it.end);
+    small = showDate ? vnDayMonth(it.start) : it.endEstimated ? tr("bắt đầu", "starts") : tr("đến ", "until ") + vnTime(it.end);
   }
   const program = it.programId ? PROGRAMS.find((x) => x.id === it.programId) : undefined;
   const action = program ? () => onOpenProgram(program) : it.url ? () => openUrl(it.url!) : undefined;
@@ -59,14 +60,14 @@ export const AgendaRow: FC<{ it: AgendaItem; showDate: boolean; now: number; onO
       <span className="ag-body">
         <span className="pc-tags">
           <span className="chip">{it.label}</span>
-          {live && <span className="chip chip-live">Đang diễn ra</span>}
-          {it.status === "postponed" && <span className="chip chip-warn">Tạm hoãn</span>}
-          {it.tentative && <span className="chip chip-muted">Dự kiến</span>}
+          {live && <span className="chip chip-live">{tr("Đang diễn ra", "Live now")}</span>}
+          {it.status === "postponed" && <span className="chip chip-warn">{tr("Tạm hoãn", "Postponed")}</span>}
+          {it.tentative && <span className="chip chip-muted">{tr("Dự kiến", "Tentative")}</span>}
         </span>
         <span className="pc-title">{it.title}</span>
         <span className="pc-venue"><IconPin size={15} />{it.venue}</span>
         {it.kind === "event" && it.desc && <span className="ag-desc">{it.desc}</span>}
-        {it.verifiedAt && <span className="ag-src">{it.kind === "show" ? "Theo trang của điểm diễn" : "Theo cổng chính thức"}, đối chiếu {dmy(it.verifiedAt)}</span>}
+        {it.verifiedAt && <span className="ag-src">{it.kind === "show" ? tr("Theo trang của điểm diễn", "Per the venue's site") : tr("Theo cổng chính thức", "Per the official portal")}{tr(", đối chiếu ", ", checked ")}{dmy(it.verifiedAt)}</span>}
       </span>
       {action && <span className="ag-go"><IconArrow size={18} /></span>}
     </React.Fragment>
@@ -75,7 +76,7 @@ export const AgendaRow: FC<{ it: AgendaItem; showDate: boolean; now: number; onO
   return (
     <li className={"ag-item is-" + it.kind}>
       {action ? <button type="button" className={cls} onClick={action}>{body}</button> : <div className={cls}>{body}</div>}
-      <button type="button" className={"pc-save" + (inPlan ? " on" : "")} aria-label={inPlan ? "Bỏ khỏi lịch trình" : "Thêm vào lịch trình"} aria-pressed={inPlan} onClick={togglePlan}>
+      <button type="button" className={"pc-save" + (inPlan ? " on" : "")} aria-label={inPlan ? tr("Bỏ khỏi lịch trình", "Remove from My plan") : tr("Thêm vào lịch trình", "Add to My plan")} aria-pressed={inPlan} onClick={togglePlan}>
         <IconBookmark size={22} filled={inPlan} />
       </button>
     </li>
@@ -114,19 +115,19 @@ export const Agenda: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenProg
 
   return (
     <section className="sec agenda" id="dang-dien-ra" aria-labelledby="ag-h">
-      <p className="eyebrow">Giờ Việt Nam · {win.label}</p>
-      <h2 className="h2" id="ag-h">Đang diễn ra <em>tại Đà Lạt</em></h2>
-      <div className="filters" role="tablist" aria-label="Chọn ngày">
-        {PRESETS.map((p) => (
+      <p className="eyebrow">{tr("Giờ Việt Nam", "Vietnam time")} · {win.label}</p>
+      <h2 className="h2" id="ag-h">{tr("Đang diễn ra ", "Happening ")}<em>{tr("tại Đà Lạt", "in Da Lat")}</em></h2>
+      <div className="filters" role="tablist" aria-label={tr("Chọn ngày", "Pick a date")}>
+        {PRESETS().map((p) => (
           <button key={p.id} type="button" role="tab" aria-selected={preset === p.id} className={"fb" + (preset === p.id ? " on" : "")} onClick={() => setPreset(p.id)}>
             {p.label}
           </button>
         ))}
         <label className={"fb fb-date" + (preset === "date" ? " on" : "")}>
-          <span>{preset === "date" && picked ? dmy(picked) : "Chọn ngày"}</span>
+          <span>{preset === "date" && picked ? dmy(picked) : tr("Chọn ngày", "Pick a date")}</span>
           <input
             type="date"
-            aria-label="Chọn ngày"
+            aria-label={tr("Chọn ngày", "Pick a date")}
             min={today}
             value={picked}
             onChange={(e) => {
@@ -136,8 +137,8 @@ export const Agenda: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenProg
           />
         </label>
       </div>
-      <div className="filters filters-sub" role="tablist" aria-label="Lọc theo loại">
-        {KINDS.map((k) => (
+      <div className="filters filters-sub" role="tablist" aria-label={tr("Lọc theo loại", "Filter by type")}>
+        {KINDS().map((k) => (
           <button key={k.id} type="button" role="tab" aria-selected={kind === k.id} className={"fb fb-sm" + (kind === k.id ? " on" : "")} onClick={() => setKind(k.id)}>
             {k.label}
           </button>
@@ -146,8 +147,8 @@ export const Agenda: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenProg
 
       {total === 0 ? (
         <div className="ag-empty">
-          <b>Chưa có sự kiện nào trong dữ liệu cho {win.label.toLowerCase()}.</b>
-          <span>Thử chọn "Cuối tuần", "Sắp diễn ra" hoặc một ngày khác.</span>
+          <b>{tr("Chưa có sự kiện nào trong dữ liệu cho ", "Nothing listed for ")}{win.label.toLowerCase()}.</b>
+          <span>{tr("Thử chọn \"Cuối tuần\", \"Sắp diễn ra\" hoặc một ngày khác.", "Try \"Weekend\", \"Coming up\" or another date.")}</span>
         </div>
       ) : (
         <React.Fragment>
@@ -159,7 +160,7 @@ export const Agenda: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenProg
           )}
           {view.longRunning.length > 0 && (
             <React.Fragment>
-              <p className="ag-sub">Đang diễn ra dài ngày</p>
+              <p className="ag-sub">{tr("Đang diễn ra dài ngày", "Running for weeks")}</p>
               <ul className="ag-list">
                 {view.longRunning.map((it) => <AgendaRow key={it.key} it={it} showDate={showDate} now={now} onOpenProgram={onOpenProgram} />)}
               </ul>
@@ -167,7 +168,7 @@ export const Agenda: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenProg
           )}
         </React.Fragment>
       )}
-      {updated && <p className="muted small">Dữ liệu cập nhật đến ngày {updated}. Lịch có thể thay đổi, hãy kiểm tra lại trước khi đến.</p>}
+      {updated && <p className="muted small">{tr("Dữ liệu cập nhật đến ngày ", "Data updated ")}{updated}{tr(". Lịch có thể thay đổi, hãy kiểm tra lại trước khi đến.", ". Schedules can change; please check before you go.")}</p>}
     </section>
   );
 };

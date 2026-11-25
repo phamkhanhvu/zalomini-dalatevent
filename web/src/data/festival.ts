@@ -3,6 +3,7 @@
  * Muốn sửa lịch, sửa data/events.json ở gốc repo, không sửa file này.
  */
 import { EventRecord, getData, onDataChange } from "./store";
+import { loc, subscribeLang, tr } from "../i18n";
 
 export type CatId = "le" | "tl" | "kg" | "ht";
 
@@ -13,12 +14,22 @@ export interface Category {
   tint: string;
 }
 
-export const CATEGORIES: Category[] = [
-  { id: "le", label: "Lễ hội", color: "#E0218A", tint: "#FFE3F1" },
-  { id: "tl", label: "Triển lãm", color: "#7B2CBF", tint: "#EFE2FA" },
-  { id: "kg", label: "Không gian hoa", color: "#0B7A4B", tint: "#C9F2DA" },
-  { id: "ht", label: "Hội thảo và thể thao", color: "#1D5FA8", tint: "#DCEEFF" },
+const CATS_RAW: Category[] = [
+  { id: "le", label: "Lễ hội|Festival", color: "#E0218A", tint: "#FFE3F1" },
+  { id: "tl", label: "Triển lãm|Exhibition", color: "#7B2CBF", tint: "#EFE2FA" },
+  { id: "kg", label: "Không gian hoa|Flower space", color: "#0B7A4B", tint: "#C9F2DA" },
+  { id: "ht", label: "Hội thảo và thể thao|Talks & sports", color: "#1D5FA8", tint: "#DCEEFF" },
 ];
+/** Nhãn loại theo ngôn ngữ hiện tại (dữ liệu ghi "Việt|Anh") */
+export const CATEGORIES: Category[] = CATS_RAW.map((c) => ({ ...c }));
+function relabel() {
+  CATS_RAW.forEach((c, i) => {
+    const [vi, en] = c.label.split("|");
+    CATEGORIES[i].label = tr(vi, en || vi);
+  });
+}
+relabel();
+subscribeLang(relabel);
 
 const CAT_OF: Record<string, CatId> = {
   "le-hoi": "le",
@@ -82,21 +93,21 @@ function toProgram(e: EventRecord, mapQuery: string | undefined, now: number): P
   const longRunning = s.all_day && end - start > 60 * 86400000 && start <= now && now <= end;
   let sub: string;
   if (!s.all_day) sub = s.start_at.slice(11, 16);
-  else if (sameDay) sub = "trong ngày";
-  else sub = "đến " + (s.start_at.slice(0, 4) === s.end_at.slice(0, 4) ? dm(s.end_at) : dmy(s.end_at));
+  else if (sameDay) sub = tr("trong ngày", "all day");
+  else sub = tr("đến ", "until ") + (s.start_at.slice(0, 4) === s.end_at.slice(0, 4) ? dm(s.end_at) : dmy(s.end_at));
   return {
     id: e.id,
     cat: CAT_OF[e.category] || "le",
-    title: e.title,
-    desc: e.description,
-    venue: e.venue_name,
+    title: loc(e, "title"),
+    desc: loc(e, "description"),
+    venue: loc(e, "venue_name"),
     mapQuery,
     start: s.start_at,
     end: s.end_at,
-    day: longRunning ? "Từ nay" : dm(s.start_at),
+    day: longRunning ? tr("Từ nay", "Now on") : dm(s.start_at),
     sub,
     tentative: e.tentative,
-    note: e.note,
+    note: loc(e, "note") || undefined,
     sourceUrl: e.source_url || undefined,
     verifiedAt: e.verified_at || undefined,
   };
@@ -127,11 +138,11 @@ export const FESTIVAL = {
 };
 
 /** Số liệu kỳ X (2024) để giới thiệu */
-export const STATS_2024 = [
-  { value: "2 triệu", label: "lượt khách" },
-  { value: "3.600 tỷ", label: "đồng doanh thu xã hội (ước tính)" },
-  { value: "10", label: "chương trình chính" },
-  { value: "Gần 1 triệu", label: "chậu hoa trưng bày" },
+export const STATS_2024 = () => [
+  { value: tr("2 triệu", "2 million"), label: tr("lượt khách", "visitors") },
+  { value: tr("3.600 tỷ", "VND 3.6 trillion"), label: tr("đồng doanh thu xã hội (ước tính)", "in tourism revenue (estimated)") },
+  { value: "10", label: tr("chương trình chính", "main programmes") },
+  { value: tr("Gần 1 triệu", "Nearly 1 million"), label: tr("chậu hoa trưng bày", "flower pots on display") },
 ];
 
 export const PROGRAMS: Program[] = [];
@@ -154,7 +165,7 @@ export function rebuild(now = Date.now()) {
     const at = list.filter((e) => e.venue_id === v.id || (e.venue_ids || []).includes(v.id));
     if (!at.length) continue;
     const cat = CATEGORIES.find((c) => c.id === (CAT_OF[at[0].category] || "le"))!;
-    venues.push({ id: v.id, name: v.name, mapQuery: v.map_query, programs: at.map((e) => e.id), color: cat.color, lat: v.lat, lng: v.lng });
+    venues.push({ id: v.id, name: loc(v, "name"), mapQuery: v.map_query, programs: at.map((e) => e.id), color: cat.color, lat: v.lat, lng: v.lng });
   }
   VENUES.splice(0, VENUES.length, ...venues);
 
@@ -162,21 +173,22 @@ export function rebuild(now = Date.now()) {
 
   const series = events.series.find((x) => x.id === SERIES) as (typeof events.series)[number] & { edition?: string; edition_short?: string; theme?: string; place?: string; total_activities?: number } | undefined;
   const opening = list.find((e) => e.id === "khai-mac");
-  FESTIVAL.name = series ? series.name.replace(/\s+lần thứ.*$/i, "") : FESTIVAL.name;
-  FESTIVAL.edition = series?.edition || "";
-  FESTIVAL.editionShort = series?.edition_short || "";
-  FESTIVAL.theme = series?.theme || "";
-  FESTIVAL.place = series?.place || "";
+  FESTIVAL.name = series ? loc(series, "name").replace(/\s+lần thứ.*$/i, "").replace(/^(the\s+)?\d+(st|nd|rd|th)\s+/i, "") : FESTIVAL.name;
+  FESTIVAL.edition = loc(series, "edition");
+  FESTIVAL.editionShort = loc(series, "edition_short");
+  FESTIVAL.theme = loc(series, "theme");
+  FESTIVAL.place = loc(series, "place");
   FESTIVAL.totalActivities = series?.total_activities || 0;
   FESTIVAL.start = series ? series.start_at : "";
   FESTIVAL.end = series ? series.end_at : "";
   FESTIVAL.dateRange = series ? dmy(series.start_at) + " – " + dmy(series.end_at) : "";
   FESTIVAL.opening = opening ? opening.sessions[0].start_at : FESTIVAL.start;
   FESTIVAL.openingLabel = FESTIVAL.opening ? FESTIVAL.opening.slice(11, 16) + " · " + dmy(FESTIVAL.opening) : "";
-  FESTIVAL.openingVenue = opening ? opening.venue_name : "";
+  FESTIVAL.openingVenue = opening ? loc(opening, "venue_name") : "";
   FESTIVAL.openingTentative = opening ? opening.tentative : false;
   FESTIVAL.updated = happening.updated_label || dmy(events.updated_at);
 }
 
 rebuild();
 onDataChange(() => rebuild());
+subscribeLang(() => rebuild());

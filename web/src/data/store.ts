@@ -17,8 +17,10 @@ export interface EventRecord {
   status: string; tentative: boolean; sessions: EventSession[];
   source_url: string | null; source_note?: string; verified_at: string | null; updated_at: string;
   note?: string; organizer?: string;
+  /** Bản tiếng Anh (tùy chọn) */
+  title_en?: string; description_en?: string; venue_name_en?: string; note_en?: string;
 }
-export interface VenueRecord { id: string; name: string; map_query: string; lat: number | null; lng: number | null }
+export interface VenueRecord { id: string; name: string; name_en?: string; map_query: string; lat: number | null; lng: number | null }
 export interface EventsDoc { schema: number; updated_at: string; series: { id: string; name: string; start_at: string; end_at: string }[]; venues: VenueRecord[]; events: EventRecord[] }
 
 export interface ShowItem { date?: string; time: string; title: string; url: string; place?: string; price?: string; weekday?: number; weekday_label?: string; note?: string }
@@ -26,7 +28,7 @@ export interface StagePlace { label: string; name: string; map_query: string; la
 export interface Stage { places?: StagePlace[]; id: string; name: string; kind: "dated" | "weekly"; source_url: string; verified_at: string; intro: string; address: string; phone?: string; phone_label?: string; cta_label: string; items: ShowItem[] }
 export interface ShowsDoc { schema: number; updated_at: string; stages: Stage[] }
 
-export interface HappeningItem { when: string; title: string; desc: string; start_date: string; end_date: string; venue?: string }
+export interface HappeningItem { when: string; title: string; desc: string; start_date: string; end_date: string; venue?: string; title_en?: string; desc_en?: string; venue_en?: string }
 export interface HappeningDoc { schema: number; updated_at: string; updated_label: string; items: HappeningItem[] }
 
 export interface DataSet { events: EventsDoc; shows: ShowsDoc; happening: HappeningDoc }

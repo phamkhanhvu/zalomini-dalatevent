@@ -8,6 +8,8 @@ import { vnDate } from "../utils/agenda";
 import { statusOf } from "../utils/time";
 import { useProgramSheet } from "../components/use-program-sheet";
 import { IconArrow, IconPin, IconRoute } from "../components/icons";
+import { loc, tr } from "../i18n";
+const ME = () => tr("vị trí của bạn", "your location");
 
 type Kind = "festival" | "show";
 interface Line { when: string; title: string; program?: Program; url?: string }
@@ -30,21 +32,21 @@ function buildPlaces(today: string, weekday: number): Place[] {
     lines: v.programs
       .map((id) => PROGRAMS.find((p) => p.id === id))
       .filter((p): p is Program => !!p && statusOf(p) !== "ended")
-      .map((p) => ({ when: p.day + (p.sub && p.sub !== "trong ngày" ? " · " + p.sub : ""), title: p.title + (p.tentative ? " (dự kiến)" : ""), program: p })),
+      .map((p) => ({ when: p.day + (p.sub && p.sub !== tr("trong ngày", "all day") ? " · " + p.sub : ""), title: p.title + (p.tentative ? tr(" (dự kiến)", " (tentative)") : ""), program: p })),
   }));
   for (const st of getData().shows.stages) {
-    const places = st.places && st.places.length ? st.places : [{ label: "", name: st.name, map_query: st.name + ", Đà Lạt", lat: null, lng: null }];
+    const places = st.places && st.places.length ? st.places : [{ label: "", name: loc(st, "name"), map_query: st.name + ", Đà Lạt", lat: null, lng: null }];
     places.forEach((pl, i) => {
       let lines: Line[];
       let more: string | undefined;
       if (st.kind === "weekly") {
         const it = st.items.find((x) => x.weekday === weekday);
-        lines = it ? [{ when: "Tối nay · " + it.time, title: it.title, url: it.url }] : [];
-        more = "Nhạc sống mỗi tối, lịch band đổi theo tuần";
+        lines = it ? [{ when: tr("Tối nay · ", "Tonight · ") + it.time, title: it.title, url: it.url }] : [];
+        more = tr("Nhạc sống mỗi tối, lịch band đổi theo tuần", "Live music every night; bands change weekly");
       } else {
         const mine = st.items.filter((x) => (x.date || "") >= today && (places.length === 1 || x.place === pl.label));
         lines = mine.slice(0, 3).map((x) => ({ when: dm(x.date!) + " · " + x.time, title: x.title, url: x.url }));
-        if (mine.length > 3) more = "và " + (mine.length - 3) + " đêm diễn khác";
+        if (mine.length > 3) more = tr("và " + (mine.length - 3) + " đêm diễn khác", "and " + (mine.length - 3) + " more shows");
       }
       out.push({ id: "s:" + st.id + ":" + i, kind: "show", name: pl.name, mapQuery: pl.map_query, lat: pl.lat, lng: pl.lng, color: SHOW_COLOR, lines, more });
     });
@@ -78,7 +80,7 @@ const MapPage: FC = () => {
   // Chỉ hỏi vị trí khi người dùng bấm nút. Vị trí chỉ giữ trong trang, không lưu và không gửi đi.
   const locate = () => {
     if (!("geolocation" in navigator)) {
-      setGeoMsg("Thiết bị không hỗ trợ định vị. Hãy chọn một điểm xuất phát bên dưới.");
+      setGeoMsg(tr("Thiết bị không hỗ trợ định vị. Hãy chọn một điểm xuất phát bên dưới.", "This device can't share location. Pick a starting point below."));
       return;
     }
     setLocating(true);
@@ -87,13 +89,13 @@ const MapPage: FC = () => {
       (pos) => {
         setLocating(false);
         setOrigin({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-        setOriginLabel("vị trí của bạn");
+        setOriginLabel(ME());
         setSelected("");
         if (radius === null) setRadius(5);
       },
       (err) => {
         setLocating(false);
-        setGeoMsg(err.code === 1 ? "Bạn chưa cho phép định vị. Không sao, hãy chọn một điểm xuất phát bên dưới." : "Chưa lấy được vị trí. Hãy thử lại hoặc chọn một điểm xuất phát bên dưới.");
+        setGeoMsg(err.code === 1 ? tr("Bạn chưa cho phép định vị. Không sao, hãy chọn một điểm xuất phát bên dưới.", "Location not allowed. No problem: pick a starting point below.") : tr("Chưa lấy được vị trí. Hãy thử lại hoặc chọn một điểm xuất phát bên dưới.", "Couldn't get your location. Try again or pick a starting point below."));
       },
       { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
     );
@@ -121,9 +123,9 @@ const MapPage: FC = () => {
       <div className="venue-head">
         <span className="venue-no" style={{ background: p.color }}>{n}</span>
         <h2>{p.name}</h2>
-        {km !== null && <span className="venue-km">{km < 0.03 ? "Tại đây" : formatKm(km)}</span>}
+        {km !== null && <span className="venue-km">{km < 0.03 ? tr("Tại đây", "Here") : formatKm(km)}</span>}
       </div>
-      <p className="venue-kind">{p.kind === "festival" ? "Địa điểm Festival" : "Điểm diễn show"}</p>
+      <p className="venue-kind">{p.kind === "festival" ? tr("Địa điểm Festival", "Festival venue") : tr("Điểm diễn show", "Show venue")}</p>
       {p.lines.length > 0 ? (
         <ul>
           {p.lines.map((l, i) => (
@@ -137,18 +139,18 @@ const MapPage: FC = () => {
           ))}
         </ul>
       ) : (
-        <p className="muted small">Chưa có lịch sắp tới trong dữ liệu.</p>
+        <p className="muted small">{tr("Chưa có lịch sắp tới trong dữ liệu.", "Nothing upcoming listed.")}</p>
       )}
       {p.more && <p className="muted small">{p.more}</p>}
       <div className="venue-actions">
         <button type="button" className="btn btn-line" onClick={() => setSelected(p.id)}>
-          <IconPin size={20} />Xem trên bản đồ
+          <IconPin size={20} />{tr("Xem trên bản đồ", "Show on map")}
         </button>
         <button type="button" className="btn btn-line" onClick={() => navigate("/dia-diem/" + p.id.replace(/:/g, "-"))}>
-          Trang địa điểm
+          {tr("Trang địa điểm", "Venue page")}
         </button>
         <button type="button" className="btn btn-ink" onClick={() => openDirections(typeof p.lat === "number" ? p.lat + "," + p.lng : p.mapQuery)}>
-          <IconRoute size={20} />Chỉ đường
+          <IconRoute size={20} />{tr("Chỉ đường", "Directions")}
         </button>
       </div>
     </article>
@@ -157,19 +159,19 @@ const MapPage: FC = () => {
   return (
     <div className="page page-col">
       <header className="top">
-        <p className="eyebrow">{places.length} điểm đến</p>
-        <h1 className="h1">Bản đồ <em>gần tôi</em></h1>
+        <p className="eyebrow">{places.length}{tr(" điểm đến", " places")}</p>
+        <h1 className="h1">{tr("Bản đồ ", "Map ")}<em>{tr("gần tôi", "near me")}</em></h1>
       </header>
       <div className="scroll grow">
         <section className="near pad">
           <div className="near-row">
             <button type="button" className="btn btn-ink" onClick={locate} disabled={locating}>
-              <IconPin size={20} />{locating ? "Đang tìm vị trí…" : "Dùng vị trí của tôi"}
+              <IconPin size={20} />{locating ? tr("Đang tìm vị trí…", "Locating…") : tr("Dùng vị trí của tôi", "Use my location")}
             </button>
             <label className="near-pick">
-              <span>hoặc tính từ</span>
-              <select value={origin && originLabel !== "vị trí của bạn" ? withCoords.find((x) => x.name === originLabel)?.id || "" : ""} onChange={(e) => pickOrigin(e.target.value)} aria-label="Chọn điểm xuất phát">
-                <option value="">Chọn một địa điểm</option>
+              <span>{tr("hoặc tính từ", "or measure from")}</span>
+              <select value={origin && originLabel !== ME() ? withCoords.find((x) => x.name === originLabel)?.id || "" : ""} onChange={(e) => pickOrigin(e.target.value)} aria-label={tr("Chọn điểm xuất phát", "Pick a starting point")}>
+                <option value="">{tr("Chọn một địa điểm", "Choose a place")}</option>
                 {withCoords.map((p) => (
                   <option key={p.id} value={p.id}>{p.name}</option>
                 ))}
@@ -180,23 +182,23 @@ const MapPage: FC = () => {
           {origin && (
             <React.Fragment>
               <p className="muted small">
-                Khoảng cách đường chim bay tính từ {originLabel}.{" "}
-                <button type="button" className="link-inline" onClick={() => { setOrigin(null); setOriginLabel(""); setRadius(null); }}>Bỏ chọn</button>
+                {tr("Khoảng cách đường chim bay tính từ ", "Straight-line distance from ")}{originLabel}.{" "}
+                <button type="button" className="link-inline" onClick={() => { setOrigin(null); setOriginLabel(""); setRadius(null); }}>{tr("Bỏ chọn", "Clear")}</button>
               </p>
-              <div className="filters" role="tablist" aria-label="Bán kính">
+              <div className="filters" role="tablist" aria-label={tr("Bán kính", "Radius")}>
                 {RADII.map((r) => (
                   <button key={r} type="button" role="tab" aria-selected={radius === r} className={"fb fb-sm" + (radius === r ? " on" : "")} onClick={() => setRadius(r)}>
                     {r} km
                   </button>
                 ))}
                 <button type="button" role="tab" aria-selected={radius === null} className={"fb fb-sm" + (radius === null ? " on" : "")} onClick={() => setRadius(null)}>
-                  Tất cả
+                  {tr("Tất cả", "All")}
                 </button>
               </div>
             </React.Fragment>
           )}
-          <div className="filters filters-sub" role="tablist" aria-label="Loại địa điểm">
-            {([["all", "Tất cả"], ["festival", "Festival"], ["show", "Show diễn"]] as [Kind | "all", string][]).map(([id, label]) => (
+          <div className="filters filters-sub" role="tablist" aria-label={tr("Loại địa điểm", "Place type")}>
+            {([["all", tr("Tất cả", "All")], ["festival", "Festival"], ["show", tr("Show diễn", "Shows")]] as [Kind | "all", string][]).map(([id, label]) => (
               <button key={id} type="button" role="tab" aria-selected={kind === id} className={"fb fb-sm" + (kind === id ? " on" : "")} onClick={() => setKind(id)}>
                 {label}
               </button>
@@ -206,8 +208,8 @@ const MapPage: FC = () => {
 
         {current && (
           <div className="pad">
-            <iframe className="mapframe" title={"Bản đồ: " + current.name} src={mapSrc} loading="lazy" referrerPolicy="no-referrer" allowFullScreen />
-            <p className="muted small">Đang xem: {current.name}. Bản đồ do Google Maps cung cấp.</p>
+            <iframe className="mapframe" title={tr("Bản đồ: ", "Map: ") + current.name} src={mapSrc} loading="lazy" referrerPolicy="no-referrer" allowFullScreen />
+            <p className="muted small">{tr("Đang xem: ", "Showing: ")}{current.name}{tr(". Bản đồ do Google Maps cung cấp.", ". Map by Google Maps.")}</p>
           </div>
         )}
 
@@ -217,14 +219,14 @@ const MapPage: FC = () => {
           ))}
         </div>
         {origin && ranked.near.length === 0 && (
-          <p className="near-msg pad">Không có địa điểm nào trong bán kính {radius} km. Hãy chọn bán kính lớn hơn.</p>
+          <p className="near-msg pad">{tr(`Không có địa điểm nào trong bán kính ${radius} km. Hãy chọn bán kính lớn hơn.`, `No places within ${radius} km. Try a larger radius.`)}</p>
         )}
         {origin && ranked.hidden > 0 && ranked.near.length > 0 && (
-          <p className="muted small pad">Còn {ranked.hidden} địa điểm nằm ngoài bán kính {radius} km.</p>
+          <p className="muted small pad">{tr(`Còn ${ranked.hidden} địa điểm nằm ngoài bán kính ${radius} km.`, `${ranked.hidden} more places beyond ${radius} km.`)}</p>
         )}
         {ranked.unknown.length > 0 && (
           <React.Fragment>
-            <p className="ag-sub pad">Chưa có vị trí chính xác</p>
+            <p className="ag-sub pad">{tr("Chưa có vị trí chính xác", "No exact location yet")}</p>
             <div className="list pad">
               {ranked.unknown.map((p, i) => (
                 <Card key={p.id} p={p} km={null} n={ranked.near.length + i + 1} />
@@ -233,7 +235,7 @@ const MapPage: FC = () => {
           </React.Fragment>
         )}
         <p className="muted small pad foot">
-          Vị trí của bạn chỉ dùng để tính khoảng cách ngay trên máy, không được lưu hay gửi đi. Tọa độ địa điểm: © OpenStreetMap contributors. Các mục dự kiến có thể thay đổi.
+          {tr("Vị trí của bạn chỉ dùng để tính khoảng cách ngay trên máy, không được lưu hay gửi đi. Tọa độ địa điểm: © OpenStreetMap contributors. Các mục dự kiến có thể thay đổi.", "Your location is only used on this device to measure distance; it is never stored or sent. Venue coordinates: © OpenStreetMap contributors. Tentative items may change.")}
         </p>
       </div>
       {sheet}

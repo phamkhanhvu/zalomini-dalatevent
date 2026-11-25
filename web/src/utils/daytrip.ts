@@ -8,9 +8,15 @@ import type { AgendaItem } from "./agenda.ts";
 import { addDays, DAY_MS, vnDate, vnMidnight, vnTime } from "./agenda.ts";
 import type { Ask } from "./assistant.ts";
 import { fold } from "./search.ts";
+import { tr } from "../i18n.ts";
 
 export interface GuidePlace { id: string; name: string; cat: string; sub?: string; area?: string; address: string; mapQuery: string; duration?: string; timing?: string; intro: string; related: string[] }
 export type Part = "Sáng" | "Trưa" | "Chiều" | "Tối";
+const PART_EN: Record<Part, string> = { Sáng: "Morning", Trưa: "Noon", Chiều: "Afternoon", Tối: "Evening" };
+/** Tên buổi theo ngôn ngữ hiện tại */
+export const partLabel = (p: Part) => tr(p, PART_EN[p]);
+/** Lời giới thiệu điểm tham quan chỉ có tiếng Việt (từ cẩm nang); ở tiếng Anh dùng câu chung */
+const introOf = (p: { intro?: string }) => tr(p.intro || "", "A pick from the Da Lat Di Dau guide by Sense Group.");
 export interface Stop {
   /** Thời điểm gợi ý (mili giây); với sự kiện là giờ bắt đầu thật */
   at: number;
@@ -80,27 +86,27 @@ export function buildPlan(ask: Ask, events: AgendaItem[], places: GuidePlace[], 
     if (open(8.5)) {
       const a = pickSight(["Thiên nhiên", "Văn hóa"], wantsFlower ? (p) => FLOWER.test(fold(p.name)) : undefined);
       if (a) {
-        add(8.5, "Sáng", "sight", a.name, a.intro, [a]);
+        add(8.5, "Sáng", "sight", a.name, introOf(a), [a]);
         const b = a.related.map((id) => byId.get(id)).find((p): p is GuidePlace => !!p && !!p.duration && p.cat !== "Ẩm thực" && !used.has(p.id));
-        if (b && open(10.25)) add(10.25, "Sáng", "sight", b.name, b.intro, [b]);
+        if (b && open(10.25)) add(10.25, "Sáng", "sight", b.name, introOf(b), [b]);
       }
     }
     if (open(11.75)) {
       const f = pickFood("eat", 2, "lunch");
-      if (f.length) add(11.75, "Trưa", "eat", "Ăn trưa quanh trung tâm", "Hai quán trong khu " + CENTER + " để bạn chọn. Xem thực đơn và hỏi chỗ trước khi ghé.", f);
+      if (f.length) add(11.75, "Trưa", "eat", tr("Ăn trưa quanh trung tâm", "Lunch in the centre"), tr("Hai quán trong khu " + CENTER + " để bạn chọn. Xem thực đơn và hỏi chỗ trước khi ghé.", "Two places around " + CENTER + " to choose from. Check the menu and ask about seats before you go."), f);
     }
     // Chiều: ưu tiên sự kiện diễn ra cả ngày (triển lãm, không gian hoa); không có thì một điểm trải nghiệm
     if (open(13.5)) {
       const ev = allDay[0];
-      if (ev) add(13.5, "Chiều", "event", ev.title, "Diễn ra cả ngày tại " + ev.venue + ". Ghé lúc nào trong buổi chiều cũng được.", [], ev);
+      if (ev) add(13.5, "Chiều", "event", ev.title, tr("Diễn ra cả ngày tại " + ev.venue + ". Ghé lúc nào trong buổi chiều cũng được.", "On all day at " + ev.venue + ". Drop in any time in the afternoon."), [], ev);
       else {
         const c = pickSight(family ? ["Trải nghiệm"] : ["Trải nghiệm", "Văn hóa", "Thiên nhiên"], wantsFlower ? (p) => FLOWER.test(fold(p.name)) : undefined);
-        if (c) add(13.5, "Chiều", "sight", c.name, c.intro, [c]);
+        if (c) add(13.5, "Chiều", "sight", c.name, introOf(c), [c]);
       }
     }
     if (open(15.5) && !(evening && evening.start < t0 + 17.5 * H && evening.start - (t0 + 15.5 * H) < 1.25 * H)) {
       const f = pickFood("cafe", 2, "cafe");
-      if (f.length) add(15.5, "Chiều", "cafe", "Nghỉ chân cà phê", "Hai quán cà phê ở trung tâm để bạn chọn.", f);
+      if (f.length) add(15.5, "Chiều", "cafe", tr("Nghỉ chân cà phê", "Coffee break"), tr("Hai quán cà phê ở trung tâm để bạn chọn.", "Two cafés in the centre to choose from."), f);
     }
     // Tối: show hoặc sự kiện có giờ là điểm chính. Show sớm (trước 18:30) thì ăn tối sau show.
     const early = !!evening && evening.start < t0 + 18.5 * H;
@@ -108,14 +114,14 @@ export function buildPlan(ask: Ask, events: AgendaItem[], places: GuidePlace[], 
     const dinner = () => {
       if (!open(dinnerAt, early ? 3 : 0.5)) return;
       const f = pickFood("eat", 2, "dinner");
-      if (f.length) add(dinnerAt, "Tối", "eat", early ? "Ăn tối sau buổi diễn" : "Ăn tối", "Hai quán trong khu " + CENTER + " để bạn chọn.", f);
+      if (f.length) add(dinnerAt, "Tối", "eat", early ? tr("Ăn tối sau buổi diễn", "Dinner after the show") : tr("Ăn tối", "Dinner"), tr("Hai quán trong khu " + CENTER + " để bạn chọn.", "Two places around " + CENTER + " to choose from."), f);
     };
     if (!early) dinner();
-    if (evening) add(0, "Tối", "event", evening.title, evening.venue + (evening.endEstimated ? "" : ", đến " + vnTime(evening.end)) + ". Bấm vào để xem chi tiết và xác nhận giờ.", [], evening);
+    if (evening) add(0, "Tối", "event", evening.title, evening.venue + (evening.endEstimated ? "" : tr(", đến ", ", until ") + vnTime(evening.end)) + tr(". Bấm vào để xem chi tiết và xác nhận giờ.", ". Tap for details and to confirm the time."), [], evening);
     if (early) dinner();
     if (!evening && open(19.5, 2)) {
       const walk = ["xuan-huong", "cho-da-lat"].map((id) => byId.get(id)).filter((p): p is GuidePlace => !!p);
-      if (walk.length) add(19.5, "Tối", "walk", "Dạo hồ Xuân Hương và chợ đêm", "Dữ liệu chưa có show hay sự kiện nào khớp cho tối này, nên gợi ý một buổi dạo trung tâm.", walk);
+      if (walk.length) add(19.5, "Tối", "walk", tr("Dạo hồ Xuân Hương và chợ đêm", "Stroll around Xuan Huong Lake and the night market"), tr("Dữ liệu chưa có show hay sự kiện nào khớp cho tối này, nên gợi ý một buổi dạo trung tâm.", "No matching show or event tonight, so here is an evening walk in the centre."), walk);
     }
     stops.sort((a, b) => a.at - b.at);
     return { date, stops };

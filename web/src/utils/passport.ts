@@ -4,6 +4,7 @@
  * Lưu ý: kiểm tra vị trí chạy trên máy người dùng nên chỉ mang tính vui chơi, không dùng để phát thưởng có giá trị.
  */
 import { distanceKm } from "./geo.ts";
+import { loc } from "../i18n.ts";
 
 export interface StampDef {
   id: string;
@@ -34,7 +35,7 @@ export const GRACE_MS = 3600000;
 export function catalogue(venues: InVenue[], stages: InStage[], events: InEvent[]): StampDef[] {
   const out: StampDef[] = [];
   const has = (x: { lat: number | null; lng: number | null }) => typeof x.lat === "number" && typeof x.lng === "number";
-  for (const v of venues) if (has(v)) out.push({ id: "pl:f-" + v.id, kind: "place", title: v.name, place: v.name, lat: v.lat, lng: v.lng, ref: "f-" + v.id });
+  for (const v of venues) if (has(v)) out.push({ id: "pl:f-" + v.id, kind: "place", title: loc(v, "name"), place: loc(v, "name"), lat: v.lat, lng: v.lng, ref: "f-" + v.id });
   for (const st of stages) (st.places || []).forEach((pl, i) => {
     if (has(pl)) out.push({ id: "pl:s-" + st.id + "-" + i, kind: "place", title: pl.name, place: pl.name, lat: pl.lat, lng: pl.lng, ref: "s-" + st.id + "-" + i });
   });
@@ -42,7 +43,7 @@ export function catalogue(venues: InVenue[], stages: InStage[], events: InEvent[
   for (const e of events) {
     const v = e.venue_id ? byId.get(e.venue_id) : undefined;
     if (e.status !== "published" || !v || !has(v) || !e.sessions.length) continue;
-    out.push({ id: "ev:" + e.id, kind: "event", title: e.title, place: v.name, lat: v.lat, lng: v.lng, start: Math.min(...e.sessions.map((s) => Date.parse(s.start_at))), end: Math.max(...e.sessions.map((s) => Date.parse(s.end_at))), ref: e.id });
+    out.push({ id: "ev:" + e.id, kind: "event", title: loc(e, "title"), place: loc(v, "name"), lat: v.lat, lng: v.lng, start: Math.min(...e.sessions.map((s) => Date.parse(s.start_at))), end: Math.max(...e.sessions.map((s) => Date.parse(s.end_at))), ref: e.id });
   }
   return out;
 }

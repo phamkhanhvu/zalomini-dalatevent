@@ -20,6 +20,14 @@ const AdminPage = React.lazy(() => import("../pages/admin"));
 import { getData } from "../data/store";
 import { AccountButton, AccountSheet } from "./account-panel";
 import { AssistantFab } from "./assistant-fab";
+import { isEn, setLang, tr } from "../i18n";
+
+/** Nút đổi ngôn ngữ cạnh nút tài khoản: đang tiếng Việt thì ghi EN, đang tiếng Anh thì ghi VI */
+const LangButton: FC = () => (
+  <button type="button" className="lang-top" onClick={() => setLang(isEn() ? "vi" : "en")} aria-label={tr("Switch to English", "Chuyển sang tiếng Việt")} lang={isEn() ? "vi" : "en"}>
+    {isEn() ? "VI" : "EN"}
+  </button>
+);
 
 const ScrollTop: FC = () => {
   const { pathname } = useLocation();
@@ -44,7 +52,7 @@ const OfflineBar: FC = () => {
   }, []);
   if (!off) return null;
   const d = getData().happening.updated_label;
-  return <div className="offline" role="status">Đang xem ngoại tuyến{d ? " · dữ liệu cập nhật đến " + d : ""}</div>;
+  return <div className="offline" role="status">{tr("Đang xem ngoại tuyến", "Offline")}{d ? tr(" · dữ liệu cập nhật đến ", " · data as of ") + d : ""}</div>;
 };
 
 export const Layout: FC = () => {
@@ -70,13 +78,18 @@ export const Layout: FC = () => {
         <Route path="/tro-ly" element={<AssistantPage />} />
         <Route path="/uu-dai" element={<DealsPage />} />
         <Route path="/thoi-tiet" element={<WeatherPage />} />
-        <Route path="/quan-tri" element={<React.Suspense fallback={<p className="muted pad">Đang tải…</p>}><AdminPage /></React.Suspense>} />
+        <Route path="/quan-tri" element={<React.Suspense fallback={<p className="muted pad">{tr("Đang tải…", "Loading…")}</p>}><AdminPage /></React.Suspense>} />
         <Route path="*" element={<HomePage />} />
       </Routes>
       <AssistantFab />
     </div>
     <Navigation />
-    <AccountButton />
+    {/* Trang chủ: logo ở giữa nên nút ngôn ngữ nằm góc trái; các trang khác nằm cạnh nút tài khoản */}
+    {pathname === "/" && <div className="top-left"><LangButton /></div>}
+    <div className="top-actions">
+      {pathname !== "/" && <LangButton />}
+      <AccountButton />
+    </div>
     <AccountSheet />
   </div>
   );

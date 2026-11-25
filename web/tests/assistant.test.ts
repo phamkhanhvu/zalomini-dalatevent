@@ -97,3 +97,18 @@ test("show đã qua giờ không được gợi ý", () => {
   const { advice } = run("tối nay nghe nhạc", at("2026-11-23T22:30:00"));
   assert.ok(advice.fits.concat(advice.unknown).every((p) => p.item.end >= at("2026-11-23T22:30:00")));
 });
+
+test("hiểu câu hỏi tiếng Anh: số người, ngân sách, sở thích, gần đâu", () => {
+  const now = Date.parse("2026-12-05T10:00:00+07:00");
+  const a = parseAsk("Tonight two people with 500k, want live music near me", now, []);
+  assert.equal(a.people, 2);
+  assert.equal(a.budget, 500000);
+  assert.ok(a.interests.includes("music"));
+  assert.equal(a.nearMe, true);
+  assert.equal(a.dateGiven, true);
+  const b = parseAsk("This weekend, family of 4, we love flowers, 1 million per person", now, []);
+  assert.equal(b.people, 4);
+  assert.equal(b.budget, 4000000);
+  assert.ok(b.interests.includes("flower"));
+  assert.equal(parseAsk("Mây Lang Thang tối nay", now, []).dateGiven, true);
+});

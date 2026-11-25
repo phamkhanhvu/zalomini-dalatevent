@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useSnackbar } from "../ui";
 import { Program } from "../data/festival";
 import { useSaved } from "../utils/saved";
-import { SAVED_MSG, SHARE_FAIL } from "../utils/platform";
+import { savedMsg, shareFail } from "../utils/platform";
 import { ProgramSheet } from "./program-sheet";
+import { tr } from "../i18n";
 
 /** Gom phần mở chi tiết + lưu chương trình để các trang dùng chung */
 export function useProgramSheet() {
@@ -14,7 +15,7 @@ export function useProgramSheet() {
   const toggleSave = (p: Program) => {
     const on = saved.toggle(p.id);
     openSnackbar({
-      text: on ? SAVED_MSG : "Đã bỏ lưu",
+      text: on ? savedMsg() : tr("Đã bỏ lưu", "Removed"),
       type: "success",
       duration: 2400,
     });
@@ -27,7 +28,7 @@ export function useProgramSheet() {
       onClose={() => setOpen(null)}
       onToggleSave={toggleSave}
       onShared={(ok) => {
-        if (!ok) openSnackbar({ text: SHARE_FAIL, duration: 2200 });
+        if (!ok) openSnackbar({ text: shareFail(), duration: 2200 });
       }}
     />
   );

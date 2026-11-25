@@ -21,6 +21,7 @@ Trước khi sửa: chạy `gh workflow run cms.yml -R phamkhanhvu/zalomini-dala
    - `venue`: tên địa điểm
    - `when`: chữ hiển thị, ví dụ `20 — 24.11.2026` hoặc `21.11 — 12.12.2026 · Đồi cỏ hồng`
    - `desc`: 1 đến 3 câu, văn bản thường, không có thẻ HTML, không dùng ký tự `<` `>`
+   - `title_en`, `venue_en`, `desc_en`: bản tiếng Anh của ba trường trên (website song ngữ; khách chọn EN sẽ thấy các trường này). Dịch sát nghĩa, tên riêng viết không dấu kiểu quốc tế (Lam Vien Square, Xuan Huong Lake), không thêm thông tin ngoài bản tiếng Việt. Mục cũ đã có bản tiếng Anh thì giữ nguyên.
    Xóa mục có `end_date` trước hôm nay.
 5. Đặt `updated_label` là hôm nay dạng `dd.mm.yyyy`, `updated_at` dạng `2026-11-24T05:50:00+07:00`.
 6. Không tìm được nguồn đáng tin: chỉ xóa mục đã qua và cập nhật hai trường ngày.

@@ -14,7 +14,12 @@
       "theme": "Bản giao hòa của sắc hoa và âm nhạc",
       "place": "Đà Lạt, Lâm Đồng",
       "total_activities": 36,
-      "total_activities_source": "Cổng chính thức festivaldalat.lamdongtructuyen.vn, đọc ngày 23.11.2026 (11 chương trình trọng tâm trong tổng số 36 chương trình, hoạt động)"
+      "total_activities_source": "Cổng chính thức festivaldalat.lamdongtructuyen.vn, đọc ngày 23.11.2026 (11 chương trình trọng tâm trong tổng số 36 chương trình, hoạt động)",
+      "name_en": "Da Lat Flower Festival",
+      "edition_en": "11th edition",
+      "edition_short_en": "11th edition",
+      "theme_en": "A harmony of flowers and music",
+      "place_en": "Da Lat, Lam Dong"
     }
   ],
   "venues": [
@@ -24,7 +29,8 @@
       "map_query": "Quảng trường Lâm Viên, Đà Lạt",
       "lat": 11.93884,
       "lng": 108.44501,
-      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
+      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026",
+      "name_en": "Lam Vien Square"
     },
     {
       "id": "xuan-huong",
@@ -32,7 +38,8 @@
       "map_query": "Hồ Xuân Hương, Đà Lạt",
       "lat": 11.94508,
       "lng": 108.44872,
-      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
+      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026",
+      "name_en": "Xuan Huong Lake"
     },
     {
       "id": "tqt",
@@ -40,7 +47,8 @@
       "map_query": "Công viên Trần Quốc Toản, Đà Lạt",
       "lat": null,
       "lng": null,
-      "geo_note": "Chưa tìm thấy tọa độ đáng tin cậy trên OpenStreetMap; chỉ đường dùng tên địa điểm."
+      "geo_note": "Chưa tìm thấy tọa độ đáng tin cậy trên OpenStreetMap; chỉ đường dùng tên địa điểm.",
+      "name_en": "Tran Quoc Toan Park"
     },
     {
       "id": "golf",
@@ -48,7 +56,8 @@
       "map_query": "Dalat Palace Golf Club, Đà Lạt",
       "lat": 11.94788,
       "lng": 108.4458,
-      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
+      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026",
+      "name_en": "Dalat Palace Golf Club"
     },
     {
       "id": "sgdl",
@@ -56,7 +65,8 @@
       "map_query": "Khách sạn Sài Gòn Đà Lạt, Đà Lạt",
       "lat": 11.9393,
       "lng": 108.42963,
-      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
+      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026",
+      "name_en": "Saigon – Dalat Hotel"
     },
     {
       "id": "htm",
@@ -64,7 +74,8 @@
       "map_query": "Đường Hồ Tùng Mậu, Đà Lạt",
       "lat": 11.93789,
       "lng": 108.44438,
-      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
+      "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026",
+      "name_en": "Ho Tung Mau Street"
     }
   ],
   "events": [
@@ -88,7 +99,10 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:45:00+07:00"
+      "updated_at": "2026-11-23T06:45:00+07:00",
+      "title_en": "“Everyone plants flowers and greenery” campaign",
+      "description_en": "A campaign welcoming the 11th Da Lat Flower Festival.",
+      "venue_name_en": "All of Lam Dong province"
     },
     {
       "id": "hoa-lan",
@@ -111,7 +125,10 @@
       "source_note": "Poster chính thức Festival Hoa Đà Lạt lần thứ XI (theo dalatevent.com)",
       "verified_at": null,
       "updated_at": "2026-11-23T06:50:00+07:00",
-      "note": "Không có trên cổng chính thức ngày 23.11.2026; đã gỡ khỏi web và app theo quyết định của chủ dự án (sửa cho khớp cổng chính thức)."
+      "note": "Không có trên cổng chính thức ngày 23.11.2026; đã gỡ khỏi web và app theo quyết định của chủ dự án (sửa cho khớp cổng chính thức).",
+      "title_en": "Lam Dong International Phalaenopsis Orchid Exhibition and International Art Flower Exhibition",
+      "description_en": "Exhibitors from Vietnam and abroad.",
+      "venue_name_en": "Tran Quoc Toan Park"
     },
     {
       "id": "cay-canh",
@@ -134,7 +151,10 @@
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
       "updated_at": "2026-11-23T06:45:00+07:00",
-      "organizer": "Hiệp hội Hoa Đà Lạt"
+      "organizer": "Hiệp hội Hoa Đà Lạt",
+      "title_en": "Flower and ornamental plant exhibition",
+      "description_en": "Flowers and ornamental plants from many countries.",
+      "venue_name_en": "Tran Quoc Toan Park"
     },
     {
       "id": "khai-mac",
@@ -158,7 +178,10 @@
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
       "updated_at": "2026-11-23T06:50:00+07:00",
-      "organizer": "Tỉnh ủy - Ủy ban nhân dân tỉnh Lâm Đồng"
+      "organizer": "Tỉnh ủy - Ủy ban nhân dân tỉnh Lâm Đồng",
+      "title_en": "Opening of the 11th Da Lat Flower Festival",
+      "description_en": "Opening night combining music, light and stage technology at Lam Vien Square. Broadcast live on VTV.",
+      "venue_name_en": "Lam Vien Square"
     },
     {
       "id": "khong-gian-hoa",
@@ -180,7 +203,10 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:45:00+07:00"
+      "updated_at": "2026-11-23T06:45:00+07:00",
+      "title_en": "Flower spaces around Xuan Huong Lake",
+      "description_en": "The Tran Hung Dao, Tran Quoc Toan and Yersin mini-parks and many embankment streets.",
+      "venue_name_en": "Xuan Huong Lake, parks and flower streets in Da Lat"
     },
     {
       "id": "golf",
@@ -203,7 +229,10 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:45:00+07:00"
+      "updated_at": "2026-11-23T06:45:00+07:00",
+      "title_en": "Dalat Palace Floral Golf Invitational",
+      "description_en": "A flower-themed golf tournament.",
+      "venue_name_en": "Dalat Palace Golf Club"
     },
     {
       "id": "tho-cam",
@@ -225,7 +254,10 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:45:00+07:00"
+      "updated_at": "2026-11-23T06:45:00+07:00",
+      "title_en": "3rd Vietnam Brocade Culture Festival",
+      "description_en": "Vietnam brocade culture festival 2026.",
+      "venue_name_en": "Lam Vien Square"
     },
     {
       "id": "hoi-thao",
@@ -248,7 +280,10 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:45:00+07:00"
+      "updated_at": "2026-11-23T06:45:00+07:00",
+      "title_en": "Science, technology and innovation conference",
+      "description_en": "Sustainable development of the Da Lat flower value chain.",
+      "venue_name_en": "Saigon – Dalat Hotel"
     },
     {
       "id": "pho-tra",
@@ -275,7 +310,10 @@
       "venue_ids": [
         "lam-vien",
         "htm"
-      ]
+      ],
+      "title_en": "Tea, coffee, wine, OCOP street and vegetable–flower market",
+      "description_en": "Showcasing the brand “Da Lat, a miraculous crystallisation of fertile land”.",
+      "venue_name_en": "Lam Vien Square fountain and Ho Tung Mau Street"
     },
     {
       "id": "nhac-jazz",
@@ -297,7 +335,10 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:50:00+07:00"
+      "updated_at": "2026-11-23T06:50:00+07:00",
+      "title_en": "Vietnam Jazz Festival 2026",
+      "description_en": "Jazz nights on Xuan Huong Lake.",
+      "venue_name_en": "On Xuan Huong Lake"
     },
     {
       "id": "carnival",
@@ -320,7 +361,10 @@
       "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:45:00+07:00"
+      "updated_at": "2026-11-23T06:45:00+07:00",
+      "title_en": "Band and modern dance carnival",
+      "description_en": "Street music and dance.",
+      "venue_name_en": "Around Xuan Huong Lake"
     },
     {
       "id": "be-mac",
@@ -343,7 +387,10 @@
       "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
       "verified_at": "2026-11-23",
       "updated_at": "2026-11-23T06:45:00+07:00",
-      "organizer": "Sở Văn hóa, Thể thao và Du lịch tỉnh Lâm Đồng"
+      "organizer": "Sở Văn hóa, Thể thao và Du lịch tỉnh Lâm Đồng",
+      "title_en": "New Year 2027 art programme and closing of the 11th Da Lat Flower Festival",
+      "description_en": "Broadcast live by Lam Dong Newspaper, Radio and Television.",
+      "venue_name_en": "Lam Vien Square"
     }
   ],
   "geo_attribution": "Tọa độ địa điểm: © OpenStreetMap contributors (ODbL)"

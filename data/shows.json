@@ -2,14 +2,14 @@
   "schema": 1,
   "about": "Lịch show của các điểm diễn tại Đà Lạt. Lịch và giá vé do từng điểm diễn công bố; mỗi mục có link về trang gốc.",
   "timezone": "Asia/Ho_Chi_Minh",
-  "updated_at": "2026-11-24T05:55:00+07:00",
+  "updated_at": "2026-11-25T05:50:00+07:00",
   "stages": [
     {
       "id": "may-lang-thang",
       "name": "Mây Lang Thang",
       "kind": "dated",
       "source_url": "https://maylangthang.com.vn/",
-      "verified_at": "2026-11-24",
+      "verified_at": "2026-11-25",
       "intro": "Đêm nhạc tại Đà Lạt. Lịch và vé do Mây Lang Thang công bố, có thể thay đổi.",
       "address": "Mây Lang Thang: 519 thôn Măng Lin, phường Lang Biang – Đà Lạt. Mây Heritage: khu Ga Đà Lạt, số 01 Quang Trung, phường Xuân Hương – Đà Lạt.",
       "cta_label": "Xem vé",
@@ -100,16 +100,20 @@
           "map_query": "Ga Đà Lạt, 01 Quang Trung, Đà Lạt",
           "lat": 11.9416,
           "lng": 108.45443,
-          "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026 (vị trí Ga Đà Lạt)"
+          "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026 (vị trí Ga Đà Lạt)",
+          "name_en": "Mây Heritage (Da Lat Station)"
         }
-      ]
+      ],
+      "intro_en": "Music nights in Da Lat. Dates and tickets are published by Mây Lang Thang and may change.",
+      "address_en": "Mây Lang Thang: 519 Mang Lin hamlet, Lang Biang ward – Da Lat. Mây Heritage: Da Lat Railway Station area, 01 Quang Trung, Xuan Huong ward – Da Lat.",
+      "cta_label_en": "Tickets"
     },
     {
       "id": "lululola",
       "name": "Lululola Show",
       "kind": "dated",
       "source_url": "https://lululolashow.com/",
-      "verified_at": "2026-11-24",
+      "verified_at": "2026-11-25",
       "intro": "Đêm diễn ca sĩ khách mời. Lịch và giá vé do Lululola Show công bố, có thể thay đổi.",
       "address": "Lululola Show: số 32/2 đường 3/4, phường Xuân Hương – Đà Lạt. Ngoài các đêm ca sĩ khách mời, Lululola có đêm acoustic lúc 19:30 vào nhiều tối trong tuần, vé từ 150.000đ.",
       "cta_label": "Xem vé",
@@ -194,7 +198,10 @@
           "lng": 108.44212,
           "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026"
         }
-      ]
+      ],
+      "intro_en": "Guest singer nights. Dates and prices are published by Lululola Show and may change.",
+      "address_en": "Lululola Show: 32/2 3/4 Street, Xuan Huong ward – Da Lat. Besides the guest singer nights, Lululola has acoustic nights at 19:30 on many evenings, tickets from 150,000 VND.",
+      "cta_label_en": "Tickets"
     },
     {
       "id": "sense-acoustic",
@@ -274,7 +281,10 @@
           "lng": 108.43172,
           "geo_source": "© OpenStreetMap contributors (ODbL), tra cứu ngày 23.11.2026 (theo số nhà 304 Hai Bà Trưng)"
         }
-      ]
+      ],
+      "intro_en": "A small, cosy corner in peaceful Da Lat. Open 17:00 – 23:00, live music 20:00 – 22:00 every night. Band line-ups may change weekly.",
+      "address_en": "Sense Acoustic Cafe: 304 Hai Ba Trung, Da Lat. Drink vouchers from 115,000 VND.",
+      "cta_label_en": "Schedule"
     }
   ]
 }

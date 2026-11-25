@@ -7,7 +7,7 @@ import type { Auth, User } from "firebase/auth";
 import type { Firestore } from "firebase/firestore/lite";
 import { registerPlugin } from "@capacitor/core";
 import { tr } from "../i18n";
-import { IS_NATIVE, storage } from "../utils/device";
+import { IS_ANDROID, IS_IOS, IS_NATIVE, storage } from "../utils/device";
 import { readPlan, replacePlan } from "../utils/plan";
 import { readSaved, replaceSaved, SAVED_EVENT } from "../utils/saved";
 import { cleanCloud, reconcile, toCloud } from "../utils/sync";
@@ -200,8 +200,10 @@ async function run(fn: (m: typeof import("firebase/auth"), a: Auth) => Promise<u
 type NativeCred = { credential?: { idToken?: string; accessToken?: string; nonce?: string; authorizationCode?: string } };
 type NativeAuthPlugin = { signInWithGoogle(): Promise<NativeCred>; signInWithApple(): Promise<NativeCred>; signOut(): Promise<void> };
 const NativeAuth = IS_NATIVE ? registerPlugin<NativeAuthPlugin>("FirebaseAuthentication") : null;
-export const CAN_GOOGLE = true;
-export const CAN_APPLE = IS_NATIVE;
+// Android: đăng nhập Google cần mã vân tay khóa ký (SHA-1) đã khai trong Firebase; bật bằng VITE_ANDROID_GOOGLE=1 khi đã khai
+export const CAN_GOOGLE = !IS_ANDROID || import.meta.env.VITE_ANDROID_GOOGLE === "1";
+// Đăng nhập Apple chỉ có trong app iOS
+export const CAN_APPLE = IS_IOS;
 let appleCode = "";
 
 class Cancelled extends Error {}
@@ -269,8 +271,8 @@ export async function wipeCloud(): Promise<boolean> {
 export function deleteNeeds(): "google" | "apple" | "password" | "web-only" {
   const ids = (user?.providerData || []).map((p) => p.providerId);
   if (ids.includes("password")) return "password";
-  if (ids.includes("apple.com") && IS_NATIVE) return "apple";
-  if (ids.includes("google.com")) return "google";
+  if (ids.includes("apple.com") && IS_IOS) return "apple";
+  if (ids.includes("google.com") && CAN_GOOGLE) return "google";
   return "web-only";
 }
 
@@ -292,7 +294,12 @@ export async function deleteAccount(password: string): Promise<boolean> {
     const m = await import("firebase/auth");
     const need = deleteNeeds();
     if (need === "web-only") {
-      set({ error: tr("Tài khoản này cần xóa trong app DalatEvent trên iPhone (mục Lịch trình).", "This account must be deleted in the DalatEvent iPhone app (My plan).") });
+      const ids = (u.providerData || []).map((p) => p.providerId);
+      set({
+        error: ids.includes("google.com")
+          ? tr("Tài khoản Google này cần xóa trên website dalatevent.com (mục Lịch trình).", "Please delete this Google account on dalatevent.com (My plan).")
+          : tr("Tài khoản này cần xóa trong app DalatEvent trên iPhone (mục Lịch trình).", "This account must be deleted in the DalatEvent iPhone app (My plan)."),
+      });
       return false;
     }
     if (need === "password") await m.reauthenticateWithCredential(u, m.EmailAuthProvider.credential(u.email || "", password));

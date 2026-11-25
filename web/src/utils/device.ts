@@ -8,6 +8,8 @@ import { Share } from "@capacitor/share";
  * trong app iOS (Capacitor) dùng tính năng của máy.
  */
 export const IS_NATIVE = Capacitor.isNativePlatform();
+export const IS_IOS = Capacitor.getPlatform() === "ios";
+export const IS_ANDROID = Capacitor.getPlatform() === "android";
 
 export async function openUrl(url: string) {
   if (IS_NATIVE) {

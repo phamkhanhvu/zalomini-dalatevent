@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DalatEvent</string>
+    <string name="title_activity_main">DalatEvent</string>
+    <string name="package_name">vn.sensegroup.dalatevent</string>
+    <string name="custom_url_scheme">vn.sensegroup.dalatevent</string>
+</resources>

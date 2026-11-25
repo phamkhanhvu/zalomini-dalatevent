@@ -1,0 +1,95 @@
+# Đóng gói app Android (AAB đã ký) cho Google Play. Chỉ chạy khi bấm "Run workflow".
+# Cần 1 secret do chủ dự án tự đặt (không gửi qua chat):
+#   ANDROID_KEY_PASSWORD   mật khẩu tự nghĩ (ít nhất 12 ký tự) cho khóa tải lên (upload key)
+# Lần chạy đầu tiên tự tạo khóa tải lên ios-app/android/keystore/upload.p12 (đã mã hóa bằng mật khẩu trên) và lưu vào repo.
+# Tùy chọn: PLAY_SERVICE_ACCOUNT_JSON (tài khoản dịch vụ Google Play) để tự đưa bản lên kênh thử nội bộ.
+name: Đóng gói app Android cho Google Play
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Số phiên bản hiển thị, ví dụ 1.0"
+        required: true
+        default: "1.0"
+      track:
+        description: "Kênh Google Play khi tự tải lên: internal, closed (alpha), production"
+        required: true
+        default: "internal"
+
+permissions:
+  contents: write
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    env:
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      APP_VERSION: ${{ inputs.version }}
+    steps:
+      - name: Kiểm tra đã đặt mật khẩu khóa tải lên
+        run: |
+          if [ -z "$ANDROID_KEY_PASSWORD" ]; then echo "::error::Chưa đặt secret ANDROID_KEY_PASSWORD"; exit 1; fi
+          if [ ${#ANDROID_KEY_PASSWORD} -lt 12 ]; then echo "::error::Mật khẩu cần ít nhất 12 ký tự"; exit 1; fi
+          echo "$APP_VERSION" | grep -Eq '^[0-9]+(\.[0-9]+){1,2}$' || { echo "::error::Số phiên bản phải có dạng 1.0 hoặc 1.0.1"; exit 1; }
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Kiểm tra dữ liệu và dựng web cho app
+        env:
+          VITE_DATA_URL: https://raw.githubusercontent.com/${{ github.repository }}/main/data/
+          VITE_CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
+          VITE_ANDROID_GOOGLE: ${{ vars.ANDROID_GOOGLE }}
+        run: |
+          node scripts/validate-events.mjs
+          cd web && npm ci && npm test && npm run build
+      - run: npm ci
+        working-directory: ios-app
+      - run: npx cap sync android
+        working-directory: ios-app
+      - name: Tạo khóa tải lên (chỉ lần đầu)
+        working-directory: ios-app/android
+        run: |
+          if [ ! -f keystore/upload.p12 ]; then
+            mkdir -p keystore
+            keytool -genkeypair -storetype PKCS12 -keystore keystore/upload.p12 -alias upload \
+              -keyalg RSA -keysize 4096 -validity 10000 \
+              -storepass "$ANDROID_KEY_PASSWORD" -keypass "$ANDROID_KEY_PASSWORD" \
+              -dname "CN=DalatEvent, O=Sense Group, L=Da Lat, C=VN"
+            cd "$GITHUB_WORKSPACE"
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add ios-app/android/keystore/upload.p12
+            git commit -m "Android: tạo khóa tải lên Google Play (mã hóa bằng mật khẩu trong secret)"
+            git pull --rebase origin main && git push origin HEAD:main
+          fi
+      - name: Mã vân tay khóa tải lên (khai cho Firebase để đăng nhập Google)
+        working-directory: ios-app/android
+        run: keytool -list -v -keystore keystore/upload.p12 -storetype PKCS12 -storepass "$ANDROID_KEY_PASSWORD" | grep -E "SHA1|SHA256"
+      - name: Đóng gói AAB
+        working-directory: ios-app/android
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon bundleRelease -PversionCode=$((100 + GITHUB_RUN_NUMBER)) -PversionName="$APP_VERSION"
+          ls -la app/build/outputs/bundle/release/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dalatevent-android-${{ inputs.version }}-${{ github.run_number }}
+          path: ios-app/android/app/build/outputs/bundle/release/app-release.aab
+          retention-days: 30
+      - name: Đưa lên Google Play (khi đã có tài khoản dịch vụ)
+        if: ${{ env.PLAY_JSON != '' }}
+        env:
+          PLAY_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: vn.sensegroup.dalatevent
+          releaseFiles: ios-app/android/app/build/outputs/bundle/release/app-release.aab
+          track: ${{ inputs.track }}
+          status: draft

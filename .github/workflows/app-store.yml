@@ -1,0 +1,41 @@
+# Chuẩn bị trang App Store và (khi chọn) gửi duyệt bản iOS qua App Store Connect API.
+# Chỉ chạy khi bấm "Run workflow". Gửi duyệt là quyết định của chủ dự án.
+name: Nộp app lên App Store
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "prepare = chỉ điền thông tin; submit = điền rồi gửi duyệt"
+        required: true
+        default: "prepare"
+      version:
+        description: "Số phiên bản, ví dụ 1.0"
+        required: true
+        default: "1.0"
+      build:
+        description: "Số bản build (trống = mới nhất)"
+        required: false
+        default: ""
+
+jobs:
+  asc:
+    runs-on: ubuntu-latest
+    env:
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID || vars.ASC_KEY_ID || '42RU4QN633' }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID || vars.ASC_ISSUER_ID || 'e2b50f6b-b197-4dad-a991-a8c60868a27f' }}
+      ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+      MODE: ${{ inputs.mode }}
+      APP_VERSION: ${{ inputs.version }}
+      BUILD_NUMBER: ${{ inputs.build }}
+      # Liên hệ cho người duyệt của Apple: chủ dự án đặt trong Settings → Secrets and variables → Actions → Variables
+      CONTACT_FIRST: ${{ vars.REVIEW_CONTACT_FIRST }}
+      CONTACT_LAST: ${{ vars.REVIEW_CONTACT_LAST }}
+      CONTACT_PHONE: ${{ vars.REVIEW_CONTACT_PHONE }}
+      CONTACT_EMAIL: ${{ vars.REVIEW_CONTACT_EMAIL || vars.CONTACT_EMAIL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/asc-submit.mjs

@@ -181,16 +181,16 @@ async function main() {
       terr = terr.concat(r.data.map((t) => t.id));
       next = r.links && r.links.next;
     }
-    terr = terr.filter((t) => t !== "CHN");
+    // API cần đủ mọi nước; Trung Quốc đại lục ghi available: false
     await api("POST", `/v2/appAvailabilities`, {
       data: {
         type: "appAvailabilities",
         attributes: { availableInNewTerritories: true },
         relationships: { app: { data: { type: "apps", id: app.id } }, territoryAvailabilities: { data: terr.map((_, i) => ({ type: "territoryAvailabilities", id: "${t" + i + "}" })) } },
       },
-      included: terr.map((t, i) => ({ type: "territoryAvailabilities", id: "${t" + i + "}", attributes: { available: true }, relationships: { territory: { data: { type: "territories", id: t } } } })),
+      included: terr.map((t, i) => ({ type: "territoryAvailabilities", id: "${t" + i + "}", attributes: { available: t !== "CHN" }, relationships: { territory: { data: { type: "territories", id: t } } } })),
     });
-    log("Vùng phát hành:", terr.length, "nước (trừ Trung Quốc đại lục)");
+    log("Vùng phát hành:", terr.length - 1, "nước (trừ Trung Quốc đại lục)");
   } catch (e) {
     if (e.status !== 409) warn("Chưa đặt được vùng phát hành qua API:\n" + e.message);
     else {

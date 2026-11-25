@@ -90,6 +90,15 @@ jobs:
           name: dalatevent-android-${{ inputs.version }}-${{ github.run_number }}
           path: ios-app/android/app/build/outputs/bundle/release/*.aab
           retention-days: 30
+      - name: Đăng bản AAB lên trang Releases (tải về từ điện thoại được)
+        if: ${{ inputs.test_only != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="android-v${APP_VERSION}-$((100 + GITHUB_RUN_NUMBER))"
+          cp ios-app/android/app/build/outputs/bundle/release/app-release.aab "dalatevent-${TAG}.aab"
+          gh release create "$TAG" "dalatevent-${TAG}.aab" --title "Android ${APP_VERSION} (${TAG##*-})" \
+            --notes "Bản AAB đã ký cho Google Play. Tải về rồi đưa lên Play Console (Testing → Closed testing → Create release)." --prerelease
       - name: Đưa lên Google Play (khi đã có tài khoản dịch vụ)
         if: ${{ env.PLAY_JSON != '' && inputs.test_only != 'true' }}
         env:

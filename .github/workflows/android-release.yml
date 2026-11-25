@@ -16,6 +16,10 @@ on:
         description: "Kênh Google Play khi tự tải lên: internal, closed (alpha), production"
         required: true
         default: "internal"
+      test_only:
+        description: "true = chỉ thử đóng gói, không ký, không tạo khóa, không tải lên"
+        required: false
+        default: "false"
 
 permissions:
   contents: write
@@ -24,11 +28,13 @@ jobs:
   android:
     runs-on: ubuntu-latest
     env:
-      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      ANDROID_KEY_PASSWORD: ${{ inputs.test_only == 'true' && '' || secrets.ANDROID_KEY_PASSWORD }}
+      TEST_ONLY: ${{ inputs.test_only }}
       APP_VERSION: ${{ inputs.version }}
     steps:
       - name: Kiểm tra đã đặt mật khẩu khóa tải lên
         run: |
+          if [ "$TEST_ONLY" = "true" ]; then echo "Chỉ thử đóng gói"; exit 0; fi
           if [ -z "$ANDROID_KEY_PASSWORD" ]; then echo "::error::Chưa đặt secret ANDROID_KEY_PASSWORD"; exit 1; fi
           if [ ${#ANDROID_KEY_PASSWORD} -lt 12 ]; then echo "::error::Mật khẩu cần ít nhất 12 ký tự"; exit 1; fi
           echo "$APP_VERSION" | grep -Eq '^[0-9]+(\.[0-9]+){1,2}$' || { echo "::error::Số phiên bản phải có dạng 1.0 hoặc 1.0.1"; exit 1; }
@@ -53,6 +59,7 @@ jobs:
       - run: npx cap sync android
         working-directory: ios-app
       - name: Tạo khóa tải lên (chỉ lần đầu)
+        if: ${{ inputs.test_only != 'true' }}
         working-directory: ios-app/android
         run: |
           if [ ! -f keystore/upload.p12 ]; then
@@ -69,6 +76,7 @@ jobs:
             git pull --rebase origin main && git push origin HEAD:main
           fi
       - name: Mã vân tay khóa tải lên (khai cho Firebase để đăng nhập Google)
+        if: ${{ inputs.test_only != 'true' }}
         working-directory: ios-app/android
         run: keytool -list -v -keystore keystore/upload.p12 -storetype PKCS12 -storepass "$ANDROID_KEY_PASSWORD" | grep -E "SHA1|SHA256"
       - name: Đóng gói AAB
@@ -80,10 +88,10 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: dalatevent-android-${{ inputs.version }}-${{ github.run_number }}
-          path: ios-app/android/app/build/outputs/bundle/release/app-release.aab
+          path: ios-app/android/app/build/outputs/bundle/release/*.aab
           retention-days: 30
       - name: Đưa lên Google Play (khi đã có tài khoản dịch vụ)
-        if: ${{ env.PLAY_JSON != '' }}
+        if: ${{ env.PLAY_JSON != '' && inputs.test_only != 'true' }}
         env:
           PLAY_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
         uses: r0adkll/upload-google-play@v1

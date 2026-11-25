@@ -132,8 +132,6 @@ export const FESTIVAL = {
   end: "",
   website: "https://dalatevent.com/",
   sourceUrl: "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
-  hotline: "0986338656",
-  hotlineLabel: "0986 338 656",
   updated: "",
 };
 

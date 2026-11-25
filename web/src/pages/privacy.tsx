@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { useNavigate } from "react-router";
 import { FESTIVAL } from "../data/festival";
-import { callPhone } from "../utils/device";
 import { CONTACT_EMAIL } from "../utils/contact";
 import { isEn, tr } from "../i18n";
 
@@ -12,7 +11,7 @@ const Contact: FC<{ subject?: string }> = ({ subject }) =>
   CONTACT ? (
     <a href={"mailto:" + CONTACT + (subject ? "?subject=" + encodeURIComponent(subject) : "")}>{CONTACT}</a>
   ) : (
-    <button type="button" className="acc-link" onClick={() => callPhone(FESTIVAL.hotline)}>{tr("số ", "phone ")}{FESTIVAL.hotlineLabel}</button>
+    <span>{tr("qua email trên website sensegroup.vn", "via the email on sensegroup.vn")}</span>
   );
 
 /** Bản tiếng Anh, cùng nội dung với bản tiếng Việt bên dưới */
@@ -24,7 +23,7 @@ const PrivacyEn: FC<{ home: () => void }> = ({ home }) => (
     </header>
     <section className="sec prose">
       <h2 className="h2">Who runs DalatEvent</h2>
-      <p>DalatEvent (dalatevent.com) is run by Sense Group, 304 Hai Ba Trung, Da Lat, Vietnam. For any request about personal data, contact <Contact />.</p>
+      <p>DalatEvent (dalatevent.com) is run by Sense Group in Da Lat, Vietnam. For any request about personal data, contact <Contact />.</p>
 
       <h2 className="h2">Without signing in</h2>
       <p>You can use the whole site without an account. The site has no analytics or advertising code and sends none of your data to DalatEvent.</p>
@@ -84,7 +83,7 @@ const PrivacyPage: FC = () => {
       </header>
       <section className="sec prose">
         <h2 className="h2">Ai vận hành</h2>
-        <p>DalatEvent (dalatevent.com) do Sense Group vận hành, địa chỉ 304 Hai Bà Trưng, Đà Lạt. Mọi yêu cầu về dữ liệu cá nhân xin liên hệ <Contact />.</p>
+        <p>DalatEvent (dalatevent.com) do Sense Group (Đà Lạt) vận hành. Mọi yêu cầu về dữ liệu cá nhân xin liên hệ <Contact />.</p>
 
         <h2 className="h2">Khi bạn không đăng nhập</h2>
         <p>Bạn dùng được toàn bộ website mà không cần tài khoản. Website không gắn mã đo lường hay quảng cáo, và không gửi dữ liệu nào của bạn về cho DalatEvent.</p>

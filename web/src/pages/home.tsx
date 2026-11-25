@@ -4,13 +4,13 @@ import { useSnackbar } from "../ui";
 import { FESTIVAL, PROGRAMS } from "../data/festival";
 import { onDataChange } from "../data/store";
 import { countdown, statusOf } from "../utils/time";
-import { callPhone, openUrl, shareText } from "../utils/device";
+import { shareText } from "../utils/device";
 import { shareFail } from "../utils/platform";
 import { Agenda } from "../components/agenda";
 import { SearchBox } from "../components/search-box";
 import { Banners } from "../components/banners";
 import { useProgramSheet } from "../components/use-program-sheet";
-import { IconArrow, IconBookmark, IconCompass, IconGlobe, IconPhone, IconPin, IconShare } from "../components/icons";
+import { IconArrow, IconBookmark, IconCompass, IconGlobe, IconPin, IconShare } from "../components/icons";
 
 import f1 from "../static/img/md-vuon-hoa.jpg";
 import f2 from "../static/img/md-dem-nhac-acoustic.jpg";
@@ -128,12 +128,6 @@ const HomePage: FC = () => {
         <h2 className="h2">{tr("Về DalatEvent", "About DalatEvent")}</h2>
         <p>{tr("DalatEvent là cổng thông tin sự kiện Đà Lạt do Sense Group vận hành.", "DalatEvent is Da Lat's events guide, run by Sense Group.")}</p>
         <div className="actions">
-          <button type="button" className="act" onClick={() => openUrl(FESTIVAL.sourceUrl)}>
-            <IconGlobe />{tr("Cổng Festival chính thức", "Official festival portal")}
-          </button>
-          <button type="button" className="act" onClick={() => callPhone(FESTIVAL.hotline)}>
-            <IconPhone />{FESTIVAL.hotlineLabel}
-          </button>
           <button
             type="button"
             className="act"
@@ -151,7 +145,7 @@ const HomePage: FC = () => {
             <IconGlobe />{tr("Nhúng lịch và mã QR cho đối tác", "Embed the calendar and QR codes for partners")}
           </button>
         </div>
-        <p className="muted small">© {new Date().getFullYear()} DalatEvent · Sense Group · 304 Hai Bà Trưng, Đà Lạt</p>
+        <p className="muted small">© {new Date().getFullYear()} DalatEvent · Sense Group</p>
         <button type="button" className="acc-switch link-left" onClick={() => navigate("/quyen-rieng-tu")}>{tr("Chính sách quyền riêng tư", "Privacy policy")}</button>
       </section>
       {sheet}

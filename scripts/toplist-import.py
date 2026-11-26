@@ -152,6 +152,7 @@ TABS = {
 }
 
 # vùng hợp lệ quanh Đà Lạt – Lâm Đồng
+EN = {}
 BOX = (11.3, 12.4, 107.5, 108.9)
 
 
@@ -187,6 +188,16 @@ def coords(v):
     return None, None
 
 
+# Câu ghi chú nội bộ lẫn trong mô tả (không đưa lên web)
+INTERNAL = re.compile(r"Sense Media|dự án|TVC|bạn đã đề cập|giới thiệu cho khách hàng", re.I)
+
+
+def clean_desc(v):
+    s = clean(v)
+    parts = re.split(r"(?<=[.!?])\s+", s)
+    return " ".join(p for p in parts if not INTERNAL.search(p)).strip()
+
+
 def folder_id(cell):
     t = (cell.hyperlink.target if cell.hyperlink else "") or str(cell.value or "")
     m = re.search(r"/folders/([A-Za-z0-9_-]{10,})", t)
@@ -206,6 +217,12 @@ def clip(v):
 
 def main(path):
     wb = openpyxl.load_workbook(path)
+    # bản tiếng Anh của mô tả (data/toplist-en.json, theo id địa điểm)
+    global EN
+    try:
+        EN = json.load(open("data/toplist-en.json", encoding="utf-8"))
+    except (OSError, ValueError):
+        EN = {}
     # giữ lại trạng thái ảnh đã lấy ở lần trước
     prev = {}
     try:
@@ -245,7 +262,8 @@ def main(path):
                 "address": clean(cells[1].value if cells[1] else ""),
                 "lat": lat,
                 "lng": lng,
-                "desc": clean(cells[3].value if cells[3] else ""),
+                "desc": clean_desc(cells[3].value if cells[3] else ""),
+                "desc_en": EN.get(pid, ""),
                 "clip": clip(cells[5].value if cells[5] else ""),
                 "img_folder": folder_id(cells[4]) if cells[4] is not None else "",
                 **prev.get(pid, {}),

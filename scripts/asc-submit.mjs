@@ -34,7 +34,8 @@ async function api(method, url, body) {
   const text = await res.text();
   const json = text ? JSON.parse(text) : {};
   if (!res.ok) {
-    const msg = (json.errors || []).map((e) => `${e.status} ${e.code}: ${e.title} — ${e.detail || ""}`).join("\n");
+    const assoc = (e) => Object.entries(e.meta?.associatedErrors || {}).flatMap(([k, list]) => (list || []).map((x) => `\n   ↳ ${k}: ${x.code} — ${x.detail || x.title || ""}`)).join("");
+    const msg = (json.errors || []).map((e) => `${e.status} ${e.code}: ${e.title} — ${e.detail || ""}${assoc(e)}`).join("\n");
     const err = new Error(`${method} ${url}\n${msg || text}`);
     err.status = res.status;
     err.json = json;
@@ -376,6 +377,9 @@ async function screenshots(locId, dir) {
   let set = sets.data.find((s) => s.attributes.screenshotDisplayType === "APP_IPHONE_67");
   if (set) {
     const old = await api("GET", `/v1/appScreenshotSets/${set.id}/appScreenshots`);
+    // Ảnh đang có trùng tên, trùng cỡ và đã xử lý xong: giữ nguyên, khỏi tải lại
+    const same = old.data.length === files.length && files.every((f) => old.data.some((s) => s.attributes.fileName === f && s.attributes.fileSize === fs.statSync(path.join(dir, f)).size && s.attributes.assetDeliveryState?.state === "COMPLETE"));
+    if (same) return log("Ảnh chụp màn hình: giữ nguyên " + files.length + " ảnh,", path.basename(dir));
     for (const s of old.data) await api("DELETE", `/v1/appScreenshots/${s.id}`);
   } else {
     set = (await api("POST", `/v1/appScreenshotSets`, { data: { type: "appScreenshotSets", attributes: { screenshotDisplayType: "APP_IPHONE_67" }, relationships: { appStoreVersionLocalization: { data: { type: "appStoreVersionLocalizations", id: locId } } } } })).data;
@@ -390,6 +394,16 @@ async function screenshots(locId, dir) {
     }
     const md5 = crypto.createHash("md5").update(buf).digest("hex");
     await api("PATCH", `/v1/appScreenshots/${shot.id}`, { data: { type: "appScreenshots", id: shot.id, attributes: { uploaded: true, sourceFileChecksum: md5 } } });
+  }
+  // Chờ Apple xử lý xong ảnh (tối đa 4 phút), nếu không sẽ chưa gửi duyệt được
+  for (const until = Date.now() + 4 * 60 * 1000; ; ) {
+    const now = await api("GET", `/v1/appScreenshotSets/${set.id}/appScreenshots`);
+    const states = now.data.map((s) => s.attributes.assetDeliveryState?.state);
+    if (states.every((st) => st === "COMPLETE") || Date.now() > until) {
+      if (states.some((st) => st !== "COMPLETE")) warn("Ảnh chụp màn hình " + path.basename(dir) + " chưa xử lý xong: " + states.join(","));
+      break;
+    }
+    await new Promise((r) => setTimeout(r, 10000));
   }
   log("Ảnh chụp màn hình:", files.length, "ảnh,", path.basename(dir));
 }

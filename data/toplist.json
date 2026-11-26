@@ -12978,7 +12978,8 @@
    "desc": "Sở hữu vị trí đắc địa trên \"con đường ẩm thực\" Hai Bà Trưng, Kiều Quán là sự kết hợp tuyệt vời giữa hai món ngon nức tiếng của Hà thành. Tiệm được lòng thực khách bởi sự đa dạng trong menu. Bạn có thể gọi một đĩa bánh cuốn nóng tráng tay ngay tại chỗ và ăn kèm với thịt nướng bún chả. Không gian quán sạch sẽ, mang hơi hướng tiệm ăn truyền thống.",
    "desc_en": "On Hai Ba Trung food street, two Hanoi favourites in one: freshly steamed rice rolls with bun cha grilled pork, in a clean traditional eatery.",
    "clip": "https://www.tiktok.com/@banandalat/video/7524553705434270994",
-   "img_folder": "1zYJvW60UCmFYIZy6ojYfJumk0iWfHtY3"
+   "img_folder": "1zYJvW60UCmFYIZy6ojYfJumk0iWfHtY3",
+   "img": true
   },
   {
    "id": "bun-dau--quan-bun-dau-co-mai",
@@ -12990,7 +12991,8 @@
    "desc": "Cô Mai là một trong những cái tên \"lão làng\" và ổn định nhất về phong độ hương vị qua nhiều năm. Quán mang phong cách mộc mạc, bình dân với không gian vừa phải nhưng luôn sạch sẽ. Đây là địa chỉ tin cậy cho những ai tìm kiếm hương vị bún đậu \"chuẩn chỉ\" không lai tạp.",
    "desc_en": "A veteran with consistent flavour for years, rustic and clean, a trusted spot for authentic bun dau.",
    "clip": "https://www.tiktok.com/@du_lich_dalat/video/7546401966750993671",
-   "img_folder": "1YJ6gCwJULAp1xUl90F9KReESC1hDGUtZ"
+   "img_folder": "1YJ6gCwJULAp1xUl90F9KReESC1hDGUtZ",
+   "img": true
   },
   {
    "id": "bun-dau--quan-que-2-bun-dau-mam-tom",
@@ -13002,7 +13004,8 @@
    "desc": "Quán Quê 2 sở hữu không gian rộng rãi, trang trí theo phong cách làng quê Việt Nam với bàn ghế tre, tạo cảm giác gần gũi và ấm cúng. Thực đơn ở đây khá đa dạng với nhiều món ăn kèm như lòng lợn luộc, dồi sụn.",
    "desc_en": "A roomy space in Vietnamese village style with bamboo furniture and lots of extras like boiled pork offal and cartilage sausage.",
    "clip": "https://www.tiktok.com/@dzui_90/video/7475265454710197520",
-   "img_folder": "1HxUfhsAWGxnPyiWAQZh9C9IkkJ9b8VEK"
+   "img_folder": "1HxUfhsAWGxnPyiWAQZh9C9IkkJ9b8VEK",
+   "img": true
   },
   {
    "id": "bun-dau--quan-bun-dau-co-oanh",
@@ -13014,7 +13017,8 @@
    "desc": "Sở hữu vị trí đắc địa ngay đầu đường Hai Bà Trưng, Cô Oanh là tọa độ \"ruột\" của các bạn trẻ và dân văn phòng khu vực trung tâm. Quán có nhịp độ phục vụ rất nhanh, không gian hiện đại và năng động. Đây là lựa chọn tuyệt vời cho một bữa trưa nhanh gọn nhưng vẫn đảm bảo ngon miệng.",
    "desc_en": "At the top of Hai Ba Trung, a go-to for young people and office workers, fast and modern, great for a quick, tasty lunch.",
    "clip": "https://www.tiktok.com/@truongphuoctu/video/7557697654206123271",
-   "img_folder": "1YA1fmxjmY1vqHnThllua9mjkqQofHN_B"
+   "img_folder": "1YA1fmxjmY1vqHnThllua9mjkqQofHN_B",
+   "img_failed": true
   },
   {
    "id": "bun-dau--bun-dau-mam-tom-tu-tooc-cn2",
@@ -13026,7 +13030,8 @@
    "desc": "Tư Toọc là một trong những chuỗi bún đậu thành công nhất tại Đà Lạt với nhiều chi nhánh, mang lại sự chuyên nghiệp trong cả món ăn lẫn dịch vụ. ác chi nhánh của Tư Toọc luôn được đầu tư về không gian, mang vibe trẻ trung, sạch sẽ. Quy trình chế biến đồng nhất giúp hương vị giữa các chi nhánh không có sự chênh lệch lớn.",
    "desc_en": "One of Da Lat's most successful bun dau chains, with youthful, clean branches and consistent flavour across locations.",
    "clip": "https://www.tiktok.com/@bundaututooc/video/7285893516750818562",
-   "img_folder": "1RCc_Fm6EHlHOy42YdVIR8Dpd5zDtsmd5"
+   "img_folder": "1RCc_Fm6EHlHOy42YdVIR8Dpd5zDtsmd5",
+   "img": true
   },
   {
    "id": "bun-dau--bun-dau-pho-co",
@@ -13038,7 +13043,8 @@
    "desc": "Đúng như cái tên, quán mang hương vị bún đậu đặc trưng của Hà Nội về giữa lòng phố núi. Quán nằm trên con đường Phan Đình Phùng nhộn nhịp, decor mang hơi hướng hoài cổ. Điểm nhấn là sợi bún lá được ép chặt, cắt miếng vuông vức đúng kiểu truyền thống.",
    "desc_en": "Hanoi-style bun dau on busy Phan Dinh Phung with nostalgic decor and traditional pressed vermicelli cut into neat squares.",
    "clip": "https://www.tiktok.com/@bundauphocodalat/video/7544717733678697735",
-   "img_folder": "1oy9AvC3bZPkb0IyOGG0oq6A9USifXsc8"
+   "img_folder": "1oy9AvC3bZPkb0IyOGG0oq6A9USifXsc8",
+   "img": true
   },
   {
    "id": "bun-dau--bun-dau-co-bich",
@@ -13050,7 +13056,8 @@
    "desc": "Một địa chỉ bình dân nhưng chất lượng. Quán nhỏ, giản dị nhưng phục vụ rất niềm nở. Cô chủ quán (Cô Bích) cực kỳ nhiệt tình, thường xuyên hỏi thăm khách có cần thêm rau hay bún không.",
    "desc_en": "Simple but good, small and welcoming, with a very friendly owner who checks if you need more greens or noodles.",
    "clip": "",
-   "img_folder": "1USIQY9_KFdpIunS0id-G4t9hVYSnW053"
+   "img_folder": "1USIQY9_KFdpIunS0id-G4t9hVYSnW053",
+   "img": true
   },
   {
    "id": "bun-dau--bun-dau-tu-tooc-chi-nhanh-3",
@@ -13062,7 +13069,8 @@
    "desc": "Tư Toọc là một trong những chuỗi bún đậu thành công nhất tại Đà Lạt với nhiều chi nhánh, mang lại sự chuyên nghiệp trong cả món ăn lẫn dịch vụ. ác chi nhánh của Tư Toọc luôn được đầu tư về không gian, mang vibe trẻ trung, sạch sẽ. Quy trình chế biến đồng nhất giúp hương vị giữa các chi nhánh không có sự chênh lệch lớn.",
    "desc_en": "One of Da Lat's most successful bun dau chains, with youthful, clean branches and consistent flavour across locations.",
    "clip": "https://www.tiktok.com/@banandalat/video/7561387645763538194",
-   "img_folder": "1KmqjxArztzj2Fcm_hYYU1aBWbC-o5wdR"
+   "img_folder": "1KmqjxArztzj2Fcm_hYYU1aBWbC-o5wdR",
+   "img": true
   },
   {
    "id": "trai-cay--cua-hang-trai-cay-long",
@@ -13074,7 +13082,8 @@
    "desc": "Trái Cây Long là một địa chỉ \"lão làng\" và uy tín bậc nhất trong lòng người dân phố núi. Tiệm chuyên cung cấp các loại trái cây nội địa chất lượng cao và trái cây nhập khẩu theo mùa. Đặc biệt, đây là nơi bạn có thể tìm thấy những loại đặc sản Đà Lạt (như hồng giòn, bơ sáp, dâu tây) được tuyển chọn kỹ lưỡng nhất.",
    "desc_en": "A long-trusted fruit shop with quality local and seasonal imported fruit, and the best-selected Da Lat specialties like crisp persimmons, avocados and strawberries.",
    "clip": "",
-   "img_folder": "170NplLOV5-u8kgRfKOR8JzHar37eXaIv"
+   "img_folder": "170NplLOV5-u8kgRfKOR8JzHar37eXaIv",
+   "img": true
   },
   {
    "id": "trai-cay--tiem-trai-cay",
@@ -13086,7 +13095,8 @@
    "desc": "Đây là tiệm trái cây mang phong cách hiện đại và thẩm mỹ cao, rất được lòng khách du lịch quốc tế (đặc biệt là khách Hàn Quốc) và giới trẻ. Tiệm tập trung vào các dòng trái cây cao cấp, đặc biệt là Dâu tây Đà Lạt xuất khẩu và các loại quả nhập khẩu được đóng gói trong các hộp gỗ, giỏ mây cực kỳ tinh tế.",
    "desc_en": "A modern, stylish fruit shop popular with international (especially Korean) visitors, focused on premium export-grade strawberries and imports in elegant wooden boxes and baskets.",
    "clip": "",
-   "img_folder": "1qDpKVOxh3GvzH_H0cJep8lMMeK6P0kza"
+   "img_folder": "1qDpKVOxh3GvzH_H0cJep8lMMeK6P0kza",
+   "img": true
   },
   {
    "id": "trai-cay--dalat-fresh-fruits-trai-cay-nhap-khau-tai-da-lat",
@@ -13098,7 +13108,8 @@
    "desc": "Đại diện tiêu biểu cho dòng Trái cây nhập khẩu chính ngạch tại Đà Lạt. Chuyên các dòng táo, nho, cherry nhập khẩu từ Mỹ, Úc, New Zealand. Cửa hàng hiện đại, có kho lạnh bảo quản chuẩn giúp trái cây luôn giữ được độ giòn ngọt.",
    "desc_en": "An official importer of apples, grapes and cherries from the US, Australia and New Zealand, with cold storage to keep fruit crisp and sweet.",
    "clip": "https://www.tiktok.com/@dalatfreshfruits/video/7440406033333357831",
-   "img_folder": "1KDbcmZeeZ0a-FLwuAvEIBJtVeiiY83hR"
+   "img_folder": "1KDbcmZeeZ0a-FLwuAvEIBJtVeiiY83hR",
+   "img": true
   },
   {
    "id": "trai-cay--shop-trai-cay-nhap-khau-da-lat-gio-trai-cay-sach",
@@ -13110,7 +13121,8 @@
    "desc": "Thế mạnh là các mẫu Giỏ trái cây thiết kế. Khách hàng thường đánh giá cao sự sáng tạo trong cách phối màu hoa tươi và trái cây trong các dịp lễ, khai trương. \"Dịch vụ điện hoa và trái cây ở đây rất nhanh, mẫu mã sang trọng, trái cây tươi không bị dập nát\"",
    "desc_en": "Strong in designed fruit baskets, praised for creative pairings of fresh flowers and fruit for holidays and openings, with fast, elegant delivery.",
    "clip": "https://www.tiktok.com/@traicaysachdalat86/video/7565036666163940628",
-   "img_folder": "17HxFq0ktPryC7SzGNi_90g_ZcLN-VLtK"
+   "img_folder": "17HxFq0ktPryC7SzGNi_90g_ZcLN-VLtK",
+   "img": true
   },
   {
    "id": "trai-cay--vua-trai-cay-thao-tay",
@@ -13122,7 +13134,8 @@
    "desc": "Nếu bạn muốn mua trái cây đặc sản Đà Lạt số lượng lớn với mức giá tốt nhất, đây chính là hai \"vựa\" uy tín nhất. Thao Tây là đầu mối của các loại hồng, bơ, dâu tây tại vườn. Không gian đúng chất vựa, hàng hóa luân chuyển mỗi ngày nên luôn tươi mới.",
    "desc_en": "One of the most trusted wholesalers for buying Da Lat fruit in bulk at the best price: persimmons, avocados and strawberries straight from farms, always fresh.",
    "clip": "",
-   "img_folder": "17DNghJ8I9yI58xleKPcRDMJrwPAyFP2T"
+   "img_folder": "17DNghJ8I9yI58xleKPcRDMJrwPAyFP2T",
+   "img": true
   },
   {
    "id": "trai-cay--vua-trai-cay-ut-thao",
@@ -13134,7 +13147,8 @@
    "desc": "Nằm gần khu vực Chợ và các trục đường chính, Út Thảo nổi tiếng với phong cách bán hàng dân dã, giá cả cạnh tranh.",
    "desc_en": "Near the market and main roads, known for down-to-earth selling and competitive prices.",
    "clip": "",
-   "img_folder": "1b9leRXVxGp1YIi5Vke7LUiyWmZdWsuf0"
+   "img_folder": "1b9leRXVxGp1YIi5Vke7LUiyWmZdWsuf0",
+   "img": true
   },
   {
    "id": "fastfood--kfc-da-lat-center",
@@ -13146,7 +13160,8 @@
    "desc": "Nằm ngay tầng trệt của khu chợ mới, đây là điểm dừng chân lý tưởng sau khi mua sắm. Không gian hiện đại, sạch sẽ và rất náo nhiệt vào cuối tuần.",
    "desc_en": "On the ground floor of the new market, a handy stop after shopping; modern, clean and busy at weekends.",
    "clip": "",
-   "img_folder": "1WT2LM62wx5gxUtKsq_BUQClvlS9YpB6g"
+   "img_folder": "1WT2LM62wx5gxUtKsq_BUQClvlS9YpB6g",
+   "img": true
   },
   {
    "id": "fastfood--kfc-bui-thi-xuan-da-lat",
@@ -13158,7 +13173,8 @@
    "desc": "Tọa lạc trên con đường sầm uất nhất về ẩm thực, chi nhánh này thường phục vụ đông đảo đối tượng học sinh, sinh viên và các gia đình địa phương.",
    "desc_en": "On the busiest food street, popular with students and local families.",
    "clip": "",
-   "img_folder": "1TW2Hmigm0aVOwiPSWLnBtv80sZIWmxiT"
+   "img_folder": "1TW2Hmigm0aVOwiPSWLnBtv80sZIWmxiT",
+   "img": true
   },
   {
    "id": "fastfood--popeyes-bui-thi-xuan-da-lat",
@@ -13170,7 +13186,8 @@
    "desc": "Cửa hàng mang tone màu cam nổi bật, không gian trẻ trung và hiện đại. Đây là địa điểm yêu thích của những ai muốn tìm kiếm hương vị gà rán khác biệt với lớp bột xù đặc trưng.",
    "desc_en": "Bright orange, young and modern, for those who want a different crispy, craggy fried chicken.",
    "clip": "https://www.tiktok.com/@callmevyvo/video/7204025467706395931",
-   "img_folder": "1XpX_k4NEN4RqGfOAmVQqPLUzhZ-d8OtG"
+   "img_folder": "1XpX_k4NEN4RqGfOAmVQqPLUzhZ-d8OtG",
+   "img": true
   },
   {
    "id": "fastfood--lotteria-hoa-binh-da-lat",
@@ -13182,7 +13199,8 @@
    "desc": "Một trong những cửa hàng có view \"đỉnh\" nhất: nhìn thẳng ra vòng xoay Chợ Đà Lạt. Ngồi ở tầng 2 vào buổi tối, bạn có thể ngắm nhìn dòng người nhộn nhịp dưới phố cực chill.",
    "desc_en": "One of the best-view branches, looking straight at the Da Lat market roundabout; the 2nd floor at night is great for people-watching.",
    "clip": "",
-   "img_folder": "1SFjsLefWYWekvTuc15CD5hqhpMGHnkdk"
+   "img_folder": "1SFjsLefWYWekvTuc15CD5hqhpMGHnkdk",
+   "img": true
   },
   {
    "id": "fastfood--lotteria-bui-thi-xuan-da-lat",
@@ -13194,7 +13212,8 @@
    "desc": "Chi nhánh này rộng rãi, thoáng mát, là tọa độ tổ chức tiệc sinh nhật quen thuộc của các bé tại Đà Lạt.",
    "desc_en": "Roomy and airy, a popular birthday party venue for local kids.",
    "clip": "",
-   "img_folder": "1EWDK4MKvDIo906hd5KCf7MAN5epplfmY"
+   "img_folder": "1EWDK4MKvDIo906hd5KCf7MAN5epplfmY",
+   "img": true
   },
   {
    "id": "fastfood--jollibee-phan-chu-trinh",
@@ -13206,7 +13225,8 @@
    "desc": "\"Chú ong chăm chỉ\" Jollibee là cái tên gần gũi nhất với các gia đình có trẻ nhỏ tại Đà Lạt nhờ phong cách phục vụ thân thiện và thực đơn ngọt ngào. jollibee ghi điểm nhờ món Mì Ý sốt bò băm ngọt nhẹ cực kỳ hợp khẩu vị trẻ em Việt Nam. \"Nhân viên ở đây luôn vui vẻ, không gian quán lúc nào cũng tràn ngập tiếng cười của trẻ nhỏ. Gà giòn vui vẻ đúng như cái tên\"",
    "desc_en": "Jollibee is a family favourite in Da Lat for friendly service and a kid-friendly menu, especially its sweet spaghetti with minced beef; always cheerful.",
    "clip": "",
-   "img_folder": "13XJYJlYj4ZVMg4nEKCp9lhBHd-MuPxVt"
+   "img_folder": "13XJYJlYj4ZVMg4nEKCp9lhBHd-MuPxVt",
+   "img": true
   },
   {
    "id": "fastfood--jollibee-phan-dinh-phung-da-lat",
@@ -13218,7 +13238,8 @@
    "desc": "\"Chú ong chăm chỉ\" Jollibee là cái tên gần gũi nhất với các gia đình có trẻ nhỏ tại Đà Lạt nhờ phong cách phục vụ thân thiện và thực đơn ngọt ngào. jollibee ghi điểm nhờ món Mì Ý sốt bò băm ngọt nhẹ cực kỳ hợp khẩu vị trẻ em Việt Nam. \"Nhân viên ở đây luôn vui vẻ, không gian quán lúc nào cũng tràn ngập tiếng cười của trẻ nhỏ. Gà giòn vui vẻ đúng như cái tên\"",
    "desc_en": "Jollibee is a family favourite in Da Lat for friendly service and a kid-friendly menu, especially its sweet spaghetti with minced beef; always cheerful.",
    "clip": "https://www.tiktok.com/@thodiadalat_gdl/video/7318623451454000402",
-   "img_folder": "1euOEqSyYIl1qmMmU9NoeaNhJaFvbqnUa"
+   "img_folder": "1euOEqSyYIl1qmMmU9NoeaNhJaFvbqnUa",
+   "img": true
   },
   {
    "id": "fastfood--jollibee-dinh-tien-hoang",
@@ -13230,7 +13251,8 @@
    "desc": "\"Chú ong chăm chỉ\" Jollibee là cái tên gần gũi nhất với các gia đình có trẻ nhỏ tại Đà Lạt nhờ phong cách phục vụ thân thiện và thực đơn ngọt ngào. jollibee ghi điểm nhờ món Mì Ý sốt bò băm ngọt nhẹ cực kỳ hợp khẩu vị trẻ em Việt Nam. \"Nhân viên ở đây luôn vui vẻ, không gian quán lúc nào cũng tràn ngập tiếng cười của trẻ nhỏ. Gà giòn vui vẻ đúng như cái tên\"",
    "desc_en": "Jollibee is a family favourite in Da Lat for friendly service and a kid-friendly menu, especially its sweet spaghetti with minced beef; always cheerful.",
    "clip": "https://www.tiktok.com/@banandalat/video/7515417721589337362",
-   "img_folder": "1tb7q4hgWbZKDuaGWvz2ALhQh7m0gm78q"
+   "img_folder": "1tb7q4hgWbZKDuaGWvz2ALhQh7m0gm78q",
+   "img": true
   },
   {
    "id": "fastfood--mcdonald-s-da-lat",
@@ -13242,7 +13264,8 @@
    "desc": "McDonald's được khen ngợi về hệ thống đặt hàng tự động hiện đại và chất lượng món Big Mac trứ danh.",
    "desc_en": "Praised for its modern self-order kiosks and the famous Big Mac.",
    "clip": "https://www.tiktok.com/@dalatreviewcotam/video/7530247584959565064",
-   "img_folder": "1Iw3BzcIpktKgJjP8IDinB6iZ3gRRy17j"
+   "img_folder": "1Iw3BzcIpktKgJjP8IDinB6iZ3gRRy17j",
+   "img": true
   },
   {
    "id": "fastfood--chicken-plus-ba-trieu-da-lat",
@@ -13254,7 +13277,8 @@
    "desc": "Quán mang phong cách trẻ trung, thường xuyên có các chương trình ưu đãi hấp dẫn. Đây là tọa độ \"ruột\" của các nhóm bạn trẻ thích tụ tập.",
    "desc_en": "Young and lively with frequent promotions, a go-to for groups of friends.",
    "clip": "https://www.tiktok.com/@banandalat/video/7454534023478512904",
-   "img_folder": "1Z6DYz0DmlqQ_xz3SK49OpbelFbBpbhVb"
+   "img_folder": "1Z6DYz0DmlqQ_xz3SK49OpbelFbBpbhVb",
+   "img": true
   },
   {
    "id": "nha-hang-hoa--xuyen-tieu-lau-hong-kong",
@@ -13266,7 +13290,8 @@
    "desc": "Xuyên Tiêu là một trong những điểm đến tiên phong mang hơi thở của những bộ phim Hong Kong thập niên 90 về giữa lòng Đà Lạt. Không gian quán gây ấn tượng mạnh với phong cách decor \"retro\" đậm chất điện ảnh: những bảng hiệu đèn neon xanh đỏ, bàn ghế gỗ mộc mạc và những góc check-in cực phẩm trên lầu. Tiệm mang lại cảm giác ấm cúng, náo nhiệt, rất phù hợp cho những buổi tụ tập bạn bè trong tiết trời se lạnh.",
    "desc_en": "A pioneer bringing 1990s Hong Kong film vibes to Da Lat: neon signs, rustic wooden furniture and great upstairs photo spots; cosy and lively for gatherings in cool weather.",
    "clip": "https://www.tiktok.com/@lauxuyentieuhongkong/video/7553857998796590344",
-   "img_folder": "1BKboDwANxsiFNB37rVUADwI37doSn3Zj"
+   "img_folder": "1BKboDwANxsiFNB37rVUADwI37doSn3Zj",
+   "img": true
   },
   {
    "id": "nha-hang-hoa--bao-asian-cuisine",
@@ -13278,7 +13303,8 @@
    "desc": "Nằm trong khuôn viên sang trọng của Mercure Dalat Resort (03 Nguyễn Du), Bao Asian Cuisine là sự kết hợp hoàn hảo giữa kiến trúc Pháp cổ điển và tinh hoa ẩm thực Châu Á hiện đại. Không gian nhà hàng vô cùng đẳng cấp với thiết kế mở, nhìn ra khu vườn ngập tràn hoa cỏ của resort. Đây là địa điểm lý tưởng cho những bữa tối lãng mạn hoặc những buổi tiếp khách quan trọng cần sự riêng tư và tinh tế.",
    "desc_en": "Inside Mercure Dalat Resort (3 Nguyen Du), classic French architecture meets modern Asian cuisine in an elegant open space overlooking flower gardens; ideal for romantic dinners or important guests.",
    "clip": "https://www.tiktok.com/@sonharryy/video/7585567052769807636",
-   "img_folder": "1M_bLfRuXu9asP-6NDZNFsITob9vkrKZm"
+   "img_folder": "1M_bLfRuXu9asP-6NDZNFsITob9vkrKZm",
+   "img": true
   },
   {
    "id": "nha-hang-hoa--cheng-an-dimsum-da-lat",
@@ -13290,7 +13316,8 @@
    "desc": "Cheng An Dimsum là toạ độ \"vàng\" dành cho những tín đồ yêu thích các món bánh bao, há cảo chuẩn vị Trung Hoa ngay tại trung tâm thành phố. Quán sở hữu mặt tiền rộng rãi, thiết kế mang tone màu đỏ đen hiện đại, nổi bật và rất dễ tìm. Không gian bên trong thoáng đạt, sạch sẽ, mang lại cảm giác chuyên nghiệp và chỉn chu.",
    "desc_en": "A top spot for authentic Chinese buns and dumplings in the centre, with a wide red-and-black modern frontage and a clean, professional space.",
    "clip": "https://www.tiktok.com/@anchoidieunghe/video/7428931845535894804",
-   "img_folder": "1eI7y_Dixn7DWrhJJ5xLgB_uSONiKiQxk"
+   "img_folder": "1eI7y_Dixn7DWrhJJ5xLgB_uSONiKiQxk",
+   "img": true
   },
   {
    "id": "nha-hang-hoa--manwah-taiwanese-hot-pot-da-lat",
@@ -13302,7 +13329,8 @@
    "desc": "Manwah mang trọn vẹn tinh hoa lẩu Đài Loan tỉ mỉ và tinh tế đến với thực khách phố núi. Không gian Manwah được thiết kế sang trọng, ấm cúng với âm hưởng truyền thống Đài Loan nhưng vẫn giữ được nét phóng khoáng, hiện đại. Đây là không gian lý tưởng cho các dịp kỷ niệm gia đình hoặc liên hoan nhóm.",
    "desc_en": "Brings refined Taiwanese hotpot to Da Lat in an elegant, cosy space with traditional Taiwanese touches; great for family occasions or group parties.",
    "clip": "https://www.tiktok.com/@dienodalat.py/video/7558325198085278983",
-   "img_folder": "12LZugej2RhetJjvR2leNL9YiTt2j5v7-"
+   "img_folder": "12LZugej2RhetJjvR2leNL9YiTt2j5v7-",
+   "img": true
   },
   {
    "id": "nha-hang-hoa--yummy-noodle-cac-mon-xao-chao-chau-a-fushion",
@@ -13314,7 +13342,8 @@
    "desc": "Quán mang phong cách trẻ trung, năng động với mô hình \"Asian Fusion\" độc đáo. Không gian nhỏ nhắn nhưng sạch sẽ, thơm nức mùi thơm từ những chảo lửa nóng hổi ngay tại khu vực bếp mở.",
    "desc_en": "Young and lively Asian fusion wok dishes, in a small but clean space full of aromas from the open kitchen.",
    "clip": "https://www.tiktok.com/@banandalat/video/7553951461483433223",
-   "img_folder": "1fZMH4QMjEJ4TJl2tqk9uEVujTkh0PeI9"
+   "img_folder": "1fZMH4QMjEJ4TJl2tqk9uEVujTkh0PeI9",
+   "img": true
   },
   {
    "id": "nha-hang-an--shree-ganesha-indian-restaurant",
@@ -13326,7 +13355,8 @@
    "desc": "Shree Ganesha là một trong những nhà hàng Ấn Độ lâu đời và uy tín nhất, mang đến cho thực khách một không gian đậm chất văn hóa Nam Á.",
    "desc_en": "One of the oldest and most trusted Indian restaurants, with a strong South Asian cultural feel.",
    "clip": "",
-   "img_folder": "1ov5rXY816LzVDQ0PxFZ6kVNI_YTzn-vJ"
+   "img_folder": "1ov5rXY816LzVDQ0PxFZ6kVNI_YTzn-vJ",
+   "img": true
   },
   {
    "id": "nha-hang-an--indiagate-indian-restaurant",
@@ -13338,7 +13368,8 @@
    "desc": "Không gian quán sạch sẽ, mang hơi hướng hiện đại nhưng vẫn giữ được \"vibe\" Ấn đặc trưng. Đây là lựa chọn hàng đầu cho những thực khách ăn chay (Vegan) hoặc những người tìm kiếm chế độ ăn Jain (không hành tỏi) với menu cực kỳ phong phú. Chủ quán và nhân viên đều giao tiếp tốt bằng tiếng Anh và tiếng Việt.",
    "desc_en": "Clean, modern and distinctly Indian, a top choice for vegans and Jain diets (no onion or garlic) with a big menu; staff speak good English and Vietnamese.",
    "clip": "https://www.tiktok.com/@brunetteswhotravel/video/7492376503632563478",
-   "img_folder": "1nwPJdrEY9dNUlJHlkBusQRrumKgcWtXz"
+   "img_folder": "1nwPJdrEY9dNUlJHlkBusQRrumKgcWtXz",
+   "img": true
   },
   {
    "id": "nha-hang-an--sagar-indian-cuisine-da-lat-halal-food",
@@ -13350,7 +13381,8 @@
    "desc": "Sagar sở hữu không gian decor cực đẹp, mang lại cảm giác như đang du ngoạn đến Ấn Độ thực thụ. Nhà hàng không chỉ chú trọng vào hương vị mà còn ở cách bày trí món ăn đầy tính nghệ thuật. Sau bữa ăn, thực khách còn được gửi một bát nước ấm pha chanh để rửa tay (theo đúng phong tục ăn bằng tay của người Ấn).",
    "desc_en": "Beautiful decor that feels like a trip to India, with artful presentation and a bowl of warm lemon water to wash your hands after, in Indian tradition; halal.",
    "clip": "https://www.tiktok.com/@ancungsuuu/video/7513433073397042439",
-   "img_folder": "12YR9RXoYGDPmQ3uWttgHgVl5IiSaV2-w"
+   "img_folder": "12YR9RXoYGDPmQ3uWttgHgVl5IiSaV2-w",
+   "img": true
   },
   {
    "id": "dimsum--dimsum-ba-con-meo",
@@ -13362,7 +13394,8 @@
    "desc": "Đây là một tiệm Dimsum nhỏ xinh, mang phong cách \"healing\" đặc trưng của Đà Lạt với không gian gỗ ấm cúng. Tiệm không quá phô trương nhưng thu hút bởi sự tỉ mỉ trong từng món ăn. Không gian tĩnh mịch, rất hợp để thưởng thức bữa sáng muộn hoặc bữa trưa nhẹ nhàng giữa tiết trời se lạnh.",
    "desc_en": "A small, healing-style dim sum shop in cosy wood, unpretentious but careful, perfect for a late breakfast or light lunch.",
    "clip": "https://www.tiktok.com/@moingaymotquan.dalat/video/7469629069680741639",
-   "img_folder": "1bHx8Y1uQaw4x9DLy5tgL-fkMEdR34BGB"
+   "img_folder": "1bHx8Y1uQaw4x9DLy5tgL-fkMEdR34BGB",
+   "img": true
   },
   {
    "id": "dimsum--cheng-an-dimsum-da-lat",
@@ -13374,7 +13407,8 @@
    "desc": "Cheng An Dimsum là toạ độ \"vàng\" dành cho những tín đồ yêu thích các món bánh bao, há cảo chuẩn vị Trung Hoa ngay tại trung tâm thành phố. Quán sở hữu mặt tiền rộng rãi, thiết kế mang tone màu đỏ đen hiện đại, nổi bật và rất dễ tìm. Không gian bên trong thoáng đạt, sạch sẽ, mang lại cảm giác chuyên nghiệp và chỉn chu.",
    "desc_en": "A top spot for authentic Chinese buns and dumplings in the centre, with a wide red-and-black modern frontage and a clean, professional space.",
    "clip": "https://www.tiktok.com/@julepe.sheen/video/7421773087512792327",
-   "img_folder": "1tKnbvXcJ0RQPEoWkSka3tZNx0lG4fxjh"
+   "img_folder": "1tKnbvXcJ0RQPEoWkSka3tZNx0lG4fxjh",
+   "img": true
   },
   {
    "id": "dimsum--ha-cao-tran-le",
@@ -13386,7 +13420,8 @@
    "desc": "\"Há Cảo Trần Lê\" vẫn là một thương hiệu \"quốc dân\" trong lòng người dân phố núi nhờ mức giá bình dân và hương vị ổn định qua nhiều năm. Quán mang phong cách tiệm ăn bình dân, phục vụ nhanh nhẹn. Đây là địa chỉ quen thuộc của giới trẻ và học sinh, sinh viên tại Đà Lạt vào mỗi buổi chiều tan tầm.",
    "desc_en": "A local favourite for years thanks to low prices and steady flavour, casual and quick, popular with students after school.",
    "clip": "https://www.tiktok.com/@ca_hoi_da_lat/video/7229514473881488645",
-   "img_folder": "1gaDDIA2NJhlCgsaSG-PFxCBQr9teNagU"
+   "img_folder": "1gaDDIA2NJhlCgsaSG-PFxCBQr9teNagU",
+   "img": true
   },
   {
    "id": "dimsum--lok-lok-tiem-an-zui-ze-dimsum-banh-cuon-hongkong",
@@ -13398,7 +13433,8 @@
    "desc": "Lok Lok mang đến một không gian hiện đại, năng động với tinh thần \"ăn là phải vui\". Tiệm được decor theo phong cách Hong Kong hiện đại với nhiều góc \"sống ảo\" màu sắc. Menu đa dạng kết hợp giữa Dimsum, bánh cuốn Hong Kong và các món ăn chơi lạ miệng.",
    "desc_en": "Modern and lively with an 'eating should be fun' spirit, Hong Kong-style decor and colourful photo spots, mixing dim sum, Hong Kong rice rolls and unusual snacks.",
    "clip": "https://www.tiktok.com/@thaygiaomeo/video/7434507256546200850",
-   "img_folder": "1k4I5hoC07kUqYXMkWuq3_uMla2o2Ffpm"
+   "img_folder": "1k4I5hoC07kUqYXMkWuq3_uMla2o2Ffpm",
+   "img": true
   },
   {
    "id": "dimsum--dimsum-a-tau",
@@ -13410,7 +13446,8 @@
    "desc": "Đây là địa chỉ dành cho những ai tìm kiếm hương vị Dimsum truyền thống với mức giá phải chăng tại khu vực xa trung tâm một chút. Quán mang phong cách gia đình, phục vụ tận tâm và mộc mạc. Menu tập trung vào các dòng bánh bao, há cảo và xíu mại cơ bản nhưng được chăm chút kỹ về phần nhân.",
    "desc_en": "Traditional dim sum at fair prices a little outside the centre, homely and caring, with carefully filled buns, dumplings and siu mai.",
    "clip": "https://www.tiktok.com/@khanh.minh014/video/7585362201645452564",
-   "img_folder": "1bP6NOp2-bQllE9qFvo7qHgOt3oRzC4Cf"
+   "img_folder": "1bP6NOp2-bQllE9qFvo7qHgOt3oRzC4Cf",
+   "img": true
   },
   {
    "id": "dimsum--bao-asian-cuisine",
@@ -13422,7 +13459,8 @@
    "desc": "Nằm trong khuôn viên sang trọng của Mercure Dalat Resort (03 Nguyễn Du), Bao Asian Cuisine là sự kết hợp hoàn hảo giữa kiến trúc Pháp cổ điển và tinh hoa ẩm thực Châu Á hiện đại. Không gian nhà hàng vô cùng đẳng cấp với thiết kế mở, nhìn ra khu vườn ngập tràn hoa cỏ của resort. Đây là địa điểm lý tưởng cho những bữa tối lãng mạn hoặc những buổi tiếp khách quan trọng cần sự riêng tư và tinh tế.",
    "desc_en": "Inside Mercure Dalat Resort (3 Nguyen Du), classic French architecture meets modern Asian cuisine in an elegant open space overlooking flower gardens; ideal for romantic dinners or important guests.",
    "clip": "https://www.tiktok.com/@sonharryy/video/7585567052769807636",
-   "img_folder": "1Z3ejDjk-f4RYO2KLXfsgaTnar7NZj88D"
+   "img_folder": "1Z3ejDjk-f4RYO2KLXfsgaTnar7NZj88D",
+   "img": true
   },
   {
    "id": "xe-banh-mi--banh-mi-xiu-mai-co-tam",
@@ -13434,7 +13472,8 @@
    "desc": "Xe bánh mì lâu đời của nhiều thế hệ học sinh tại Đà Lạt, phong cách bánh mì truyền thống viên xíu mại nhỏ nhưng chắc thịt, nước dùng thanh ngọt từ xương.",
    "desc_en": "A banh mi cart serving generations of students, with small but firm meatballs and a sweet bone broth.",
    "clip": "https://www.tiktok.com/@vudalatxinchao/video/7430761431605202192",
-   "img_folder": "1mo0V7uLuGeYvBm6gm9ErZpHHAiuUqGJV"
+   "img_folder": "1mo0V7uLuGeYvBm6gm9ErZpHHAiuUqGJV",
+   "img": true
   },
   {
    "id": "xe-banh-mi--banh-mi-hoa-le",
@@ -13446,7 +13485,8 @@
    "desc": "Tiệm đều chuyên về dòng bánh mì xíu mại chấm và bánh mì kẹp. Gần trường học nên quán thường rất đông vào giờ tan tầm hoặc sáng sớm.",
    "desc_en": "Specialises in meatball banh mi for dipping and filled banh mi; near schools, so busy early morning and after school.",
    "clip": "https://www.tiktok.com/@vudalatxinchao/video/7433123460592815376",
-   "img_folder": "1876VY2wro9svmcXMkLCegSO1FHTXuS07"
+   "img_folder": "1876VY2wro9svmcXMkLCegSO1FHTXuS07",
+   "img": true
   },
   {
    "id": "xe-banh-mi--banh-mi-co-ha",

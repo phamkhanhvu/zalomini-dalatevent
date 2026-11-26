@@ -19,6 +19,7 @@ import logoImg from "../static/img/dalatevent-logo.png";
 import passportSmall from "../static/img/passport-160.webp";
 import { DealsBanner } from "../components/deals-banner";
 import { WeatherCard } from "../components/weather-card";
+import { ToplistBanner } from "../components/toplist-banner";
 import { tr } from "../i18n";
 
 
@@ -68,14 +69,8 @@ const HomePage: FC = () => {
           </button>
         </div>
         <DealsBanner />
+        <ToplistBanner />
         <WeatherCard />
-        <button type="button" className="tl-card" onClick={() => navigate("/top-list")}>
-          <span className="tl-card-text">
-            <b>{tr("Top list Đà Lạt", "Da Lat top lists")}</b>
-            <i>{tr("Hơn 1.000 địa điểm: săn mây, cafe, quán ngon, chỗ ở…", "1,000+ places: cloud hunting, cafés, food, stays…")}</i>
-          </span>
-          <span className="tl-card-go" aria-hidden="true">→</span>
-        </button>
       </header>
 
       <Agenda onOpenProgram={openProgram} />

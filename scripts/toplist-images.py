@@ -10,6 +10,18 @@ import json, os, sys, tempfile, time
 import gdown
 from PIL import Image, ImageOps
 
+if len(sys.argv) > 1 and sys.argv[1].startswith("diag:"):
+    # Kiểm tra quyền xem công khai: diag:<id thư mục>:<id ảnh>
+    import urllib.request
+    _, fo, fi = sys.argv[1].split(":")
+    for u in ("https://drive.google.com/drive/folders/" + fo, "https://drive.google.com/thumbnail?id=" + fi + "&sz=w720", "https://drive.google.com/uc?export=download&id=" + fi):
+        try:
+            r = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"}), timeout=30)
+            b = r.read()
+            print(r.status, r.headers.get("Content-Type"), len(b), b"accounts.google.com/ServiceLogin" in b or b"Sign in" in b[:20000], u.split("?")[0])
+        except Exception as e:
+            print("ERR", u.split("?")[0], e)
+    sys.exit(0)
 LIMIT = int(sys.argv[1]) if len(sys.argv) > 1 else 50
 OUT = "data/toplist-img"
 EXT = (".jpg", ".jpeg", ".png", ".webp", ".heic", ".jfif")

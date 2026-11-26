@@ -5686,7 +5686,8 @@
    "desc": "Đúng như cái tên, tiệm chuyên sâu vào phong cách \"xíu mại chén\". Không gian quán mang hơi hướng hoài niệm và tối giản. Nước dùng trong veo nhưng vị rất sâu. Đây là nơi bạn có thể cảm nhận rõ nhất sự tinh tế của ẩm thực Đà Lạt xưa.",
    "desc_en": "Specialises in meatballs in a bowl, in a nostalgic minimalist space; a clear but deep broth showing old Da Lat finesse.",
    "clip": "",
-   "img_folder": "1SzWMPk8PZGQmplgzump6RQDLfTfPvfCx"
+   "img_folder": "1SzWMPk8PZGQmplgzump6RQDLfTfPvfCx",
+   "img": true
   },
   {
    "id": "banh-mi-xiu-mai--banh-mi-xoi-co-ha",
@@ -5698,7 +5699,8 @@
    "desc": "Một sự kết hợp hoàn hảo giữa bánh mì xíu mại và xôi mặn. Ngoài chén xíu mại nóng hổi, bạn có thể gọi thêm xôi nếp dẻo thơm.",
    "desc_en": "Meatball banh mi plus savoury sticky rice: add fragrant sticky rice to your hot meatball bowl.",
    "clip": "",
-   "img_folder": "1W2zVhoBLh6JRgJsiRxvXMoQgaoSN-HQe"
+   "img_folder": "1W2zVhoBLh6JRgJsiRxvXMoQgaoSN-HQe",
+   "img": true
   },
   {
    "id": "banh-mi-xiu-mai--banh-mi-xiu-mai-hong-hoa-yen",
@@ -5710,7 +5712,8 @@
    "desc": "Nằm trên con đường dịch vụ sầm uất, tiệm phục vụ chuyên nghiệp và sạch sẽ. Xíu mại Hồng Hoa (hay còn gọi là Yến) có vị béo ngậy hơn các quán khác một chút nhờ phần mỡ hành và tóp mỡ thơm lừng.",
    "desc_en": "On a busy street, professional and clean; slightly richer meatballs thanks to scallion oil and crispy pork crackling.",
    "clip": "https://www.tiktok.com/@dalat_chuyentoike/video/7153874748026506523",
-   "img_folder": "1JCHGRFgXMc1ZFwqsjMjrfE4XfBIh-Fv9"
+   "img_folder": "1JCHGRFgXMc1ZFwqsjMjrfE4XfBIh-Fv9",
+   "img": true
   },
   {
    "id": "banh-mi-xiu-mai--banh-mi-xiu-mai-79-co-truc",
@@ -5722,7 +5725,8 @@
    "desc": "Quán mang đậm phong cách gia đình, ấm cúng trên con đường một chiều Nguyễn Văn Trỗi. Vị thanh đạm, mộc mạc. Cô Trúc trực tiếp đứng bếp nên hương vị luôn giữ được cái \"tâm\" của người nấu.",
    "desc_en": "Homely on one-way Nguyen Van Troi, with light, simple flavours and the owner cooking herself.",
    "clip": "https://www.tiktok.com/@banhmixiumai79_cotruc/video/7566234947321744648",
-   "img_folder": "1TEmLc4pEeCx9Dny5hoDUAZMnvMXh8zqF"
+   "img_folder": "1TEmLc4pEeCx9Dny5hoDUAZMnvMXh8zqF",
+   "img": true
   },
   {
    "id": "banh-mi-xiu-mai--banh-mi-xiu-mai-ri-79-doi-dien-cay-xang-tinh-doi",
@@ -5734,7 +5738,8 @@
    "desc": "Tọa lạc tại khu vực Ngã năm Đại học, vị trí gần cây xăng Tỉnh Đội rất dễ tìm. Nổi tiếng với nước dùng \"thần thánh\" có màu sắc bắt mắt và vị ngọt thanh từ rau củ ninh cùng xương. Quán phục vụ rất bình dân và thoải mái.",
    "desc_en": "At the Five-way University intersection near the Tinh Doi petrol station, known for a colourful, sweet broth of bones and vegetables at very low prices.",
    "clip": "https://www.tiktok.com/@catrinbaoloc/video/7590729573285825812",
-   "img_folder": "1fHQgwP1Guq-3IiXuY-Il_RfjxGPNpPhj"
+   "img_folder": "1fHQgwP1Guq-3IiXuY-Il_RfjxGPNpPhj",
+   "img": true
   },
   {
    "id": "nha-hang-au--emai-italian-restaurant",
@@ -5746,7 +5751,8 @@
    "desc": "Một trong những nhà hàng Ý lãng mạn nhất Đà Lạt, nằm trong một khu vườn ngập tràn hoa lá và sương mờ. Chú trọng vào nguyên liệu hữu cơ và cách chế biến tinh tế. Các món Pasta tươi và rượu vang tại đây luôn được đánh giá 5 sao về cả hương vị lẫn cách trình bày.",
    "desc_en": "One of Da Lat's most romantic Italian restaurants, in a garden full of flowers and mist, using organic produce; fresh pasta and wine get top marks.",
    "clip": "https://www.tiktok.com/@ancungmainha/video/7502777116736425234",
-   "img_folder": "1WD6Bich8yv_IFj2hmslbt9CWUPjjpOks"
+   "img_folder": "1WD6Bich8yv_IFj2hmslbt9CWUPjjpOks",
+   "img": true
   },
   {
    "id": "nha-hang-au--boho",
@@ -5758,7 +5764,8 @@
    "desc": "Mang phong cách Bohemian tự do, phóng khoáng với thiết kế mở và nhiều chi tiết decor bằng gỗ, vải thổ cẩm. Thực đơn mang hơi hướng Fusion, kết hợp giữa kỹ thuật nấu nướng phương Tây và các loại gia vị độc đáo. Không gian tại đây cực kỳ \"chill\".",
    "desc_en": "Free-spirited Bohemian style with an open design, wood and brocade, and a fusion menu of Western techniques and unusual spices.",
    "clip": "https://www.tiktok.com/@boho.bar.cafedalat/video/7569189107184962823",
-   "img_folder": "1gihfMPms1qaFLug5oGm5hSilr5224hbu"
+   "img_folder": "1gihfMPms1qaFLug5oGm5hSilr5224hbu",
+   "img": true
   },
   {
    "id": "nha-hang-au--primavera-italian-restaurant",
@@ -5770,7 +5777,8 @@
    "desc": "Một \"biểu tượng\" của ẩm thực Ý tại Đà Lạt. Nhà hàng nằm trong hẻm nhưng luôn kín chỗ nhờ uy tín lâu năm. Lò nướng pizza bằng củi ngay tại sảnh tạo nên hương vị đế bánh giòn thơm đặc trưng. Các món bít tết và mỳ Ý ở đây chuẩn vị Florence.",
    "desc_en": "An icon of Italian food in Da Lat, tucked in an alley yet always full; a wood-fired pizza oven in the lobby, plus Florence-style steaks and pasta.",
    "clip": "https://www.tiktok.com/@nganbichnguyen92/video/7534322631135202578",
-   "img_folder": "1ffhNl4s1uk8c-wzkcSr27cEuh4bmcM84"
+   "img_folder": "1ffhNl4s1uk8c-wzkcSr27cEuh4bmcM84",
+   "img": true
   },
   {
    "id": "nha-hang-au--hef-s-dalat",
@@ -5782,7 +5790,8 @@
    "desc": "Được vận hành bởi đội ngũ đầu bếp chuyên nghiệp, tập trung vào trải nghiệm ẩm thực cao cấp. Thực đơn thay đổi theo mùa để đảm bảo độ tươi ngon nhất của nguyên liệu. Kỹ thuật trình bày món ăn đạt trình độ nghệ thuật.",
    "desc_en": "Run by professional chefs, focused on fine dining with a seasonal menu and artful plating.",
    "clip": "",
-   "img_folder": "1f-airdJBsWFxQMTU0Xc8yqACNUOIMwus"
+   "img_folder": "1f-airdJBsWFxQMTU0Xc8yqACNUOIMwus",
+   "img": true
   },
   {
    "id": "nha-hang-au--chill-chill-eatery",
@@ -5794,7 +5803,8 @@
    "desc": "Tọa lạc trên đồi Ngô Thì Sỹ với tầm nhìn bao quát thung lũng, quán mang phong cách hiện đại, năng động. Các món Âu nhẹ nhàng như Salad, Cold-cut và bít tết kèm nước sốt đặc chế. Không gian cực kỳ thoáng đạt.",
    "desc_en": "On Ngo Thi Sy hill overlooking the valley, modern and lively, with light European dishes like salads, cold cuts and steak.",
    "clip": "https://www.tiktok.com/@_mitt27/video/7569097130707586322",
-   "img_folder": "1Rqw1iW6LWSYSrnb4eMSYeXoRuaEw4kTr"
+   "img_folder": "1Rqw1iW6LWSYSrnb4eMSYeXoRuaEw4kTr",
+   "img": true
   },
   {
    "id": "nha-hang-au--botea-woodfire",
@@ -5806,7 +5816,8 @@
    "desc": "Chuyên về các món nướng củi (Woodfire), đặc biệt là Steak cao cấp. Vị trí gần hồ Xuân Hương rất thuận tiện. Kỹ thuật nướng thịt trên lửa củi giúp miếng Steak giữ được độ mọng nước và có mùi thơm khói rất quyến rũ. List rượu vang đi kèm rất đa dạng.",
    "desc_en": "Specialises in wood-fired dishes, especially premium steak, near Xuan Huong Lake, with juicy, smoky meat and a wide wine list.",
    "clip": "https://www.tiktok.com/@botea.woodfire/video/7399251895493152020",
-   "img_folder": "1pJDcBE5YggeBQheJ2rDrSiO8tNFeVqtl"
+   "img_folder": "1pJDcBE5YggeBQheJ2rDrSiO8tNFeVqtl",
+   "img": true
   },
   {
    "id": "nha-hang-au--moon-dining",
@@ -5818,7 +5829,8 @@
    "desc": "Một bistro hiện đại, tối giản nhưng vô cùng tinh tế ngay trung tâm thành phố.Sự kết hợp hoàn hảo giữa ẩm thực Âu và các loại cocktail sáng tạo. Không gian mang lại cảm giác thời thượng và đẳng cấp.",
    "desc_en": "A modern, minimalist bistro in the centre pairing European food with creative cocktails.",
    "clip": "https://www.tiktok.com/@mymy.review07/video/7305626949009935618",
-   "img_folder": "1j9iC72F64FoneULm1RGeGEwibKen-1ks"
+   "img_folder": "1j9iC72F64FoneULm1RGeGEwibKen-1ks",
+   "img": true
   },
   {
    "id": "nha-hang-au--da-lat-peace-bistro",
@@ -5830,7 +5842,8 @@
    "desc": "Đúng như tên gọi \"Peace\", quán nằm trong khu vực yên tĩnh với lối kiến trúc nhẹ nhàng, mang lại sự bình an. Các món Âu mang hơi hướng gia đình (Home-cooked European style), sạch sẽ và lành mạnh.",
    "desc_en": "In a quiet area with gentle architecture, home-style European cooking that is clean and healthy.",
    "clip": "",
-   "img_folder": "1issrktLnKZSBwknc34aHu9nb2Qf2ykuR"
+   "img_folder": "1issrktLnKZSBwknc34aHu9nb2Qf2ykuR",
+   "img": true
   },
   {
    "id": "nha-hang-au--moto-laurie-cafe-bistro",
@@ -5842,7 +5855,8 @@
    "desc": "Sự giao thoa giữa văn hóa xe dịch và ẩm thực Bistro. Không gian bụi bặm, cá tính và tràn đầy năng lượng. Các món Burger, Pasta và đồ ăn nhẹ được chế biến nhanh, đậm đà, phù hợp với tinh thần phóng khoáng.",
    "desc_en": "Motorbike culture meets bistro: rugged and full of character, with quick, tasty burgers, pasta and snacks.",
    "clip": "https://www.tiktok.com/@qmthau/video/7572541607262571784",
-   "img_folder": "1YVVnhQrkctq3jKti5p52F5kQr46I2kLs"
+   "img_folder": "1YVVnhQrkctq3jKti5p52F5kQr46I2kLs",
+   "img": true
   },
   {
    "id": "nha-hang-au--trang-s-cookery-restaurant",
@@ -5854,7 +5868,8 @@
    "desc": "Nổi tiếng với sự tận tâm của người đứng bếp. Các món Âu tại đây có hương vị rất ổn định, trình bày đẹp mắt và giá cả hợp lý.",
    "desc_en": "Known for a dedicated cook, with consistent, nicely presented European dishes at fair prices.",
    "clip": "https://www.tiktok.com/@ellaexploringg/video/7353056211123703072",
-   "img_folder": "1iwco18UMO3Ebw7kiwDjlsmcx3nkGTcwQ"
+   "img_folder": "1iwco18UMO3Ebw7kiwDjlsmcx3nkGTcwQ",
+   "img": true
   },
   {
    "id": "nha-hang-au--drinkery-restaurant-cocktail-garden",
@@ -5866,7 +5881,8 @@
    "desc": "Sự kết hợp giữa nhà hàng và vườn cocktail. Tuyệt vời cho những đêm tiệc \"Dinner & Drinks\" sôi động dưới ánh đèn lung linh.",
    "desc_en": "A restaurant and cocktail garden, great for lively dinner-and-drinks nights under twinkling lights.",
    "clip": "https://www.tiktok.com/@ghiendalat_official/video/7471983706832506130",
-   "img_folder": "1S6f4pWxgd_-Ig2n6BdsiGl4Zpg9r-ieh"
+   "img_folder": "1S6f4pWxgd_-Ig2n6BdsiGl4Zpg9r-ieh",
+   "img": true
   },
   {
    "id": "nha-hang-au--d-lart-garden-drinking-dining",
@@ -5878,7 +5894,8 @@
    "desc": "Không gian vườn cực kỳ Aesthetic, mang lại trải nghiệm ăn uống giữa thiên nhiên ngay trong lòng phố.",
    "desc_en": "A very aesthetic garden for dining in nature right in town.",
    "clip": "https://www.tiktok.com/@mee.dalat/video/7567700128505597192",
-   "img_folder": "1c-xC9vovmhdCZtQzZQ4nchfcb_nU_K-O"
+   "img_folder": "1c-xC9vovmhdCZtQzZQ4nchfcb_nU_K-O",
+   "img": true
   },
   {
    "id": "nha-hang-au--chay-burger-dining",
@@ -5890,7 +5907,8 @@
    "desc": "\"Thiên đường\" của những chiếc Burger khổng lồ với nhân thịt nướng thơm nức. Đây là tọa độ Fast-food cao cấp không thể bỏ qua.",
    "desc_en": "A paradise of giant burgers with fragrant grilled patties, an upscale fast-food stop.",
    "clip": "https://www.tiktok.com/@_trungday/video/7538789299093884168",
-   "img_folder": "1xG7renh1mSgkEndLJhGqU8C6SQWcHQ8Y"
+   "img_folder": "1xG7renh1mSgkEndLJhGqU8C6SQWcHQ8Y",
+   "img": true
   },
   {
    "id": "nha-hang-au--artist-alley-restaurant",
@@ -5902,7 +5920,8 @@
    "desc": "Nằm trong \"ngõ nghệ sĩ\", nhà hàng là một gallery nghệ thuật thu nhỏ với những mảng màu rực rỡ. Phục vụ các món Pháp và Âu cổ điển. Không gian đậm chất nghệ thuật giúp bữa ăn trở nên thú vị hơn rất nhiều.",
    "desc_en": "In an 'artists' alley', a mini art gallery full of colour serving classic French and European dishes.",
    "clip": "",
-   "img_folder": "1uV3FmmYJHDtoOCKnb6aesZcmiUSVBIKd"
+   "img_folder": "1uV3FmmYJHDtoOCKnb6aesZcmiUSVBIKd",
+   "img": true
   },
   {
    "id": "nha-hang-han-quoc--fungi-chingu-cho-dem",
@@ -5914,7 +5933,8 @@
    "desc": "Có thể coi là \"tượng đài\" của đồ nướng Hàn Quốc tại Đà Lạt. Vị trí ngay cổng chợ đêm khiến quán luôn trong tình trạng tấp nập. Hệ thống hút khói hiện đại, menu gọi món đa dạng và các món panchan (đồ ăn kèm) rất phong phú. Chất lượng thịt được tẩm ướp chuẩn vị.",
    "desc_en": "An icon of Korean BBQ in Da Lat at the night market gate, always busy, with modern smoke extraction, a big menu and lots of banchan side dishes.",
    "clip": "https://www.tiktok.com/@papyayy/video/7443036758436039953",
-   "img_folder": "1dUfR6CKEDjK4oBpoOuPIZkTaT4fHGmZx"
+   "img_folder": "1dUfR6CKEDjK4oBpoOuPIZkTaT4fHGmZx",
+   "img": true
   },
   {
    "id": "nha-hang-han-quoc--oppane",
@@ -5926,7 +5946,8 @@
    "desc": "Mang phong cách trẻ trung, năng động. Chuyên các dòng BBQ và lẩu Hàn Quốc với không gian decor hiện đại, phù hợp cho các buổi tụ tập bạn bè. Giá thành rất cạnh tranh.",
    "desc_en": "Young and lively, specialising in Korean BBQ and hotpot with modern decor and very competitive prices.",
    "clip": "",
-   "img_folder": "14WqhmPX7VL9FUIn4PRw_jxYG9_qXSpTU"
+   "img_folder": "14WqhmPX7VL9FUIn4PRw_jxYG9_qXSpTU",
+   "img": true
   },
   {
    "id": "nha-hang-han-quoc--gangnam-korea-bbq-house",
@@ -5938,7 +5959,8 @@
    "desc": "Nằm trong khu biệt thự yên tĩnh, quán mang lại cảm giác sang trọng, riêng tư. Rất phù hợp để tiếp khách hoặc ăn gia đình.",
    "desc_en": "In a quiet villa area, classy and private, good for hosting guests or family meals.",
    "clip": "",
-   "img_folder": "1HxYHJKJJ0tY15SG9dDKLAAbzESJef034"
+   "img_folder": "1HxYHJKJJ0tY15SG9dDKLAAbzESJef034",
+   "img": true
   },
   {
    "id": "nha-hang-han-quoc--gangnam-bbq-dalat",
@@ -5950,7 +5972,8 @@
    "desc": "Không gian rộng rãi, thoáng đãng hơn, thích hợp cho các đoàn khách lớn hoặc team-building.",
    "desc_en": "Roomier and airier, suited to large groups or team building.",
    "clip": "",
-   "img_folder": "16Yf5T5T7eBXEZAumovxDbJXeg4cwWN7l"
+   "img_folder": "16Yf5T5T7eBXEZAumovxDbJXeg4cwWN7l",
+   "img": true
   },
   {
    "id": "nha-hang-han-quoc--umma-tokbokki",
@@ -5962,7 +5985,8 @@
    "desc": "Chuyên sâu về Tokbokki (bánh gạo nướng/lẩu), mỳ tương đen và các món ăn vặt. Nước sốt tại đây có độ cay nồng vừa phải, rất hợp với tiết trời Đà Lạt.",
    "desc_en": "Specialises in tteokbokki, black bean noodles and snacks, with a moderately spicy sauce perfect for Da Lat weather.",
    "clip": "",
-   "img_folder": "1w8mdtSeGt3Ni7znrr71mjO7ZO7KEWfuH"
+   "img_folder": "1w8mdtSeGt3Ni7znrr71mjO7ZO7KEWfuH",
+   "img": true
   },
   {
    "id": "nha-hang-han-quoc--pacho-pocha-mot-quan-nhau-kieu-han",
@@ -5974,7 +5998,8 @@
    "desc": "Một quán nhậu kiểu Hàn (Pocha) đích thực với không gian mở, cực kỳ \"chill\" để ngắm cảnh và thưởng thức rượu.",
    "desc_en": "A real Korean pocha with an open, relaxed space for drinks and views.",
    "clip": "https://www.tiktok.com/@nnqocie_htao/video/7596651491117796626",
-   "img_folder": "18y3UXT22DGGwTdy3ysjhu_4f9ZGaVytJ"
+   "img_folder": "18y3UXT22DGGwTdy3ysjhu_4f9ZGaVytJ",
+   "img": true
   },
   {
    "id": "nha-hang-han-quoc--dalat-pocha",
@@ -5986,7 +6011,8 @@
    "desc": "Tái hiện không gian quán nhậu lều trại, mang lại trải nghiệm như đang đóng phim Hàn Quốc ngay giữa lòng Đà Lạt.",
    "desc_en": "Recreates a tent-style drinking spot, like being in a Korean drama in Da Lat.",
    "clip": "",
-   "img_folder": "1i72e-ngIyDB3ivE_6OSO9bD2l6uf-_gY"
+   "img_folder": "1i72e-ngIyDB3ivE_6OSO9bD2l6uf-_gY",
+   "img": true
   },
   {
    "id": "nha-hang-han-quoc--truyen-thuyet-champong-da-lat",
@@ -5998,7 +6024,8 @@
    "desc": "Sợi mỳ tươi, nước dùng Jjamppong đậm đà, cay nồng và đầy ắp hải sản. Đây là hương vị rất đặc thù, khó tìm được ở các quán tổng hợp.",
    "desc_en": "Fresh noodles in a rich, spicy jjamppong broth full of seafood, a flavour hard to find elsewhere.",
    "clip": "https://www.tiktok.com/@dalatreviewtattantat/video/7395905458982112519",
-   "img_folder": "1Q2jDOGl-zpvysTjhVdeuFSYk3ZYnHyR-"
+   "img_folder": "1Q2jDOGl-zpvysTjhVdeuFSYk3ZYnHyR-",
+   "img": true
   },
   {
    "id": "nha-hang-han-quoc--chans-chicken-ga-ran-han-quoc",
@@ -6010,7 +6037,8 @@
    "desc": "Chuyên về Gà rán Hàn Quốc với lớp vỏ giòn tan và các loại sốt đặc chế (sốt cay, sốt tỏi mật ong). Gà luôn nóng sốt, thịt bên trong mềm mọng. Menu đi kèm với các loại khoai tây chiên và salad giải ngấy rất tốt.",
    "desc_en": "Korean fried chicken with a crispy crust and special sauces (spicy, honey garlic), always hot and juicy, with fries and salad.",
    "clip": "",
-   "img_folder": "14GHSBMuasIEAfMQJdV7POOskvxVPd4xg"
+   "img_folder": "14GHSBMuasIEAfMQJdV7POOskvxVPd4xg",
+   "img": true
   },
   {
    "id": "nha-hang-han-quoc--tiem-nuong-samwon-da-lat",
@@ -6022,7 +6050,8 @@
    "desc": "Nổi tiếng với phong cách nướng than củi truyền thống. Mùi thơm của khói than hòa quyện vào thịt tạo nên hương vị cực kỳ quyến rũ.",
    "desc_en": "Known for traditional wood-charcoal grilling; the smoky aroma soaks into the meat.",
    "clip": "https://www.tiktok.com/@laca_khapnoi/video/7580982486855896328",
-   "img_folder": "1LU5rKaCU7gdtA6qazSpgrzBwNgDZvnxg"
+   "img_folder": "1LU5rKaCU7gdtA6qazSpgrzBwNgDZvnxg",
+   "img": true
   },
   {
    "id": "nha-hang-han-quoc--matchandeul-da-lat",
@@ -6034,7 +6063,8 @@
    "desc": "Thương hiệu thịt nướng cao cấp nổi tiếng toàn cầu. Chú trọng vào chất lượng thịt (thịt heo lên men) và kỹ thuật nướng canh nhiệt độ chuẩn xác.",
    "desc_en": "A globally known premium BBQ brand focused on meat quality (fermented pork) and precise grilling temperatures.",
    "clip": "https://www.tiktok.com/@didalatcungtruc/video/7557714620786478343",
-   "img_folder": "1yRGNUjI03G1QjnjJ5REYoWIUw4bVFxrJ"
+   "img_folder": "1yRGNUjI03G1QjnjJ5REYoWIUw4bVFxrJ",
+   "img": true
   },
   {
    "id": "nha-hang-nhat-ban--ganeya-restaurant-nha-hang-nhat-ban",
@@ -6046,7 +6076,8 @@
    "desc": "Một trong những không gian Nhật Bản sang trọng và chuẩn mực nhất tại Đà Lạt. Thiết kế mang đậm phong cách kiến trúc gỗ truyền thống. Nổi tiếng với nguồn nguyên liệu cá tươi nhập khẩu và quy trình chế biến khắt khe. Không gian phòng VIP riêng tư rất đẳng cấp.",
    "desc_en": "One of Da Lat's most refined Japanese restaurants, in traditional wooden architecture, known for imported fresh fish, strict preparation and classy private rooms.",
    "clip": "",
-   "img_folder": "1rES2Y-l7KVz30hwFi2R-_nw31a3MjqoE"
+   "img_folder": "1rES2Y-l7KVz30hwFi2R-_nw31a3MjqoE",
+   "img": true
   },
   {
    "id": "nha-hang-nhat-ban--fujiya-sushi-da-lat-mon-nhat",
@@ -6058,7 +6089,8 @@
    "desc": "Nằm trong khu quy hoạch mới hiện đại, Fujiya mang phong cách trẻ trung nhưng vẫn giữ được sự chỉn chu của Nhật Bản. Thực đơn đa dạng với mức giá cực kỳ hợp lý so với chất lượng. Các món Sashimi ở đây luôn giữ được độ tươi giòn và trình bày bắt mắt.",
    "desc_en": "In a modern new district, young but meticulous, with a varied menu at very fair prices and fresh, beautifully presented sashimi.",
    "clip": "https://www.tiktok.com/@callmevyvo/video/7280487463615794440",
-   "img_folder": "15fuP9zhZJvkWCZIlNpwrdnVSXyWOq8KX"
+   "img_folder": "15fuP9zhZJvkWCZIlNpwrdnVSXyWOq8KX",
+   "img": true
   },
   {
    "id": "nha-hang-nhat-ban--tokyo-sushi-da-lat",
@@ -6070,7 +6102,8 @@
    "desc": "Phục vụ nhanh, menu phong phú từ Sushi, mỳ Udon đến các loại lẩu Nhật. Hương vị được điều chỉnh nhẹ để phù hợp với khẩu vị số đông.",
    "desc_en": "Quick service and a big menu from sushi and udon to Japanese hotpot, slightly adapted to local tastes.",
    "clip": "https://www.tiktok.com/@elricreviewer/video/7140969926512233755",
-   "img_folder": "1MlC40fZbwTju0-_aCk0fxT8pHk0bm_dk"
+   "img_folder": "1MlC40fZbwTju0-_aCk0fxT8pHk0bm_dk",
+   "img": true
   },
   {
    "id": "nha-hang-nhat-ban--sushi-dung-so",
@@ -6082,7 +6115,8 @@
    "desc": "Tập trung vào các dòng Sushi sáng tạo (Rolls) với nước sốt đặc chế độc đáo. Phong cách phục vụ thân thiện, gần gũi",
    "desc_en": "Focused on creative sushi rolls with unique house sauces and friendly service.",
    "clip": "https://www.tiktok.com/@hatrangnee/video/7543983810560478472",
-   "img_folder": "1AowWmnhKj_XGVLSjD2wEzJcM0Qm0_-Xe"
+   "img_folder": "1AowWmnhKj_XGVLSjD2wEzJcM0Qm0_-Xe",
+   "img": true
   },
   {
    "id": "nha-hang-nhat-ban--niboshi-dalat-oodles-of-noodles",
@@ -6094,7 +6128,8 @@
    "desc": "\"Thánh địa\" cho những tín đồ của Ramen. Niboshi chú trọng vào nước dùng được ninh kỳ công và sợi mỳ tươi làm trong ngày. Hương vị nước súp đậm đà, chuẩn vị mỳ Nhật truyền thống. Không gian mang hơi hướng các tiệm mỳ nhỏ tại Tokyo.",
    "desc_en": "A haven for ramen lovers, with carefully simmered broth and fresh noodles made daily, in a space like a small Tokyo noodle shop.",
    "clip": "https://www.tiktok.com/@fb.hie/video/7381718025449262343",
-   "img_folder": "1G3ldMvttEXB2-wcusF_b4Thh6HM3k0mj"
+   "img_folder": "1G3ldMvttEXB2-wcusF_b4Thh6HM3k0mj",
+   "img": true
   },
   {
    "id": "nha-hang-nhat-ban--izakaya-toru-da-lat",
@@ -6106,7 +6141,8 @@
    "desc": "Mô hình quán nhậu kiểu Nhật (Izakaya) đích thực với ánh đèn vàng mờ ảo và tiếng cụng ly nhộn nhịp. Các món nhắm nướng (Yakitori) và các dòng rượu Sake, Shochu phong phú. Không khí tại đây cực kỳ \"chill\" và phóng khoáng.",
    "desc_en": "A true izakaya with dim yellow lights and clinking glasses, yakitori and plenty of sake and shochu; relaxed and lively.",
    "clip": "https://www.tiktok.com/@ghiendalat_official/video/7482747961370283282",
-   "img_folder": "1gAASRyvNb_ZE97_wTQ9eWQbDq9Fuo4tK"
+   "img_folder": "1gAASRyvNb_ZE97_wTQ9eWQbDq9Fuo4tK",
+   "img": true
   },
   {
    "id": "nha-hang-nhat-ban--furin-sushi",
@@ -6118,7 +6154,8 @@
    "desc": "\"Furin\" (Chuông gió) mang lại cảm giác nhẹ nhàng, thư thái ngay khi bước chân vào. Chú trọng vào sự cân bằng trong hương vị và tính thẩm mỹ trong cách bày trí món ăn. Sushi tại đây có sự tinh tế và thanh nhã.",
    "desc_en": "'Furin' means wind chime: calm and soothing, with balanced flavours and elegant, refined sushi.",
    "clip": "",
-   "img_folder": "12uO55TECdUqc8_3HdoA1PzKC9Vi5dJMn"
+   "img_folder": "12uO55TECdUqc8_3HdoA1PzKC9Vi5dJMn",
+   "img": true
   },
   {
    "id": "nha-hang-nhat-ban--umami-yatai",
@@ -6130,7 +6167,8 @@
    "desc": "Tái hiện phong cách quầy hàng vỉa hè (Yatai) đặc trưng của Nhật Bản ngay giữa lòng phố núi. Trải nghiệm ẩm thực gần gũi, ấm cúng và đầy thú vị. Các món ăn được chế biến trực tiếp tại quầy giúp thực khách cảm nhận trọn vẹn hương vị.",
    "desc_en": "Recreates a Japanese street stall (yatai): cosy and fun, with dishes made right at the counter.",
    "clip": "https://www.tiktok.com/@qmthau/video/7591467716070984967",
-   "img_folder": "1cZEopDwiFMXss_35uTZ0O511Vi8hZ4zO"
+   "img_folder": "1cZEopDwiFMXss_35uTZ0O511Vi8hZ4zO",
+   "img": true
   },
   {
    "id": "nha-hang-nhat-ban--kiyo-da-lat",
@@ -6142,7 +6180,8 @@
    "desc": "Một nhà hàng Nhật mang hơi thở hiện đại với không gian decor tối giản nhưng cực kỳ sang trọng. Chuyên về các dòng Fusion Nhật Bản, kết hợp nguyên liệu địa phương Đà Lạt với kỹ thuật chế biến xứ Phù Tang.",
    "desc_en": "Modern Japanese with minimalist but classy decor, specialising in fusion that pairs Da Lat produce with Japanese techniques.",
    "clip": "https://www.tiktok.com/@qmthau/video/7284107729059319042",
-   "img_folder": "19phBC63Zs5InURywbtsc8KcG5gpcvrul"
+   "img_folder": "19phBC63Zs5InURywbtsc8KcG5gpcvrul",
+   "img": true
   },
   {
    "id": "nha-hang-nhat-ban--com-luon-unayaki",
@@ -6154,7 +6193,8 @@
    "desc": "Lươn được nướng sốt Kabayaki vàng óng, thịt mềm mọng hòa quyện với cơm trắng dẻo thơm. Nước sốt bí truyền là điểm nhấn tạo nên sự khác biệt.",
    "desc_en": "Eel grilled in golden kabayaki sauce, tender and juicy over sticky white rice, with a secret-recipe sauce.",
    "clip": "https://www.tiktok.com/@chillwithvyuyennn/video/7567635434805742855",
-   "img_folder": "1l5asumq0Dpg_H3OR2gWnKdecWfU4cuMe"
+   "img_folder": "1l5asumq0Dpg_H3OR2gWnKdecWfU4cuMe",
+   "img": true
   },
   {
    "id": "nha-hang-nhat-ban--sushi-akashi",

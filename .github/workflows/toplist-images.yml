@@ -24,14 +24,29 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install gdown==5.2.0 pillow==11.0.0
-      - name: Lấy ảnh đại diện từ Google Drive
-        run: python3 scripts/toplist-images.py "${{ github.event.inputs.limit }}"
-      - name: Lưu vào repo
-        if: always()
+      # Lấy theo từng đợt 40 địa điểm, xong đợt nào đưa lên repo đợt đó để web có ảnh ngay
+      - name: Lấy ảnh theo từng đợt và lưu lên repo
+        env:
+          LIMIT: ${{ github.event.inputs.limit }}
         run: |
+          case "$LIMIT" in diag:*) python3 scripts/toplist-images.py "$LIMIT"; exit 0;; esac
           git config user.name "github-actions[bot]"
           git config user.email "41898733+github-actions[bot]@users.noreply.github.com"
-          git add data/toplist.json data/toplist-img || true
-          git diff --cached --quiet && exit 0
-          git commit -m "Top list: thêm ảnh đại diện"
-          for i in 1 2 3; do git pull --rebase origin main && git push && break; sleep 5; done
+          END=$((SECONDS + 150 * 60))
+          TOTAL=0
+          PAUSES=0
+          while [ "$SECONDS" -lt "$END" ] && [ "$TOTAL" -lt "$LIMIT" ]; do
+            python3 scripts/toplist-images.py 40 | tee /tmp/out.txt
+            TOTAL=$((TOTAL + 40))
+            git add data/toplist.json data/toplist-img
+            if ! git diff --cached --quiet; then
+              git commit -qm "Top list: thêm ảnh đại diện"
+              for i in 1 2 3; do git pull -q --rebase origin main && git push -q && break; sleep 5; done
+            fi
+            if grep -q "còn 0 điểm chưa thử" /tmp/out.txt; then echo "Đã thử hết các địa điểm"; break; fi
+            if grep -q "Dừng: Google" /tmp/out.txt; then
+              PAUSES=$((PAUSES + 1))
+              if [ "$PAUSES" -gt 3 ]; then echo "Bị giới hạn nhiều lần, dừng"; break; fi
+              echo "Bị giới hạn, nghỉ 5 phút rồi chạy tiếp"; sleep 300
+            fi
+          done

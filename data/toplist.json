@@ -7246,7 +7246,8 @@
    "desc": "Nổi tiếng với nước dùng đậm vị và sợi bánh dai ngon. Đây là điểm dừng chân quen thuộc của du khách lưu trú",
    "desc_en": "Known for a rich broth and chewy noodles, a favourite stop for visitors staying nearby.",
    "clip": "https://www.tiktok.com/@toiladandalat/video/7555508419646573857",
-   "img_folder": "1rRpCydtgeOb4d-B321KN2A_tKIB0k2XU"
+   "img_folder": "1rRpCydtgeOb4d-B321KN2A_tKIB0k2XU",
+   "img": true
   },
   {
    "id": "banh-canh--banh-canh-ca-loc-chu-la",
@@ -7258,7 +7259,8 @@
    "desc": "Thu hút bởi phong cách phục vụ bình dân, gần gũi và phần cá lóc rất đầy đặn, chắc thịt.",
    "desc_en": "Simple, friendly service and generous, firm snakehead fish.",
    "clip": "https://www.tiktok.com/@myhmyh0704/video/7558909302510079240",
-   "img_folder": "1u2jdTfOCRY9laUu7VuE6ACtFYvk-QpKw"
+   "img_folder": "1u2jdTfOCRY9laUu7VuE6ACtFYvk-QpKw",
+   "img": true
   },
   {
    "id": "banh-canh--banh-canh-he-phu-yen",
@@ -7270,7 +7272,8 @@
    "desc": "Một làn gió mới với màu xanh mướt của hẹ, chả cá thu dai sần sật và nước dùng trong vắt, thanh nhẹ đúng chất miền biển.",
    "desc_en": "Fresh green chives, chewy mackerel fish cake and a clear, light coastal broth.",
    "clip": "https://www.tiktok.com/@minhlamayo/video/7582460337333587220",
-   "img_folder": "1OlQxFzdEnqBosmhrtSumWCSzmNY8Xe-D"
+   "img_folder": "1OlQxFzdEnqBosmhrtSumWCSzmNY8Xe-D",
+   "img": true
   },
   {
    "id": "banh-canh--banh-canh-cha-ca-thu-139",
@@ -7282,7 +7285,8 @@
    "desc": "Chả cá thu có độ ngọt tự nhiên và mùi thơm đặc trưng của biển, kết hợp hoàn hảo với nước dùng xương",
    "desc_en": "Naturally sweet mackerel fish cake with a fresh sea aroma in a bone broth.",
    "clip": "https://www.tiktok.com/@didalat.review/video/7350183407160167682",
-   "img_folder": "1C_v6Hm5sG4qz115VkD7nV5U5JF7UygGp"
+   "img_folder": "1C_v6Hm5sG4qz115VkD7nV5U5JF7UygGp",
+   "img": true
   },
   {
    "id": "view-ho-xuan-huong--nha-hang-thuy-ta",
@@ -7294,7 +7298,8 @@
    "desc": "Là một trong những biểu tượng kiến trúc lâu đời và nổi bật nhất của Đà Lạt với tòa nhà màu trắng thanh thoát vươn mình ra mặt hồ. Nhà hàng mang lại không gian yên tĩnh, cổ điển và cực kỳ lãng mạn. Thực đơn tại đây chuyên về các món ăn Việt Nam thuần túy và cà phê chất lượng cao. Đây là nơi bạn có thể cảm nhận rõ rệt nhất nhịp thở của hồ Xuân Hương.",
    "desc_en": "One of Da Lat's oldest architectural icons, a graceful white building over the lake; quiet, classic and romantic, serving Vietnamese food and quality coffee.",
    "clip": "https://www.tiktok.com/@travip/video/7519296946171890951",
-   "img_folder": "1zJP4DUzKF2Vq45ywo9lvjjh3rjah8-nc"
+   "img_folder": "1zJP4DUzKF2Vq45ywo9lvjjh3rjah8-nc",
+   "img": true
   },
   {
    "id": "view-ho-xuan-huong--thanh-thuy-blue-water",
@@ -7306,7 +7311,8 @@
    "desc": "Thanh Thuỷ nổi bật rực rỡ với tone màu tím mộng mơ đặc trưng, tạo nên một điểm nhấn không thể nhầm lẫn ngay sát mép nước. Đây là tọa độ sôi động và phổ biến nhất đối với du khách. Nhà hàng có không gian mở rộng lớn, menu đa dạng từ thức uống đến các món Âu - Á. Buổi tối, ánh đèn tím lung linh phản chiếu xuống mặt hồ tạo nên bối cảnh cực kỳ ấn tượng.",
    "desc_en": "Stands out in dreamy purple right at the water's edge, the liveliest lakeside spot, with a big open space and a menu of drinks and European and Asian dishes; purple lights reflect on the lake at night.",
    "clip": "https://www.tiktok.com/@thanhthuybluewater/video/7602193773761678613",
-   "img_folder": "15MKkgn8qErMwHStNw7bCmpDS-tYbxFU5"
+   "img_folder": "15MKkgn8qErMwHStNw7bCmpDS-tYbxFU5",
+   "img": true
   },
   {
    "id": "view-ho-xuan-huong--xuan-huong-garden-coffee",
@@ -7318,7 +7324,8 @@
    "desc": "Tọa lạc gần khu vực Vườn hoa Thành phố, đây là một tổ hợp cà phê và nhà hàng sân vườn có diện tích cực lớn và hiện đại. Thiết kế theo phong cách \"khu vườn trong phố\" với nhiều cây xanh và tiểu cảnh đẹp mắt. Không gian tại đây rất thoáng đạt, phù hợp cho cả những đoàn khách đông người. Tầm nhìn hướng ra hồ Xuân Hương từ phía công viên mang lại cảm giác thư thái và xanh mát.",
    "desc_en": "Near the Flower Garden, a huge modern garden cafe and restaurant full of greenery, roomy for groups, with a park-side view of the lake.",
    "clip": "https://www.tiktok.com/@xun.hng.garden.co/video/7561437541828840722",
-   "img_folder": "1ccS4IXGVrJ-25PtcvVVEr1jsQvSpn03y"
+   "img_folder": "1ccS4IXGVrJ-25PtcvVVEr1jsQvSpn03y",
+   "img": true
   },
   {
    "id": "view-ho-xuan-huong--nha-hang-son-phat",
@@ -7330,7 +7337,8 @@
    "desc": "Nằm ngay trên cung đường Trần Quốc Toản thơ mộng, Sơn Phát là nhà hàng được đánh giá rất cao về cả chất lượng món ăn lẫn phong cách phục vụ chuyên nghiệp. Nhà hàng sở hữu không gian sang trọng, chỉn chu với tầm nhìn bao quát một góc hồ Xuân Hương xinh đẹp. Thực đơn phong phú với các món đặc sản địa phương được chế biến tinh tế, rất được lòng những thực khách sành ăn.",
    "desc_en": "On scenic Tran Quoc Toan street, highly rated for food and professional service, elegant with a view over part of the lake and refined local specialties.",
    "clip": "",
-   "img_folder": "1kP3CWV5jAF-d2hJzj6w9FFti-ifETCOU"
+   "img_folder": "1kP3CWV5jAF-d2hJzj6w9FFti-ifETCOU",
+   "img": true
   },
   {
    "id": "view-ho-xuan-huong--bich-cau-1",
@@ -7342,7 +7350,8 @@
    "desc": "Mang phong cách của một \"ốc đảo\" nhỏ giữa lòng phố sương, Bích Câu (chi nhánh Pasteur) thường thu hút thực khách bởi không gian ấm cúng và sự tận tâm trong cách phục vụ. Tầm nhìn từ khu vực này mang lại một góc nhìn khác, yên bình hơn về phía thung lũng và mặt hồ xa xa.",
    "desc_en": "A cosy 'oasis' (Pasteur branch) with attentive service and a calmer view towards the valley and the distant lake.",
    "clip": "https://www.tiktok.com/@mvhodalat/video/7502817112692362503",
-   "img_folder": "1Zt58rEn3ScxhJ_8D7G6VJzv9RlocgAzc"
+   "img_folder": "1Zt58rEn3ScxhJ_8D7G6VJzv9RlocgAzc",
+   "img": true
   },
   {
    "id": "tra-chieu-cao-cap--dalat-palace-heritage-hotel",
@@ -7354,7 +7363,8 @@
    "desc": "\"Tiệc Trà\" tại Dalat Palace được phục vụ theo phong cách Anh truyền thống trong một không gian thanh lịch nhưng vô cùng thoải mái. Bạn sẽ được thưởng thức những loại trà đặc biệt do các chuyên gia pha chế phục vụ, đi kèm với tháp bánh ngọt, bánh mì sandwich quyến rũ và các loại bánh kem tinh tế. Đây là nơi lý tưởng để sống lại cảm giác của một thời quý tộc xưa giữa lòng thành phố ngàn hoa.",
    "desc_en": "Traditional English-style afternoon tea in an elegant yet relaxed setting: specialty teas, a tiered stand of sweets, sandwiches and fine cakes, like reliving an aristocratic past.",
    "clip": "https://www.tiktok.com/@didaunao2022/video/7378112624610872594",
-   "img_folder": "1YWRy-1hLjd2x-X_kMY7pLcBUutyzwARF"
+   "img_folder": "1YWRy-1hLjd2x-X_kMY7pLcBUutyzwARF",
+   "img": true
   },
   {
    "id": "tra-chieu-cao-cap--ana-mandara-villas-dalat",
@@ -7366,7 +7376,8 @@
    "desc": "Tiệc trà chiều tại đây đưa bạn đắm chìm vào không gian xanh mướt và yên bình. Bạn có thể nhâm nhi tách trà ấm, dùng kèm những chiếc bánh xinh xắn và cảm nhận không khí mát mẻ đặc trưng của Đà Lạt. Nhiều thực khách đánh giá đây là nơi có trà chiều chất lượng và \"tình\" nhất, kể cả khi so sánh với các khách sạn 5 sao ở các thành phố lớn.",
    "desc_en": "Afternoon tea surrounded by peaceful greenery with lovely cakes and cool Da Lat air; many guests rate it among the best, even compared with 5-star hotels in big cities.",
    "clip": "https://www.tiktok.com/@huykutis/video/7256324410284444934",
-   "img_folder": "1rWd-F-gBqBcc0K52j4d2lCX5umlUlIvA"
+   "img_folder": "1rWd-F-gBqBcc0K52j4d2lCX5umlUlIvA",
+   "img": true
   },
   {
    "id": "tra-chieu-cao-cap--mercure-dalat-resort",
@@ -7378,7 +7389,8 @@
    "desc": "Tại đây, bạn có thể lựa chọn chỗ ngồi ngoài trời với thiết kế ban công kiểu hoàng gia để vừa thưởng thức trà vừa ngắm nhìn khuôn viên ngập tràn hoa cỏ. Thực đơn trà chiều tại Mercure được đầu tư kỹ lưỡng về hình thức trình bày, mang phong cách trẻ trung nhưng không kém phần sang trọng. Không gian tông màu hồng phấn và be nhã nhặn tại đây cũng là điểm đến lý tưởng cho những ai yêu thích chụp ảnh phong cách \"tiểu thư\" lãng mạn.",
    "desc_en": "Sit outdoors on a royal-style balcony overlooking flower gardens; a stylish, youthful afternoon tea in soft pink and beige tones, great for romantic photos.",
    "clip": "https://www.tiktok.com/@sonharryy/video/7549185455322090759",
-   "img_folder": "198DZSJoq8o1kwZ0KUfXB7yVQBuPm9JqC"
+   "img_folder": "198DZSJoq8o1kwZ0KUfXB7yVQBuPm9JqC",
+   "img": true
   },
   {
    "id": "bun-rieu--bun-rieu-che-trang",
@@ -7390,7 +7402,8 @@
    "desc": "Đây là một trong những quán bún riêu có tiếng nhất khu vực trung tâm. Nước dùng ở đây có vị thanh ngọt tự nhiên, riêu cua được làm chắc tay và rất thơm. Đặc biệt, quán có phục vụ thêm các loại topping như huyết, đậu hũ và giò heo được ninh mềm.",
    "desc_en": "One of the best-known crab noodle soups in the centre: a light, naturally sweet broth, firm fragrant crab cakes and toppings like blood cubes, tofu and pork hock.",
    "clip": "https://www.tiktok.com/@didalatcungtruc/video/7379238231130361104",
-   "img_folder": "1Io4c0QqHLtQcS268Tf8-CYx_Y38cjbcd"
+   "img_folder": "1Io4c0QqHLtQcS268Tf8-CYx_Y38cjbcd",
+   "img": true
   },
   {
    "id": "bun-rieu--mi-quang-bun-rieu-co-nguyet",
@@ -7402,7 +7415,8 @@
    "desc": "Điểm độc đáo là sự kết hợp giữa Mì Quảng và Bún Riêu. Bún riêu của Cô Nguyệt mang hương vị đậm đà kiểu miền Trung, riêu cua béo ngậy và nước dùng có màu sắc rất bắt mắt. Rau sống đi kèm luôn tươi ngon và được thái nhỏ đặc trưng của Đà Lạt.",
    "desc_en": "Serves both Quang noodles and crab noodle soup; rich Central-style riêu with colourful broth and finely sliced fresh herbs.",
    "clip": "https://www.tiktok.com/@hien_soschildrensvillage/video/7095699689118502171",
-   "img_folder": "1YgP29uGKNsjhjegd_CqY-jd4TJPRwIW_"
+   "img_folder": "1YgP29uGKNsjhjegd_CqY-jd4TJPRwIW_",
+   "img": true
   },
   {
    "id": "bun-rieu--quan-bun-rieu-cua-man",
@@ -7414,7 +7428,8 @@
    "desc": "Quán Mẫn nổi tiếng với riêu cua nguyên chất, không pha trộn nhiều. Tô bún ở đây trình bày rất chỉn chu, sạch sẽ. Nước dùng được nấu trong veo nhưng lại cực kỳ đậm đà vị cua đồng.",
    "desc_en": "Known for pure crab paste, neat and clean bowls, and a clear yet very rich field-crab broth.",
    "clip": "https://www.tiktok.com/@hien_soschildrensvillage/video/7097186629466541339",
-   "img_folder": "1Fv4v5WqETFwx0a_rv2GXXHhYFHTdeA4K"
+   "img_folder": "1Fv4v5WqETFwx0a_rv2GXXHhYFHTdeA4K",
+   "img": true
   },
   {
    "id": "bun-rieu--bun-rieu-co-lan",
@@ -7426,7 +7441,8 @@
    "desc": "Bún riêu Cô Lan ghi điểm bởi phần riêu cua miếng lớn, béo mềm và miếng huyết dai giòn sần sật. Hương vị ở đây rất ổn định qua nhiều năm, tạo nên thương hiệu riêng trong lòng người dân phố núi.",
    "desc_en": "Big, soft, rich crab cakes and chewy blood cubes, with consistent flavour for years.",
    "clip": "https://www.tiktok.com/@qmthau/video/7278658562904182017",
-   "img_folder": "193lSl7aOUNrpxROHnfkzohB2ICIGpiJc"
+   "img_folder": "193lSl7aOUNrpxROHnfkzohB2ICIGpiJc",
+   "img": true
   },
   {
    "id": "bun-rieu--bun-rieu-di-canh",
@@ -7438,7 +7454,8 @@
    "desc": "Mang phong cách bún riêu bình dân, mộc mạc nhưng cực kỳ hút khách bởi hương vị \"đúng chất dì nấu\". Nước dùng có vị chua thanh nhẹ của cà chua và dấm bỗng, cực kỳ kích thích vị giác giữa cái lạnh Đà Lạt.",
    "desc_en": "Simple and homely, with a 'just like auntie makes it' flavour and a gently sour tomato and rice-vinegar broth.",
    "clip": "https://www.tiktok.com/@sayhihuy/video/7364339835189873927",
-   "img_folder": "1sAnllcteQEprKUUZUpu6-gvn80s5I6R2"
+   "img_folder": "1sAnllcteQEprKUUZUpu6-gvn80s5I6R2",
+   "img": true
   },
   {
    "id": "com-tam--com-tam-sa-bi-chuong",
@@ -7450,7 +7467,8 @@
    "desc": "Không gian hiện đại, sạch sẽ và quy trình phục vụ chuyên nghiệp. Miếng sườn được nướng theo công thức độc quyền, dày dặn nhưng vẫn mềm mọng. Phần nước mắm kẹo đặc trưng là điểm nhấn khó quên.",
    "desc_en": "Modern, clean and professional, with thick yet tender ribs grilled to a house recipe and a memorable caramel fish sauce.",
    "clip": "https://www.tiktok.com/@vimaay/video/7192064272334146842",
-   "img_folder": "1OgvkpP_2j6g1DX8-suZsfSY94xW1rLXw"
+   "img_folder": "1OgvkpP_2j6g1DX8-suZsfSY94xW1rLXw",
+   "img": true
   },
   {
    "id": "com-tam--com-tam-mo",
@@ -7462,7 +7480,8 @@
    "desc": "Cơm ở đây có độ tơi vừa phải, sườn nướng thơm mùi mật ong và gia vị truyền thống. Quán nổi tiếng với sự sạch sẽ và phong cách phục vụ điềm đạm của người Đà Lạt.",
    "desc_en": "Fluffy broken rice and ribs fragrant with honey and spices; clean and calm in true Da Lat style.",
    "clip": "https://www.tiktok.com/@kembohaycomtam/video/7422923504405744904",
-   "img_folder": "1ynNx_wZjMTPUnL9GhYqpCXTUt0suFYZM"
+   "img_folder": "1ynNx_wZjMTPUnL9GhYqpCXTUt0suFYZM",
+   "img": true
   },
   {
    "id": "com-tam--com-tam-co-hai",
@@ -7474,7 +7493,8 @@
    "desc": "Sườn nướng tại Cô Hai có hương vị đậm đà, cháy cạnh rất hấp dẫn. Phần chả trứng và bì được làm thủ công, giữ được độ thơm béo tự nhiên.",
    "desc_en": "Rich, nicely charred grilled ribs with handmade egg meatloaf and shredded pork skin.",
    "clip": "https://www.tiktok.com/@militheman/video/7517965669103668498",
-   "img_folder": "1VHE4tHPiVvjTPbGDVYrs8u0mJkn0J4Y9"
+   "img_folder": "1VHE4tHPiVvjTPbGDVYrs8u0mJkn0J4Y9",
+   "img": true
   },
   {
    "id": "com-tam--com-tam-cong-minh",
@@ -7486,7 +7506,8 @@
    "desc": "Phong cách nấu truyền thống, không cầu kỳ nhưng cực kỳ ổn định về chất lượng. Nước canh đi kèm ở đây thường được nấu rất thanh và ngọt từ xương.",
    "desc_en": "Traditional cooking with steady quality and a light, sweet bone-broth soup on the side.",
    "clip": "",
-   "img_folder": "1jAPNHPqx9c4eDCHcbAxfcxT7w0HQ1qpq"
+   "img_folder": "1jAPNHPqx9c4eDCHcbAxfcxT7w0HQ1qpq",
+   "img": true
   },
   {
    "id": "com-tam--com-tam-moi",
@@ -7498,7 +7519,8 @@
    "desc": "Tốc độ phục vụ tại đây cực nhanh. Miếng sườn to che kín mặt đĩa, được nướng liên tục nên luôn nóng hổi. Cơm tấm ở đây được đánh giá là rất đúng chất \"tấm\" – hạt nhỏ, thơm và tơi.",
    "desc_en": "Very fast service with plate-sized ribs grilled continuously so they're always hot, and properly fluffy broken rice.",
    "clip": "https://www.tiktok.com/@comtammoi/video/7153489224312818970",
-   "img_folder": "1eBmeTUWdyu265mXEvw__AaEWH6OSsQ7y"
+   "img_folder": "1eBmeTUWdyu265mXEvw__AaEWH6OSsQ7y",
+   "img": true
   },
   {
    "id": "com-tam--com-tam-lao-tru",
@@ -7510,7 +7532,8 @@
    "desc": "Lão Trư tập trung vào các loại sườn nướng tảng hoặc sườn cọng với cách tẩm ướp hiện đại. Không gian quán mang hơi hướng \"hip\" và rất thoải mái cho nhóm bạn trẻ.",
    "desc_en": "Big slab or thin-cut ribs with modern marinades in a hip, relaxed space for groups.",
    "clip": "https://www.tiktok.com/@hachireview74/video/7380179973245603080",
-   "img_folder": "1xQXBIaNcET57HYcfH84a099l6l7FB60e"
+   "img_folder": "1xQXBIaNcET57HYcfH84a099l6l7FB60e",
+   "img": true
   },
   {
    "id": "com-tam--com-tam-3-ghien-da-lat",
@@ -7522,7 +7545,8 @@
    "desc": "Điểm nhận diện không thể nhầm lẫn là miếng sườn \"to hơn đĩa\", được nướng vàng ươm và thơm nức một góc phố. Ăn kèm với trứng ốp la lòng đào tạo nên một combo hoàn hảo.",
    "desc_en": "Known for ribs 'bigger than the plate', grilled golden, with a soft-yolk fried egg for the perfect combo.",
    "clip": "",
-   "img_folder": "1rmJuhyYegaqEzEAGe1x9xc8LJk3UZSQF"
+   "img_folder": "1rmJuhyYegaqEzEAGe1x9xc8LJk3UZSQF",
+   "img": true
   },
   {
    "id": "com-tam--com-tam-co-thu-118",
@@ -7534,7 +7558,8 @@
    "desc": "Hệ thống này duy trì chất lượng cực kỳ đồng nhất. Sườn nướng của Cô Thu thường có vị hơi ngọt thanh, rất dễ ăn và phù hợp với khẩu vị của cả ba miền.",
    "desc_en": "A consistent chain with slightly sweet ribs that suit all tastes.",
    "clip": "https://www.tiktok.com/@didalat.review/video/7324557218408353025",
-   "img_folder": "1xIIFfe9xDV3aGO_3itRVdKJ7Z5xGtmvA"
+   "img_folder": "1xIIFfe9xDV3aGO_3itRVdKJ7Z5xGtmvA",
+   "img": true
   },
   {
    "id": "com-tam--com-tam-co-thu-2",
@@ -7546,7 +7571,8 @@
    "desc": "Hệ thống này duy trì chất lượng cực kỳ đồng nhất. Sườn nướng của Cô Thu thường có vị hơi ngọt thanh, rất dễ ăn và phù hợp với khẩu vị của cả ba miền.",
    "desc_en": "A consistent chain with slightly sweet ribs that suit all tastes.",
    "clip": "https://www.tiktok.com/@toiladandalat/video/7532859904197987616",
-   "img_folder": "1ogOcW_K8hmv6JUxUpHZ2oiWOemuhERj7"
+   "img_folder": "1ogOcW_K8hmv6JUxUpHZ2oiWOemuhERj7",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--lee-s-pizza-house",
@@ -7558,7 +7584,8 @@
    "desc": "Đây là một trong những tiệm pizza đời đầu và giữ được phong độ ổn định nhất tại Đà Lạt. Nổi tiếng với dòng pizza đế mỏng, giòn rụm và các loại mì Ý sốt kem béo ngậy. Không gian quán nhỏ nhắn, ấm cúng với tone màu vàng đỏ đặc trưng.",
    "desc_en": "One of Da Lat's first and most consistent pizza shops, known for thin, crispy pizza and creamy pasta in a small, cosy space.",
    "clip": "https://www.tiktok.com/@lees.pizza.house/video/7262719562133671176",
-   "img_folder": "1zo_7nx6lxtx30ro_QJcSTEvmcjbZWwdG"
+   "img_folder": "1zo_7nx6lxtx30ro_QJcSTEvmcjbZWwdG",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--pizza-doc-nha-bo",
@@ -7570,7 +7597,8 @@
    "desc": "Pizza ở đây được làm thủ công với lớp vỏ bánh có độ dẻo thơm đặc biệt. Quán tận dụng lợi thế địa hình dốc để tạo ra những góc ngồi ngắm phố phường cực kỳ thú vị.",
    "desc_en": "Handmade pizza with a chewy, fragrant crust, with fun seats on the slope looking over the streets.",
    "clip": "https://www.tiktok.com/@suachuasay/video/7489761634198572293",
-   "img_folder": "1pYVBPM7HveBVXaDtNdbisJty58N54fNd"
+   "img_folder": "1pYVBPM7HveBVXaDtNdbisJty58N54fNd",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--pizza-susi",
@@ -7582,7 +7610,8 @@
    "desc": "Menu đa dạng với các loại pizza truyền thống và các món ăn kèm phong phú. Điểm cộng lớn nhất là sự nhiệt tình của chủ quán và không gian mang lại cảm giác gần gũi như ăn tại nhà.",
    "desc_en": "Traditional pizzas and plenty of sides, with a warm owner and a homely feel.",
    "clip": "",
-   "img_folder": "1rwRWmLpEbFopADcfkEZHXJFdSRGPZE6b"
+   "img_folder": "1rwRWmLpEbFopADcfkEZHXJFdSRGPZE6b",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--pizza-bingo-da-lat",
@@ -7594,7 +7623,8 @@
    "desc": "Bánh pizza tại đây thường có lớp phô mai rất hào phóng và nhân bánh đầy đặn. Quán cũng rất mạnh về mảng giao hàng tận nơi (delivery) với tốc độ nhanh chóng.",
    "desc_en": "Generous cheese and toppings, and fast delivery.",
    "clip": "https://www.tiktok.com/@banandalat/video/7473837491695389970",
-   "img_folder": "1abPRAZhnKXNUG-Q_6S4kbDr5qjFogxjx"
+   "img_folder": "1abPRAZhnKXNUG-Q_6S4kbDr5qjFogxjx",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--moto-laurie-cafe-bistro",
@@ -7606,7 +7636,8 @@
    "desc": "Moto Laurie nổi tiếng với các món mì Ý và Pizza được chế biến theo phong cách Fusion tinh tế. Không gian quán mang đậm chất bụi bặm của dân mê xe dịch nhưng vẫn rất lãng mạn.",
    "desc_en": "Known for refined fusion pasta and pizza in a rugged biker-style space that's still romantic.",
    "clip": "https://www.tiktok.com/@vine.2905/video/7593308144286158088",
-   "img_folder": "1fp4sNjHGdz1wtaJ-1GsOCMYisNyR9FIL"
+   "img_folder": "1fp4sNjHGdz1wtaJ-1GsOCMYisNyR9FIL",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--mi-y-la-pasta",
@@ -7618,7 +7649,8 @@
    "desc": "Đúng như tên gọi, thế mạnh tuyệt đối ở đây là Pasta. Sợi mì được nấu vừa chín tới (Al dente), kết hợp với các loại sốt được pha chế kỳ công, mang lại hương vị khác biệt hoàn toàn so với các quán đại trà.",
    "desc_en": "As the name says, pasta is the star: cooked al dente with carefully made sauces that stand out from the crowd.",
    "clip": "https://www.tiktok.com/@didalatcungtruc/video/7486445520160951570",
-   "img_folder": "1HBzI4EHTY8ozxbP_eIxNNkiILaM3wppP"
+   "img_folder": "1HBzI4EHTY8ozxbP_eIxNNkiILaM3wppP",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--the-pizza-company",
@@ -7630,7 +7662,8 @@
    "desc": "Chất lượng đồng bộ, menu phong phú với các dòng pizza nhân nhồi và viền phô mai cực kỳ hấp dẫn. Không gian rộng rãi, hiện đại và nhìn thẳng xuống phố đi bộ.",
    "desc_en": "Consistent quality, a big menu with stuffed-crust and cheese-edge pizzas, and a modern space overlooking the walking street.",
    "clip": "https://www.tiktok.com/@thodiadalat_gdl/video/7480877844504120594",
-   "img_folder": "1_uLIeZpJ4p9mdY2VJhG79EIbseukHd2C"
+   "img_folder": "1_uLIeZpJ4p9mdY2VJhG79EIbseukHd2C",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--hestia-dalat",
@@ -7642,7 +7675,8 @@
    "desc": "Hestia chú trọng vào nghệ thuật ẩm thực với các món Ý được trình bày vô cùng nghệ thuật. Các món mì Ý hải sản và salad tại đây luôn tươi ngon và đậm đà vị cao nguyên.",
    "desc_en": "Focused on culinary art, with beautifully plated Italian dishes; seafood pasta and salads are fresh and full of highland flavour.",
    "clip": "",
-   "img_folder": "11PtOI2z4Bs892tUTsyGS1WN2TQ5Rbnnb"
+   "img_folder": "11PtOI2z4Bs892tUTsyGS1WN2TQ5Rbnnb",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--comfort-food-gourmet-snack",
@@ -7654,7 +7688,8 @@
    "desc": "Đúng như tên gọi, quán phục vụ những món ăn mang lại sự thoải mái (comfort food). Pizza và mỳ Ý ở đây có hương vị mộc mạc, dễ ăn và rất tốt cho sức khỏe.",
    "desc_en": "True to its name, comfort food: simple, easy-to-love and wholesome pizza and pasta.",
    "clip": "",
-   "img_folder": "18u9StiXBbavgZvw9RgvVcvGiXztRSbkP"
+   "img_folder": "18u9StiXBbavgZvw9RgvVcvGiXztRSbkP",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--pizza-tet",
@@ -7666,7 +7701,8 @@
    "desc": "Pizza được làm thủ công với sự tỉ mỉ trong từng khâu chọn nguyên liệu. Vỏ bánh có độ giòn đặc trưng và mùi thơm nồng nàn của các loại lá gia vị Ý.",
    "desc_en": "Handmade pizza with carefully chosen ingredients, a distinctively crisp crust and the aroma of Italian herbs.",
    "clip": "",
-   "img_folder": "1EXWG8MA_LGaSF8I5089oLYJq1YX9VvVD"
+   "img_folder": "1EXWG8MA_LGaSF8I5089oLYJq1YX9VvVD",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--pizza-dalat-24h",
@@ -7678,7 +7714,8 @@
    "desc": "Phục vụ xuyên suốt với tốc độ nhanh. Menu tập trung vào các dòng pizza phổ biến, dễ ăn và luôn được giữ nóng sốt.",
    "desc_en": "Open round the clock with fast service, focused on popular, easy pizzas kept piping hot.",
    "clip": "",
-   "img_folder": "1PKEfg8O7DtRewj7rHJfXtjoBTrfwMNGR"
+   "img_folder": "1PKEfg8O7DtRewj7rHJfXtjoBTrfwMNGR",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--pasta-fresca-da-lat",
@@ -7690,7 +7727,8 @@
    "desc": "Khách hàng có thể tận mắt chứng kiến quy trình làm mì tươi. Sợi mì mềm, thơm mùi trứng và có độ thấm sốt tuyệt vời, mang lại trải nghiệm ẩm thực Ý đích thực.",
    "desc_en": "Watch fresh pasta being made: soft, eggy noodles that soak up sauce for an authentic Italian experience.",
    "clip": "https://www.tiktok.com/@chang.trang91/video/7587390298423151893",
-   "img_folder": "1PPM0don8uQcvuuXcN7AX8ON42CFI_gVJ"
+   "img_folder": "1PPM0don8uQcvuuXcN7AX8ON42CFI_gVJ",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--mimi-sushi-pizza-restaurant",
@@ -7702,7 +7740,8 @@
    "desc": "Không gian hiện đại, phục vụ đa dạng nhu cầu. Pizza tại MiMi có sự biến tấu thú vị để hòa hợp với khẩu vị Á Đông, thường có lớp vỏ mềm mại và nhân bánh phong phú.",
    "desc_en": "Modern and versatile; pizzas adapted to Asian tastes, usually with a soft crust and plenty of toppings.",
    "clip": "https://www.tiktok.com/@didalatcungtruc/video/7205889378751614235",
-   "img_folder": "1TQLoWlFS6vrdfx70WADkrwLTqCLW0Zrk"
+   "img_folder": "1TQLoWlFS6vrdfx70WADkrwLTqCLW0Zrk",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--pizza-cui",
@@ -7714,7 +7753,8 @@
    "desc": "Bánh được nướng trực tiếp trong lò gạch bằng củi khô, tạo nên lớp vỏ cháy sém nhẹ và mùi khói đặc trưng không thể trộn lẫn. Các loại topping tại đây đều rất tươi và đậm đà.",
    "desc_en": "Baked in a brick oven over dry wood for a lightly charred crust and smoky flavour, with fresh, tasty toppings.",
    "clip": "https://www.tiktok.com/@pizzacui_dalat/video/7247719329045826821",
-   "img_folder": "1x_H839x9H9gO80Ag3rrQoHzzJr4BJTFa"
+   "img_folder": "1x_H839x9H9gO80Ag3rrQoHzzJr4BJTFa",
+   "img": true
   },
   {
    "id": "nha-hang-y-pizza--pizza-chorio",

@@ -2,14 +2,14 @@
   "schema": 1,
   "about": "Lịch show của các điểm diễn tại Đà Lạt. Lịch và giá vé do từng điểm diễn công bố; mỗi mục có link về trang gốc.",
   "timezone": "Asia/Ho_Chi_Minh",
-  "updated_at": "2026-11-26T05:50:00+07:00",
+  "updated_at": "2026-11-27T05:50:00+07:00",
   "stages": [
     {
       "id": "may-lang-thang",
       "name": "Mây Lang Thang",
       "kind": "dated",
       "source_url": "https://maylangthang.com.vn/",
-      "verified_at": "2026-11-26",
+      "verified_at": "2026-11-27",
       "intro": "Đêm nhạc tại Đà Lạt. Lịch và vé do Mây Lang Thang công bố, có thể thay đổi.",
       "address": "Mây Lang Thang: 519 thôn Măng Lin, phường Lang Biang – Đà Lạt. Mây Heritage: khu Ga Đà Lạt, số 01 Quang Trung, phường Xuân Hương – Đà Lạt.",
       "cta_label": "Xem vé",
@@ -113,7 +113,7 @@
       "name": "Lululola Show",
       "kind": "dated",
       "source_url": "https://lululolashow.com/",
-      "verified_at": "2026-11-26",
+      "verified_at": "2026-11-27",
       "intro": "Đêm diễn ca sĩ khách mời. Lịch và giá vé do Lululola Show công bố, có thể thay đổi.",
       "address": "Lululola Show: số 32/2 đường 3/4, phường Xuân Hương – Đà Lạt. Ngoài các đêm ca sĩ khách mời, Lululola có đêm acoustic lúc 19:30 vào nhiều tối trong tuần, vé từ 150.000đ.",
       "cta_label": "Xem vé",
@@ -142,7 +142,7 @@
         {
           "date": "2026-12-19",
           "time": "17:00",
-          "title": "Võ Hạ Trâm ft Khánh An Band và Bè Cadillac",
+          "title": "Võ Hạ Trâm – minishow Cánh Chim Tự Do ft Khánh An Band và Bè Cadillac",
           "url": "https://lululolashow.com/show/2026-12-19-ns",
           "price": "Vé từ 580.000đ"
         },

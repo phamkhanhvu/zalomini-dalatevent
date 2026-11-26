@@ -8286,7 +8286,8 @@
    "desc": "Thịt dê núi chính gốc nên rất chắc và thơm. Cách chế biến tại đây mang hơi hướng phong trần, đậm đà, rất kích thích vị giác. Đặc biệt, món lẩu dê ở đây thường đi kèm với rất nhiều loại rau rừng và rau đặc sản Đà Lạt.",
    "desc_en": "Genuine mountain goat, firm and fragrant, cooked in a rustic, bold style with lots of wild and Da Lat greens in the hotpot.",
    "clip": "https://www.tiktok.com/@julepe.sheen/video/7501196507459243272",
-   "img_folder": "1-Jd6Ha4qs32MeyKXipLOYUPoYrX2972u"
+   "img_folder": "1-Jd6Ha4qs32MeyKXipLOYUPoYrX2972u",
+   "img": true
   },
   {
    "id": "com-ga-xoi-mo--com-ga-xoi-mo-nhu-y-3",
@@ -8298,7 +8299,8 @@
    "desc": "Gà ở đây được xối mỡ liên tục giúp lớp da giòn tan như bóng bì nhưng phần thịt bên trong vẫn giữ được độ ngọt và mọng nước. Cơm chiên tơi, không quá dầu mỡ.",
    "desc_en": "Chicken basted with hot oil until the skin is as crisp as puffed pork rind while the meat stays juicy, with fluffy, not greasy fried rice.",
    "clip": "",
-   "img_folder": "1Wh8lNc_0F2gPGGvweZj1UiR3wYlSNq1Z"
+   "img_folder": "1Wh8lNc_0F2gPGGvweZj1UiR3wYlSNq1Z",
+   "img": true
   },
   {
    "id": "com-ga-xoi-mo--com-ga-xoi-mo-lan-ha",
@@ -8310,7 +8312,8 @@
    "desc": "Điểm mạnh lớn nhất là phần ăn cực kỳ đầy đặn (với tiêu chí \"bao no\"). Miếng gà to, được tẩm ướp đậm đà theo khẩu vị miền Trung, ăn kèm với đồ chua giải ngấy rất bắt miệng.",
    "desc_en": "Very generous portions, big pieces of chicken with Central Vietnam seasoning and crunchy pickles.",
    "clip": "",
-   "img_folder": "1JSbibtskamQvqFpBQDpzp0avrIOdROt4"
+   "img_folder": "1JSbibtskamQvqFpBQDpzp0avrIOdROt4",
+   "img": true
   },
   {
    "id": "com-ga-xoi-mo--com-ga-xoi-mo-20-ba-trieu",
@@ -8322,7 +8325,8 @@
    "desc": "Cơm ở đây có màu vàng óng tự nhiên, hạt cơm săn chắc. Gà xối mỡ của quán có lớp vỏ ngoài rùm rụm đặc trưng, thường được phục vụ kèm nước sốt tương đặc chế mang vị ngọt thanh.Cơm ở đây có màu vàng óng tự nhiên, hạt cơm săn chắc. Gà xối mỡ của quán có lớp vỏ ngoài rùm rụm đặc trưng, thường được phục vụ kèm nước sốt tương đặc chế mang vị ngọt thanh.",
    "desc_en": "Naturally golden, firm fried rice and crunchy oil-basted chicken served with a lightly sweet house sauce.",
    "clip": "https://www.tiktok.com/@thaytuanvuive251095/video/7255611152942599429",
-   "img_folder": "1Ucf7UFf1Ddw3i9EQg6kKKNHMzFyqUKc7"
+   "img_folder": "1Ucf7UFf1Ddw3i9EQg6kKKNHMzFyqUKc7",
+   "img": true
   },
   {
    "id": "com-ga-xoi-mo--com-ga-son-ky-2",
@@ -8334,7 +8338,8 @@
    "desc": "Thương hiệu này chú trọng vào chất lượng thịt gà (thường là gà ta hoặc gà thả vườn) nên thịt chắc và thơm. Quy trình chế biến sạch sẽ, cơm chiên đều tay, tơi xốp.",
    "desc_en": "Focuses on free-range chicken for firm, fragrant meat, with clean cooking and evenly fluffy fried rice.",
    "clip": "https://www.tiktok.com/@avuuuuu94/video/7588520040756956436",
-   "img_folder": "17FLrJwpZckKgflHf8_TffKJbDuySGPyK"
+   "img_folder": "17FLrJwpZckKgflHf8_TffKJbDuySGPyK",
+   "img": true
   },
   {
    "id": "com-ga-xoi-mo--com-ga-xoi-mo-a-lu",
@@ -8346,7 +8351,8 @@
    "desc": "Quán phục vụ theo phong cách năng động, nhanh chóng. Gà luôn được chiên mới nóng hổi, lớp da giữ được độ giòn lâu. Phần cơm chiên thường có thêm ít tỏi phi thơm lừng.",
    "desc_en": "Lively and quick, chicken always freshly fried with long-lasting crisp skin, and fried rice with fragrant garlic.",
    "clip": "https://www.tiktok.com/@reviewdalatdiaphuong/video/7523591740255718664",
-   "img_folder": "1DoF3X1X3_lOHIArmNIkhWdxnhYyrWUhG"
+   "img_folder": "1DoF3X1X3_lOHIArmNIkhWdxnhYyrWUhG",
+   "img": true
   },
   {
    "id": "com-ga-xoi-mo--tiem-com-ga-hai-phan-rang",
@@ -8358,7 +8364,8 @@
    "desc": "Khác với xối mỡ truyền thống, gà ở đây có thể được chế biến theo kiểu luộc hoặc chiên mắm nhưng vẫn giữ được độ giòn đặc thù. Đặc biệt nhất là phần nước chấm tỏi ớt giã nhuyễn và cơm nấu bằng nước dùng gà cực kỳ thơm ngậy.",
    "desc_en": "Phan Rang style: chicken boiled or fried with fish sauce but still crispy, with pounded garlic-chilli sauce and rice cooked in chicken broth.",
    "clip": "https://www.tiktok.com/@qmthau/video/7552882067256691976",
-   "img_folder": "1q7W5lSJr8Gx10Mr_sze1EJaZVkh32F8u"
+   "img_folder": "1q7W5lSJr8Gx10Mr_sze1EJaZVkh32F8u",
+   "img": true
   },
   {
    "id": "com-van-phong--quan-2-oi-com-trua-da-lat",
@@ -8370,7 +8377,8 @@
    "desc": "Thực đơn thay đổi theo ngày với các món ăn thuần Việt, được nêm nếm đậm đà và trình bày chỉn chu trong các bộ bát đĩa gốm mộc mạc. Điểm cộng lớn nhất là cảm giác ăn uống thong thả, không vội vã.",
    "desc_en": "A daily-changing menu of Vietnamese dishes, well seasoned and neatly served in rustic ceramics, for an unhurried meal.",
    "clip": "https://www.tiktok.com/@julepe.sheen/video/7408066998933933330",
-   "img_folder": "1BPjyJsGvIOiBuYidhMGKW5LB2Rqyipu5"
+   "img_folder": "1BPjyJsGvIOiBuYidhMGKW5LB2Rqyipu5",
+   "img": true
   },
   {
    "id": "com-van-phong--com-cui-da-lat",
@@ -8382,7 +8390,8 @@
    "desc": "Đúng như tên gọi \"Củi\", quán gây ấn tượng bởi hương vị thức ăn được nấu theo lối truyền thống, dậy mùi thơm đặc trưng. Các món cá kho tộ, rau luộc kho quẹt tại đây luôn là \"best-seller\". Không gian quán rộng rãi, mang hơi hướng hoài cổ.",
    "desc_en": "Traditional wood-fire cooking with a distinctive aroma; braised fish and boiled vegetables with dipping paste are best-sellers, in a roomy, nostalgic space.",
    "clip": "https://www.tiktok.com/@com.cui/video/7534292070358437127",
-   "img_folder": "1ztMXUsC3K5I05rqMLwW6c-_7_m3MmsAw"
+   "img_folder": "1ztMXUsC3K5I05rqMLwW6c-_7_m3MmsAw",
+   "img": true
   },
   {
    "id": "com-van-phong--now-restaurant-nha-hang-com-nieu",
@@ -8394,7 +8403,8 @@
    "desc": "Cơm được nấu trong niêu đất với lớp cháy giòn tan ở đáy, ăn kèm với đa dạng các món mặn từ thịt, cá đến hải sản. Không gian nhà hàng sang trọng, sạch sẽ và có sức chứa lớn.",
    "desc_en": "Rice cooked in clay pots with a crispy bottom crust, plus meat, fish and seafood dishes, in a smart, clean and spacious restaurant.",
    "clip": "https://www.tiktok.com/@comnieudalatngon/video/7552015730418486549",
-   "img_folder": "1YIoX0XXmT33FWoQwhdmTtyTKux-9aTG3"
+   "img_folder": "1YIoX0XXmT33FWoQwhdmTtyTKux-9aTG3",
+   "img": true
   },
   {
    "id": "com-van-phong--quan-an-long-phat",
@@ -8406,7 +8416,8 @@
    "desc": "Long Phát nổi tiếng với chất lượng món ăn ổn định, giá cả phải chăng và thực đơn cực kỳ phong phú. Các món xào và canh tại đây luôn nóng hổi, mang lại cảm giác ăn ngon miệng như cơm mẹ nấu.",
    "desc_en": "Known for steady quality, fair prices and a huge menu, with hot stir-fries and soups like mum's cooking.",
    "clip": "",
-   "img_folder": "1U-GqNRwrUwzGGzd9ATloJktst5pmKGs0"
+   "img_folder": "1U-GqNRwrUwzGGzd9ATloJktst5pmKGs0",
+   "img": true
   },
   {
    "id": "com-van-phong--com-bac",
@@ -8418,7 +8429,8 @@
    "desc": "Thực đơn mang đậm dấu ấn Bắc Bộ với các món như thịt luộc cà pháo, canh cua mồng tơi, đậu phụ rán giòn. Vị thanh nhẹ, ít ngọt, rất được lòng những người con xa xứ hoặc những ai muốn đổi vị sau những bữa ăn đậm chất cao nguyên.",
    "desc_en": "Northern-style dishes like boiled pork with eggplant, crab soup and crispy fried tofu; light and less sweet, a change from highland flavours.",
    "clip": "https://www.tiktok.com/@didalat.review/video/7473776828705033479",
-   "img_folder": "1KoBABXpsGqDqz--QeqV_NjxyEtk6kdIs"
+   "img_folder": "1KoBABXpsGqDqz--QeqV_NjxyEtk6kdIs",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--nang-ha-homestay-da-lat",
@@ -8430,7 +8442,8 @@
    "desc": "Nắng Hạ mang đúng tinh thần \"nhà trong phố\". Không gian được decor theo phong cách tối giản với tông màu trắng - gỗ chủ đạo. hù hợp cho những nhóm bạn trẻ hoặc khách lẻ muốn một không gian tĩnh lặng để nghỉ ngơi sau ngày dài khám phá.",
    "desc_en": "A 'home in town' with minimalist white-and-wood decor, good for young groups or solo travellers wanting a quiet rest.",
    "clip": "https://www.tiktok.com/@nhanphepha/video/7376922492767603969",
-   "img_folder": "1F1pz1JFWkHYcM6Tpqo_8voYToHLfBv9-"
+   "img_folder": "1F1pz1JFWkHYcM6Tpqo_8voYToHLfBv9-",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--suri-s-house-homestay-dalat",
@@ -8442,7 +8455,8 @@
    "desc": "SuRi's House là điểm dừng chân cực kỳ năng động. \"Bước một bước ra phố\", cực kỳ thuận tiện cho những ai thích nhịp sống về đêm, gần các quán cafe, tiệm bánh và nhà hàng.",
    "desc_en": "A lively base one step from the street, handy for nightlife, cafes, bakeries and restaurants.",
    "clip": "https://www.tiktok.com/@suris.house.homes/video/7593543803760430343",
-   "img_folder": "1IbpiSV11Fis3lRMEHuuYNg2HLetaDEI7"
+   "img_folder": "1IbpiSV11Fis3lRMEHuuYNg2HLetaDEI7",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--mi-casa-2-homestay",
@@ -8454,7 +8468,8 @@
    "desc": "Mi Casa 2 sở hữu phong cách kiến trúc hiện đại, trẻ trung với những khoảng sân nhỏ xinh xắn. Vị trí này cực kỳ thuận lợi để đi bộ ra hồ Xuân Hương hoặc siêu thị GO!. Không gian tại đây rất \"ăn ảnh\", phù hợp cho tệp khách hàng Gen Z thích quay phim, chụp ảnh lifestyle.",
    "desc_en": "Modern and youthful with cute little yards, an easy walk to Xuan Huong Lake or GO! supermarket; very photogenic for Gen Z.",
    "clip": "https://www.tiktok.com/@micasa2homestayda/video/7518756935815023890",
-   "img_folder": "1mfouSyXk-HkyhVaZR90OyZFLe0jqIIvr"
+   "img_folder": "1mfouSyXk-HkyhVaZR90OyZFLe0jqIIvr",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--vu-homestay-da-lat",
@@ -8466,7 +8481,8 @@
    "desc": "Vũ Homestay mang lại trải nghiệm sống như một người Đà Lạt thực thụ. Không gian mộc mạc, gần gũi. Điểm cộng lớn nhất là bạn có thể thưởng thức đủ loại đặc sản ngay khi vừa bước ra khỏi cổng hẻm.",
    "desc_en": "Live like a local in a rustic, homely space, with all kinds of specialties right outside the alley.",
    "clip": "https://www.tiktok.com/@vuhomestaydalat/video/7568355620944956690",
-   "img_folder": "1FmfOAa62XYRlmmOF9P5Pe3wEwfJGUAYe"
+   "img_folder": "1FmfOAa62XYRlmmOF9P5Pe3wEwfJGUAYe",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--feliz-dalat-homestay",
@@ -8478,7 +8494,8 @@
    "desc": "Feliz mang phong cách đô thị hiện đại, phòng ốc gọn gàng và tối ưu công năng. Xung quanh là vô số tiệm thuốc, cửa hàng tiện lợi và các quán ăn ngon. Rất phù hợp cho khách đi công tác hoặc du lịch tự túc cần sự tiện lợi tuyệt đối về hạ tầng.",
    "desc_en": "Modern urban style with neat, functional rooms surrounded by pharmacies, convenience stores and good food; ideal for business or independent travel.",
    "clip": "https://www.tiktok.com/@heyy.lalalaa/video/7553543846966103307",
-   "img_folder": "1CP2I81UX_E49OJwaQpB17j4nqDEI2nIb"
+   "img_folder": "1CP2I81UX_E49OJwaQpB17j4nqDEI2nIb",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--hygge-homestay-da-lat",
@@ -8490,7 +8507,8 @@
    "desc": "Nằm gần bến xe liên tỉnh, tọa lạc trên đồi dốc nên HYGGE sở hữu tầm nhìn khá thoáng về phía thung lũng sương mù. Đúng như cái tên \"Hygge\" (phong cách sống hạnh phúc của người Đan Mạch), không gian ở đây cực kỳ ấm cúng với nến, gỗ và ánh sáng vàng. Tuyệt vời cho các cặp đôi",
    "desc_en": "Near the intercity bus station on a hillside with a fairly open view of the misty valley; cosy hygge style with candles, wood and warm light, great for couples.",
    "clip": "https://www.tiktok.com/@hyggedalat/video/7595500292230221077",
-   "img_folder": "1VVbij-CE_WS-hXm-ETmuM680Cn2Gw8Uf"
+   "img_folder": "1VVbij-CE_WS-hXm-ETmuM680Cn2Gw8Uf",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--mo-dalats-homestay",
@@ -8502,7 +8520,8 @@
    "desc": "Mơ Dalats mang phong cách vintage nhẹ nhàng, lãng mạn. Đây là tọa độ lý tưởng nhất cho những ai muốn đi bộ ra phố đi bộ Hòa Bình chỉ trong 2-3 phút.",
    "desc_en": "Gentle, romantic vintage style, just 2–3 minutes' walk from the Hoa Binh walking street.",
    "clip": "https://www.tiktok.com/@m.dalats.homestay/video/7579269923671706888",
-   "img_folder": "1H910SrvkqC4kRBtBLYZ1mbjY281Wbwhc"
+   "img_folder": "1H910SrvkqC4kRBtBLYZ1mbjY281Wbwhc",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--emm-dalat-homestay",
@@ -8514,7 +8533,8 @@
    "desc": "Emm mang vẻ đẹp tinh tế, sạch sẽ và rất chỉn chu trong từng chi tiết decor nhỏ. Phù hợp cho những khách hàng yêu cầu sự yên tĩnh cao nhưng vẫn muốn ở trong bán kính trung tâm nội đô.",
    "desc_en": "Refined, clean and carefully decorated, for guests who want quiet but still be in the centre.",
    "clip": "",
-   "img_folder": "1dSLORRu57dcq3yIoNVsssuCAAPmJmdJG"
+   "img_folder": "1dSLORRu57dcq3yIoNVsssuCAAPmJmdJG",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--homestay-together-is-home",
@@ -8526,7 +8546,8 @@
    "desc": "Thủ Khoa Huân là khu vực tập trung nhiều khách sạn và dịch vụ lữ hành. Homestay này chú trọng vào không gian kết nối cộng đồng. Rất hợp cho các nhóm bạn đông người (team building) muốn có một \"ngôi nhà chung\" ngay trung tâm.",
    "desc_en": "In the Thu Khoa Huan hotel area, focused on shared spaces; great for big groups wanting a 'shared home' in the centre.",
    "clip": "https://www.tiktok.com/@togetherhomestaydalat/photo/7601199939175157000",
-   "img_folder": "1A7GYnCNOxnYT6eeUYZJn3CsEMBctjh5a"
+   "img_folder": "1A7GYnCNOxnYT6eeUYZJn3CsEMBctjh5a",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--homestay-bo-cong-anh",
@@ -8538,7 +8559,8 @@
    "desc": "Nằm trong khu vực cư dân Xuân An (gần Nhà thờ Con Gà), Không gian xanh mát với nhiều hoa lá theo đúng phong cách vườn tược Đà Lạt xưa. Thích hợp cho những gia đình nhỏ muốn tìm kiếm sự thư thái.",
    "desc_en": "In the Xuan An residential area near the Chicken Church, green and full of flowers like an old Da Lat garden; good for small families.",
    "clip": "https://www.tiktok.com/@boconganh.homestaydalat/video/7558740436077120775",
-   "img_folder": "1VHmx4cGHpfCDU29HG4eElnXL3wwlH4Hs"
+   "img_folder": "1VHmx4cGHpfCDU29HG4eElnXL3wwlH4Hs",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--amigo-homestay-da-lat",
@@ -8550,7 +8572,8 @@
    "desc": "Amigo mang phong cách phục vụ thân thiện và hiếu khách như những người bạn (Amigo). Vị trí cực gần lối xuống chợ đêm. Lựa chọn an toàn cho du khách lần đầu đến Đà Lạt và ngại đi xa. Phòng ốc đa dạng từ phòng đơn đến phòng tập thể (dorm).",
    "desc_en": "Friendly, welcoming service very close to the night market, a safe choice for first-timers, with rooms from singles to dorms.",
    "clip": "https://www.tiktok.com/@amigohomestaydalat/video/7460511846978653458",
-   "img_folder": "1uXF3qEqKFjoOPpKL0e_JiwTddigLjpgD"
+   "img_folder": "1uXF3qEqKFjoOPpKL0e_JiwTddigLjpgD",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--da-lat-truly-home-homestay-da-lat-view-dep",
@@ -8562,7 +8585,8 @@
    "desc": "Tọa lạc trên đồi Đống Đa – nơi có tầm nhìn bao quát toàn cảnh thành phố lung linh về đêm. Đây là homestay hiếm hoi ở gần trung tâm nhưng lại có \"view triệu đô\". Không gian rộng rãi, thoáng đãng.",
    "desc_en": "On Dong Da hill with a sweeping view of the city lights at night, a rare central homestay with a million-dollar view, roomy and airy.",
    "clip": "https://www.tiktok.com/@trulyhomedalat/video/7312819009622166791",
-   "img_folder": "1hYdXw7_pnb36MkN5kA_fXKdHxuHsxewb"
+   "img_folder": "1hYdXw7_pnb36MkN5kA_fXKdHxuHsxewb",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--homestay-nha-cua-trinh",
@@ -8574,7 +8598,8 @@
    "desc": "Nằm ngay đầu cung đường biệt thự Pháp Trần Hưng Đạo cổ kính với những hàng mai anh đào rực rỡ vào mùa xuân. Không gian mang hơi hướng hoài cổ, tinh tế. Đây là bối cảnh tuyệt vời cho các bộ ảnh nghệ thuật hoặc những tâm hồn yêu âm nhạc, văn thơ.",
    "desc_en": "At the start of the old French villa road Tran Hung Dao, lined with cherry blossoms in spring; nostalgic and refined, great for art photos and music lovers.",
    "clip": "https://www.tiktok.com/@homestaynhacuatrinh/photo/7364770920268975367",
-   "img_folder": "1MzTYZCOW4NxxpgkP5qpV7xGTYE-X5uB2"
+   "img_folder": "1MzTYZCOW4NxxpgkP5qpV7xGTYE-X5uB2",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--pai-homestay",
@@ -8586,7 +8611,8 @@
    "desc": "Tọa lạc trên đường Đặng Thái Thân – cung đường nổi tiếng với các quán cafe view rừng thông thung lũng sâu. Pai mang lại cảm giác nghỉ dưỡng thực thụ với không gian mở, đón gió rừng. Cực kỳ hợp cho những ekip sáng tạo nội dung cần tìm cảm hứng.",
    "desc_en": "On Dang Thai Than, known for cafes over deep pine valleys; a true retreat with an open, breezy space, great for content creators.",
    "clip": "https://www.tiktok.com/@paihomestay_dalat/video/6878809634463829250",
-   "img_folder": "1AVcEtVvKOH39NLHdxbxodgYJHg0FUy_J"
+   "img_folder": "1AVcEtVvKOH39NLHdxbxodgYJHg0FUy_J",
+   "img": true
   },
   {
    "id": "homestay-trung-tam--mercy-homestay",
@@ -8598,7 +8624,8 @@
    "desc": "Mercy mang phong cách sang trọng pha chút cổ điển châu Âu. Vị trí này rất thuận tiện để di chuyển đến các dinh thự bảo tàng hoặc quảng trường Lâm Viên. Phù hợp cho phân khúc khách hàng tinh tế, yêu cầu không gian lưu trú chất lượng cao.",
    "desc_en": "Upscale with a touch of classic Europe, convenient for the palace museums and Lam Vien Square; for guests wanting high-quality stays.",
    "clip": "",
-   "img_folder": "1p94PcA_lr_8YxA9gk-LP9NAGy7T6e_Hs"
+   "img_folder": "1p94PcA_lr_8YxA9gk-LP9NAGy7T6e_Hs",
+   "img": true
   },
   {
    "id": "khach-san-gan-cho--ttc-hotel-da-lat",
@@ -8610,7 +8637,8 @@
    "desc": "Khách sạn đạt tiêu chuẩn 4 sao với kiến trúc châu Âu hiện đại, thanh lịch. Phòng ốc rộng rãi, thoáng đãng và dịch vụ chuyên nghiệp.",
    "desc_en": "A 4-star hotel with modern, elegant European architecture, spacious rooms and professional service.",
    "clip": "https://www.tiktok.com/@khachsandalatviewdep/video/7352882303288347922",
-   "img_folder": "1YTzVHHkl3Kf6n9j63yYWrV8JAlQ7LzUQ"
+   "img_folder": "1YTzVHHkl3Kf6n9j63yYWrV8JAlQ7LzUQ",
+   "img": true
   },
   {
    "id": "khach-san-gan-cho--ttc-hotel-ngoc-lan",
@@ -8622,7 +8650,8 @@
    "desc": "Khách sạn 4 sao sở hữu tầm nhìn \"triệu đô\" bao quát toàn cảnh Hồ Xuân Hương và khu vực chợ từ trên cao. Không gian nội thất mang hơi hướng cổ điển, ấm cúng và sang trọng.",
    "desc_en": "A 4-star hotel with a sweeping view over Xuan Huong Lake and the market area, with classic, cosy and elegant interiors.",
    "clip": "https://www.tiktok.com/@khachsandalatviewdep/video/7352745337750129938",
-   "img_folder": "1mRliW59OHkUTMyChydBwtBiL-hGDYSu3"
+   "img_folder": "1mRliW59OHkUTMyChydBwtBiL-hGDYSu3",
+   "img": true
   },
   {
    "id": "khach-san-gan-cho--hotel-colline-da-lat",
@@ -8634,7 +8663,8 @@
    "desc": "Khách sạn 4 sao này là \"thánh địa check-in\" nổi tiếng nhất hiện nay. Điểm cộng lớn là hệ thống ẩm thực đa dạng ngay tầng trệt và khu vực sảnh chờ cực kỳ thời thượng.",
    "desc_en": "A 4-star hotel that is the city's most famous photo spot, with plenty of dining on the ground floor and a very stylish lobby.",
    "clip": "https://www.tiktok.com/@resortdalat/video/7481975004461124872",
-   "img_folder": "1nMAsR4ruM7wxw3DQamoDvPB3u8DKpMsM"
+   "img_folder": "1nMAsR4ruM7wxw3DQamoDvPB3u8DKpMsM",
+   "img": true
   },
   {
    "id": "khach-san-gan-cho--khach-san-muong-thanh-holiday",
@@ -8646,7 +8676,8 @@
    "desc": "Không gian bên trong rộng lớn, thiết kế theo tone màu gỗ ấm cúng. Khách sạn có đầy đủ các dịch vụ như hồ bơi trong nhà, spa và phòng gym tiêu chuẩn.",
    "desc_en": "A large interior in warm wood tones, with an indoor pool, spa and gym.",
    "clip": "https://www.tiktok.com/@hapctravel/video/7387301569399770369",
-   "img_folder": "1GvAulj7QPTmUG8eWpX2YI4xcqfBVFv9_"
+   "img_folder": "1GvAulj7QPTmUG8eWpX2YI4xcqfBVFv9_",
+   "img": true
   },
   {
    "id": "khach-san-gan-cho--golf-valley-hotel",
@@ -8658,7 +8689,8 @@
    "desc": "Nội thất được thiết kế theo tone màu tối giản nhưng vô cùng tinh tế và cao cấp. Các phòng đều có ban công rộng, đón ánh sáng tự nhiên rất tốt.",
    "desc_en": "Minimalist yet refined, upscale interiors; every room has a large, sunny balcony.",
    "clip": "https://www.tiktok.com/@langquangnhatrangdalat/video/7581802345013529876",
-   "img_folder": "1d54xhjxqRD6kyA1VBylBoSWO9ODPRDnY"
+   "img_folder": "1d54xhjxqRD6kyA1VBylBoSWO9ODPRDnY",
+   "img": true
   },
   {
    "id": "khach-san-gan-cho--kings-hotel-dalat",
@@ -8670,7 +8702,8 @@
    "desc": "Khách sạn kết hợp giữa dịch vụ lưu trú và các tiện ích giải trí như nhà hàng nướng, dịch vụ chăm sóc sức khỏe. Phòng ốc được thiết kế chắc chắn, cách âm tốt.",
    "desc_en": "Combines rooms with a BBQ restaurant and wellness services; solidly built with good soundproofing.",
    "clip": "https://www.tiktok.com/@dalatcungtico/video/7221875401184808219",
-   "img_folder": "1w3G-FSjFHgWZ3_uMbEv-5CjbtCGwMuBc"
+   "img_folder": "1w3G-FSjFHgWZ3_uMbEv-5CjbtCGwMuBc",
+   "img": true
   },
   {
    "id": "khach-san-gan-cho--tulip-hotel",
@@ -8682,7 +8715,8 @@
    "desc": "Chi nhánh đời đầu ngay phố đi bộ. Mạnh về sự tiện lợi, phòng ốc gọn gàng, sạch sẽ. Phù hợp cho những ai thích hòa mình vào sự nhộn nhịp của phố phường.",
    "desc_en": "The original branch right on the walking street, convenient, neat and clean, for those who like the buzz of the town.",
    "clip": "",
-   "img_folder": "19-getDc7M548YeZDcIeb5Jm22vsL6si2"
+   "img_folder": "19-getDc7M548YeZDcIeb5Jm22vsL6si2",
+   "img": true
   },
   {
    "id": "khach-san-gan-cho--tulip-2-hotel",
@@ -8694,7 +8728,8 @@
    "desc": "Nằm trên con dốc nổi tiếng với nhiều quán cafe đẹp. Chi nhánh này có phong cách phục vụ rất trẻ trung, hiện đại và tầm nhìn thoáng hơn.",
    "desc_en": "On a slope known for pretty cafes, with youthful, modern service and a more open view.",
    "clip": "https://www.tiktok.com/@tuliphotelgroup/video/7529811221785136392",
-   "img_folder": "1W3euTuUwOVjc0FSxi0Xp3KHxBzv62Vcv"
+   "img_folder": "1W3euTuUwOVjc0FSxi0Xp3KHxBzv62Vcv",
+   "img": true
   },
   {
    "id": "khach-san-gan-cho--tulip-3-hotel",
@@ -8706,7 +8741,8 @@
    "desc": "Chi nhánh mới hơn với cơ sở vật chất hiện đại, nằm trên cung đường mua sắm sầm uất. Đây là lựa chọn \"ngon - bổ - rẻ\" cho những đoàn cần lưu trú số lượng lớn ngay trung tâm.",
    "desc_en": "A newer branch with modern facilities on a busy shopping street, a good-value choice for large groups in the centre.",
    "clip": "https://www.tiktok.com/@tuliphotelgroup/video/7533104696932830482",
-   "img_folder": "1K9gbSPRxAjbmVj8DOB16mLJUPcNJMxJ8"
+   "img_folder": "1K9gbSPRxAjbmVj8DOB16mLJUPcNJMxJ8",
+   "img": true
   },
   {
    "id": "khach-san-gan-cho--sandals-flora-hotel",
@@ -8718,7 +8754,8 @@
    "desc": "Không gian nhỏ xinh, tinh tế với phong cách phục vụ thân thiện, gần gũi như người bản địa. Các phòng được decor tỉ mỉ, tạo cảm giác dễ chịu.",
    "desc_en": "Small and refined with friendly, local-style service and carefully decorated, pleasant rooms.",
    "clip": "https://www.tiktok.com/@resortdalat/video/7365145364401327376",
-   "img_folder": "1sR_vwl8HxqKKQzjoKoezAUo57LmUptMu"
+   "img_folder": "1sR_vwl8HxqKKQzjoKoezAUo57LmUptMu",
+   "img": true
   },
   {
    "id": "khach-san-gan-cho--saphir-dalat-hotel",
@@ -8730,7 +8767,8 @@
    "desc": "Toàn bộ nội thất được ốp gỗ ấm cúng, trưng bày nhiều xe cổ và các kỷ vật thời xưa. Saphir mang đến trải nghiệm lưu trú như ngược dòng thời gian.",
    "desc_en": "Wood-panelled throughout and full of vintage cars and old mementos, like stepping back in time.",
    "clip": "https://www.tiktok.com/@julepe.sheen/video/7270738101947944197",
-   "img_folder": "19u6GWSYHvKrYV6GDQyss9wBg42kgjseN"
+   "img_folder": "19u6GWSYHvKrYV6GDQyss9wBg42kgjseN",
+   "img": true
   },
   {
    "id": "villa-nguyen-can--joya-villa",
@@ -8742,7 +8780,8 @@
    "desc": "Villa có không gian mở với nhiều kính, tận dụng tối đa ánh sáng tự nhiên. Sân vườn rộng rãi phù hợp cho các buổi tiệc BBQ ngoài trời. Nội thất được thiết kế đồng bộ, mang lại cảm giác ấm cúng như đang ở chính ngôi nhà của mình.",
    "desc_en": "An open villa with lots of glass and natural light, a big garden for outdoor BBQs and a cosy, home-like interior.",
    "clip": "",
-   "img_folder": "1XplRBUXyyGyGRiAv56fRF7NWrcANG2Sw"
+   "img_folder": "1XplRBUXyyGyGRiAv56fRF7NWrcANG2Sw",
+   "img": true
   },
   {
    "id": "villa-nguyen-can--the-aratana-villa",
@@ -8754,7 +8793,8 @@
    "desc": "Sự tinh tế nằm ở các vật liệu tự nhiên như gỗ và đá. Villa chú trọng vào khoảng lặng và sự tĩnh tại với những khu vườn tiểu cảnh được chăm sóc tỉ mỉ. Không gian phòng khách rộng lớn, cực kỳ đẳng cấp.",
    "desc_en": "Natural wood and stone, a focus on quiet and stillness with carefully tended gardens and a large, classy living room.",
    "clip": "https://www.tiktok.com/@dkhongan/video/7511923902675766536",
-   "img_folder": "1p--xgvSwQIrn0b1vdhhEZ_Rl0iV3Yl97"
+   "img_folder": "1p--xgvSwQIrn0b1vdhhEZ_Rl0iV3Yl97",
+   "img": true
   },
   {
    "id": "villa-nguyen-can--d-house-dalat",

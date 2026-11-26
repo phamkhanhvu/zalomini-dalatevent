@@ -63,6 +63,7 @@ const TEXT = {
 • Lọc theo hôm nay, tối nay, cuối tuần hoặc một ngày bất kỳ
 • Trợ lý "Hôm nay đi đâu?": nhắn một câu, nhận ngay lịch trình theo buổi
 • Lịch trình của riêng bạn: cảnh báo trùng giờ, báo khi chương trình đổi lịch, nhắc trước 2 tiếng
+• Top list Đà Lạt: hơn 1.000 địa điểm theo 127 chủ đề (săn mây, cà phê view đẹp, lẩu gà lá é, homestay…), có ảnh, tìm kiếm, xếp theo gần bạn và chỉ đường
 • Bản đồ gần tôi và chỉ đường tới từng địa điểm
 • Thời tiết và săn mây: gợi ý sáng nào nên đi săn mây, chiều nào nên ở trong nhà
 • Hộ chiếu Đà Lạt: đến nơi, đóng dấu, sưu tập đủ bộ dấu mộc
@@ -72,6 +73,9 @@ const TEXT = {
 Không cần tài khoản để xem lịch. Đăng nhập (tùy chọn) bằng Apple, Google hoặc email để đồng bộ lịch trình giữa các máy.
 
 Lịch có thể thay đổi; hãy xem lại trước khi đến.`,
+    whatsNew: `• Mới: Top list Đà Lạt với hơn 1.000 địa điểm theo 127 chủ đề, có ảnh, tìm kiếm, xếp theo gần bạn và chỉ đường
+• Mới: danh sách điểm săn mây trong trang Thời tiết, kèm chỉ đường
+• Sửa lỗi nút Trợ lý che nút "Dùng ưu đãi"`,
   },
   "en-US": {
     name: "DalatEvent",
@@ -85,6 +89,7 @@ Lịch có thể thay đổi; hãy xem lại trước khi đến.`,
 • Filter by today, tonight, this weekend or any date
 • "Where to go today?" assistant: type one sentence and get a plan by time of day
 • Your own plan: clash warnings, alerts when a programme changes, reminders 2 hours before
+• Da Lat Top lists: 1,000+ places in 127 themes (cloud hunting, cafés with a view, local food, homestays…) with photos, search, nearest-first sorting and directions
 • Map near me and directions to every venue
 • Weather and cloud hunting: which mornings are worth an early start, which afternoons to stay indoors
 • Da Lat Passport: visit, get stamped, collect the full set
@@ -94,19 +99,23 @@ Lịch có thể thay đổi; hãy xem lại trước khi đến.`,
 No account needed to browse. Optionally sign in with Apple, Google or email to sync your plan across devices.
 
 Schedules can change; please check before you go.`,
+    whatsNew: `• New: Da Lat Top lists with 1,000+ places in 127 themes, with photos, search, nearest-first sorting and directions
+• New: cloud-hunting spots on the Weather page, with directions
+• Fixed: the Assistant button no longer covers the "Use offer" button`,
   },
 };
 const SUPPORT_URL = "https://dalatevent.com/";
 const COPYRIGHT = "© 2026 Sense Group";
 const VIDEO_URL = process.env.REVIEW_VIDEO_URL || "";
 const REVIEW_NOTES = `1) SCREEN RECORDING (physical iPhone, latest iOS): ${VIDEO_URL || "(link will be added)"}
-It starts at app launch and shows browsing events, the assistant, map, passport, weather, language switch, and account registration, sign-in, sign-out and account deletion.
+It starts at app launch and shows browsing events, the assistant, map, passport, weather, language switch, and account registration, sign-in, sign-out and account deletion. It was recorded on version 1.0; what is new in this update is described in 3).
 
 2) PURPOSE AND AUDIENCE
 DalatEvent is a free events guide for Da Lat, Vietnam, run by Sense Group (a local Da Lat company). Audience: domestic and international visitors and residents. Problem it solves: event information in Da Lat (Flower Festival 2026, exhibitions, live music) is scattered across many sites; DalatEvent gathers it in one daily-updated, source-checked calendar and helps users plan their day.
 
 3) HOW TO USE / ACCESS
-No login is required for any core feature: Home (Today / Tonight / Weekend filters, search), Festival tab, Shows tab, Map tab ("Use my location" is optional), assistant (pink "Assistant" button: type e.g. "Saturday, two people, live music"), Weather & cloud forecast (strip on Home), Da Lat Passport (stamps only work within 300 m of a venue), Dalat Deals (offers from partners; currently none published).
+No login is required for any core feature: Home (Today / Tonight / Weekend filters, search), Festival tab, Shows tab, Map tab ("Use my location" is optional), assistant (pink "Assistant" button: type e.g. "Saturday, two people, live music"), Weather & cloud forecast (strip on Home), Da Lat Passport (stamps only work within 300 m of a venue), Dalat Deals (offers from partner venues; browsing is open, using an offer needs sign-in).
+New in this update: Top lists (green banner on Home). A directory of 1,000+ places in Da Lat in 127 themes (sights, cafés, food, stays, shopping) with one photo per place, search, optional "Sort by nearest" (location is used on the device only and not stored) and directions through Google Maps. "Watch clip" opens a public TikTok review link outside the app. The Weather page also lists cloud-hunting spots with directions.
 Account is optional and only syncs the saved plan and passport stamps across devices. To test: tap "Sign in" (top right) → "Sign up" tab → create an account with any email and a 6+ character password, or use Sign in with Apple / Google.
 Account deletion: "My plan" tab → tap the account strip → "Delete account" → confirm. This deletes the account and all its data.
 Language: tap EN / VI at the top of any page.
@@ -115,7 +124,7 @@ There is no user-generated content shared with other users (a user's plan is pri
 4) EXTERNAL SERVICES
 - Firebase Authentication and Cloud Firestore (Google): optional accounts and plan sync.
 - Sign in with Apple, Google Sign-In.
-- GitHub (raw.githubusercontent.com): hosts the public event data files, updated daily by our team.
+- GitHub (raw.githubusercontent.com): hosts the public event data files (updated daily by our team) and the Top list data and place photos.
 - Open-Meteo (api.open-meteo.com): weather forecast for central Da Lat (no user location sent).
 - Google Maps: embedded maps and directions links.
 - OpenStreetMap: venue coordinates.
@@ -125,7 +134,7 @@ No AI services, no payment processors.
 The app works the same in all regions. Content is about Da Lat, Vietnam, in Vietnamese and English. Not distributed in mainland China.
 
 6) REGULATED INDUSTRY / THIRD-PARTY MATERIAL
-Not a regulated industry. Event information is factual schedule data checked against public official sources (festival portal, venue websites) with links back to them. Images in the app are Sense Group's own illustrations.`;
+Not a regulated industry. Event information is factual schedule data checked against public official sources (festival portal, venue websites) with links back to them. Top list entries are compiled by Sense Group's local content team; the place photos come from the media library that team gathered. Other artwork in the app is Sense Group's own illustration.`;
 
 /* ---------- Các bước ---------- */
 async function main() {
@@ -136,24 +145,59 @@ async function main() {
   const primary = app.attributes.primaryLocale; // "vi"
 
   // 1. Quyền nội dung bên thứ ba (bản đồ Google, dữ liệu OpenStreetMap: dùng theo điều khoản của họ)
-  await api("PATCH", `/v1/apps/${app.id}`, { data: { type: "apps", id: app.id, attributes: { contentRightsDeclaration: "USES_THIRD_PARTY_CONTENT" } } });
-  log("Đã khai báo quyền nội dung");
+  try {
+    await api("PATCH", `/v1/apps/${app.id}`, { data: { type: "apps", id: app.id, attributes: { contentRightsDeclaration: "USES_THIRD_PARTY_CONTENT" } } });
+    log("Đã khai báo quyền nội dung");
+  } catch (e) {
+    warn("Chưa cập nhật được khai báo quyền nội dung (giữ như cũ):\n" + e.message);
+  }
+
+  // 1b. Phiên bản: dùng bản đúng số; chưa có thì đổi tên bản đang soạn, hoặc tạo bản mới (bản cập nhật)
+  const EDITABLE = ["PREPARE_FOR_SUBMISSION", "DEVELOPER_REJECTED", "REJECTED", "METADATA_REJECTED", "INVALID_BINARY"];
+  const stateOf = (v) => v.attributes.appVersionState || v.attributes.appStoreState || "";
+  const vers = await api("GET", `/v1/apps/${app.id}/appStoreVersions?filter[platform]=IOS&limit=20`);
+  for (const v of vers.data) console.log("  phiên bản", v.attributes.versionString, stateOf(v));
+  let ver = vers.data.find((v) => v.attributes.versionString === VERSION);
+  if (!ver) {
+    const draft = vers.data.find((v) => EDITABLE.includes(stateOf(v)));
+    if (draft) {
+      ver = (await api("PATCH", `/v1/appStoreVersions/${draft.id}`, { data: { type: "appStoreVersions", id: draft.id, attributes: { versionString: VERSION } } })).data;
+      log("Đổi số bản đang soạn thành", VERSION);
+    } else {
+      ver = (await api("POST", `/v1/appStoreVersions`, { data: { type: "appStoreVersions", attributes: { platform: "IOS", versionString: VERSION, copyright: COPYRIGHT, releaseType: "AFTER_APPROVAL" }, relationships: { app: { data: { type: "apps", id: app.id } } } } })).data;
+      log("Đã tạo phiên bản mới", VERSION);
+    }
+  }
+  const isUpdate = vers.data.some((v) => v.id !== ver.id);
+  if (!EDITABLE.includes(stateOf(ver))) throw new Error("Phiên bản " + VERSION + " đang ở trạng thái " + stateOf(ver) + ", không sửa được. Hãy dùng số phiên bản mới.");
 
   // 2. App Info: danh mục, tên, phụ đề, link chính sách
   const infos = await api("GET", `/v1/apps/${app.id}/appInfos`);
-  const info = infos.data.find((x) => !["READY_FOR_DISTRIBUTION", "REPLACED_WITH_NEW_INFO"].includes(x.attributes.appStoreState || x.attributes.state)) || infos.data[0];
-  await api("PATCH", `/v1/appInfos/${info.id}`, {
-    data: { type: "appInfos", id: info.id, relationships: { primaryCategory: { data: { type: "appCategories", id: "TRAVEL" } }, secondaryCategory: { data: { type: "appCategories", id: "ENTERTAINMENT" } } } },
-  });
-  log("Danh mục: Travel, Entertainment");
+  const LIVE = ["READY_FOR_DISTRIBUTION", "READY_FOR_SALE", "REPLACED_WITH_NEW_INFO", "REPLACED_WITH_NEW_VERSION"];
+  for (const x of infos.data) console.log("  app info", x.id, x.attributes.state || "", x.attributes.appStoreState || "");
+  const info = infos.data.find((x) => ![x.attributes.state, x.attributes.appStoreState].some((st) => LIVE.includes(st))) || infos.data[0];
+  console.log("  app info dùng:", info.id, info.attributes.appStoreState || info.attributes.state);
+  try {
+    await api("PATCH", `/v1/appInfos/${info.id}`, {
+      data: { type: "appInfos", id: info.id, relationships: { primaryCategory: { data: { type: "appCategories", id: "TRAVEL" } }, secondaryCategory: { data: { type: "appCategories", id: "ENTERTAINMENT" } } } },
+    });
+    log("Danh mục: Travel, Entertainment");
+  } catch (e) {
+    warn("Chưa đặt lại được danh mục (giữ như bản đang phát hành):\n" + e.message);
+  }
   const infoLocs = await api("GET", `/v1/appInfos/${info.id}/appInfoLocalizations`);
   for (const [loc, t] of Object.entries(TEXT)) {
     const locale = loc === "vi" ? primary : loc;
     const have = infoLocs.data.find((x) => x.attributes.locale === locale);
     const attributes = { name: t.name, subtitle: t.subtitle, privacyPolicyUrl: t.privacyPolicyUrl };
-    if (have) await api("PATCH", `/v1/appInfoLocalizations/${have.id}`, { data: { type: "appInfoLocalizations", id: have.id, attributes } });
-    else await api("POST", `/v1/appInfoLocalizations`, { data: { type: "appInfoLocalizations", attributes: { ...attributes, locale }, relationships: { appInfo: { data: { type: "appInfos", id: info.id } } } } });
-    log("Thông tin app", locale);
+    try {
+      if (have) await api("PATCH", `/v1/appInfoLocalizations/${have.id}`, { data: { type: "appInfoLocalizations", id: have.id, attributes } });
+      else await api("POST", `/v1/appInfoLocalizations`, { data: { type: "appInfoLocalizations", attributes: { ...attributes, locale }, relationships: { appInfo: { data: { type: "appInfos", id: info.id } } } } });
+      log("Thông tin app", locale);
+    } catch (e) {
+      if (!isUpdate) throw e;
+      warn("Chưa sửa được tên/phụ đề " + locale + " (giữ như bản đang phát hành):\n" + e.message);
+    }
   }
 
   // 3. Độ tuổi: app không có nội dung nào trong các nhóm này → 4+
@@ -238,15 +282,10 @@ async function main() {
   }
 
   // 6. Phiên bản: bản quyền, phát hành ngay sau khi duyệt, gắn bản build
-  const vers = await api("GET", `/v1/apps/${app.id}/appStoreVersions?filter[platform]=IOS&limit=10`);
-  let ver = vers.data.find((v) => v.attributes.versionString === VERSION) || vers.data[0];
-  if (ver.attributes.versionString !== VERSION) {
-    await api("PATCH", `/v1/appStoreVersions/${ver.id}`, { data: { type: "appStoreVersions", id: ver.id, attributes: { versionString: VERSION } } });
-  }
   await api("PATCH", `/v1/appStoreVersions/${ver.id}`, { data: { type: "appStoreVersions", id: ver.id, attributes: { copyright: COPYRIGHT, releaseType: "AFTER_APPROVAL" } } });
-  const builds = await api("GET", `/v1/builds?filter[app]=${app.id}&filter[processingState]=VALID&sort=-uploadedDate&limit=20` + (BUILD ? `&filter[version]=${BUILD}` : ""));
+  const builds = await api("GET", `/v1/builds?filter[app]=${app.id}&filter[processingState]=VALID&sort=-uploadedDate&limit=20&filter[preReleaseVersion.version]=${VERSION}` + (BUILD ? `&filter[version]=${BUILD}` : ""));
   const build = builds.data[0];
-  if (!build) throw new Error("Chưa có bản build nào xử lý xong");
+  if (!build) throw new Error("Chưa có bản build nào của phiên bản " + VERSION + " xử lý xong");
   await api("PATCH", `/v1/appStoreVersions/${ver.id}/relationships/build`, { data: { type: "builds", id: build.id } });
   log("Phiên bản", VERSION, "gắn bản build", build.attributes.version);
 
@@ -256,6 +295,7 @@ async function main() {
     const locale = loc === "vi" ? primary : loc;
     let vl = verLocs.data.find((x) => x.attributes.locale === locale);
     const attributes = { description: t.description, keywords: t.keywords, promotionalText: t.promotionalText, supportUrl: SUPPORT_URL, marketingUrl: SUPPORT_URL };
+    if (isUpdate && t.whatsNew) attributes.whatsNew = t.whatsNew;
     if (vl) await api("PATCH", `/v1/appStoreVersionLocalizations/${vl.id}`, { data: { type: "appStoreVersionLocalizations", id: vl.id, attributes } });
     else vl = (await api("POST", `/v1/appStoreVersionLocalizations`, { data: { type: "appStoreVersionLocalizations", attributes: { ...attributes, locale }, relationships: { appStoreVersion: { data: { type: "appStoreVersions", id: ver.id } } } } })).data;
     log("Mô tả", locale);

@@ -35,7 +35,7 @@ export interface DataSet { events: EventsDoc; shows: ShowsDoc; happening: Happen
 
 const CACHE_KEY = "dalatevent.data.v1";
 /** Nơi tải dữ liệu mới. Web: cùng máy chủ với site. App iOS: bản công khai trên GitHub (đổi bằng VITE_DATA_URL khi site đã có tên miền). */
-const DATA_URL: string =
+export const DATA_URL: string =
   (import.meta.env.VITE_DATA_URL as string | undefined) ||
   (IS_NATIVE ? "https://raw.githubusercontent.com/phamkhanhvu/zalomini-dalatevent/main/data/" : "./data/");
 

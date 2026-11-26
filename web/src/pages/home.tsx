@@ -69,6 +69,13 @@ const HomePage: FC = () => {
         </div>
         <DealsBanner />
         <WeatherCard />
+        <button type="button" className="tl-card" onClick={() => navigate("/top-list")}>
+          <span className="tl-card-text">
+            <b>{tr("Top list Đà Lạt", "Da Lat top lists")}</b>
+            <i>{tr("Hơn 1.000 địa điểm: săn mây, cafe, quán ngon, chỗ ở…", "1,000+ places: cloud hunting, cafés, food, stays…")}</i>
+          </span>
+          <span className="tl-card-go" aria-hidden="true">→</span>
+        </button>
       </header>
 
       <Agenda onOpenProgram={openProgram} />

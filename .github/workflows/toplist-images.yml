@@ -17,7 +17,7 @@ concurrency:
 jobs:
   images:
     runs-on: ubuntu-latest
-    timeout-minutes: 150
+    timeout-minutes: 175
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -27,6 +27,7 @@ jobs:
       - name: Lấy ảnh đại diện từ Google Drive
         run: python3 scripts/toplist-images.py "${{ github.event.inputs.limit }}"
       - name: Lưu vào repo
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898733+github-actions[bot]@users.noreply.github.com"

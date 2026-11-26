@@ -283,8 +283,15 @@ async function main() {
 
   // 6. Phiên bản: bản quyền, phát hành ngay sau khi duyệt, gắn bản build
   await api("PATCH", `/v1/appStoreVersions/${ver.id}`, { data: { type: "appStoreVersions", id: ver.id, attributes: { copyright: COPYRIGHT, releaseType: "AFTER_APPROVAL" } } });
-  const builds = await api("GET", `/v1/builds?filter[app]=${app.id}&filter[processingState]=VALID&sort=-uploadedDate&limit=20&filter[preReleaseVersion.version]=${VERSION}` + (BUILD ? `&filter[version]=${BUILD}` : ""));
-  const build = builds.data[0];
+  // Bản build vừa tải lên cần Apple xử lý vài phút: chờ tối đa 25 phút
+  const buildUrl = `/v1/builds?filter[app]=${app.id}&filter[processingState]=VALID&sort=-uploadedDate&limit=20&filter[preReleaseVersion.version]=${VERSION}` + (BUILD ? `&filter[version]=${BUILD}` : "");
+  let build = null;
+  for (const until = Date.now() + 25 * 60 * 1000; ; ) {
+    build = (await api("GET", buildUrl)).data[0];
+    if (build || Date.now() > until) break;
+    console.log("  chờ Apple xử lý bản build…");
+    await new Promise((r) => setTimeout(r, 30000));
+  }
   if (!build) throw new Error("Chưa có bản build nào của phiên bản " + VERSION + " xử lý xong");
   await api("PATCH", `/v1/appStoreVersions/${ver.id}/relationships/build`, { data: { type: "builds", id: build.id } });
   log("Phiên bản", VERSION, "gắn bản build", build.attributes.version);

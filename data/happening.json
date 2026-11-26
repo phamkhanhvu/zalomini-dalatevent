@@ -2,20 +2,9 @@
   "schema": 1,
   "about": "Các sự kiện khác đang và sắp diễn ra tại Đà Lạt (ngoài chương trình Festival Hoa trong events.json). Mỗi mục có ngày bắt đầu và kết thúc để lọc theo ngày.",
   "timezone": "Asia/Ho_Chi_Minh",
-  "updated_at": "2026-11-26T05:50:00+07:00",
-  "updated_label": "26.11.2026",
+  "updated_at": "2026-11-27T05:50:00+07:00",
+  "updated_label": "27.11.2026",
   "items": [
-    {
-      "title": "Triển lãm tranh cổ động Ngày Văn hóa Việt Nam",
-      "start_date": "2026-11-16",
-      "end_date": "2026-11-26",
-      "venue": "Quảng trường Lâm Viên",
-      "when": "16 — 26.11.2026",
-      "desc": "150 tranh cổ động tấm lớn tuyển chọn từ cuộc thi sáng tác toàn quốc, trưng bày tại khu vực đài phun nước Quảng trường Lâm Viên và quanh hồ Xuân Hương.",
-      "title_en": "Vietnam Culture Day poster exhibition",
-      "venue_en": "Lam Vien Square",
-      "desc_en": "150 large propaganda posters selected from a national design contest, shown around the Lam Vien Square fountain and Xuan Huong Lake."
-    },
     {
       "title": "Mùa hội cỏ hồng Lang Biang năm 2026",
       "start_date": "2026-11-21",
@@ -26,6 +15,17 @@
       "title_en": "Lang Biang pink grass season festival 2026",
       "venue_en": "Da Nghit pink grass hill, Lang Biang ward – Da Lat",
       "desc_en": "Opened on the morning of 21.11 in support of the 11th Da Lat Flower Festival: traditional ethnic costume shows, bareback horse racing and other cultural, sports and tourism activities."
+    },
+    {
+      "title": "Giải chạy địa hình Prenn Trail Summit 2026",
+      "start_date": "2026-12-09",
+      "end_date": "2026-12-13",
+      "venue": "Thác Prenn (Tea Resort Prenn), chân đèo Prenn – Đà Lạt",
+      "when": "09 — 13.12.2026",
+      "desc": "Mùa thứ 4 của giải chạy địa hình do Unique Events & Media tổ chức. Đường chạy đi từ cao nguyên Di Linh lên cao nguyên Lâm Viên và về đích tại thác Prenn.",
+      "title_en": "Prenn Trail Summit 2026 trail race",
+      "venue_en": "Prenn Waterfall (Tea Resort Prenn), foot of Prenn Pass – Da Lat",
+      "desc_en": "Season 4 of the trail running race organised by Unique Events & Media. The course runs from the Di Linh plateau up to the Lam Vien plateau and finishes at Prenn Waterfall."
     }
   ]
 }

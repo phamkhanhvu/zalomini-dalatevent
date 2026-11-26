@@ -415,3 +415,14 @@ div.ag-row { text-align: left; }
 .adm-en { border: 1px dashed var(--line); border-radius: 12px; padding: 8px 12px; }
 .adm-en summary { cursor: pointer; font-size: 13px; font-weight: 600; color: var(--ink2); }
 .adm-en[open] summary { margin-bottom: 8px; }
+
+/* Điểm săn mây */
+.spot-list { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.spot { padding: 12px 14px; border-radius: 18px; background: var(--paper); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+.spot-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.spot-head b { font-family: var(--serif); font-size: 17px; }
+.spot-head i { font-style: normal; font-size: 13px; color: var(--ink2); white-space: nowrap; }
+.spot-area { font-size: 13px; color: var(--ink2); }
+.spot-note { font-size: 14px; line-height: 1.45; }
+.spot-acts { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.spot-acts .btn { min-height: 38px; padding: 0 14px; font-size: 14px; }

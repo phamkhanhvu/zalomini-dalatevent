@@ -4,7 +4,14 @@ import { getForecast, Forecast } from "../platform/weather";
 import { vnDate, vnTime } from "../utils/agenda";
 import { openUrl, mapsUrl } from "../utils/device";
 import { afternoonLabel, bestCloudDay, cloudLabel, DayPlan, plan } from "../utils/weather";
-import { tr, wdShort } from "../i18n";
+import { tr, wdShort, isEn } from "../i18n";
+import { CLOUD_SPOTS, CloudSpot } from "../data/cloud-spots";
+import { distanceKm } from "../utils/geo";
+
+const CENTER = { lat: 11.9416, lng: 108.4419 }; // Hồ Xuân Hương
+const kmOf = (s: CloudSpot) => (s.lat !== null && s.lng !== null ? Math.round(distanceKm(CENTER, { lat: s.lat, lng: s.lng })) : null);
+const spotQuery = (s: CloudSpot) => (s.lat !== null && s.lng !== null ? s.lat + "," + s.lng : s.query || s.name);
+
 
 const dayName = (date: string, today: string) => {
   if (date === today) return tr("Hôm nay", "Today");
@@ -55,7 +62,7 @@ const WeatherPage: FC = () => {
           <div className="wx-best" role="status">
             <span className="wx-best-k">{tr("Sáng nên đi săn mây", "Best morning for clouds")}</span>
             <b>{dayName(best.date, today)}{best.sunrise ? tr(", có mặt trên đồi trước ", ", be on the hill before ") + best.sunrise : ""}</b>
-            <button type="button" className="btn btn-ink" onClick={() => openUrl(mapsUrl(tr("điểm săn mây Đà Lạt", "Da Lat cloud hunting viewpoint")))}>{tr("Tìm điểm săn mây", "Find viewpoints")}</button>
+            <button type="button" className="btn btn-ink" onClick={() => document.getElementById("diem-san-may")?.scrollIntoView({ behavior: "smooth" })}>{tr("Xem điểm săn mây", "See viewpoints")}</button>
           </div>
         )}
         {f && !best && <p className="wx-none">{tr("Mấy ngày tới ít khả năng có biển mây. Hãy xem lại sau, dự báo đổi mỗi ngày.", "A sea of clouds is unlikely in the coming days. Check back later; the forecast changes daily.")}</p>}
@@ -68,6 +75,28 @@ const WeatherPage: FC = () => {
           <button type="button" className="acc-switch link-left" onClick={() => navigate("/show")}>{tr("Chiều mưa? Xem show diễn và triển lãm trong nhà", "Rainy afternoon? See indoor shows and exhibitions")}</button>
         )}
         {f && <p className="muted small">{tr("Nguồn dự báo: Open-Meteo, cập nhật lúc ", "Forecast: Open-Meteo, updated ")}{vnTime(f.fetchedAt)}.</p>}
+      </section>
+      <section className="sec" id="diem-san-may">
+        <h2 className="h2">{tr("Điểm săn mây gợi ý", "Cloud-hunting spots")}</h2>
+        <p className="muted small">{tr("Xếp từ gần đến xa trung tâm (hồ Xuân Hương). Nên có mặt trước giờ mặt trời mọc 20–30 phút.", "Sorted from nearest to farthest from the centre (Xuan Huong Lake). Arrive 20–30 minutes before sunrise.")}</p>
+        <ul className="spot-list">
+          {CLOUD_SPOTS.map((sp) => ({ sp, km: kmOf(sp) }))
+            .sort((a, b) => (a.km ?? 25) - (b.km ?? 25))
+            .map(({ sp, km }) => (
+              <li key={sp.id} className="spot">
+                <div className="spot-head">
+                  <b>{sp.name}</b>
+                  <i>{"~" + (km ?? 25) + " km"}</i>
+                </div>
+                <p className="spot-area">{isEn() ? sp.area_en : sp.area}</p>
+                <p className="spot-note">{isEn() ? sp.note_en : sp.note}</p>
+                <div className="spot-acts">
+                  <button type="button" className="btn btn-ink" onClick={() => openUrl(mapsUrl(spotQuery(sp)))}>{tr("Chỉ đường", "Directions")}</button>
+                  {sp.clip && <button type="button" className="btn btn-line" onClick={() => openUrl(sp.clip as string)}>{tr("Xem clip", "Watch clip")}</button>}
+                </div>
+              </li>
+            ))}
+        </ul>
       </section>
     </div>
   );

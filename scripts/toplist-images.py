@@ -14,11 +14,13 @@ if len(sys.argv) > 1 and sys.argv[1].startswith("diag:"):
     # Kiểm tra quyền xem công khai: diag:<id thư mục>:<id ảnh>
     import urllib.request
     _, fo, fi = sys.argv[1].split(":")
-    for u in ("https://drive.google.com/drive/folders/" + fo, "https://drive.google.com/thumbnail?id=" + fi + "&sz=w720", "https://drive.google.com/uc?export=download&id=" + fi):
+    for u in ("https://drive.google.com/drive/folders/" + fo, "https://drive.google.com/thumbnail?id=" + fi + "&sz=w720", "https://lh3.googleusercontent.com/d/" + fi + "=w720"):
         try:
             r = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"}), timeout=30)
             b = r.read()
-            print(r.status, r.headers.get("Content-Type"), len(b), b"accounts.google.com/ServiceLogin" in b or b"Sign in" in b[:20000], u.split("?")[0])
+            import re as _re
+            t = _re.search(rb"<title>(.*?)</title>", b[:200000])
+            print(r.status, r.headers.get("Content-Type"), len(b), t.group(1)[:80] if t else b"", r.geturl()[:80])
         except Exception as e:
             print("ERR", u.split("?")[0], e)
     sys.exit(0)

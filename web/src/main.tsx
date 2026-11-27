@@ -1,4 +1,5 @@
 import React from "react";
+import { markGoodMoment } from "./platform/review";
 import { createRoot } from "react-dom/client";
 
 import "@fontsource/be-vietnam-pro/vietnamese-400.css";
@@ -35,7 +36,10 @@ async function start() {
   // Nhắc lịch chỉ có trong app cài trên máy. Mở app: hẹn lại (không hỏi quyền). Lưu chương trình: hỏi quyền nếu cần.
   if (IS_NATIVE) {
     syncReminders(savedIds(), false, readPlan());
-    window.addEventListener(SAVED_EVENT, () => syncReminders(savedIds(), true, readPlan()));
+    window.addEventListener(SAVED_EVENT, () => {
+      syncReminders(savedIds(), true, readPlan());
+      markGoodMoment();
+    });
   }
   createRoot(document.getElementById("app")!).render(<App />);
   // Giữ khung trang để mở được khi mất mạng. Không dùng trong app cài trên máy (app đã có sẵn tệp).

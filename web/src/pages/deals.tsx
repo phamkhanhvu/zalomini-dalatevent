@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import { markGoodMoment } from "../platform/review";
 import { useSearchParams } from "react-router";
 import { Sheet, useSnackbar } from "../ui";
 import { openAccount } from "../components/account-panel";
@@ -85,6 +86,7 @@ const DealsPage: FC = () => {
     if (!open) return;
     setBusy(true);
     const r = await redeem(open.id);
+    if (r.ok) markGoodMoment();
     setBusy(false);
     if (r.ok) {
       setMine(r.redemption);

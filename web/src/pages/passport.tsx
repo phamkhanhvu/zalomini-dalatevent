@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import { markGoodMoment } from "../platform/review";
 import m_passport from "../static/img/mascots/passport.webp";
 import { useNavigate } from "react-router";
 import { useSnackbar } from "../ui";
@@ -51,6 +52,7 @@ const PassportPage: FC = () => {
         const r = stampHere(defs, stamps, { lat: p.coords.latitude, lng: p.coords.longitude, accuracy: p.coords.accuracy }, t);
         if (r.earned.length) {
           addStamps(r.earned.map((d) => d.id), t);
+          markGoodMoment();
           setMsg("");
           openSnackbar({ text: tr("Đã đóng " + r.earned.length + " dấu: ", "Stamped " + r.earned.length + ": ") + r.earned.map((d) => d.title).join(", "), type: "success", duration: 4000 });
         } else if (!r.nearest) setMsg(tr("Bạn đã có đủ mọi dấu hiện có.", "You already have every stamp available."));

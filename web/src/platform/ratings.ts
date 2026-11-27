@@ -44,6 +44,38 @@ export async function loadRatings(ids: string[]): Promise<void> {
   listeners.forEach((f) => f());
 }
 
+/** Điểm xếp hạng: trung bình có trọng số theo số lượt (ít lượt thì kéo về 3,5 sao), để 1 phiếu 5 sao không vượt 20 phiếu 4,8 sao */
+export const rankScore = (r: Rating, prior = 3.5, weight = 3) => (r.avg * r.count + prior * weight) / (r.count + weight);
+
+/** Các địa điểm được chấm nhiều nhất (đọc công khai), đồng thời nạp điểm vào bộ nhớ */
+export async function mostRated(limit = 60): Promise<{ id: string; r: Rating }[]> {
+  try {
+    const res = await fetch(REST + ":runQuery", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ structuredQuery: { from: [{ collectionId: "placeRatings" }], orderBy: [{ field: { fieldPath: "count" }, direction: "DESCENDING" }], limit } }),
+    });
+    if (!res.ok) return [];
+    const rows = (await res.json()) as { document?: { name: string; fields?: Record<string, { integerValue?: string }> } }[];
+    const out: { id: string; r: Rating }[] = [];
+    for (const row of rows) {
+      if (!row.document) continue;
+      const id = row.document.name.slice(NAME.length);
+      const sum = Number(row.document.fields?.sum?.integerValue || 0);
+      const count = Number(row.document.fields?.count?.integerValue || 0);
+      if (count > 0) {
+        const r = { avg: sum / count, count };
+        cache.set(id, r);
+        out.push({ id, r });
+      }
+    }
+    listeners.forEach((f) => f());
+    return out;
+  } catch (e) {
+    return [];
+  }
+}
+
 /** Số sao chính mình đã chấm (0 nếu chưa) */
 export async function myStars(id: string): Promise<number> {
   await loadAccount();

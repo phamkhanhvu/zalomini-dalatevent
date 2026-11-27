@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { track } from "../platform/stats";
 import { RateStars, RatingBadge } from "../components/stars";
-import { loadRatings } from "../platform/ratings";
+import { loadRatings, mostRated, rankScore } from "../platform/ratings";
 import m_coffee from "../static/img/mascots/coffee.webp";
 import { useNavigate, useParams, useSearchParams } from "react-router";
 import { loadToplist, TopDoc, TopPlace, topImage } from "../data/toplist";
@@ -88,6 +88,60 @@ const PlaceCard: FC<{ p: TopPlace; km: number | null; listName?: string; focus?:
   );
 };
 
+/** Nổi bật: 5 địa điểm được chấm cao nhất (tính cả số lượt chấm) */
+const TopRated: FC<{ doc: TopDoc; listName: Record<string, string> }> = ({ doc, listName }) => {
+  const navigate = useNavigate();
+  const [ids, setIds] = useState<{ id: string; avg: number; count: number }[] | null>(null);
+  useEffect(() => {
+    let live = true;
+    mostRated().then((rows) => {
+      if (!live) return;
+      const known = new Set(doc.places.map((p) => p.id));
+      setIds(
+        rows
+          .filter((x) => known.has(x.id))
+          .sort((a, b) => rankScore(b.r) - rankScore(a.r) || b.r.count - a.r.count)
+          .slice(0, 5)
+          .map((x) => ({ id: x.id, avg: x.r.avg, count: x.r.count })),
+      );
+    });
+    return () => {
+      live = false;
+    };
+  }, [doc]);
+  if (!ids || !ids.length) return null;
+  const byId = new Map(doc.places.map((p) => [p.id, p]));
+  return (
+    <section className="tl-hot" aria-label={tr("Nổi bật", "Top rated")}>
+      <div className="tl-hot-head">
+        <b>{tr("Nổi bật", "Top rated")}</b>
+        <i>{tr("Được khách chấm sao cao nhất", "Highest rated by visitors")}</i>
+      </div>
+      <ol className="tl-hot-row">
+        {ids.map((x, i) => {
+          const p = byId.get(x.id)!;
+          const img = topImage(p);
+          return (
+            <li key={x.id}>
+              <button type="button" className="tl-hot-card" onClick={() => { track("toplist_hot", p.id); navigate("/top-list/" + p.list + "?p=" + encodeURIComponent(p.id)); }}>
+                <span className="tl-hot-pic">
+                  {img ? <img src={img} alt="" loading="lazy" onError={(e) => ((e.currentTarget as HTMLImageElement).style.visibility = "hidden")} /> : null}
+                  <span className="tl-hot-rank">{i + 1}</span>
+                </span>
+                <b>{p.name}</b>
+                <span className="tl-hot-meta">
+                  <span className="tl-hot-star">★ {x.avg.toFixed(1).replace(".", tr(",", "."))}</span> · {x.count}{tr(" lượt", x.count === 1 ? " rating" : " ratings")}
+                </span>
+                <i>{listName[p.list] || ""}</i>
+              </button>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+  );
+};
+
 const NearButton: FC<{ loc: ReturnType<typeof useLocate> }> = ({ loc }) => (
   <div className="tl-near">
     <button type="button" className={"fb" + (loc.pos ? " on" : "")} onClick={loc.locate} disabled={loc.busy}>
@@ -154,6 +208,7 @@ export const ToplistPage: FC = () => {
             <ul className="tl-places" ref={() => loadRatings(found.map((x) => x.p.id))}>{found.map(({ p, km }) => <PlaceCard key={p.id} p={p} km={km} listName={listName[p.list]} />)}</ul>
           </>
         )}
+        {doc && !found && <TopRated doc={doc} listName={listName} />}
         {doc && !found && (
           <ul className="tl-lists">
             {lists.map((l) => (

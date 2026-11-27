@@ -20,7 +20,9 @@ async function openGame() {
 }
 
 /** Thẻ trang chủ dẫn vào game "Khám phá sự kiện Đà Lạt" */
-export const GameBanner: FC = () => (
+export const GameBanner: FC = () =>
+  // Trong app chưa hiện: game có người chơi gặp nhau, Apple yêu cầu nút báo cáo/chặn trước khi đưa vào
+  IS_NATIVE ? null : (
   <button type="button" className="gmb" onClick={openGame} aria-label={tr("Chơi game Khám phá sự kiện Đà Lạt", "Play the Explore Da Lat events game")}>
     <span className="gmb-icon" aria-hidden="true">🎮</span>
     <span className="gmb-text">

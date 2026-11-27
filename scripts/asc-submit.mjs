@@ -74,9 +74,9 @@ const TEXT = {
 Không cần tài khoản để xem lịch. Đăng nhập (tùy chọn) bằng Apple, Google hoặc email để đồng bộ lịch trình giữa các máy.
 
 Lịch có thể thay đổi; hãy xem lại trước khi đến.`,
-    whatsNew: `• Mới: Top list Đà Lạt với hơn 1.000 địa điểm theo 127 chủ đề, có ảnh, tìm kiếm, xếp theo gần bạn và chỉ đường
-• Mới: danh sách điểm săn mây trong trang Thời tiết, kèm chỉ đường
-• Sửa lỗi nút Trợ lý che nút "Dùng ưu đãi"`,
+    whatsNew: `• Mã ưu đãi của đối tác hiện đúng trong Dalat Deals, có nút chép mã và đặt vé
+• Gợi ý tìm kiếm theo ngày khai mạc Festival Hoa (20.12)
+• Sửa lỗi nhỏ và cải thiện tốc độ`,
   },
   "en-US": {
     name: "DalatEvent",
@@ -100,9 +100,9 @@ Lịch có thể thay đổi; hãy xem lại trước khi đến.`,
 No account needed to browse. Optionally sign in with Apple, Google or email to sync your plan across devices.
 
 Schedules can change; please check before you go.`,
-    whatsNew: `• New: Da Lat Top lists with 1,000+ places in 127 themes, with photos, search, nearest-first sorting and directions
-• New: cloud-hunting spots on the Weather page, with directions
-• Fixed: the Assistant button no longer covers the "Use offer" button`,
+    whatsNew: `• Partner offer codes now show correctly in Dalat Deals, with copy and booking buttons
+• Search suggestion for the Flower Festival opening day (20.12)
+• Small fixes and speed improvements`,
   },
 };
 const SUPPORT_URL = "https://dalatevent.com/";

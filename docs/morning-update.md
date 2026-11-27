@@ -48,3 +48,6 @@ Tiếng Việt, ngắn, gạch đầu dòng: sự kiện thêm/xóa; thay đổi
 
 ## Phân luồng Festival Hoa 2026 (đến 31.12.2026)
 Mỗi sáng tìm thông báo chính thức (Công an Lâm Đồng, UBND phường Xuân Hương - Đà Lạt, Báo Lâm Đồng) về cấm đường, phân luồng, bãi xe tạm cho Festival Hoa lần thứ XI. Có thì cập nhật `data/festival-map.json`: thêm từng đoạn vào `closures` (text, text_en, from, to, source) và bãi xe tạm vào `points` (kind "parking", source là link thông báo). Chưa có thì giữ nguyên.
+
+## Ngày khai mạc Festival Hoa 2026
+Anh Vũ xác nhận ngày 28.11.2026: khai mạc chính thức tối 20.12.2026. Một số bài báo cũ (ví dụ Báo Lâm Đồng 18.11) ghi 12.12, bỏ qua, không báo lệch nữa trừ khi có thông báo mới hơn ngày 28.11.

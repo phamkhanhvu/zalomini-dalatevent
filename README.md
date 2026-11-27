@@ -53,7 +53,7 @@ Toàn bộ lịch, địa điểm, mô tả nằm ở **`src/data/festival.ts`**
 
 ## Lưu ý
 
-- Ngày khai mạc đang ghi **tối 12.12.2026 (dự kiến)** theo phương án họp ngày 18.11.2026 của UBND tỉnh Lâm Đồng; poster trước đó ghi 19.12. Khi có lịch chính thức, sửa ở `festival.ts`.
+- Ngày khai mạc: **tối 20.12.2026**, theo Thường trực Tỉnh ủy Lâm Đồng ngày 23.11.2026 (Dân trí, Báo Lâm Đồng). Trước đó ghi 19.12 rồi 12.12.
 - Chỉ ngày khai mạc và bế mạc có giờ cụ thể (20:00). Các chương trình khác chỉ có ngày.
 - Các nút Chỉ đường, Chia sẻ, Yêu thích, Gọi điện chỉ chạy đầy đủ bên trong Zalo. Trên trình duyệt chúng dùng phương án thay thế.
 - Bản này chỉ có tiếng Việt.

@@ -8,7 +8,7 @@ import { AgendaRow, agendaFor } from "./agenda";
 import { IconPin, IconSearch } from "./icons";
 import { tr } from "../i18n";
 
-const HINTS = () => [tr("Hôm nay", "Today"), tr("Cuối tuần", "Weekend"), "12.12", "Jazz", "Lâm Viên"];
+const HINTS = () => [tr("Hôm nay", "Today"), tr("Cuối tuần", "Weekend"), "20.12", "Jazz", "Lâm Viên"];
 
 function places(): SearchPlace[] {
   const d = getData();
@@ -51,7 +51,7 @@ export const SearchBox: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenP
         <div className="search-results" aria-live="polite">
           <p className="search-meta">
             {res.empty
-              ? tr("Không tìm thấy kết quả. Thử tên nghệ sĩ, địa điểm, hoặc một ngày như 12.12.", "No results. Try an artist, a place, or a date like 12.12.")
+              ? tr("Không tìm thấy kết quả. Thử tên nghệ sĩ, địa điểm, hoặc một ngày như 20.12.", "No results. Try an artist, a place, or a date like 20.12.")
               : `${res.items.length} ${tr("sự kiện", res.items.length === 1 ? "event" : "events")}${res.places.length ? ", " + res.places.length + tr(" địa điểm", " places") : ""}${res.date ? " · " + res.date.label : tr(" · từ hôm nay trở đi", " · from today on")}`}
           </p>
           {res.places.length > 0 && (

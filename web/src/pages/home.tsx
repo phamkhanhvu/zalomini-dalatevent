@@ -146,30 +146,44 @@ const HomePage: FC = () => {
       </section>
 
       <section className="sec about">
-        <h2 className="h2">{tr("Về DalatEvent", "About DalatEvent")}</h2>
-        <p>{tr("DalatEvent là cổng thông tin sự kiện Đà Lạt do Sense Group vận hành.", "DalatEvent is Da Lat's events guide, run by Sense Group.")}</p>
-        <div className="actions">
-          <button
-            type="button"
-            className="act"
-            onClick={async () => {
-              const ok = await shareText(tr(`Đà Lạt có gì vui? Lịch ${FESTIVAL.name} ${FESTIVAL.edition} (${FESTIVAL.dateRange}) và các show diễn tại Đà Lạt: ${FESTIVAL.website}`, `What's on in Da Lat? ${FESTIVAL.name} (${FESTIVAL.dateRange}) schedule and live shows in Da Lat: ${FESTIVAL.website}`), "DalatEvent");
-              if (!ok) openSnackbar({ text: shareFail(), duration: 2200 });
-            }}
-          >
-            <IconShare />{tr("Chia sẻ", "Share")}
-          </button>
-          <button type="button" className="act" onClick={() => navigate("/uu-dai")}>
-            <IconBookmark />{tr("Dalat Deals: ưu đãi đối tác", "Dalat Deals: partner offers")}
-          </button>
-          <button type="button" className="act" onClick={() => navigate("/nhung-lich")}>
-            <IconGlobe />{tr("Nhúng lịch và mã QR cho đối tác", "Embed the calendar and QR codes for partners")}
-          </button>
-        </div>
         <AdBanner />
-        <p className="muted small">© {new Date().getFullYear()} DalatEvent · Sense Group</p>
-        <button type="button" className="acc-switch link-left" onClick={() => navigate("/quyen-rieng-tu")}>{tr("Chính sách quyền riêng tư", "Privacy policy")}</button>
-        <button type="button" className="acc-switch link-left" onClick={() => navigate("/dieu-khoan")}>{tr("Điều khoản sử dụng", "Terms of use")}</button>
+        <footer className="foot">
+          <div className="foot-brand">
+            <img src={logoImg} alt="DalatEvent.com" width={60} height={48} />
+            <span>
+              <b>DalatEvent</b>
+              <i>{tr("Cổng thông tin sự kiện Đà Lạt do Sense Group vận hành.", "Da Lat's events guide, run by Sense Group.")}</i>
+            </span>
+          </div>
+          <div className="foot-acts">
+            <button
+              type="button"
+              onClick={async () => {
+                const ok = await shareText(tr(`Đà Lạt có gì vui? Lịch ${FESTIVAL.name} ${FESTIVAL.edition} (${FESTIVAL.dateRange}) và các show diễn tại Đà Lạt: ${FESTIVAL.website}`, `What's on in Da Lat? ${FESTIVAL.name} (${FESTIVAL.dateRange}) schedule and live shows in Da Lat: ${FESTIVAL.website}`), "DalatEvent");
+                if (!ok) openSnackbar({ text: shareFail(), duration: 2200 });
+              }}
+            >
+              <IconShare /><span>{tr("Chia sẻ", "Share")}</span>
+            </button>
+            <button type="button" onClick={() => navigate("/uu-dai")}>
+              <IconBookmark /><span>{tr("Ưu đãi", "Offers")}</span>
+            </button>
+            <button type="button" onClick={() => navigate("/gui-su-kien")}>
+              <IconCompass size={22} /><span>{tr("Gửi sự kiện", "Submit event")}</span>
+            </button>
+            <button type="button" onClick={() => navigate("/nhung-lich")}>
+              <IconGlobe /><span>{tr("Nhúng lịch", "Embed")}</span>
+            </button>
+          </div>
+          <nav className="foot-links" aria-label={tr("Thông tin pháp lý", "Legal")}>
+            <button type="button" onClick={() => navigate("/quyen-rieng-tu")}>{tr("Quyền riêng tư", "Privacy")}</button>
+            <span aria-hidden="true">·</span>
+            <button type="button" onClick={() => navigate("/dieu-khoan")}>{tr("Điều khoản", "Terms")}</button>
+            <span aria-hidden="true">·</span>
+            <a href="https://www.sensegroup.vn" target="_blank" rel="noopener noreferrer">sensegroup.vn</a>
+          </nav>
+          <p className="foot-copy">© {new Date().getFullYear()} DalatEvent · Sense Group</p>
+        </footer>
       </section>
       {sheet}
     </div>

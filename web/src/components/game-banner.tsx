@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { track } from "../platform/stats";
 import m_explore from "../static/img/mascots/explore.webp";
 import m_concert from "../static/img/mascots/concert.webp";
-import { Browser } from "@capacitor/browser";
+import { AppLauncher } from "@capacitor/app-launcher";
 import { IS_NATIVE } from "../utils/device";
 import { tr } from "../i18n";
 
@@ -13,8 +13,8 @@ async function openGame() {
   track("game_open");
   if (IS_NATIVE) {
     try {
-      // Mở toàn màn hình ngay trong app, có nút Xong để quay lại
-      await Browser.open({ url: GAME_URL, presentationStyle: "fullscreen" });
+      // Trong app: mở game bằng Safari/trình duyệt của máy, game không chạy bên trong app
+      await AppLauncher.openUrl({ url: GAME_URL });
       return;
     } catch (e) {
       /* rơi xuống cách mở thường */
@@ -24,9 +24,7 @@ async function openGame() {
 }
 
 /** Thẻ trang chủ dẫn vào game "Khám phá sự kiện Đà Lạt" */
-export const GameBanner: FC = () =>
-  // Trong app chưa hiện: game có người chơi gặp nhau, Apple yêu cầu nút báo cáo/chặn trước khi đưa vào
-  IS_NATIVE ? null : (
+export const GameBanner: FC = () => (
   <button type="button" className="gmb has-mascot" onClick={openGame} aria-label={tr("Chơi game Khám phá sự kiện Đà Lạt", "Play the Explore Da Lat events game")}>
     <span className="gmb-icon" aria-hidden="true">🎮</span>
     <img className="mascot" src={m_explore} alt="" aria-hidden="true" />
@@ -35,7 +33,7 @@ export const GameBanner: FC = () =>
       <b>{tr("Khám phá sự kiện Đà Lạt", "Explore Da Lat events")}</b>
       <i>{tr("Dạo Quảng trường Lâm Viên và Chợ Đà Lạt, tìm thẻ câu hỏi, gặp người chơi khác", "Roam Lam Vien Square and Da Lat Market, find quiz cards, meet other players")}</i>
     </span>
-    <span className="gmb-go">{tr("Chơi", "Play")}</span>
+    <span className="gmb-go">{IS_NATIVE ? tr("Mở web ↗", "Open web ↗") : tr("Chơi", "Play")}</span>
   </button>
 );
 

@@ -78,6 +78,7 @@ Lịch có thể thay đổi; hãy xem lại trước khi đến.`,
 • Dalat Deals dạng slide; mã ưu đãi đối tác hiện kèm nút chép mã và đặt vé
 • Chấm sao địa điểm trong Top list
 • Gửi sự kiện cho DalatEvent duyệt (một lần, hằng đêm hoặc hằng tuần)
+• Thẻ Game 3D "Khám phá sự kiện Đà Lạt" mở trên trình duyệt
 • Đếm ngược tới đêm khai mạc Festival Hoa 20.12
 • Báo khi có bản cập nhật mới; trang Điều khoản sử dụng`,
   },
@@ -107,6 +108,7 @@ Schedules can change; please check before you go.`,
 • Dalat Deals slider; partner offer codes with copy and booking buttons
 • Star ratings for Top list places
 • Submit events for review (one-off, nightly or weekly)
+• "Explore Da Lat events" 3D web game card (opens in the browser)
 • Countdown to the Flower Festival opening night (20.12)
 • Update notice when a new version is out; Terms of use page`,
   },
@@ -130,7 +132,8 @@ New in 1.0.2:
 - Star ratings (Top list → any place → "Rate"): signed-in users give 1–5 stars; only the average and count are shown, never who rated. No text reviews.
 - Submit an event (Home → "Hosting an event in Da Lat?"): signed-in users send event details. Nothing is published automatically; every submission is reviewed by our team in an admin page before it appears, and can be rejected. Contact details are only visible to our admins.
 - A banner at the bottom of Home promotes Sense Group's own event services (our company, labelled "Ad"). No third-party ad networks.
-- Anonymous usage counts (page opens and button taps per day and platform, no user or device identifiers, no cookies) to see which features are used. No tracking.
+- Anonymous daily usage counts (page opens, button taps; no user/device identifiers). No tracking.
+- The "3D game" card on Home only opens dalatevent.com/game in Safari, outside the app.
 - Terms of use: Home → bottom → "Terms". No user-to-user messaging, no in-app purchases.
 
 4) EXTERNAL SERVICES
@@ -179,6 +182,20 @@ async function main() {
     } else {
       ver = (await api("POST", `/v1/appStoreVersions`, { data: { type: "appStoreVersions", attributes: { platform: "IOS", versionString: VERSION, copyright: COPYRIGHT, releaseType: "AFTER_APPROVAL" }, relationships: { app: { data: { type: "apps", id: app.id } } } } })).data;
       log("Đã tạo phiên bản mới", VERSION);
+    }
+  }
+  // Đang chờ duyệt mà muốn thay bản build khác (BUILD_NUMBER): rút khỏi hàng chờ rồi nộp lại
+  if (BUILD && MODE === "submit" && stateOf(ver) === "WAITING_FOR_REVIEW") {
+    const waiting = await api("GET", `/v1/reviewSubmissions?filter[app]=${app.id}&filter[platform]=IOS&filter[state]=WAITING_FOR_REVIEW&limit=20`);
+    for (const s of waiting.data) {
+      await api("PATCH", `/v1/reviewSubmissions/${s.id}`, { data: { type: "reviewSubmissions", id: s.id, attributes: { canceled: true } } });
+      log("Đã rút lần nộp đang chờ", s.id, "để thay bản build", BUILD);
+    }
+    for (const until = Date.now() + 10 * 60 * 1000; Date.now() < until; ) {
+      await new Promise((r) => setTimeout(r, 15000));
+      ver = (await api("GET", `/v1/appStoreVersions/${ver.id}`)).data;
+      console.log("  trạng thái phiên bản:", stateOf(ver));
+      if (EDITABLE.includes(stateOf(ver))) break;
     }
   }
   const isUpdate = vers.data.some((v) => v.id !== ver.id);

@@ -40,6 +40,7 @@ const PrivacyEn: FC<{ home: () => void }> = ({ home }) => (
       <ul>
         <li>Your email and display name (display name only with Google; with Apple, the email may be Apple's private relay address).</li>
         <li>The items in your plan and the stamps in your Da Lat Passport, to sync across devices.</li>
+        <li>When you rate a place: the stars and time, tied to your account so each person has one vote. Others only see the average and number of ratings, not who rated.</li>
         <li>When you submit an event on the "Submit an event" page: the event details, your display name and the contact you leave (phone, Zalo or email). Only DalatEvent admins see the contact, to ask about the event; it is never shown publicly.</li>
         <li>When you use a Dalat Deals offer: your display name, the time and the code, to reconcile with the partner.</li>
         <li>If you play the game: game progress, character name and leaderboard score (the leaderboard is public), your character's position while online and the stalls you own in the game.</li>
@@ -101,6 +102,7 @@ const PrivacyPage: FC = () => {
         <ul>
           <li>Email và tên hiển thị của tài khoản (tên hiển thị chỉ có khi đăng nhập bằng Google; với Apple, email có thể là địa chỉ chuyển tiếp ẩn danh của Apple).</li>
           <li>Danh sách mục bạn đã thêm vào lịch trình và các dấu mộc đã đóng trong Hộ chiếu Đà Lạt, để đồng bộ giữa các máy.</li>
+          <li>Khi bạn chấm sao một địa điểm: số sao và thời điểm chấm, gắn với tài khoản để mỗi người chỉ có một phiếu. Người khác chỉ thấy điểm trung bình và số lượt, không thấy ai chấm.</li>
           <li>Khi bạn gửi sự kiện qua trang "Gửi sự kiện": nội dung sự kiện, tên hiển thị và cách liên hệ bạn để lại (số điện thoại, Zalo hoặc email). Cách liên hệ chỉ quản trị viên DalatEvent xem, dùng để hỏi thêm về sự kiện, không hiện công khai.</li>
           <li>Khi bạn dùng một ưu đãi trong Dalat Deals: tên hiển thị của tài khoản, thời điểm và mã đổi, để đối soát với đối tác cung cấp ưu đãi.</li>
           <li>Nếu bạn chơi trò chơi: tiến trình chơi, tên nhân vật và điểm trên bảng xếp hạng (bảng xếp hạng ai cũng xem được), vị trí nhân vật khi đang trực tuyến và gian hàng bạn sở hữu trong trò chơi.</li>

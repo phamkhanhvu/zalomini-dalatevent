@@ -1,4 +1,6 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import { RateStars, RatingBadge } from "../components/stars";
+import { loadRatings } from "../platform/ratings";
 import m_coffee from "../static/img/mascots/coffee.webp";
 import { useNavigate, useParams } from "react-router";
 import { loadToplist, TopDoc, TopPlace, topImage } from "../data/toplist";
@@ -67,6 +69,7 @@ const PlaceCard: FC<{ p: TopPlace; km: number | null; listName?: string }> = ({ 
           <b>{p.name}</b>
           {km !== null && <i>{kmText(km)}</i>}
         </div>
+        <RatingBadge id={p.id} />
         {listName && <span className="tl-tag">{listName}</span>}
         {p.address && <p className="tl-addr">{p.address}</p>}
         {desc && (
@@ -74,6 +77,7 @@ const PlaceCard: FC<{ p: TopPlace; km: number | null; listName?: string }> = ({ 
             {desc}
           </p>
         )}
+        <RateStars id={p.id} />
         <div className="tl-acts">
           <button type="button" className="btn btn-ink" onClick={() => openUrl(mapsUrl(where))}>{tr("Chỉ đường", "Directions")}</button>
           {p.clip && <button type="button" className="btn btn-line" onClick={() => openUrl(p.clip)}>{tr("Xem clip", "Watch clip")}</button>}
@@ -146,7 +150,7 @@ export const ToplistPage: FC = () => {
           <>
             <NearButton loc={loc} />
             <p className="muted small">{found.length ? found.length + tr(" kết quả", " results") : tr("Không thấy địa điểm phù hợp.", "No matching places.")}</p>
-            <ul className="tl-places">{found.map(({ p, km }) => <PlaceCard key={p.id} p={p} km={km} listName={listName[p.list]} />)}</ul>
+            <ul className="tl-places" ref={() => loadRatings(found.map((x) => x.p.id))}>{found.map(({ p, km }) => <PlaceCard key={p.id} p={p} km={km} listName={listName[p.list]} />)}</ul>
           </>
         )}
         {doc && !found && (
@@ -194,7 +198,7 @@ export const ToplistDetailPage: FC = () => {
         {!doc && !err && <p className="muted">{tr("Đang tải danh sách…", "Loading…")}</p>}
         {err && <p className="muted">{tr("Chưa tải được danh sách. Hãy kiểm tra mạng rồi thử lại.", "Couldn't load the lists. Check your connection and try again.")}</p>}
         {doc && !list && <p className="muted">{tr("Không tìm thấy danh sách này.", "List not found.")}</p>}
-        <ul className="tl-places">{items.map(({ p, km }) => <PlaceCard key={p.id} p={p} km={km} />)}</ul>
+        <ul className="tl-places" ref={() => loadRatings(items.map((x) => x.p.id))}>{items.map(({ p, km }) => <PlaceCard key={p.id} p={p} km={km} />)}</ul>
       </section>
     </div>
   );

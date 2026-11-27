@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from "react";
+import m_deals from "../static/img/mascots/deals.webp";
 import { useNavigate } from "react-router";
 import { fetchPublicDeals } from "../platform/deals";
 import { Deal, dealState, remaining, visibleDeals } from "../utils/deals";
@@ -51,8 +52,9 @@ export const DealsBanner: FC = () => {
 
   if (n === 0)
     return (
-      <button type="button" className="deals-banner" onClick={() => navigate("/uu-dai")}>
+      <button type="button" className="deals-banner has-mascot" onClick={() => navigate("/uu-dai")}>
         <Ticket />
+        <img className="mascot" src={m_deals} alt="" aria-hidden="true" />
         <span className="deals-text">
           <span className="deals-kicker">Dalat Deals</span>
           <b>{tr("Ưu đãi từ quán và điểm diễn đối tác", "Offers from partner cafés and venues")}</b>
@@ -66,8 +68,9 @@ export const DealsBanner: FC = () => {
     <section className="deals-slider" aria-label="Dalat Deals" aria-roledescription="carousel">
       <div className="deals-track" ref={track} onScroll={onScroll} onPointerDown={() => (paused.current = true)} onPointerUp={() => window.setTimeout(() => (paused.current = false), 6000)}>
         {list.map((d, i) => (
-          <button key={d.id} type="button" className={"deals-banner deals-slide v" + (i % 3)} aria-label={d.title} onClick={() => navigate("/uu-dai?d=" + encodeURIComponent(d.id))}>
+          <button key={d.id} type="button" className={"deals-banner deals-slide has-mascot v" + (i % 3)} aria-label={d.title} onClick={() => navigate("/uu-dai?d=" + encodeURIComponent(d.id))}>
             <Ticket />
+            <img className="mascot" src={m_deals} alt="" aria-hidden="true" />
             <span className="deals-text">
               <span className="deals-kicker">Dalat Deals · {i + 1}/{n}</span>
               <b>{d.title}</b>

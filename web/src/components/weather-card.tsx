@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import m_cloud from "../static/img/mascots/cloud.webp";
 import { useNavigate } from "react-router";
 import { getForecast, Forecast } from "../platform/weather";
 import { vnDate, vnTime } from "../utils/agenda";
@@ -23,7 +24,8 @@ export const WeatherCard: FC = () => {
   const morning = (date: string) => (date === today ? tr("Sáng nay", "This morning") : date === tomorrow ? tr("Sáng mai", "Tomorrow morning") : tr("Sáng ", "") + wdShort(new Date(date + "T12:00:00Z").getUTCDay()) + " " + date.slice(8, 10) + "." + date.slice(5, 7));
   const cloudText = best ? morning(best.date) + ": " + cloudLabel(best.cloud!.level).toLowerCase() : tr("mấy ngày tới ít khả năng có biển mây", "a sea of clouds is unlikely in the coming days");
   return (
-    <button type="button" className="wx-card" onClick={() => navigate("/thoi-tiet")}>
+    <button type="button" className="wx-card has-mascot" onClick={() => navigate("/thoi-tiet")}>
+      <img className="mascot" src={m_cloud} alt="" aria-hidden="true" />
       <span className="wx-card-ico" aria-hidden="true">
         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 18a4 4 0 1 1 .9-7.9A5.5 5.5 0 0 1 18.5 12 3 3 0 0 1 18 18z" /><path d="M3 21h18" /></svg>
       </span>

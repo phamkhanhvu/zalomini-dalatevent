@@ -1,4 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import m_tickets from "../static/img/mascots/tickets.webp";
+import m_planner from "../static/img/mascots/planner.webp";
+import m_passport from "../static/img/mascots/passport.webp";
 import { useNavigate } from "react-router";
 import { useSnackbar } from "../ui";
 import { FESTIVAL, PROGRAMS } from "../data/festival";
@@ -16,7 +19,6 @@ import f1 from "../static/img/md-vuon-hoa.jpg";
 import f2 from "../static/img/md-dem-nhac-acoustic.jpg";
 import f3 from "../static/img/md-cho-dem.jpg";
 import logoImg from "../static/img/dalatevent-logo.png";
-import passportSmall from "../static/img/passport-160.webp";
 import { DealsBanner } from "../components/deals-banner";
 import { WeatherCard } from "../components/weather-card";
 import { ToplistBanner } from "../components/toplist-banner";
@@ -54,7 +56,8 @@ const HomePage: FC = () => {
         </div>
         <h1 className="sr-only">{tr("Đà Lạt có gì vui?", "What's on in Da Lat?")}</h1>
         <Banners />
-        <button type="button" className="fest-strip" onClick={() => navigate("/chuong-trinh")}>
+        <button type="button" className="fest-strip has-mascot" onClick={() => navigate("/chuong-trinh")}>
+          <img className="mascot" src={m_tickets} alt="" aria-hidden="true" />
           <span className="fest-flower" aria-hidden="true">🌸</span>
           <span className="fest-text">
             <i>{FESTIVAL.name} {FESTIVAL.start.slice(0, 4)}</i>
@@ -64,7 +67,8 @@ const HomePage: FC = () => {
         </button>
         <p className="lead">{tr("Lễ hội, sự kiện và show diễn đang và sắp diễn ra tại Đà Lạt, cập nhật mỗi ngày.", "Festivals, events and live shows happening now and coming up in Da Lat, updated daily.")}</p>
         <SearchBox onOpenProgram={openProgram} />
-        <button type="button" className="as-entry" onClick={() => navigate("/tro-ly")}>
+        <button type="button" className="as-entry has-mascot" onClick={() => navigate("/tro-ly")}>
+          <img className="mascot" src={m_planner} alt="" aria-hidden="true" />
           <span><b>{tr("Hôm nay đi đâu?", "Where to go today?")}</b><i>{tr("Nhắn kiểu \"tối nay hai người, thích nghe nhạc\" để có ngay một lịch trình", "Type something like \"tonight, two people, live music\" to get a plan instantly")}</i></span>
           <IconArrow size={20} />
         </button>
@@ -90,7 +94,7 @@ const HomePage: FC = () => {
 
       <section className="sec">
         <button type="button" className="pass-card" onClick={() => navigate("/ho-chieu")}>
-          <img className="pass-card-art" src={passportSmall} alt="" width={56} height={70} />
+          <img className="pass-card-art" src={m_passport} alt="" width={56} height={94} />
           <span className="pass-card-text"><b>{tr("Hộ chiếu Đà Lạt", "Da Lat Passport")}</b><i>{tr("Đến nơi, đóng dấu, sưu tập đủ bộ dấu mộc của các địa điểm và chương trình.", "Visit, get stamped and collect the full set of stamps from venues and programmes.")}</i></span>
           <IconArrow size={20} />
         </button>

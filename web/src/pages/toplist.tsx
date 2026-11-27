@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import m_coffee from "../static/img/mascots/coffee.webp";
 import { useNavigate, useParams } from "react-router";
 import { loadToplist, TopDoc, TopPlace, topImage } from "../data/toplist";
 import { distanceKm, LatLng } from "../utils/geo";
@@ -119,7 +120,8 @@ export const ToplistPage: FC = () => {
 
   return (
     <div className="scroll page">
-      <header className="top">
+      <header className="top has-top-mascot">
+        <img className="top-mascot" src={m_coffee} alt="" aria-hidden="true" />
         <p className="eyebrow">{tr("Top list Đà Lạt", "Da Lat top lists")}</p>
         <h1 className="h1">{doc ? doc.places.length.toLocaleString(en ? "en" : "vi") : "…"}{tr(" địa điểm, ", " places, ")}<em>{doc ? doc.lists.length : "…"}{tr(" chủ đề", " topics")}</em></h1>
         <p className="muted">{tr("Săn mây, cafe, quán ngon, chỗ ở, chỗ chơi… do đội Sense Group đi và chọn lọc.", "Cloud hunting, cafés, food, stays and things to do, picked by the Sense Group team.")}</p>

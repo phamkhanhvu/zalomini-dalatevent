@@ -623,3 +623,16 @@ html, body { background: #fff6ef; }
 .ad-tag { position: absolute; top: 8px; right: 10px; z-index: 1; padding: 2px 8px; border-radius: 999px; background: rgba(0, 0, 0, 0.45); color: #fff; font-size: 11px; font-weight: 600; }
 .ad-banner { display: block; width: 100%; padding: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 18px rgba(15, 30, 51, 0.18); }
 .ad-banner img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 1; object-fit: cover; }
+
+/* Nhân vật minh họa trên các thẻ trang chủ */
+.has-mascot { position: relative; padding-right: 92px !important; }
+.has-mascot .mascot { position: absolute; right: 4px; bottom: 0; height: 100%; max-height: 140px; width: auto; max-width: 96px; object-fit: contain; object-position: bottom right; pointer-events: none; filter: drop-shadow(0 4px 8px rgba(15, 30, 51, 0.22)); z-index: 1; }
+.has-mascot .deals-go, .has-mascot .tlb-go, .has-mascot .gmb-go, .has-mascot .fest-go, .has-mascot .sbe-go, .has-mascot .wx-card-go, .as-entry.has-mascot > svg { display: none; }
+.fest-strip.has-mascot { min-height: 96px; }
+.as-entry.has-mascot, .sbe.has-mascot, .wx-card.has-mascot { min-height: 92px; }
+.pass-card-art { object-fit: contain; height: 94px; width: auto; }
+.has-top-mascot { position: relative; padding-right: 110px; min-height: 120px; }
+.top-mascot { position: absolute; right: 12px; bottom: 0; height: 130px; width: auto; max-width: 110px; object-fit: contain; object-position: bottom; pointer-events: none; filter: drop-shadow(0 4px 8px rgba(15, 30, 51, 0.2)); }
+.top { background: transparent !important; border-bottom: 0 !important; }
+.has-top-mascot { min-height: 170px; }
+.top-mascot { height: 112px; bottom: 6px; }

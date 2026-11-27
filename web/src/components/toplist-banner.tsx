@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import m_toplist from "../static/img/mascots/toplist.webp";
 import { useNavigate } from "react-router";
 import { tr } from "../i18n";
 
@@ -19,7 +20,8 @@ export const ToplistBanner: FC = () => {
   const navigate = useNavigate();
   return (
     <section className="tlb" aria-label={tr("Top list Đà Lạt", "Da Lat top lists")}>
-      <button type="button" className="tlb-main" onClick={() => navigate("/top-list")}>
+      <button type="button" className="tlb-main has-mascot" onClick={() => navigate("/top-list")}>
+        <img className="mascot" src={m_toplist} alt="" aria-hidden="true" />
         <span className="tlb-badge" aria-hidden="true">TOP</span>
         <span className="tlb-text">
           <span className="tlb-kicker">{tr("Top list Đà Lạt", "Da Lat top lists")}</span>

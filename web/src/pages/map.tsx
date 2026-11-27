@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import m_map from "../static/img/mascots/map.webp";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { PROGRAMS, Program, VENUES } from "../data/festival";
 import { getData, onDataChange } from "../data/store";
@@ -158,7 +159,8 @@ const MapPage: FC = () => {
 
   return (
     <div className="page page-col">
-      <header className="top">
+      <header className="top has-top-mascot">
+        <img className="top-mascot" src={m_map} alt="" aria-hidden="true" />
         <p className="eyebrow">{places.length}{tr(" điểm đến", " places")}</p>
         <h1 className="h1">{tr("Bản đồ ", "Map ")}<em>{tr("gần tôi", "near me")}</em></h1>
       </header>

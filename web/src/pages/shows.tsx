@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+import m_concert from "../static/img/mascots/concert.webp";
 import { useNavigate } from "react-router";
 import { getData, onDataChange, ShowItem, Stage } from "../data/store";
 import { callPhone, openUrl } from "../utils/device";
@@ -48,7 +49,8 @@ const ShowsPage: FC = () => {
 
   return (
     <div className="scroll page">
-      <header className="top">
+      <header className="top has-top-mascot">
+        <img className="top-mascot" src={m_concert} alt="" aria-hidden="true" />
         <p className="eyebrow">{tr("Đêm nhạc tại Đà Lạt", "Live music in Da Lat")}</p>
         <h1 className="h1">{tr("Lịch ", "Show ")}<em>{tr("show diễn", "schedule")}</em></h1>
         <p className="muted">{tr("Lịch và giá vé do từng điểm diễn công bố, có thể thay đổi. Bấm vào từng đêm diễn để mở trang gốc.", "Dates and prices are published by each venue and may change. Tap a show to open the venue's page.")}</p>

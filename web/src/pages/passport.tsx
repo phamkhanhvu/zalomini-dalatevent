@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import m_passport from "../static/img/mascots/passport.webp";
 import { useNavigate } from "react-router";
 import { useSnackbar } from "../ui";
 import { FESTIVAL } from "../data/festival";
@@ -91,7 +92,8 @@ const PassportPage: FC = () => {
 
   return (
     <div className="scroll page">
-      <header className="top">
+      <header className="top has-top-mascot">
+        <img className="top-mascot" src={m_passport} alt="" aria-hidden="true" />
         <div className="pass-head">
           <div>
             <p className="eyebrow">{tr("Sưu tập dấu mộc", "Collect stamps")}</p>

@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import m_planner from "../static/img/mascots/planner.webp";
 import { useNavigate, useSearchParams } from "react-router";
 import { useSnackbar } from "../ui";
 import { FESTIVAL, PROGRAMS } from "../data/festival";
@@ -152,7 +153,8 @@ const SavedPage: FC = () => {
 
   return (
     <div className="page page-col">
-      <header className="top">
+      <header className="top has-top-mascot">
+        <img className="top-mascot" src={m_planner} alt="" aria-hidden="true" />
         <p className="eyebrow">{isShared ? tr(`Lịch trình được chia sẻ · ${upcoming.length} mục sắp tới`, `Shared plan · ${upcoming.length} upcoming`) : items.length ? tr(`${upcoming.length} mục sắp tới · lưu trên máy của bạn`, `${upcoming.length} upcoming · saved on this device`) : tr("Lưu trên máy của bạn", "Saved on this device")}</p>
         <h1 className="h1">{isShared ? tr("Lịch trình ", "Shared ") : tr("Lịch trình ", "My ")}<em>{isShared ? tr("được chia sẻ", "plan") : tr("của tôi", "plan")}</em></h1>
         {isShared && items.length > 0 && (

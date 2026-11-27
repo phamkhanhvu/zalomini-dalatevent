@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import m_explore from "../static/img/mascots/explore.webp";
 import { getData, onDataChange } from "../data/store";
 import { AgendaRow, agendaFor } from "../components/agenda";
 import { useProgramSheet } from "../components/use-program-sheet";
@@ -68,7 +69,8 @@ const AssistantPage: FC = () => {
 
   return (
     <div className="scroll page">
-      <header className="top">
+      <header className="top has-top-mascot">
+        <img className="top-mascot" src={m_explore} alt="" aria-hidden="true" />
         <p className="eyebrow">{tr("Trợ lý gợi ý lịch trình", "Trip assistant")}</p>
         <h1 className="h1">{tr("Hôm nay ", "Where to ")}<em>{tr("đi đâu?", "go today?")}</em></h1>
         <p className="muted">{tr("Viết như đang nhắn cho bạn: khi nào, mấy người, thích gì. Trợ lý xếp sẵn một lịch trình theo buổi.", "Write it like a text to a friend: when, how many people, what you like. The assistant lays out a plan by time of day.")}</p>

@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+import { track } from "../platform/stats";
 import { DATA_URL } from "../data/store";
 import { openUrl } from "../utils/device";
 import { isEn, tr } from "../i18n";
@@ -26,7 +27,7 @@ export const AdBanner: FC = () => {
   return (
     <section className="ad-slot" aria-label={tr("Quảng cáo", "Advertisement")}>
       <span className="ad-tag">{tr("Quảng cáo", "Ad")}</span>
-      <button type="button" className="ad-banner" onClick={() => openUrl(ad.url)}>
+      <button type="button" className="ad-banner" onClick={() => { track("ad_click", ad.img.replace(/^ads\//, "").replace(/\.\w+$/, "")); openUrl(ad.url); }}>
         <img src={DATA_URL + ad.img} alt={alt} loading="lazy" width={1400} height={467} />
       </button>
     </section>

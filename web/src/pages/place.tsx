@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import { track } from "../platform/stats";
 import { useNavigate, useParams } from "react-router";
 import QRCode from "qrcode";
 import { useSnackbar } from "../ui";
@@ -86,7 +87,7 @@ const PlacePage: FC = () => {
         {stage && <p className="muted">{loc(stage, "intro")}</p>}
         {stage?.address && <p className="muted small">{loc(stage, "address")}</p>}
         <div className="ps-actions">
-          <button type="button" className="btn btn-ink" onClick={() => openDirections(dest)}><IconRoute size={20} />{tr("Chỉ đường", "Directions")}</button>
+          <button type="button" className="btn btn-ink" onClick={() => { track("venue_dir", dest); openDirections(dest); }}><IconRoute size={20} />{tr("Chỉ đường", "Directions")}</button>
           {stage?.phone && <button type="button" className="btn btn-line" onClick={() => callPhone(stage.phone!)}><IconPhone size={20} />{stage.phone_label}</button>}
           <button
             type="button"

@@ -1,4 +1,5 @@
 import React from "react";
+import { startStats } from "./platform/stats";
 import { markGoodMoment } from "./platform/review";
 import { createRoot } from "react-dom/client";
 
@@ -41,6 +42,7 @@ async function start() {
       markGoodMoment();
     });
   }
+  startStats();
   createRoot(document.getElementById("app")!).render(<App />);
   // Giữ khung trang để mở được khi mất mạng. Không dùng trong app cài trên máy (app đã có sẵn tệp).
   if (!IS_NATIVE && "serviceWorker" in navigator && (window.location.protocol === "https:" || window.location.hostname === "localhost")) {

@@ -26,7 +26,7 @@ const PrivacyEn: FC<{ home: () => void }> = ({ home }) => (
       <p>DalatEvent (dalatevent.com) is run by Sense Group in Da Lat, Vietnam. For any request about personal data, contact <Contact />.</p>
 
       <h2 className="h2">Without signing in</h2>
-      <p>You can use the whole site without an account. The site has no analytics or advertising code and sends none of your data to DalatEvent.</p>
+      <p>You can use the whole site without an account. The site and app use no advertising cookies or third-party trackers. DalatEvent only counts, anonymously, how many times pages are opened and buttons are used (such as directions or offers) per day and platform (web, iPhone, Android), with no user ID, device ID or location, to learn which features are useful. Your device only stores the date it was last counted so a day is not counted twice.</p>
       <ul>
         <li><b>Your plan</b> is stored in your browser on your device. Clearing browser data removes it.</li>
         <li><b>Plan share links</b> contain the list of items you saved. Anyone with the link can see that list; DalatEvent does not store these links.</li>
@@ -88,7 +88,7 @@ const PrivacyPage: FC = () => {
         <p>DalatEvent (dalatevent.com) do Sense Group (Đà Lạt) vận hành. Mọi yêu cầu về dữ liệu cá nhân xin liên hệ <Contact />.</p>
 
         <h2 className="h2">Khi bạn không đăng nhập</h2>
-        <p>Bạn dùng được toàn bộ website mà không cần tài khoản. Website không gắn mã đo lường hay quảng cáo, và không gửi dữ liệu nào của bạn về cho DalatEvent.</p>
+        <p>Bạn dùng được toàn bộ website mà không cần tài khoản. Website và app không dùng cookie quảng cáo hay mã theo dõi của bên thứ ba. DalatEvent chỉ đếm ẩn danh số lần mở trang và bấm các nút (ví dụ chỉ đường, lấy ưu đãi) theo ngày và nền tảng (web, iPhone, Android), không kèm mã người dùng, mã thiết bị hay vị trí, để biết tính năng nào hữu ích. Máy bạn chỉ ghi ngày đã được đếm để không đếm trùng trong một ngày.</p>
         <ul>
           <li><b>Lịch trình</b> bạn lưu nằm trong bộ nhớ trình duyệt trên máy bạn. Xóa dữ liệu trình duyệt là mất.</li>
           <li><b>Link chia sẻ lịch trình</b> chứa sẵn danh sách mục bạn đã lưu. Ai có link đều xem được danh sách đó; DalatEvent không lưu link này.</li>

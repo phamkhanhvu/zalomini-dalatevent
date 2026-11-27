@@ -373,4 +373,6 @@ export async function writeCms(file: string, json: string): Promise<number> {
 }
 
 /** Cho các phần khác (ưu đãi) dùng chung kết nối đã mở. null nếu chưa tải hoặc chưa đăng nhập. */
+/** Mã đăng nhập ngắn hạn (dùng để đọc dữ liệu chỉ quản trị viên được xem) */
+export const idToken = async (): Promise<string> => (user ? user.getIdToken() : "");
 export const session = () => (db && user ? { db, uid: user.uid, name: (user.displayName || "").slice(0, 40) } : null);

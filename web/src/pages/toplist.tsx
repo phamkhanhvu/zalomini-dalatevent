@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import { track } from "../platform/stats";
 import { RateStars, RatingBadge } from "../components/stars";
 import { loadRatings } from "../platform/ratings";
 import m_coffee from "../static/img/mascots/coffee.webp";
@@ -79,8 +80,8 @@ const PlaceCard: FC<{ p: TopPlace; km: number | null; listName?: string }> = ({ 
         )}
         <RateStars id={p.id} />
         <div className="tl-acts">
-          <button type="button" className="btn btn-ink" onClick={() => openUrl(mapsUrl(where))}>{tr("Chỉ đường", "Directions")}</button>
-          {p.clip && <button type="button" className="btn btn-line" onClick={() => openUrl(p.clip)}>{tr("Xem clip", "Watch clip")}</button>}
+          <button type="button" className="btn btn-ink" onClick={() => { track("place_dir", p.id); openUrl(mapsUrl(where)); }}>{tr("Chỉ đường", "Directions")}</button>
+          {p.clip && <button type="button" className="btn btn-line" onClick={() => { track("place_clip", p.id); openUrl(p.clip); }}>{tr("Xem clip", "Watch clip")}</button>}
         </div>
       </div>
     </li>

@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { track } from "../platform/stats";
 import m_explore from "../static/img/mascots/explore.webp";
 import m_concert from "../static/img/mascots/concert.webp";
 import { Browser } from "@capacitor/browser";
@@ -9,6 +10,7 @@ import { tr } from "../i18n";
 export const GAME_URL = "https://dalatevent.com/game/";
 
 async function openGame() {
+  track("game_open");
   if (IS_NATIVE) {
     try {
       // Mở toàn màn hình ngay trong app, có nút Xong để quay lại

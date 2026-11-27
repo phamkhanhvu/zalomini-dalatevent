@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import { track } from "../platform/stats";
 import { markGoodMoment } from "../platform/review";
 import { useSearchParams } from "react-router";
 import { Sheet, useSnackbar } from "../ui";
@@ -67,6 +68,7 @@ const DealsPage: FC = () => {
   const signedIn = getAccount().status === "in";
 
   const show = (d: Deal) => {
+    track("deal_view", d.id);
     setOpen(d);
     setMine(null);
     setAgree(false);
@@ -86,7 +88,10 @@ const DealsPage: FC = () => {
     if (!open) return;
     setBusy(true);
     const r = await redeem(open.id);
-    if (r.ok) markGoodMoment();
+    if (r.ok) {
+      markGoodMoment();
+      track("deal_use", open.id);
+    }
     setBusy(false);
     if (r.ok) {
       setMine(r.redemption);

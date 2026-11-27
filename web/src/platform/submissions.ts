@@ -3,6 +3,7 @@
  * chỉ quản trị viên đọc, đổi trạng thái hoặc xóa.
  */
 import { loadAccount, session } from "./account";
+import { track } from "./stats";
 import { cleanInput, Submission, SubmissionInput } from "../utils/submissions";
 
 export async function sendSubmission(input: SubmissionInput): Promise<"ok" | "signin" | "error"> {
@@ -12,6 +13,7 @@ export async function sendSubmission(input: SubmissionInput): Promise<"ok" | "si
   try {
     const { addDoc, collection, serverTimestamp } = await import("firebase/firestore/lite");
     await addDoc(collection(s.db, "submissions"), { ...cleanInput(input), uid: s.uid, by: s.name, status: "new", createdAt: serverTimestamp() });
+    track("submit_event");
     return "ok";
   } catch (e) {
     return "error";

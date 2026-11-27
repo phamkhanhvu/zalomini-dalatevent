@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
+import { track } from "../platform/stats";
 import { Route, Routes, useLocation } from "react-router";
 import { Navigation } from "./navigation";
 import HomePage from "../pages/home";
@@ -36,6 +37,10 @@ const ScrollTop: FC = () => {
   const { pathname } = useLocation();
   useEffect(() => {
     document.querySelectorAll(".scroll").forEach((el) => (el.scrollTop = 0));
+    // Đếm lượt xem theo trang (chỉ tên trang, không kèm gì khác)
+    const parts = pathname.split("/").filter(Boolean);
+    track("view", parts[0] || "home");
+    if (parts[0] === "top-list" && parts[1]) track("toplist", parts[1]);
   }, [pathname]);
   return null;
 };

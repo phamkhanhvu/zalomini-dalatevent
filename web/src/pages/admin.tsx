@@ -5,6 +5,7 @@ import { useSnackbar } from "../ui";
 import { openAccount } from "../components/account-panel";
 import { DealsEditor } from "../components/admin-deals";
 import { SubmissionsEditor } from "../components/admin-submissions";
+import { StatsPanel } from "../components/admin-stats";
 import { repeatLabel, Submission } from "../utils/submissions";
 import { currentUid, getAccount, isAdmin, loadAccount, onAccount, readCms, writeCms } from "../platform/account";
 import type { EventRecord, EventsDoc, HappeningDoc, HappeningItem, ShowsDoc } from "../data/store";
@@ -255,13 +256,14 @@ const FestivalEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, ch
   );
 };
 
-type TabId = FileId | "deals" | "inbox";
+type TabId = FileId | "deals" | "inbox" | "stats";
 const TABS: { id: TabId; label: string }[] = [
   { id: "happening", label: "Sự kiện khác" },
   { id: "shows", label: "Lịch nhạc Sense" },
   { id: "events", label: "Festival" },
   { id: "deals", label: "Ưu đãi" },
   { id: "inbox", label: "Chờ duyệt" },
+  { id: "stats", label: "Thống kê" },
 ];
 
 /** Trang quản trị nội dung: chỉ tài khoản có trong danh sách quản trị dùng được */
@@ -362,13 +364,14 @@ const AdminPage: FC = () => {
           <button key={t.id} type="button" role="tab" aria-selected={tab === t.id} className={"fb" + (tab === t.id ? " on" : "")} onClick={() => { setTab(t.id); setErrors([]); }}>{t.label}</button>
         ))}
       </div>
-      {tab !== "deals" && tab !== "inbox" && <StatusLine file={tab} data={data} sentAt={sent[tab]} />}
+      {tab !== "deals" && tab !== "inbox" && tab !== "stats" && <StatusLine file={tab} data={data} sentAt={sent[tab]} />}
       {errors.length > 0 && <div className="adm-status is-bad" role="alert"><b>Cần sửa trước khi lưu:</b><ul>{errors.map((e) => <li key={e}>{e}</li>)}</ul></div>}
       {tab === "happening" && <HappeningEditor key={"h" + round} data={data} onSave={onSave} />}
       {tab === "shows" && <BandEditor key={"s" + round} data={data} onSave={onSave} />}
       {tab === "events" && <FestivalEditor key={"e" + round} data={data} onSave={onSave} />}
       {tab === "deals" && <DealsEditor key={"d" + round} />}
       {tab === "inbox" && <SubmissionsEditor key={"i" + round} onApprove={approve} />}
+      {tab === "stats" && <StatsPanel key={"st" + round} />}
       <button type="button" className="acc-switch" onClick={() => setRound((n) => n + 1)}>Tải lại dữ liệu mới nhất (bỏ thay đổi chưa lưu)</button>
     </div>
   );

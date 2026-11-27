@@ -4,6 +4,7 @@
  * Tổng và phiếu được ghi cùng một lệnh; rules kiểm tra tổng khớp với phiếu.
  */
 import { loadAccount, session } from "./account";
+import { track } from "./stats";
 
 const REST = "https://firestore.googleapis.com/v1/projects/quay-hang-da-lat/databases/(default)/documents";
 const NAME = "projects/quay-hang-da-lat/databases/(default)/documents/placeRatings/";
@@ -79,6 +80,7 @@ export async function rate(id: string, stars: number): Promise<RateResult> {
     batch.set(vRef, { stars, at: Date.now() });
     await batch.commit();
     cache.set(id, { avg: next.sum / next.count, count: next.count });
+    track("rate", id);
     listeners.forEach((f) => f());
     return "ok";
   } catch (e) {

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { track } from "../platform/stats";
 import m_map from "../static/img/mascots/map.webp";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { PROGRAMS, Program, VENUES } from "../data/festival";
@@ -150,7 +151,7 @@ const MapPage: FC = () => {
         <button type="button" className="btn btn-line" onClick={() => navigate("/dia-diem/" + p.id.replace(/:/g, "-"))}>
           {tr("Trang địa điểm", "Venue page")}
         </button>
-        <button type="button" className="btn btn-ink" onClick={() => openDirections(typeof p.lat === "number" ? p.lat + "," + p.lng : p.mapQuery)}>
+        <button type="button" className="btn btn-ink" onClick={() => { track("venue_dir", p.name || "map"); openDirections(typeof p.lat === "number" ? p.lat + "," + p.lng : p.mapQuery); }}>
           <IconRoute size={20} />{tr("Chỉ đường", "Directions")}
         </button>
       </div>

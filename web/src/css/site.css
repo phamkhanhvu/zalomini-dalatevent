@@ -670,3 +670,19 @@ html, body { background: #fff6ef; }
 .rt-star { width: 32px; height: 32px; font-size: 22px; line-height: 1; color: rgba(15, 30, 51, 0.22); padding: 0; transition: transform .1s; }
 .rt-star.on { color: var(--brand-yellow); text-shadow: 0 1px 2px rgba(180, 83, 9, 0.35); }
 .rt-star:active { transform: scale(1.2); }
+
+/* Thống kê trong quản trị */
+.st-kpis { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+@media (min-width: 700px) { .st-kpis { grid-template-columns: repeat(3, 1fr); } }
+.st-kpis div { padding: 12px; border-radius: 14px; background: var(--glass-strong); border: 1px solid var(--glass-line); display: flex; flex-direction: column; }
+.st-kpis i { font-style: normal; font-size: 12px; color: var(--ink2); }
+.st-kpis b { font-size: 24px; }
+.st-box { padding: 12px 14px; border-radius: 14px; background: var(--glass-strong); border: 1px solid var(--glass-line); }
+.st-box ol { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.st-box li { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; }
+.st-box li span { text-transform: capitalize; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.st-box li i { font-style: normal; font-weight: 800; }
+.st-bars { display: flex; align-items: flex-end; gap: 3px; height: 120px; margin-top: 10px; }
+.st-bars span { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 2px; }
+.st-bars em { width: 100%; min-height: 2px; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, var(--brand-orange), var(--brand-yellow)); }
+.st-bars small { font-size: 9px; color: var(--ink2); }

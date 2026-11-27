@@ -20,7 +20,7 @@ import passportSmall from "../static/img/passport-160.webp";
 import { DealsBanner } from "../components/deals-banner";
 import { WeatherCard } from "../components/weather-card";
 import { ToplistBanner } from "../components/toplist-banner";
-import { GameBanner } from "../components/game-banner";
+import { GameBanner, SubmitEventCard } from "../components/game-banner";
 import { tr } from "../i18n";
 
 
@@ -72,6 +72,7 @@ const HomePage: FC = () => {
         <DealsBanner />
         <ToplistBanner />
         <GameBanner />
+        <SubmitEventCard onOpen={() => navigate("/gui-su-kien")} />
         <WeatherCard />
       </header>
 

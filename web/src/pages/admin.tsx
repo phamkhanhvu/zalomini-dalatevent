@@ -4,6 +4,8 @@ import { validate } from "../../../scripts/validate-core.mjs";
 import { useSnackbar } from "../ui";
 import { openAccount } from "../components/account-panel";
 import { DealsEditor } from "../components/admin-deals";
+import { SubmissionsEditor } from "../components/admin-submissions";
+import type { Submission } from "../utils/submissions";
 import { currentUid, getAccount, isAdmin, loadAccount, onAccount, readCms, writeCms } from "../platform/account";
 import type { EventRecord, EventsDoc, HappeningDoc, HappeningItem, ShowsDoc } from "../data/store";
 
@@ -253,12 +255,13 @@ const FestivalEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, ch
   );
 };
 
-type TabId = FileId | "deals";
+type TabId = FileId | "deals" | "inbox";
 const TABS: { id: TabId; label: string }[] = [
   { id: "happening", label: "Sự kiện khác" },
   { id: "shows", label: "Lịch nhạc Sense" },
   { id: "events", label: "Festival" },
   { id: "deals", label: "Ưu đãi" },
+  { id: "inbox", label: "Chờ duyệt" },
 ];
 
 /** Trang quản trị nội dung: chỉ tài khoản có trong danh sách quản trị dùng được */
@@ -308,6 +311,28 @@ const AdminPage: FC = () => {
     setBusy(false);
   };
 
+  /** Duyệt sự kiện gửi lên: thêm vào "Sự kiện khác" (mục nhập tay) rồi lưu như khi bấm Lưu */
+  const approve = async (s: Submission): Promise<boolean> => {
+    if (!data) return false;
+    const item: HapItem = { title: s.title, start_date: s.start_date, end_date: s.end_date, venue: s.venue, when: whenOf(s.start_date, s.end_date, ""), desc: s.desc, manual: true };
+    const items = [...data.happening.items.filter((x) => x.title !== s.title), item].sort((a, b) => a.start_date.localeCompare(b.start_date));
+    const doc = { ...data.happening, items };
+    const check = { ...data, happening: doc };
+    const r = validate(check.events, check.shows, check.happening) as { errors: string[] };
+    if (r.errors.length) {
+      setErrors(r.errors);
+      return false;
+    }
+    try {
+      const at = await writeCms("happening", JSON.stringify(doc));
+      setSent((x) => ({ ...x, happening: at }));
+      setData(check);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+
   let body: React.ReactNode;
   if (acc.status === "loading" || acc.status === "off") body = <p className="muted pad">Đang tải…</p>;
   else if (acc.status === "out") body = (
@@ -334,12 +359,13 @@ const AdminPage: FC = () => {
           <button key={t.id} type="button" role="tab" aria-selected={tab === t.id} className={"fb" + (tab === t.id ? " on" : "")} onClick={() => { setTab(t.id); setErrors([]); }}>{t.label}</button>
         ))}
       </div>
-      {tab !== "deals" && <StatusLine file={tab} data={data} sentAt={sent[tab]} />}
+      {tab !== "deals" && tab !== "inbox" && <StatusLine file={tab} data={data} sentAt={sent[tab]} />}
       {errors.length > 0 && <div className="adm-status is-bad" role="alert"><b>Cần sửa trước khi lưu:</b><ul>{errors.map((e) => <li key={e}>{e}</li>)}</ul></div>}
       {tab === "happening" && <HappeningEditor key={"h" + round} data={data} onSave={onSave} />}
       {tab === "shows" && <BandEditor key={"s" + round} data={data} onSave={onSave} />}
       {tab === "events" && <FestivalEditor key={"e" + round} data={data} onSave={onSave} />}
       {tab === "deals" && <DealsEditor key={"d" + round} />}
+      {tab === "inbox" && <SubmissionsEditor key={"i" + round} onApprove={approve} />}
       <button type="button" className="acc-switch" onClick={() => setRound((n) => n + 1)}>Tải lại dữ liệu mới nhất (bỏ thay đổi chưa lưu)</button>
     </div>
   );

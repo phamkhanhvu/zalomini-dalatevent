@@ -33,3 +33,15 @@ export const GameBanner: FC = () =>
     <span className="gmb-go">{tr("Chơi", "Play")}</span>
   </button>
 );
+
+/** Lời mời gửi sự kiện cho ban tổ chức, quán, điểm diễn */
+export const SubmitEventCard: FC<{ onOpen: () => void }> = ({ onOpen }) => (
+  <button type="button" className="sbe" onClick={onOpen}>
+    <span aria-hidden="true">📣</span>
+    <span className="sbe-text">
+      <b>{tr("Bạn tổ chức sự kiện ở Đà Lạt?", "Hosting an event in Da Lat?")}</b>
+      <i>{tr("Gửi cho DalatEvent, duyệt miễn phí", "Send it to DalatEvent, free review")}</i>
+    </span>
+    <span className="sbe-go" aria-hidden="true">→</span>
+  </button>
+);

@@ -1,0 +1,42 @@
+{
+ "schema": 1,
+ "note": "Quảng cáo hiện ngẫu nhiên ở cuối trang chủ. Thêm/bớt ảnh trong data/ads/ và sửa danh sách này.",
+ "items": [
+  {
+   "img": "ads/sense-su-kien-1.webp",
+   "url": "https://www.sensegroup.vn",
+   "alt": "DalatEvent – Sense Group: tổ chức sự kiện chuyên nghiệp (lễ hội, hội nghị, gala, show diễn)",
+   "alt_en": "DalatEvent – Sense Group: professional event organiser (festivals, conferences, galas, shows)"
+  },
+  {
+   "img": "ads/sense-su-kien-2.webp",
+   "url": "https://www.sensegroup.vn",
+   "alt": "DalatEvent – Sense Group: tổ chức sự kiện chuyên nghiệp (lễ hội, hội nghị, gala, show diễn)",
+   "alt_en": "DalatEvent – Sense Group: professional event organiser (festivals, conferences, galas, shows)"
+  },
+  {
+   "img": "ads/sense-su-kien-3.webp",
+   "url": "https://www.sensegroup.vn",
+   "alt": "DalatEvent – Sense Group: tổ chức sự kiện chuyên nghiệp (lễ hội, hội nghị, gala, show diễn)",
+   "alt_en": "DalatEvent – Sense Group: professional event organiser (festivals, conferences, galas, shows)"
+  },
+  {
+   "img": "ads/sense-su-kien-4.webp",
+   "url": "https://www.sensegroup.vn",
+   "alt": "DalatEvent – Sense Group: tổ chức sự kiện chuyên nghiệp (lễ hội, hội nghị, gala, show diễn)",
+   "alt_en": "DalatEvent – Sense Group: professional event organiser (festivals, conferences, galas, shows)"
+  },
+  {
+   "img": "ads/sense-su-kien-5.webp",
+   "url": "https://www.sensegroup.vn",
+   "alt": "DalatEvent – Sense Group: tổ chức sự kiện chuyên nghiệp (lễ hội, hội nghị, gala, show diễn)",
+   "alt_en": "DalatEvent – Sense Group: professional event organiser (festivals, conferences, galas, shows)"
+  },
+  {
+   "img": "ads/sense-su-kien-6.webp",
+   "url": "https://www.sensegroup.vn",
+   "alt": "DalatEvent – Sense Group: tổ chức sự kiện chuyên nghiệp (lễ hội, hội nghị, gala, show diễn)",
+   "alt_en": "DalatEvent – Sense Group: professional event organiser (festivals, conferences, galas, shows)"
+  }
+ ]
+}

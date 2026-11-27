@@ -617,3 +617,9 @@ html, body { background: #fff6ef; }
 @media (prefers-reduced-motion: reduce) { .deals-banner::after, .tlb-main::after, .gmb::after, .fest-strip::after, .quick-main::after { animation: none; display: none; } }
 .deals-badge, .tlb-badge, .gmb-icon, .fest-flower { background: rgba(255, 255, 255, 0.85) !important; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
 .fab { background: linear-gradient(135deg, rgba(241, 90, 37, 0.92), rgba(247, 144, 30, 0.9)); -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur); border: 1px solid rgba(255, 255, 255, 0.6); }
+
+/* Quảng cáo cuối trang */
+.ad-slot { position: relative; margin: 16px 0 12px; }
+.ad-tag { position: absolute; top: 8px; right: 10px; z-index: 1; padding: 2px 8px; border-radius: 999px; background: rgba(0, 0, 0, 0.45); color: #fff; font-size: 11px; font-weight: 600; }
+.ad-banner { display: block; width: 100%; padding: 0; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 18px rgba(15, 30, 51, 0.18); }
+.ad-banner img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 1; object-fit: cover; }

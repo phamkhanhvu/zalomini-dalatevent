@@ -21,6 +21,7 @@ import { DealsBanner } from "../components/deals-banner";
 import { WeatherCard } from "../components/weather-card";
 import { ToplistBanner } from "../components/toplist-banner";
 import { GameBanner, SubmitEventCard } from "../components/game-banner";
+import { AdBanner } from "../components/ad-banner";
 import { tr } from "../i18n";
 
 
@@ -159,6 +160,7 @@ const HomePage: FC = () => {
             <IconGlobe />{tr("Nhúng lịch và mã QR cho đối tác", "Embed the calendar and QR codes for partners")}
           </button>
         </div>
+        <AdBanner />
         <p className="muted small">© {new Date().getFullYear()} DalatEvent · Sense Group</p>
         <button type="button" className="acc-switch link-left" onClick={() => navigate("/quyen-rieng-tu")}>{tr("Chính sách quyền riêng tư", "Privacy policy")}</button>
       </section>

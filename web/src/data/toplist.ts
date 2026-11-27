@@ -31,6 +31,10 @@ export function loadToplist(): Promise<TopDoc> {
       })
       .then((d) => {
         if (d.schema !== 1 || !Array.isArray(d.places)) throw new Error("toplist schema");
+        // đếm lại số địa điểm mỗi danh sách (địa điểm bổ sung không nằm trong số đếm của bảng gốc)
+        const n: Record<string, number> = {};
+        d.places.forEach((p) => (n[p.list] = (n[p.list] || 0) + 1));
+        d.lists.forEach((l) => (l.count = n[l.id] || 0));
         return d;
       })
       .catch((e) => {

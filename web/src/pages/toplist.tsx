@@ -3,7 +3,7 @@ import { track } from "../platform/stats";
 import { RateStars, RatingBadge } from "../components/stars";
 import { loadRatings } from "../platform/ratings";
 import m_coffee from "../static/img/mascots/coffee.webp";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 import { loadToplist, TopDoc, TopPlace, topImage } from "../data/toplist";
 import { distanceKm, LatLng } from "../utils/geo";
 import { fold } from "../utils/search";
@@ -57,13 +57,13 @@ function useLocate() {
   return { pos, busy, msg, locate };
 }
 
-const PlaceCard: FC<{ p: TopPlace; km: number | null; listName?: string }> = ({ p, km, listName }) => {
+const PlaceCard: FC<{ p: TopPlace; km: number | null; listName?: string; focus?: boolean }> = ({ p, km, listName, focus }) => {
   const [open, setOpen] = useState(false);
   const img = topImage(p);
   const desc = (isEn() && p.desc_en) || p.desc;
   const where = p.lat !== null && p.lng !== null ? p.lat + "," + p.lng : p.name + ", " + p.address;
   return (
-    <li className="tl-place">
+    <li className={"tl-place" + (focus ? " tl-focus" : "")} ref={focus ? (el) => { if (el && !el.dataset.seen) { el.dataset.seen = "1"; setTimeout(() => el.scrollIntoView({ block: "center", behavior: "smooth" }), 120); } } : undefined}>
       {img && <img className="tl-img" src={img} alt="" loading="lazy" onError={(e) => ((e.currentTarget as HTMLImageElement).style.display = "none")} />}
       <div className="tl-body">
         <div className="tl-head">
@@ -174,6 +174,8 @@ export const ToplistPage: FC = () => {
 /** Một danh sách theo chủ đề */
 export const ToplistDetailPage: FC = () => {
   const { id } = useParams();
+  const [sp] = useSearchParams();
+  const focusId = sp.get("p") || "";
   const navigate = useNavigate();
   const { doc, err } = useToplist();
   const loc = useLocate();
@@ -199,7 +201,7 @@ export const ToplistDetailPage: FC = () => {
         {!doc && !err && <p className="muted">{tr("Đang tải danh sách…", "Loading…")}</p>}
         {err && <p className="muted">{tr("Chưa tải được danh sách. Hãy kiểm tra mạng rồi thử lại.", "Couldn't load the lists. Check your connection and try again.")}</p>}
         {doc && !list && <p className="muted">{tr("Không tìm thấy danh sách này.", "List not found.")}</p>}
-        <ul className="tl-places" ref={() => loadRatings(items.map((x) => x.p.id))}>{items.map(({ p, km }) => <PlaceCard key={p.id} p={p} km={km} />)}</ul>
+        <ul className="tl-places" ref={() => loadRatings(items.map((x) => x.p.id))}>{items.map(({ p, km }) => <PlaceCard key={p.id} p={p} km={km} focus={p.id === focusId} />)}</ul>
       </section>
     </div>
   );

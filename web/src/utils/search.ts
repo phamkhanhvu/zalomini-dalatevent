@@ -93,7 +93,7 @@ export function parseDateQuery(query: string, now: number): DateQuery | null {
   return null;
 }
 
-export interface SearchPlace { id: string; name: string; hint: string }
+export interface SearchPlace { id: string; name: string; hint: string; to?: string }
 export interface SearchResult { date: DateQuery | null; items: AgendaItem[]; places: SearchPlace[]; empty: boolean }
 
 function matches(hay: string, tokens: string[]) {
@@ -130,6 +130,6 @@ export function search(
       return true;
     })
     .slice(0, 20);
-  const foundPlaces = tokens.length ? places.filter((p) => matches(fold(p.name + " " + p.hint), tokens)).slice(0, 5) : [];
+  const foundPlaces = tokens.length ? places.filter((p) => matches(fold(p.name + " " + p.hint), tokens)).slice(0, 8) : [];
   return { date, items, places: foundPlaces, empty: items.length === 0 && foundPlaces.length === 0 };
 }

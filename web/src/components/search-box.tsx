@@ -4,6 +4,8 @@ import { Program } from "../data/festival";
 import { getData, onDataChange } from "../data/store";
 import { search, SearchPlace } from "../utils/search";
 import { listPlaces } from "../utils/places";
+import { loadToplist, TopDoc } from "../data/toplist";
+import { isEn } from "../i18n";
 import { AgendaRow, agendaFor } from "./agenda";
 import { IconPin, IconSearch } from "./icons";
 import { tr } from "../i18n";
@@ -16,6 +18,15 @@ function openingDay(): string {
 }
 const HINTS = () => [tr("Hôm nay", "Today"), tr("Cuối tuần", "Weekend"), openingDay(), "Jazz", "Lâm Viên"];
 
+/** Địa điểm Top list: chỉ tải khi người dùng bắt đầu gõ */
+function topPlaces(doc: TopDoc | null): SearchPlace[] {
+  if (!doc) return [];
+  const en = isEn();
+  const name: Record<string, string> = {};
+  doc.lists.forEach((l) => (name[l.id] = en ? l.name_en : l.name));
+  return doc.places.map((p) => ({ id: p.id, name: p.name, hint: "Top list · " + (name[p.list] || "") + (p.address ? " · " + p.address.split(" · ")[0] : ""), to: "/top-list/" + p.list + "?p=" + encodeURIComponent(p.id) }));
+}
+
 function places(): SearchPlace[] {
   const d = getData();
   return listPlaces(d.events.venues, d.shows.stages).map((p) => ({ id: p.id, name: p.name, hint: p.kind === "festival" ? tr("Địa điểm Festival", "Festival venue") : tr("Điểm diễn show", "Show venue") + (p.stageName && p.stageName !== p.name ? " · " + p.stageName : "") }));
@@ -27,8 +38,12 @@ export const SearchBox: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenP
   const [q, setQ] = useState("");
   const [tick, setTick] = useState(0);
   useEffect(() => onDataChange(() => setTick((n) => n + 1)), []);
+  const [top, setTop] = useState<TopDoc | null>(null);
+  useEffect(() => {
+    if (q.trim().length >= 2 && !top) loadToplist().then(setTop).catch(() => {});
+  }, [q, top]);
   const now = Date.now();
-  const res = useMemo(() => search(q, now, (a, b) => agendaFor(a, b, now), places()), [q, tick, Math.floor(now / 60000)]);
+  const res = useMemo(() => search(q, now, (a, b) => agendaFor(a, b, now), [...places(), ...topPlaces(top)]), [q, tick, top, Math.floor(now / 60000)]);
   const active = q.trim().length >= 2;
 
   return (
@@ -63,7 +78,7 @@ export const SearchBox: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenP
           {res.places.length > 0 && (
             <div className="search-places">
               {res.places.map((p) => (
-                <button key={p.id} type="button" className="search-place" onClick={() => navigate("/dia-diem/" + p.id)}>
+                <button key={p.id} type="button" className="search-place" onClick={() => navigate(p.to || "/dia-diem/" + p.id)}>
                   <IconPin size={18} /><span><b>{p.name}</b><i>{p.hint}</i></span>
                 </button>
               ))}

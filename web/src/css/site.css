@@ -568,7 +568,7 @@ div.ag-row { text-align: left; }
 
 /* ===== Kính trong (glassmorphism) trên nền nhiều màu nhận diện DalatEvent ===== */
 :root {
-  --glass: rgba(255, 255, 255, 0.42);
+  --glass: rgba(255, 255, 255, 0.5);
   --glass-strong: rgba(255, 255, 255, 0.62);
   --glass-line: rgba(255, 255, 255, 0.75);
   --glass-blur: blur(18px) saturate(160%);
@@ -577,13 +577,13 @@ div.ag-row { text-align: left; }
 html, body { background: #fff6ef; }
 .shell {
   background:
-    radial-gradient(38% 30% at 8% 6%, rgba(241, 90, 37, 0.55), transparent 70%),
-    radial-gradient(34% 28% at 92% 14%, rgba(41, 188, 231, 0.55), transparent 70%),
-    radial-gradient(40% 32% at 85% 55%, rgba(252, 177, 27, 0.50), transparent 70%),
-    radial-gradient(42% 34% at 10% 62%, rgba(29, 174, 121, 0.45), transparent 70%),
-    radial-gradient(36% 28% at 55% 95%, rgba(241, 90, 37, 0.40), transparent 70%),
-    radial-gradient(30% 24% at 45% 35%, rgba(41, 188, 231, 0.25), transparent 70%),
-    linear-gradient(160deg, #fff4ea, #f1fbff 50%, #f3fff8) !important;
+    radial-gradient(45% 32% at 5% 4%, rgba(241, 90, 37, 0.95), transparent 72%),
+    radial-gradient(42% 30% at 98% 12%, rgba(41, 188, 231, 0.95), transparent 72%),
+    radial-gradient(48% 34% at 92% 58%, rgba(252, 177, 27, 0.90), transparent 72%),
+    radial-gradient(50% 36% at 4% 66%, rgba(29, 174, 121, 0.88), transparent 72%),
+    radial-gradient(46% 30% at 55% 100%, rgba(241, 90, 37, 0.85), transparent 72%),
+    radial-gradient(36% 26% at 50% 34%, rgba(41, 188, 231, 0.55), transparent 72%),
+    linear-gradient(160deg, #ffd9c2, #c9eefa 50%, #c8f0dc) !important;
 }
 #app, .page, .scroll { background: transparent; }
 .agenda { background: transparent; border: 0; }

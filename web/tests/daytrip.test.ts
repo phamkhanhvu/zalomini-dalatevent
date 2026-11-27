@@ -73,7 +73,7 @@ test("cuối tuần cho ra hai ngày; bấm gợi ý khác (seed khác) thì đ�
 });
 
 test("thích hoa: buổi sáng ưu tiên vườn hoa; ngày Festival thì sự kiện cả ngày vào buổi chiều", () => {
-  const s = plan("12.12 gia đình 4 người đi xem hoa", MON14)[0].stops;
+  const s = plan("20.12 gia đình 4 người đi xem hoa", MON14)[0].stops;
   assert.match(s.find((x) => x.part === "Sáng")!.title.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(), /hoa|vuon|cam tu cau|che|garden/);
   assert.ok(s.some((x) => x.kind === "event"));
 });

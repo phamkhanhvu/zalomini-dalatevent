@@ -77,7 +77,7 @@ test("không nói ngân sách thì không loại ai vì giá; không nói ngày 
 });
 
 test("hỏi theo ngày Festival và sở thích khác", () => {
-  const { ask, advice } = run("12.12 gia đình 4 người đi xem hoa");
+  const { ask, advice } = run("20.12 gia đình 4 người đi xem hoa");
   assert.equal(ask.people, 4);
   assert.deepEqual(ask.interests, ["flower"]);
   assert.ok(advice.unknown.some((p) => p.item.programId === "khai-mac"));

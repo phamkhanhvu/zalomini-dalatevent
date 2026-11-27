@@ -126,3 +126,14 @@ test("Sắp diễn ra: từ ngày mai, trong 30 ngày, bỏ cái đang diễn ra
   const up = upcomingOnly(buildAgenda(EVENTS, STAGES, w.from, w.to), w.from, 12).map((x) => x.title);
   assert.deepEqual(up, ["hoan", "Show chiều", "Show tối", "khai-mac", "qua-dem", "Show CN", "tho-cam"]);
 });
+
+test("sự kiện khác lặp hằng tuần: chỉ hiện đúng thứ, đúng giờ", () => {
+  // 2026-11-27 là thứ 6
+  const h = [{ title: "Đêm nhạc", desc: "d", when: "w", start_date: "2026-11-23", end_date: "2026-12-31", days: [5, 6], time: "19:30" }];
+  const from = Date.parse("2026-11-23T00:00:00+07:00");
+  const to = Date.parse("2026-11-30T00:00:00+07:00");
+  const rows = buildAgenda([], [], from, to, Infinity, h);
+  assert.deepEqual(rows.map((r) => vnDate(r.start)), ["2026-11-27", "2026-11-28"]);
+  assert.equal(rows[0].allDay, false);
+  assert.equal(new Date(rows[0].start).toISOString(), "2026-11-27T12:30:00.000Z");
+});

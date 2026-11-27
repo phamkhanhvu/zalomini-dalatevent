@@ -5,7 +5,7 @@ import { useSnackbar } from "../ui";
 import { openAccount } from "../components/account-panel";
 import { DealsEditor } from "../components/admin-deals";
 import { SubmissionsEditor } from "../components/admin-submissions";
-import type { Submission } from "../utils/submissions";
+import { repeatLabel, Submission } from "../utils/submissions";
 import { currentUid, getAccount, isAdmin, loadAccount, onAccount, readCms, writeCms } from "../platform/account";
 import type { EventRecord, EventsDoc, HappeningDoc, HappeningItem, ShowsDoc } from "../data/store";
 
@@ -87,7 +87,7 @@ const HappeningEditor: FC<{ data: Loaded; onSave: (file: FileId, doc: unknown, c
   const save = () => {
     const out = items
       .map((x) => {
-        const o: HapItem = { ...x, title: clean(x.title), venue: clean(x.venue || ""), desc: clean(x.desc), when: whenOf(x.start_date, x.end_date, "") };
+        const o: HapItem = { ...x, title: clean(x.title), venue: clean(x.venue || ""), desc: clean(x.desc), when: x.days || x.time ? x.when : whenOf(x.start_date, x.end_date, "") };
         for (const k of ["title_en", "desc_en", "venue_en"] as const) {
           const v = clean(o[k] || "");
           if (v) o[k] = v;
@@ -314,7 +314,10 @@ const AdminPage: FC = () => {
   /** Duyệt sự kiện gửi lên: thêm vào "Sự kiện khác" (mục nhập tay) rồi lưu như khi bấm Lưu */
   const approve = async (s: Submission): Promise<boolean> => {
     if (!data) return false;
-    const item: HapItem = { title: s.title, start_date: s.start_date, end_date: s.end_date, venue: s.venue, when: whenOf(s.start_date, s.end_date, ""), desc: s.desc, manual: true };
+    const rep = repeatLabel(s);
+    const item: HapItem = { title: s.title, start_date: s.start_date, end_date: s.end_date, venue: s.venue, when: (s.repeat === "once" ? whenOf(s.start_date, s.end_date, "") : "đến " + dmy(s.end_date)) + (rep ? " · " + rep : ""), desc: s.desc, manual: true };
+    if (s.repeat === "weekly" && s.weekdays.length) item.days = s.weekdays;
+    if (s.time) item.time = s.time;
     const items = [...data.happening.items.filter((x) => x.title !== s.title), item].sort((a, b) => a.start_date.localeCompare(b.start_date));
     const doc = { ...data.happening, items };
     const check = { ...data, happening: doc };

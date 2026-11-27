@@ -4,11 +4,16 @@ import { useSnackbar } from "../ui";
 import { openAccount } from "../components/account-panel";
 import { getAccount, loadAccount, onAccount } from "../platform/account";
 import { sendSubmission } from "../platform/submissions";
-import { cleanInput, submissionErrors, SubmissionInput } from "../utils/submissions";
+import { cleanInput, Repeat, submissionErrors, SubmissionInput, WEEKDAYS } from "../utils/submissions";
 import { tr } from "../i18n";
 
 const todayVn = () => new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10);
-const blank = (): SubmissionInput => ({ title: "", start_date: todayVn(), end_date: todayVn(), venue: "", desc: "", link: "", contact: "" });
+const blank = (): SubmissionInput => ({ title: "", start_date: todayVn(), end_date: todayVn(), venue: "", desc: "", link: "", contact: "", repeat: "once", weekdays: [], time: "" });
+const REPEATS = (): { id: Repeat; label: string }[] => [
+  { id: "once", label: tr("Một lần / vài ngày liền", "Once / consecutive days") },
+  { id: "daily", label: tr("Hằng đêm", "Every night") },
+  { id: "weekly", label: tr("Hằng tuần", "Weekly") },
+];
 
 /** Trang cho mọi người gửi sự kiện ở Đà Lạt; quản trị viên duyệt rồi mới hiện trên trang */
 const SubmitEventPage: FC = () => {
@@ -65,10 +70,29 @@ const SubmitEventPage: FC = () => {
       <div className={"pad adm-list" + (busy ? " is-busy" : "")}>
         {errors.length > 0 && <div className="adm-status is-bad" role="alert"><b>{tr("Cần bổ sung:", "Please fix:")}</b><ul>{errors.map((e) => <li key={e}>{e}</li>)}</ul></div>}
         <label className="adm-field">{tr("Tên sự kiện", "Event name")}<input value={f.title} maxLength={120} onChange={(e) => set({ title: e.target.value })} /></label>
-        <div className="adm-row">
-          <label className="adm-field">{tr("Từ ngày", "From")}<input type="date" value={f.start_date} min={todayVn()} onChange={(e) => set({ start_date: e.target.value, end_date: f.end_date < e.target.value ? e.target.value : f.end_date })} /></label>
-          <label className="adm-field">{tr("Đến ngày", "To")}<input type="date" value={f.end_date} min={f.start_date} onChange={(e) => set({ end_date: e.target.value })} /></label>
+        <div className="adm-field">
+          {tr("Diễn ra", "Happens")}
+          <div className="sub-repeat" role="radiogroup">
+            {REPEATS().map((r) => (
+              <button key={r.id} type="button" role="radio" aria-checked={f.repeat === r.id} className={"fb" + (f.repeat === r.id ? " on" : "")} onClick={() => set({ repeat: r.id })}>{r.label}</button>
+            ))}
+          </div>
         </div>
+        {f.repeat === "weekly" && (
+          <div className="adm-field">
+            {tr("Vào các thứ", "On")}
+            <div className="sub-days">
+              {WEEKDAYS.map((w, d) => (
+                <button key={w} type="button" aria-pressed={f.weekdays.includes(d)} className={"sub-day" + (f.weekdays.includes(d) ? " on" : "")} onClick={() => set({ weekdays: f.weekdays.includes(d) ? f.weekdays.filter((x) => x !== d) : [...f.weekdays, d] })}>{w}</button>
+              ))}
+            </div>
+          </div>
+        )}
+        <div className="adm-row">
+          <label className="adm-field">{f.repeat === "once" ? tr("Từ ngày", "From") : tr("Bắt đầu từ ngày", "Starting")}<input type="date" value={f.start_date} min={todayVn()} onChange={(e) => set({ start_date: e.target.value, end_date: f.end_date < e.target.value ? e.target.value : f.end_date })} /></label>
+          <label className="adm-field">{f.repeat === "once" ? tr("Đến ngày", "To") : tr("Lặp đến ngày", "Repeat until")}<input type="date" value={f.end_date} min={f.start_date} onChange={(e) => set({ end_date: e.target.value })} /></label>
+        </div>
+        <label className="adm-field">{tr("Giờ bắt đầu", "Start time")}{f.repeat === "once" ? tr(" (nếu có)", " (optional)") : ""}<input type="time" value={f.time} onChange={(e) => set({ time: e.target.value })} /></label>
         <label className="adm-field">{tr("Địa điểm", "Venue")}<input value={f.venue} maxLength={120} placeholder={tr("Tên nơi tổ chức và địa chỉ", "Venue name and address")} onChange={(e) => set({ venue: e.target.value })} /></label>
         <label className="adm-field">{tr("Giới thiệu sự kiện (giờ diễn ra, giá vé nếu có)", "About the event (time, ticket price if any)")}<textarea rows={5} value={f.desc} maxLength={800} onChange={(e) => set({ desc: e.target.value })} /></label>
         <label className="adm-field">{tr("Link Facebook, trang bán vé (nếu có)", "Facebook or ticket link (optional)")}<input value={f.link} maxLength={300} placeholder="https://" onChange={(e) => set({ link: e.target.value.trim() })} /></label>

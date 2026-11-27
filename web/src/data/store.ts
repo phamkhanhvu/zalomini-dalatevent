@@ -28,7 +28,7 @@ export interface StagePlace { label: string; name: string; map_query: string; la
 export interface Stage { places?: StagePlace[]; id: string; name: string; kind: "dated" | "weekly"; source_url: string; verified_at: string; intro: string; address: string; phone?: string; phone_label?: string; cta_label: string; items: ShowItem[] }
 export interface ShowsDoc { schema: number; updated_at: string; stages: Stage[] }
 
-export interface HappeningItem { when: string; title: string; desc: string; start_date: string; end_date: string; venue?: string; title_en?: string; desc_en?: string; venue_en?: string }
+export interface HappeningItem { when: string; title: string; desc: string; start_date: string; end_date: string; venue?: string; title_en?: string; desc_en?: string; venue_en?: string; days?: number[]; time?: string }
 export interface HappeningDoc { schema: number; updated_at: string; updated_label: string; items: HappeningItem[] }
 
 export interface DataSet { events: EventsDoc; shows: ShowsDoc; happening: HappeningDoc }

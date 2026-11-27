@@ -47,7 +47,7 @@ export interface AgendaItem {
 
 /* ---------- Dữ liệu đầu vào (cùng dạng với data/events.json và data/shows.json) ---------- */
 export interface InSession { start_at: string; end_at: string; all_day: boolean; end_estimated?: boolean }
-export interface InHappening { title: string; desc: string; when: string; start_date: string; end_date: string; venue?: string }
+export interface InHappening { title: string; desc: string; when: string; start_date: string; end_date: string; venue?: string; /** Lặp hằng tuần vào các thứ này (0 = Chủ nhật) */ days?: number[]; /** Giờ bắt đầu mỗi buổi, "19:30" */ time?: string }
 export interface InEvent { series?: string; description?: string; id: string; title: string; category: string; venue_name: string; status: string; tentative: boolean; sessions: InSession[]; source_url: string | null; verified_at: string | null }
 export interface InShow { date?: string; time: string; title: string; url: string; place?: string; price?: string; weekday?: number; note?: string }
 export interface InStage { id: string; name: string; kind: "dated" | "weekly"; source_url: string; verified_at: string; items: InShow[] }
@@ -127,6 +127,21 @@ export function buildAgenda(events: InEvent[], stages: InStage[], from: number, 
     const start = vnMidnight(h.start_date);
     const end = vnMidnight(h.end_date) + DAY_MS - 60000;
     if (!(start < to && end >= from)) return;
+    const days = Array.isArray(h.days) && h.days.length ? h.days : null;
+    const hm = /^(\d{2}):(\d{2})$/.exec(h.time || "");
+    if (days || hm) {
+      // Sự kiện lặp (hằng đêm hoặc hằng tuần): mỗi buổi là một dòng riêng, chỉ trong khoảng đang xem
+      const offset = hm ? (+hm[1] * 60 + +hm[2]) * 60000 : 0;
+      for (let d = Math.max(start, vnMidnight(vnDate(from))); d <= end && d < to; d += DAY_MS) {
+        const wd = new Date(d + VN_OFFSET_MS).getUTCDay();
+        if (days && !days.includes(wd)) continue;
+        const s = d + offset;
+        const e = hm ? s + 3 * 3600000 : d + DAY_MS - 60000;
+        if (!(s < to && e >= from)) continue;
+        out.push({ key: "h:" + i + ":" + vnDate(d), kind: "event", title: loc(h, "title"), label: tr("Sự kiện", "Event"), venue: loc(h, "venue") || tr("Đà Lạt", "Da Lat"), start: s, end: e, allDay: !hm, status: "published", desc: loc(h, "desc"), weekly: true });
+      }
+      return;
+    }
     out.push({ key: "h:" + i + ":" + h.start_date, kind: "event", title: loc(h, "title"), label: tr("Sự kiện", "Event"), venue: loc(h, "venue") || tr("Đà Lạt", "Da Lat"), start, end, allDay: true, status: "published", desc: loc(h, "desc") });
   });
   for (const e of events) {

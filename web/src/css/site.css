@@ -561,3 +561,7 @@ div.ag-row { text-align: left; }
 .deals-dots i { width: 7px; height: 7px; border-radius: 999px; background: rgba(241, 90, 37, 0.3); transition: width .2s; }
 .deals-dots i.on { width: 20px; background: var(--brand-orange); }
 .deals-all { font-size: 13px; font-weight: 700; color: #c2410c; padding: 6px 4px; }
+.sub-repeat { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.sub-days { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.sub-day { width: 44px; height: 40px; border-radius: 12px; border: 1px solid var(--line); background: var(--paper); font-weight: 700; color: var(--ink); }
+.sub-day.on { background: var(--brand-orange); border-color: var(--brand-orange); color: #fff; }

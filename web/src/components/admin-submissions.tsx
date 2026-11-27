@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { useSnackbar } from "../ui";
 import { adminListSubmissions, adminSetSubmission } from "../platform/submissions";
-import type { Submission } from "../utils/submissions";
+import { repeatLabel, Submission } from "../utils/submissions";
 
 const dmy = (d: string) => d.slice(8, 10) + "." + d.slice(5, 7) + "." + d.slice(0, 4);
 
@@ -38,7 +38,7 @@ export const SubmissionsEditor: FC<{ onApprove: (s: Submission) => Promise<boole
         <div className="adm-card" key={s.id}>
           <div className="adm-body">
             <b>{s.title}</b>
-            <p className="small">{s.start_date === s.end_date ? dmy(s.start_date) : dmy(s.start_date) + " — " + dmy(s.end_date)} · {s.venue}</p>
+            <p className="small">{s.start_date === s.end_date ? dmy(s.start_date) : dmy(s.start_date) + " — " + dmy(s.end_date)}{repeatLabel(s) ? " · " + repeatLabel(s) : ""} · {s.venue}</p>
             <p className="small">{s.desc}</p>
             {s.link && <p className="small"><a href={s.link} target="_blank" rel="noopener noreferrer">{s.link}</a></p>}
             <p className="muted small">Gửi bởi {s.by || "(không tên)"} · liên hệ: {s.contact}{s.status !== "new" ? " · " + (s.status === "approved" ? "đã duyệt" : "đã từ chối") : ""}</p>

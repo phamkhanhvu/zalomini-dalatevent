@@ -128,6 +128,8 @@ export function validate(doc, shows, hap) {
       if (!DATE.test(it.start_date || "") || !DATE.test(it.end_date || "")) err(`happening.json mục ${i + 1}: cần start_date và end_date dạng 2026-11-23`);
       else if (it.end_date < it.start_date) err(`happening.json mục ${i + 1}: end_date trước start_date`);
       if (it.venue !== undefined && typeof it.venue !== "string") err(`happening.json mục ${i + 1}: venue phải là chữ`);
+      if (it.days !== undefined && (!Array.isArray(it.days) || !it.days.length || it.days.length > 7 || it.days.some((d) => !Number.isInteger(d) || d < 0 || d > 6) || new Set(it.days).size !== it.days.length)) err(`happening.json mục ${i + 1}: days phải là danh sách thứ 0–6 (0 = Chủ nhật), không trùng`);
+      if (it.time !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(it.time)) err(`happening.json mục ${i + 1}: time phải có dạng 19:30`);
     }
   }
 

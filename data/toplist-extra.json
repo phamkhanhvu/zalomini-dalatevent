@@ -1,0 +1,18 @@
+{
+ "_note": "Địa điểm bổ sung ngoài bảng 200 Top List (đối tác gửi trực tiếp). scripts/toplist-import.py gộp tệp này vào data/toplist.json mỗi lần nhập lại.",
+ "places": [
+  {
+   "id": "tiem-banh-ngot--tiem-banh-trong-hem",
+   "list": "tiem-banh-ngot",
+   "name": "Tiệm Bánh Trong Hẻm",
+   "address": "142C Phan Đình Phùng, P. Xuân Hương, Đà Lạt · 0325 43 68 67",
+   "lat": null,
+   "lng": null,
+   "desc": "Tiệm bánh kem, bánh ngọt, bánh lạnh, tiramisu, mousse, cheesecake, bánh mì và bánh ăn vặt. Mẫu bánh trẻ trung, nhận đặt bánh sinh nhật và bánh theo yêu cầu.",
+   "desc_en": "Bakery for cream cakes, pastries, chilled cakes, tiramisu, mousse, cheesecake, bread and snacks. Playful designs; birthday and custom cakes made to order.",
+   "clip": "",
+   "img_folder": "",
+   "img": true
+  }
+ ]
+}

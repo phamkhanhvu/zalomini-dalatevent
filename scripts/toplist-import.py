@@ -271,6 +271,17 @@ def main(path):
             count += 1
         if count:
             lists.append({"id": lid, "group": group, "name": name, "name_en": name_en, "count": count})
+    # địa điểm bổ sung do đối tác gửi trực tiếp (data/toplist-extra.json)
+    try:
+        extra = json.load(open("data/toplist-extra.json", encoding="utf-8"))["places"]
+    except (OSError, ValueError, KeyError):
+        extra = []
+    for q in extra:
+        if q["id"] in seen_ids or not any(l["id"] == q["list"] for l in lists):
+            continue
+        seen_ids.add(q["id"])
+        places.append(q)
+        next(l for l in lists if l["id"] == q["list"])["count"] += 1
     missing = sorted(set(TABS) - {re.sub(r"\s+", " ", ws.title).strip() for ws in wb.worksheets})
     now = datetime.now(timezone(timedelta(hours=7))).replace(microsecond=0).isoformat()
     out = {

@@ -207,7 +207,7 @@ export const AccountSheet: FC = () => {
 <button type="button" className="acc-switch" onClick={() => setMode(mode === "in" ? "new" : "in")}>
                 {mode === "in" ? tr("Chưa có tài khoản? Đăng ký", "No account yet? Sign up") : tr("Đã có tài khoản? Đăng nhập", "Have an account? Sign in")}
               </button>
-              <p className="acc-note">{tr("Khi đăng nhập hoặc đăng ký, bạn đồng ý với ", "By signing in or signing up you agree to the ")}<button type="button" className="acc-link" onClick={() => { setOpen(false); navigate("/quyen-rieng-tu"); }}>{tr("chính sách quyền riêng tư", "privacy policy")}</button>.</p>
+              <p className="acc-note">{tr("Khi đăng nhập hoặc đăng ký, bạn đồng ý với ", "By signing in or signing up you agree to the ")}<button type="button" className="acc-link" onClick={() => { setOpen(false); navigate("/quyen-rieng-tu"); }}>{tr("chính sách quyền riêng tư", "privacy policy")}</button>{tr(" và ", " and ")}<button type="button" className="acc-link" onClick={() => { setOpen(false); navigate("/dieu-khoan"); }}>{tr("điều khoản sử dụng", "terms of use")}</button>.</p>
             </React.Fragment>
           )}
         </div>

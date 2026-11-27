@@ -169,6 +169,7 @@ const HomePage: FC = () => {
         <AdBanner />
         <p className="muted small">© {new Date().getFullYear()} DalatEvent · Sense Group</p>
         <button type="button" className="acc-switch link-left" onClick={() => navigate("/quyen-rieng-tu")}>{tr("Chính sách quyền riêng tư", "Privacy policy")}</button>
+        <button type="button" className="acc-switch link-left" onClick={() => navigate("/dieu-khoan")}>{tr("Điều khoản sử dụng", "Terms of use")}</button>
       </section>
       {sheet}
     </div>

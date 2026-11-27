@@ -98,7 +98,7 @@ const SubmitEventPage: FC = () => {
         <label className="adm-field">{tr("Link Facebook, trang bán vé (nếu có)", "Facebook or ticket link (optional)")}<input value={f.link} maxLength={300} placeholder="https://" onChange={(e) => set({ link: e.target.value.trim() })} /></label>
         <label className="adm-field">{tr("Số điện thoại hoặc Zalo để liên hệ (không hiện công khai)", "Phone or Zalo to reach you (not shown publicly)")}<input value={f.contact} maxLength={120} onChange={(e) => set({ contact: e.target.value })} /></label>
         <button type="button" className="btn btn-ink btn-wide" onClick={send}>{signedIn ? tr("Gửi để duyệt", "Send for review") : tr("Đăng nhập để gửi", "Sign in to send")}</button>
-        <p className="muted small">{tr("Cần đăng nhập để chống tin rác. Thông tin liên hệ chỉ quản trị viên DalatEvent thấy.", "Sign-in is required to prevent spam. Your contact details are only visible to DalatEvent admins.")}</p>
+        <p className="muted small">{tr("Cần đăng nhập để chống tin rác. Thông tin liên hệ chỉ quản trị viên DalatEvent thấy. Khi gửi, bạn đồng ý với ", "Sign-in is required to prevent spam. Your contact details are only visible to DalatEvent admins. By sending you agree to the ")}<button type="button" className="link-inline" onClick={() => navigate("/dieu-khoan")}>{tr("Điều khoản sử dụng", "Terms of use")}</button>.</p>
       </div>
     </div>
   );

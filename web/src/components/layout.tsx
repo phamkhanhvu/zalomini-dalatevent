@@ -16,6 +16,7 @@ import DealsPage from "../pages/deals";
 import WeatherPage from "../pages/weather";
 import { ToplistPage, ToplistDetailPage } from "../pages/toplist";
 import SubmitEventPage from "../pages/submit-event";
+import TermsPage from "../pages/terms";
 
 // Trang quản trị chỉ vài người dùng: tách thành tệp riêng, khách thường không phải tải
 const AdminPage = React.lazy(() => import("../pages/admin"));
@@ -83,6 +84,7 @@ export const Layout: FC = () => {
         <Route path="/top-list" element={<ToplistPage />} />
         <Route path="/top-list/:id" element={<ToplistDetailPage />} />
         <Route path="/gui-su-kien" element={<SubmitEventPage />} />
+        <Route path="/dieu-khoan" element={<TermsPage />} />
         <Route path="/quan-tri" element={<React.Suspense fallback={<p className="muted pad">{tr("Đang tải…", "Loading…")}</p>}><AdminPage /></React.Suspense>} />
         <Route path="*" element={<HomePage />} />
       </Routes>

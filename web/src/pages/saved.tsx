@@ -14,6 +14,8 @@ import { vnDate, vnDayMonth, vnTime, vnWeekday } from "../utils/agenda";
 import { arrangePlan, conflicts, decodeShare, encodeShare, PlanItem, toIcs, toPlanItem } from "../utils/itinerary";
 import { usePlan } from "../utils/plan";
 import { IS_NATIVE, openUrl, shareText } from "../utils/device";
+import { LEAD_CHOICES, remindLead, setRemindLead } from "../platform/reminders";
+import { SAVED_EVENT } from "../utils/saved";
 import { shareFail } from "../utils/platform";
 import { tr, wdLong } from "../i18n";
 
@@ -33,6 +35,26 @@ const readSnaps = (): SnapMap => {
   }
 };
 const CHANGE_TEXT = () => ({ time: tr("Đã đổi giờ", "Time changed"), postponed: tr("Tạm hoãn", "Postponed"), cancelled: tr("Đã hủy", "Cancelled"), removed: tr("Không còn trong lịch", "No longer listed") });
+
+/** Chọn nhắc trước bao lâu (chỉ trong app cài trên máy) */
+const RemindPicker: FC = () => {
+  const [lead, setLead] = useState(remindLead());
+  const pick = (m: number) => {
+    setRemindLead(m);
+    setLead(m);
+    // Hẹn lại toàn bộ thông báo theo mốc mới (hỏi quyền nếu cần)
+    window.dispatchEvent(new Event(SAVED_EVENT));
+  };
+  const label = (m: number) => (m === 0 ? tr("Tắt", "Off") : m < 60 ? tr(m + " phút", m + " min") : tr(m / 60 + " tiếng", m / 60 + " h"));
+  return (
+    <div className="remind-row" role="radiogroup" aria-label={tr("Nhắc trước giờ bắt đầu", "Remind me before it starts")}>
+      <span>🔔 {tr("Nhắc trước", "Remind")}</span>
+      {LEAD_CHOICES.map((m) => (
+        <button key={m} type="button" role="radio" aria-checked={lead === m} className={"fb" + (lead === m ? " on" : "")} onClick={() => pick(m)}>{label(m)}</button>
+      ))}
+    </div>
+  );
+};
 
 const SavedPage: FC = () => {
   const navigate = useNavigate();
@@ -171,6 +193,7 @@ const SavedPage: FC = () => {
             <button type="button" className="btn btn-line" onClick={share}><IconShare size={18} />{tr("Chia sẻ lịch trình", "Share plan")}</button>
           </div>
         )}
+        {!isShared && IS_NATIVE && <RemindPicker />}
       </header>
       <div className="scroll grow">
         {!isShared && <div className="pad acc-wrap"><AccountPanel /></div>}

@@ -114,7 +114,9 @@ export function toIcs(items: PlanItem[], now: number, site = "https://dalatevent
       lines.push("DTSTART:" + utc(it.start), "DTEND:" + utc(it.end));
     }
     const notes = [it.label, it.tentative ? "Lịch dự kiến, hãy kiểm tra lại trước khi đi." : "", it.endEstimated ? "Giờ kết thúc là ước lượng." : "", "Xem tại " + (it.url || site)].filter(Boolean).join("\n");
-    lines.push("SUMMARY:" + esc(it.title), "LOCATION:" + esc(it.venue), "DESCRIPTION:" + esc(notes), "URL:" + (it.url || site), "END:VEVENT");
+    lines.push("SUMMARY:" + esc(it.title), "LOCATION:" + esc(it.venue), "DESCRIPTION:" + esc(notes), "URL:" + (it.url || site));
+    // Lịch điện thoại tự nhắc trước 1 tiếng (mục cả ngày: 8 giờ sáng hôm trước)
+    lines.push("BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:" + esc(it.title), it.allDay ? "TRIGGER:-PT16H" : "TRIGGER:-PT1H", "END:VALARM", "END:VEVENT");
   }
   lines.push("END:VCALENDAR");
   return lines.map(fold).join("\r\n") + "\r\n";

@@ -3,6 +3,7 @@ import { track } from "../platform/stats";
 import { markGoodMoment } from "../platform/review";
 import { useSearchParams } from "react-router";
 import { Sheet, useSnackbar } from "../ui";
+import { shareCard, shareCardMessage } from "../utils/share-card";
 import { openAccount } from "../components/account-panel";
 import { getAccount, onAccount } from "../platform/account";
 import { fetchPublicDeals, myRedemption, redeem, Redemption } from "../platform/deals";
@@ -169,6 +170,21 @@ const DealsPage: FC = () => {
               </React.Fragment>
             )}
             {open.place && <button type="button" className="btn btn-line" onClick={() => openDirections(open.partner + ", " + open.place + ", Đà Lạt")}>{tr("Chỉ đường", "Directions")}</button>}
+            <button
+              type="button"
+              className="btn btn-line"
+              onClick={async () => {
+                const link = "https://dalatevent.com/#/uu-dai?d=" + encodeURIComponent(open.id);
+                const r = await shareCard(
+                  { kicker: tr("Ưu đãi Dalat Deals · ", "Dalat Deals · ") + open.partner, title: open.title, lines: [open.summary, open.place ? "📍 " + open.partner + " · " + open.place : "", "⏳ " + tr("Đến ", "Until ") + vnDayMonth(open.endAt) + tr(" · số lượt có hạn", " · limited")], link, name: "dalatevent-uu-dai-" + open.id },
+                  tr(`${open.title} — ưu đãi trên DalatEvent: ${link}`, `${open.title} — offer on DalatEvent: ${link}`),
+                );
+                const msg = shareCardMessage(r, tr);
+                if (msg) openSnackbar({ text: msg, duration: 2600 });
+              }}
+            >
+              {tr("Chia sẻ ảnh", "Share image")}
+            </button>
           </div>
         )}
       </Sheet>

@@ -9,6 +9,9 @@ import { distanceKm, LatLng } from "../utils/geo";
 import { fold } from "../utils/search";
 import { mapsUrl, openUrl } from "../utils/device";
 import { isEn, tr } from "../i18n";
+import { shareCard, shareCardMessage } from "../utils/share-card";
+import { ratingOf } from "../platform/ratings";
+import { useSnackbar } from "../ui";
 
 // Vị trí chỉ giữ trong bộ nhớ của trang, không lưu và không gửi đi
 let myPos: LatLng | null = null;
@@ -59,6 +62,7 @@ function useLocate() {
 
 const PlaceCard: FC<{ p: TopPlace; km: number | null; listName?: string; focus?: boolean }> = ({ p, km, listName, focus }) => {
   const [open, setOpen] = useState(false);
+  const { openSnackbar } = useSnackbar();
   const img = topImage(p);
   const desc = (isEn() && p.desc_en) || p.desc;
   const where = p.lat !== null && p.lng !== null ? p.lat + "," + p.lng : p.name + ", " + p.address;
@@ -82,6 +86,23 @@ const PlaceCard: FC<{ p: TopPlace; km: number | null; listName?: string; focus?:
         <div className="tl-acts">
           <button type="button" className="btn btn-ink" onClick={() => { track("place_dir", p.id); openUrl(mapsUrl(where)); }}>{tr("Chỉ đường", "Directions")}</button>
           {p.clip && <button type="button" className="btn btn-line" onClick={() => { track("place_clip", p.id); openUrl(p.clip); }}>{tr("Xem clip", "Watch clip")}</button>}
+          <button
+            type="button"
+            className="btn btn-line"
+            onClick={async () => {
+              track("place_share", p.id);
+              const link = "https://dalatevent.com/#/top-list/" + p.list + "?p=" + encodeURIComponent(p.id);
+              const rt = ratingOf(p.id);
+              const r = await shareCard(
+                { kicker: tr("Top list Đà Lạt", "Da Lat top list") + (listName ? " · " + listName : ""), title: p.name, image: img || undefined, badge: rt ? "★ " + rt.avg.toFixed(1).replace(".", tr(",", ".")) + " · " + rt.count + tr(" lượt", "") : undefined, lines: [p.address ? "📍 " + p.address : "", ((isEn() && p.desc_en) || p.desc || "").slice(0, 160)], link, name: "dalatevent-" + p.id },
+                tr(`${p.name} — trong Top list Đà Lạt của DalatEvent: ${link}`, `${p.name} — on DalatEvent's Da Lat top list: ${link}`),
+              );
+              const msg = shareCardMessage(r, tr);
+              if (msg) openSnackbar({ text: msg, duration: 2600 });
+            }}
+          >
+            {tr("Chia sẻ", "Share")}
+          </button>
         </div>
       </div>
     </li>

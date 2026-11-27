@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import QRCode from "qrcode";
+import { shareCard } from "../utils/share-card";
 import { useNavigate } from "react-router";
 import { getData } from "../data/store";
 import { CONTACT_EMAIL, mailto } from "../utils/contact";
@@ -83,11 +84,12 @@ export const ProgramSheet: FC<Props> = ({ program, saved, onClose, onToggleSave,
               type="button"
               className="btn btn-line"
               onClick={async () => {
-                const ok = await shareText(
-                  tr(`${p.title} — ${p.day}${p.sub ? ", " + p.sub : ""} tại ${p.venue}. Xem chi tiết: ${programLink(p.id)}`, `${p.title} — ${p.day}${p.sub ? ", " + p.sub : ""} at ${p.venue}. Details: ${programLink(p.id)}`),
-                  FESTIVAL.name + " " + FESTIVAL.edition
+                const text = tr(`${p.title} — ${p.day}${p.sub ? ", " + p.sub : ""} tại ${p.venue}. Xem chi tiết: ${programLink(p.id)}`, `${p.title} — ${p.day}${p.sub ? ", " + p.sub : ""} at ${p.venue}. Details: ${programLink(p.id)}`);
+                const r = await shareCard(
+                  { kicker: FESTIVAL.name + " " + FESTIVAL.edition, title: p.title, badge: p.day, lines: ["🗓 " + p.day + (p.sub ? " · " + p.sub : ""), "📍 " + p.venue, p.tentative ? tr("Lịch dự kiến, có thể thay đổi", "Tentative schedule") : ""], link: programLink(p.id), name: "dalatevent-" + p.id },
+                  text,
                 );
-                onShared?.(ok);
+                if (r === "error") onShared?.(await shareText(text, FESTIVAL.name + " " + FESTIVAL.edition));
               }}
             >
               <IconShare size={20} />{tr("Chia sẻ", "Share")}

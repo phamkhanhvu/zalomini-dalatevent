@@ -3,6 +3,7 @@ import { track } from "../platform/stats";
 import { useNavigate, useParams } from "react-router";
 import QRCode from "qrcode";
 import { useSnackbar } from "../ui";
+import { shareCard, shareCardMessage } from "../utils/share-card";
 import { FESTIVAL } from "../data/festival";
 import { getData, onDataChange } from "../data/store";
 import { AgendaRow, agendaFor } from "../components/agenda";
@@ -93,8 +94,15 @@ const PlacePage: FC = () => {
             type="button"
             className="btn btn-line"
             onClick={async () => {
-              const ok = await shareText(tr(`${place.name}: xem những gì sắp diễn ra tại đây ${link}`, `${place.name}: see what's coming up here ${link}`), place.name);
-              if (!ok) openSnackbar({ text: shareFail(), duration: 2200 });
+              const text = tr(`${place.name}: xem những gì sắp diễn ra tại đây ${link}`, `${place.name}: see what's coming up here ${link}`);
+              const r = await shareCard({ kicker: place.kind === "show" ? tr("Điểm diễn show Đà Lạt", "Da Lat show venue") : FESTIVAL.name, title: place.name, lines: [stage?.address ? "📍 " + loc(stage, "address") : "", stage ? loc(stage, "intro").slice(0, 150) : ""], link, name: "dalatevent-" + place.id }, text);
+              if (r === "error") {
+                const ok = await shareText(text, place.name);
+                if (!ok) openSnackbar({ text: shareFail(), duration: 2200 });
+              } else {
+                const msg = shareCardMessage(r, tr);
+                if (msg) openSnackbar({ text: msg, duration: 2600 });
+              }
             }}
           >
             <IconShare size={20} />{tr("Chia sẻ", "Share")}

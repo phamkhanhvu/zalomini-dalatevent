@@ -15,7 +15,7 @@ export interface Category {
 }
 
 const CATS_RAW: Category[] = [
-  { id: "le", label: "Lễ hội|Festival", color: "#E0218A", tint: "#FFE3F1" },
+  { id: "le", label: "Lễ hội|Festival", color: "#D24A1C", tint: "#FDECE4" },
   { id: "tl", label: "Triển lãm|Exhibition", color: "#7B2CBF", tint: "#EFE2FA" },
   { id: "kg", label: "Không gian hoa|Flower space", color: "#0B7A4B", tint: "#C9F2DA" },
   { id: "ht", label: "Hội thảo và thể thao|Talks & sports", color: "#1D5FA8", tint: "#DCEEFF" },

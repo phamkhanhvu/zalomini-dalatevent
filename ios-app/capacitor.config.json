@@ -4,11 +4,11 @@
   "webDir": "../web/dist",
   "ios": {
     "contentInset": "never",
-    "backgroundColor": "#FFF8EF"
+    "backgroundColor": "#F4F6F8"
   },
   "plugins": {
     "LocalNotifications": {
-      "iconColor": "#E0218A"
+      "iconColor": "#D24A1C"
     },
     "FirebaseAuthentication": {
       "skipNativeAuth": true,

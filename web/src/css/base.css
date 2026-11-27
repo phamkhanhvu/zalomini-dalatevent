@@ -2,7 +2,7 @@
 html, body, #app { height: 100%; margin: 0; }
 body {
   --zaui-safe-area-inset-top: env(safe-area-inset-top, 0px);
-  background: #FFF8EF;
+  background: #F4F6F8;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior: none;

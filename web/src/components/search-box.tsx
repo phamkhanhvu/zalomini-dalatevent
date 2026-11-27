@@ -8,7 +8,13 @@ import { AgendaRow, agendaFor } from "./agenda";
 import { IconPin, IconSearch } from "./icons";
 import { tr } from "../i18n";
 
-const HINTS = () => [tr("Hôm nay", "Today"), tr("Cuối tuần", "Weekend"), "20.12", "Jazz", "Lâm Viên"];
+/** Ngày khai mạc lấy từ dữ liệu (series.start_at), để đổi ngày không cần làm bản app mới */
+function openingDay(): string {
+  const at = getData().events.series?.[0]?.start_at || "";
+  const m = /^\d{4}-(\d{2})-(\d{2})/.exec(at);
+  return m ? `${m[2]}.${m[1]}` : "20.12";
+}
+const HINTS = () => [tr("Hôm nay", "Today"), tr("Cuối tuần", "Weekend"), openingDay(), "Jazz", "Lâm Viên"];
 
 function places(): SearchPlace[] {
   const d = getData();
@@ -51,7 +57,7 @@ export const SearchBox: FC<{ onOpenProgram: (p: Program) => void }> = ({ onOpenP
         <div className="search-results" aria-live="polite">
           <p className="search-meta">
             {res.empty
-              ? tr("Không tìm thấy kết quả. Thử tên nghệ sĩ, địa điểm, hoặc một ngày như 20.12.", "No results. Try an artist, a place, or a date like 20.12.")
+              ? tr("Không tìm thấy kết quả. Thử tên nghệ sĩ, địa điểm, hoặc một ngày như " + openingDay() + ".", "No results. Try an artist, a place, or a date like " + openingDay() + ".")
               : `${res.items.length} ${tr("sự kiện", res.items.length === 1 ? "event" : "events")}${res.places.length ? ", " + res.places.length + tr(" địa điểm", " places") : ""}${res.date ? " · " + res.date.label : tr(" · từ hôm nay trở đi", " · from today on")}`}
           </p>
           {res.places.length > 0 && (

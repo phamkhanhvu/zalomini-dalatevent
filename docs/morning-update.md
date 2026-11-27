@@ -45,3 +45,6 @@ Trước khi sửa: chạy `gh workflow run cms.yml -R phamkhanhvu/zalomini-dala
 
 ## Báo cáo
 Tiếng Việt, ngắn, gạch đầu dòng: sự kiện thêm/xóa; thay đổi lịch Mây Lang Thang và Lululola; kết quả kiểm tra và mã commit; link nguồn; điểm nào lệch với lịch Festival chính thức (chỉ báo, không tự sửa).
+
+## Phân luồng Festival Hoa 2026 (đến 31.12.2026)
+Mỗi sáng tìm thông báo chính thức (Công an Lâm Đồng, UBND phường Xuân Hương - Đà Lạt, Báo Lâm Đồng) về cấm đường, phân luồng, bãi xe tạm cho Festival Hoa lần thứ XI. Có thì cập nhật `data/festival-map.json`: thêm từng đoạn vào `closures` (text, text_en, from, to, source) và bãi xe tạm vào `points` (kind "parking", source là link thông báo). Chưa có thì giữ nguyên.

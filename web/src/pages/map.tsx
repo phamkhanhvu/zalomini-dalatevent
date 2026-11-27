@@ -10,7 +10,9 @@ import { vnDate } from "../utils/agenda";
 import { statusOf } from "../utils/time";
 import { useProgramSheet } from "../components/use-program-sheet";
 import { IconArrow, IconPin, IconRoute } from "../components/icons";
-import { loc, tr } from "../i18n";
+import { isEn, loc, tr } from "../i18n";
+import { loadSeason, SeasonDoc, SeasonKind } from "../data/season";
+import { distanceKm } from "../utils/geo";
 const ME = () => tr("vị trí của bạn", "your location");
 
 type Kind = "festival" | "show";
@@ -56,6 +58,66 @@ function buildPlaces(today: string, weekday: number): Place[] {
   return out;
 }
 
+const SVC: [SeasonKind | "closures", string, string, string][] = [
+  ["parking", "🅿️", "Gửi xe", "Parking"],
+  ["wc", "🚻", "Nhà vệ sinh", "Toilets"],
+  ["medical", "🏥", "Y tế", "Medical"],
+  ["closures", "🚧", "Cấm đường", "Road closures"],
+];
+
+/** Tiện ích mùa lễ hội: gửi xe, nhà vệ sinh, y tế, phân luồng */
+const SeasonBox: FC<{ doc: SeasonDoc; svc: SeasonKind | "closures" | ""; setSvc: (k: SeasonKind | "closures" | "") => void; origin: LatLng | null; onShow: (p: { name: string; lat: number; lng: number }) => void }> = ({ doc, svc, setSvc, origin, onShow }) => {
+  const en = isEn();
+  const pts = svc && svc !== "closures" ? doc.points.filter((p) => p.kind === svc).map((p) => ({ p, km: origin ? distanceKm(origin, p) : null })) : [];
+  if (origin) pts.sort((a, b) => (a.km ?? 0) - (b.km ?? 0));
+  return (
+    <section className="season pad">
+      <p className="season-title">{tr("Tiện ích mùa lễ hội", "Festival essentials")}</p>
+      <div className="season-chips">
+        {SVC.map(([k, ico, vi, enl]) => (
+          <button key={k} type="button" className={"fb fb-sm" + (svc === k ? " on" : "")} aria-pressed={svc === k} onClick={() => { track("season", k); setSvc(svc === k ? "" : k); }}>
+            {ico} {tr(vi, enl)}
+          </button>
+        ))}
+      </div>
+      {svc === "closures" && (
+        <div className="season-list">
+          {doc.closures.length ? (
+            doc.closures.map((c) => (
+              <div key={c.id} className="season-item">
+                <b>{en ? c.text_en || c.text : c.text}</b>
+                {(c.from || c.to) && <span className="muted small">{[c.from, c.to].filter(Boolean).join(" → ")}</span>}
+                {c.source && <button type="button" className="link-inline" onClick={() => openUrl(c.source!)}>{tr("Nguồn", "Source")}</button>}
+              </div>
+            ))
+          ) : (
+            <p className="season-note">{en ? doc.closures_note_en : doc.closures_note}</p>
+          )}
+        </div>
+      )}
+      {svc && svc !== "closures" && (
+        <div className="season-list">
+          {svc === "parking" && <p className="season-note">{en ? doc.closures_note_en : doc.closures_note}</p>}
+          {pts.map(({ p, km }) => (
+            <div key={p.id} className="season-item">
+              <div className="season-head">
+                <b>{en ? p.name_en || p.name : p.name}</b>
+                {km !== null && <i>{formatKm(km)}</i>}
+              </div>
+              {(en ? p.note_en : p.note) && <span className="muted small">{en ? p.note_en : p.note}</span>}
+              <div className="season-acts">
+                <button type="button" className="btn btn-line btn-sm" onClick={() => onShow({ name: en ? p.name_en || p.name : p.name, lat: p.lat, lng: p.lng })}><IconPin size={16} />{tr("Xem", "View")}</button>
+                <button type="button" className="btn btn-ink btn-sm" onClick={() => { track("season_dir", p.id); openDirections(p.lat + "," + p.lng); }}><IconRoute size={16} />{tr("Chỉ đường", "Directions")}</button>
+              </div>
+            </div>
+          ))}
+          <p className="muted small">{tr("Vị trí theo OpenStreetMap, chưa được ban tổ chức xác nhận; nhà vệ sinh có thể thu phí hoặc đóng ngoài giờ.", "Locations from OpenStreetMap, not confirmed by the organisers; toilets may charge or close after hours.")}{svc === "medical" ? tr(" Khẩn cấp gọi 115.", " Emergency: call 115.") : ""}</p>
+        </div>
+      )}
+    </section>
+  );
+};
+
 const MapPage: FC = () => {
   const { sheet, openProgram } = useProgramSheet();
   const navigate = useNavigate();
@@ -69,6 +131,12 @@ const MapPage: FC = () => {
   const [geoMsg, setGeoMsg] = useState("");
   const [locating, setLocating] = useState(false);
   const [selected, setSelected] = useState<string>("");
+  const [season, setSeason] = useState<SeasonDoc | null>(null);
+  const [svc, setSvc] = useState<SeasonKind | "closures" | "">("");
+  const [spot, setSpot] = useState<{ name: string; lat: number; lng: number } | null>(null);
+  useEffect(() => {
+    loadSeason().then(setSeason).catch(() => undefined);
+  }, []);
 
   const now = Date.now();
   const today = vnDate(now);
@@ -116,9 +184,12 @@ const MapPage: FC = () => {
     if (radius === null) setRadius(5);
   };
 
-  const mapSrc = current
+  const mapSrc = spot
+    ? "https://www.google.com/maps?q=" + encodeURIComponent(spot.lat + "," + spot.lng) + "&z=17&output=embed&hl=vi"
+    : current
     ? "https://www.google.com/maps?q=" + encodeURIComponent(typeof current.lat === "number" ? current.lat + "," + current.lng : current.mapQuery) + "&z=15&output=embed&hl=vi"
     : "";
+  const mapName = spot ? spot.name : current?.name || "";
 
   const Card: FC<{ p: Place; km: number | null; n: number }> = ({ p, km, n }) => (
     <article className={"venue" + (current && current.id === p.id ? " is-current" : "")}>
@@ -145,7 +216,7 @@ const MapPage: FC = () => {
       )}
       {p.more && <p className="muted small">{p.more}</p>}
       <div className="venue-actions">
-        <button type="button" className="btn btn-line" onClick={() => setSelected(p.id)}>
+        <button type="button" className="btn btn-line" onClick={() => { setSpot(null); setSelected(p.id); }}>
           <IconPin size={20} />{tr("Xem trên bản đồ", "Show on map")}
         </button>
         <button type="button" className="btn btn-line" onClick={() => navigate("/dia-diem/" + p.id.replace(/:/g, "-"))}>
@@ -209,10 +280,12 @@ const MapPage: FC = () => {
           </div>
         </section>
 
-        {current && (
+        {season && <SeasonBox doc={season} svc={svc} setSvc={setSvc} origin={origin} onShow={(pt) => { setSpot(pt); document.querySelector(".mapframe")?.scrollIntoView({ behavior: "smooth", block: "center" }); }} />}
+
+        {(current || spot) && (
           <div className="pad">
-            <iframe className="mapframe" title={tr("Bản đồ: ", "Map: ") + current.name} src={mapSrc} loading="lazy" referrerPolicy="no-referrer" allowFullScreen />
-            <p className="muted small">{tr("Đang xem: ", "Showing: ")}{current.name}{tr(". Bản đồ do Google Maps cung cấp.", ". Map by Google Maps.")}</p>
+            <iframe className="mapframe" title={tr("Bản đồ: ", "Map: ") + mapName} src={mapSrc} loading="lazy" referrerPolicy="no-referrer" allowFullScreen />
+            <p className="muted small">{tr("Đang xem: ", "Showing: ")}{mapName}{tr(". Bản đồ do Google Maps cung cấp.", ". Map by Google Maps.")}</p>
           </div>
         )}
 

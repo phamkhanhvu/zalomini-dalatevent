@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "updated": "2026-11-27",
+  "closures": [],
+  "closures_note": "Ban tổ chức chưa công bố phương án phân luồng, cấm đường và bãi xe tạm cho Festival Hoa 2026. DalatEvent sẽ cập nhật ngay khi có thông báo chính thức.",
+  "closures_note_en": "The organisers haven't published the 2026 Flower Festival road closures and temporary parking yet. DalatEvent will update as soon as it's official.",
+  "points": [
+    { "id": "y-bvdk-lam-dong", "kind": "medical", "name": "Bệnh viện Đa khoa tỉnh Lâm Đồng (cấp cứu)", "name_en": "Lam Dong General Hospital (emergency)", "lat": 11.94648, "lng": 108.4309, "note": "Đường Phạm Ngọc Thạch. Có khoa cấp cứu.", "note_en": "Pham Ngoc Thach St. Emergency department.", "source": "osm" },
+    { "id": "y-ttyt-da-lat", "kind": "medical", "name": "Trung tâm Y tế thành phố Đà Lạt", "name_en": "Da Lat City Medical Centre", "lat": 11.95098, "lng": 108.43942, "note": "Đường Bùi Thị Xuân.", "note_en": "Bui Thi Xuan St.", "source": "osm" },
+    { "id": "y-pk-ttyt", "kind": "medical", "name": "Phòng khám Đa khoa Trung tâm Y tế Đà Lạt", "name_en": "Da Lat Medical Centre polyclinic", "lat": 11.93985, "lng": 108.43295, "note": "", "note_en": "", "source": "osm" },
+    { "id": "y-bv-yhct", "kind": "medical", "name": "Bệnh viện Y học cổ truyền Phạm Ngọc Thạch", "name_en": "Pham Ngoc Thach Traditional Medicine Hospital", "lat": 11.94811, "lng": 108.45945, "note": "Đường Quang Trung.", "note_en": "Quang Trung St.", "source": "osm" },
+    { "id": "x-khu-hoa-binh", "kind": "parking", "name": "Bãi đậu xe Khu Hòa Bình", "name_en": "Hoa Binh area car park", "lat": 11.94319, "lng": 108.43618, "note": "Đường Phan Bội Châu, gần Chợ Đà Lạt. Mùa lễ hội có thể đông hoặc bị điều chỉnh.", "note_en": "Phan Boi Chau St., near Da Lat Market. May be full or changed during the festival.", "source": "osm" },
+    { "id": "w-cho-da-lat", "kind": "wc", "name": "Nhà vệ sinh gần Chợ Đà Lạt", "name_en": "Toilets near Da Lat Market", "lat": 11.94187, "lng": 108.44128, "note": "", "note_en": "", "source": "osm" },
+    { "id": "w-hoa-binh", "kind": "wc", "name": "Nhà vệ sinh khu Hòa Bình", "name_en": "Toilets, Hoa Binh area", "lat": 11.94159, "lng": 108.43688, "note": "", "note_en": "", "source": "osm" },
+    { "id": "w-ho-xuan-huong-nam", "kind": "wc", "name": "Nhà vệ sinh ven hồ Xuân Hương (phía nam)", "name_en": "Toilets by Xuan Huong Lake (south)", "lat": 11.93927, "lng": 108.44738, "note": "", "note_en": "", "source": "osm" },
+    { "id": "w-quang-truong", "kind": "wc", "name": "Nhà vệ sinh khu Quảng trường Lâm Viên", "name_en": "Toilets near Lam Vien Square", "lat": 11.94137, "lng": 108.45471, "note": "", "note_en": "", "source": "osm" },
+    { "id": "w-vuon-hoa", "kind": "wc", "name": "Nhà vệ sinh công cộng (miễn phí)", "name_en": "Public toilets (free)", "lat": 11.95103, "lng": 108.44866, "note": "Phía bắc hồ Xuân Hương, hướng Vườn hoa thành phố.", "note_en": "North of Xuan Huong Lake, towards the Flower Garden.", "source": "osm" },
+    { "id": "w-bac-ho", "kind": "wc", "name": "Nhà vệ sinh phía bắc hồ Xuân Hương", "name_en": "Toilets north of Xuan Huong Lake", "lat": 11.95004, "lng": 108.45038, "note": "", "note_en": "", "source": "osm" }
+  ]
+}

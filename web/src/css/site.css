@@ -710,3 +710,15 @@ html, body { background: #fff6ef; }
 .remind-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 10px; font-size: 14px; }
 .remind-row > span { font-weight: 700; margin-right: 2px; }
 .remind-row .fb { padding: 6px 12px; font-size: 13px; }
+
+/* Bản đồ: tiện ích mùa lễ hội */
+.season { margin: 4px 0 10px; }
+.season-title { font-weight: 800; margin: 0 0 6px; }
+.season-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.season-list { display: grid; gap: 8px; margin-top: 10px; }
+.season-item { display: grid; gap: 4px; padding: 10px 12px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); }
+.season-head { display: flex; justify-content: space-between; gap: 8px; }
+.season-head i { font-style: normal; color: var(--muted, #6b7280); font-size: 13px; white-space: nowrap; }
+.season-acts { display: flex; gap: 6px; margin-top: 2px; }
+.season-acts .btn { padding: 6px 12px; font-size: 13px; min-height: 0; }
+.season-note { margin: 0; padding: 10px 12px; border-radius: 14px; background: #fff4e6; border: 1px solid #fcd9b0; font-size: 14px; }

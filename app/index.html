@@ -105,7 +105,7 @@ fbq('track', 'PageView');
         e.preventDefault();
         var href = a.href, done = false;
         function go() { if (!done) { done = true; location.href = href; } }
-        fbq("trackCustom", "AppStoreClick", { ct: ct, button: id });
+        fbq("trackCustom", "AppStoreClick", { poster: ct, content_name: ct, button: id });
         fbq("track", "Lead", { content_name: ct });
         setTimeout(go, 350);
       });

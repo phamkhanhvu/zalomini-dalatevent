@@ -53,6 +53,14 @@ const HomePage: FC = () => {
         </div>
         <h1 className="sr-only">{tr("Đà Lạt có gì vui?", "What's on in Da Lat?")}</h1>
         <Banners />
+        <button type="button" className="fest-strip" onClick={() => navigate("/chuong-trinh")}>
+          <span className="fest-flower" aria-hidden="true">🌸</span>
+          <span className="fest-text">
+            <i>{FESTIVAL.name} {FESTIVAL.start.slice(0, 4)}</i>
+            <b>{cd.big === "Đang diễn ra" ? tr("Đang diễn ra", "Happening now") : cd.big === "Đã bế mạc" ? tr("Đã bế mạc", "Closed") : tr(cd.big, cd.big.replace("Còn ", "").replace(" ngày", " days to go").replace("Ngày mai", "Tomorrow"))}</b>
+          </span>
+          <span className="fest-go">{tr("Xem lịch", "Schedule")}</span>
+        </button>
         <p className="lead">{tr("Lễ hội, sự kiện và show diễn đang và sắp diễn ra tại Đà Lạt, cập nhật mỗi ngày.", "Festivals, events and live shows happening now and coming up in Da Lat, updated daily.")}</p>
         <SearchBox onOpenProgram={openProgram} />
         <button type="button" className="as-entry" onClick={() => navigate("/tro-ly")}>

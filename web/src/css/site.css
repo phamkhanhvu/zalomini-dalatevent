@@ -514,3 +514,35 @@ div.ag-row { text-align: left; }
 .gmb-go { background: var(--brand-blue); color: #fff; }
 .sbe { border-color: rgba(252, 177, 27, 0.7); }
 .brand-stripe { height: 4px; background: linear-gradient(90deg, var(--brand-orange) 0 25%, var(--brand-yellow) 25% 50%, var(--brand-green) 50% 75%, var(--brand-blue) 75% 100%); }
+
+/* Tưng bừng lễ hội: thẻ trang chủ dùng mảng màu logo, có hạt confetti */
+.fest-strip { position: relative; margin-top: 12px; width: 100%; display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 18px; color: #fff; text-align: left; overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(255,255,255,.35) 0 3px, transparent 4px),
+    radial-gradient(circle at 78% 18%, rgba(252,177,27,.9) 0 4px, transparent 5px),
+    radial-gradient(circle at 88% 78%, rgba(41,188,231,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 55% 85%, rgba(29,174,121,.9) 0 3px, transparent 4px),
+    radial-gradient(circle at 35% 12%, rgba(255,255,255,.5) 0 2px, transparent 3px),
+    linear-gradient(110deg, #f15a25 0%, #f7801f 60%, #f9a01c 100%);
+  box-shadow: 0 8px 20px rgba(241, 90, 37, 0.28); }
+@media (min-width: 900px) { .fest-strip { max-width: 680px; } }
+.fest-flower { flex: none; width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: rgba(255,255,255,.95); font-size: 26px; }
+.fest-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.fest-text i { font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; opacity: .95; }
+.fest-text b { font-size: 22px; line-height: 1.15; font-weight: 800; }
+.fest-go { flex: none; padding: 8px 12px; border-radius: 999px; background: #fff; color: #c2410c; font-size: 13px; font-weight: 800; }
+
+.deals-banner, .tlb-main, .gmb { color: #fff; border: 0; }
+.deals-banner { background: radial-gradient(circle at 90% 15%, rgba(255,255,255,.35) 0 4px, transparent 5px), radial-gradient(circle at 70% 85%, rgba(41,188,231,.8) 0 3px, transparent 4px), linear-gradient(120deg, #f15a25, #f7901e); box-shadow: 0 8px 20px rgba(241, 90, 37, 0.25); }
+.tlb-main { background: radial-gradient(circle at 88% 20%, rgba(252,177,27,.9) 0 4px, transparent 5px), radial-gradient(circle at 65% 88%, rgba(255,255,255,.4) 0 3px, transparent 4px), linear-gradient(120deg, #158e5b, #1dae79 60%, #32b44a); box-shadow: 0 8px 20px rgba(29, 174, 121, 0.28); }
+.gmb { background: radial-gradient(circle at 90% 18%, rgba(252,177,27,.9) 0 4px, transparent 5px), radial-gradient(circle at 60% 90%, rgba(241,90,37,.85) 0 3px, transparent 4px), linear-gradient(120deg, #1c8fd1, #29bce7); box-shadow: 0 8px 20px rgba(41, 188, 231, 0.3); }
+.deals-kicker, .tlb-kicker, .gmb-kicker { color: rgba(255,255,255,.95); }
+.deals-text i, .tlb-text i, .gmb-text i { color: rgba(255,255,255,.92); }
+.deals-badge, .tlb-badge, .gmb-icon { background: #fff; }
+.deals-badge { color: var(--brand-orange); }
+.tlb-badge { color: #158e5b; }
+.deals-go, .tlb-go, .gmb-go { background: #fff; }
+.deals-go { color: #c2410c; } .tlb-go { color: #158e5b; } .gmb-go { color: #1c8fd1; }
+.tlb-chip { background: #fff; border-color: rgba(29,174,121,.35); color: #14532d; }
+.quick-main { background: var(--brand-orange); color: #fff; }
+.brand-stripe { height: 6px; }

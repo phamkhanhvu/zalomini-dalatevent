@@ -3,15 +3,20 @@
   --ink2: #4a5568;
   --cream: #f4f6f8;
   --paper: #ffffff;
-  --magenta: #d24a1c;
-  --accent-soft: #fdece4;
-  --green: #0b7a4b;
+  --magenta: #e8521f;
+  --accent-soft: #fee9e0;
+  --green: #158e5b;
   --orange: #c2410c;
-  --yellow: #ffc93c;
-  --blue: #8ec9ff;
+  --yellow: #fcb11b;
+  --blue: #29bce7;
   --pink: #ff9ec4;
-  --mint: #c9f2da;
+  --mint: #dcf3ea;
   --line: rgba(15, 30, 51, 0.10);
+  /* Màu nhận diện lấy từ logo DalatEvent */
+  --brand-orange: #f15a25;
+  --brand-green: #1dae79;
+  --brand-blue: #29bce7;
+  --brand-yellow: #fcb11b;
   --serif: "Be Vietnam Pro", "Segoe UI", Arial, sans-serif;
   --sans: "Be Vietnam Pro", "Segoe UI", Arial, sans-serif;
   --zmp-primary-color: #0f1e33;

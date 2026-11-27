@@ -46,6 +46,7 @@ const HomePage: FC = () => {
 
   return (
     <div className="scroll page">
+      <div className="brand-stripe" aria-hidden="true" />
       <header className="hero">
         <div className="brand">
           <img className="brand-logo" src={logoImg} alt="DalatEvent.com" width={90} height={72} />

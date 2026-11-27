@@ -94,7 +94,7 @@ html:not(.is-native) body { --zaui-safe-area-inset-top: 0px; }
 .brand { margin-bottom: 6px; padding-right: 0; justify-content: center; }
 .search { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
 .search-field { display: flex; align-items: center; gap: 10px; min-height: 54px; padding: 0 16px; border-radius: 999px; background: var(--paper); border: 1.5px solid var(--ink); color: var(--ink2); }
-.search-field:focus-within { border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(210, 74, 28, 0.18); }
+.search-field:focus-within { border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(241, 90, 37, 0.2); }
 .search-field input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-size: 16px; color: var(--ink); -webkit-appearance: none; appearance: none; }
 .search-field input::-webkit-search-cancel-button { display: none; }
 .search-clear { flex: none; width: 32px; height: 32px; border-radius: 50%; text-align: center; font-size: 22px; line-height: 30px; color: var(--ink2); }
@@ -302,7 +302,7 @@ div.ag-row { text-align: left; }
 .as-entry i { font-style: normal; font-size: 13px; color: var(--ink2); }
 .as-form { display: flex; flex-direction: column; gap: 10px; }
 .as-form textarea { width: 100%; padding: 12px 14px; border-radius: 16px; border: 1.5px solid var(--ink); background: var(--paper); font: inherit; font-size: 16px; color: var(--ink); resize: vertical; }
-.as-form textarea:focus { outline: 0; border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(210, 74, 28, 0.18); }
+.as-form textarea:focus { outline: 0; border-color: var(--magenta); box-shadow: 0 0 0 3px rgba(241, 90, 37, 0.2); }
 .as-understood { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; }
 .as-note { margin: -4px 0 6px; padding: 6px 12px; border-radius: 10px; background: var(--mint); color: var(--green); font-size: 13px; font-weight: 600; }
 .as-note.is-unknown { background: #fff1d6; color: #7a4b00; font-weight: 400; }
@@ -498,8 +498,8 @@ div.ag-row { text-align: left; }
 .deals-banner, .tlb-main, .gmb { background: var(--paper); color: var(--ink); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(15, 30, 51, 0.06), 0 4px 14px rgba(15, 30, 51, 0.05); }
 .deals-banner::before, .tlb-main::before, .gmb::before { display: none; }
 .deals-badge { transform: none; background: var(--accent-soft); color: var(--magenta); box-shadow: none; }
-.tlb-badge { transform: none; background: #0f6b4a; color: #fff; box-shadow: none; }
-.gmb-icon { transform: none; background: #eef0ff; box-shadow: none; }
+.tlb-badge { transform: none; background: var(--brand-green); color: #fff; box-shadow: none; }
+.gmb-icon { transform: none; background: #e3f6fc; box-shadow: none; }
 .tlb-kicker, .gmb-kicker { color: var(--ink2); }
 .tlb-text i, .gmb-text i { color: var(--ink2); opacity: 1; }
 .tlb-go, .gmb-go { background: var(--ink); color: #fff; }
@@ -508,3 +508,9 @@ div.ag-row { text-align: left; }
 .deals-go { background: var(--ink); }
 .deals-kicker { color: var(--ink2); }
 .deals-text i { color: var(--ink2); opacity: 1; }
+
+/* Màu nhận diện DalatEvent: nút chính và điểm nhấn dùng cam logo, dải 4 màu logo dưới đầu trang */
+.fab, .tlb-go, .deals-go { background: var(--brand-orange); color: #fff; }
+.gmb-go { background: var(--brand-blue); color: #fff; }
+.sbe { border-color: rgba(252, 177, 27, 0.7); }
+.brand-stripe { height: 4px; background: linear-gradient(90deg, var(--brand-orange) 0 25%, var(--brand-yellow) 25% 50%, var(--brand-green) 50% 75%, var(--brand-blue) 75% 100%); }

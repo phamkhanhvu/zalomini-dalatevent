@@ -8,7 +8,7 @@
   },
   "plugins": {
     "LocalNotifications": {
-      "iconColor": "#D24A1C"
+      "iconColor": "#F15A25"
     },
     "FirebaseAuthentication": {
       "skipNativeAuth": true,

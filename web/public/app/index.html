@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tải app DalatEvent – Sự kiện, địa điểm, lịch trình Đà Lạt</title>
 <meta name="description" content="DalatEvent: lịch Festival Hoa Đà Lạt 2026, show diễn, sự kiện mỗi ngày, top list 1.001 địa điểm và trợ lý AI gợi ý lịch trình. Miễn phí trên App Store.">
-<meta name="apple-itunes-app" content="app-id=6838873847">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Đến Đà Lạt, tải ngay DalatEvent">
 <meta property="og:description" content="Sự kiện, địa điểm, lịch trình Đà Lạt trong một ứng dụng – miễn phí trên App Store.">
@@ -35,9 +34,24 @@
   li b { color:var(--pink); }
   .note { font-size:13px; color:#6b6178; margin-top:14px; }
   .note a { color:var(--pink); }
+  .topbar { position:sticky; top:0; z-index:10; display:flex; align-items:center; gap:10px; padding:10px 14px;
+            background:linear-gradient(90deg,#d6336c,#f15a25); color:#fff; box-shadow:0 4px 14px rgba(214,51,108,.35); }
+  .topbar img { width:44px; height:44px; border-radius:11px; background:#fff; flex:none; }
+  .topbar .t { flex:1; text-align:left; line-height:1.25; }
+  .topbar .t b { display:block; font-size:16px; }
+  .topbar .t span { font-size:13px; opacity:.95; }
+  .topbar a { flex:none; background:#fff; color:#d6336c; font-weight:800; font-size:15px; padding:9px 16px;
+              border-radius:999px; text-decoration:none; animation:pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.07); } }
+  @media (prefers-reduced-motion: reduce) { .topbar a { animation:none; } }
 </style>
 </head>
 <body>
+<div class="topbar">
+  <img src="../icon-192.png" alt="">
+  <div class="t"><b>DalatEvent</b><span>Miễn phí trên App Store</span></div>
+  <a id="store-top" href="https://apps.apple.com/app/apple-store/id6838873847?pt=129863953&amp;ct=web_app&amp;mt=8">TẢI NGAY</a>
+</div>
 <main>
   <div class="brand"><img src="../icon-192.png" alt="">DalatEvent</div>
   <h1>Đến Đà Lạt,<br>tải ngay <em>DalatEvent</em></h1>
@@ -64,8 +78,9 @@
   (function () {
     var ct = new URLSearchParams(location.search).get("ct") || "";
     if (/^[a-z0-9_]{1,40}$/i.test(ct)) {
-      document.getElementById("store").href =
-        "https://apps.apple.com/app/apple-store/id6838873847?pt=129863953&ct=" + ct + "&mt=8";
+      var link = "https://apps.apple.com/app/apple-store/id6838873847?pt=129863953&ct=" + ct + "&mt=8";
+      document.getElementById("store").href = link;
+      document.getElementById("store-top").href = link;
     }
   })();
 </script>

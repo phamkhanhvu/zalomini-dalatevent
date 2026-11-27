@@ -28,7 +28,7 @@ const Voucher: FC<{ deal: Deal; r: Redemption }> = ({ deal, r }) => {
     return (
       <div className="voucher" role="status">
         <p className="eyebrow">{tr("Nhập mã này khi đặt vé tại ", "Enter this code when booking with ")}{deal.partner}</p>
-        <b className="voucher-code">{deal.code}</b>
+        <b className="voucher-code" style={{ ["--n" as string]: String(deal.code).length }}>{deal.code}</b>
         <p>{deal.title}</p>
         <div className="voucher-actions">
           <button type="button" className="btn btn-line" onClick={copy}>{tr("Chép mã", "Copy code")}</button>
@@ -40,7 +40,7 @@ const Voucher: FC<{ deal: Deal; r: Redemption }> = ({ deal, r }) => {
   return (
     <div className="voucher" role="status">
       <p className="eyebrow">{tr("Đưa màn hình này cho nhân viên ", "Show this screen to the staff at ")}{deal.partner}</p>
-      <b className="voucher-code">{r.code}</b>
+      <b className="voucher-code" style={{ ["--n" as string]: String(r.code).length }}>{r.code}</b>
       <p>{deal.title}</p>
       <p className="muted small">{tr("Đã dùng lúc ", "Used at ")}{vnTime(r.at)}{tr(" ngày ", ", ")}{vnDayMonth(r.at)}{tr(" · Bây giờ là ", " · Now ")}<span className="voucher-clock">{clock}</span></p>
     </div>

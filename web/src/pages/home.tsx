@@ -180,6 +180,8 @@ const HomePage: FC = () => {
             <span aria-hidden="true">·</span>
             <button type="button" onClick={() => navigate("/dieu-khoan")}>{tr("Điều khoản", "Terms")}</button>
             <span aria-hidden="true">·</span>
+            <button type="button" onClick={() => navigate("/doi-tac")}>{tr("Đối tác", "Partners")}</button>
+            <span aria-hidden="true">·</span>
             <a href="https://www.sensegroup.vn" target="_blank" rel="noopener noreferrer">sensegroup.vn</a>
           </nav>
           <p className="foot-copy">© {new Date().getFullYear()} DalatEvent · Sense Group</p>

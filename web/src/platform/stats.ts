@@ -31,9 +31,16 @@ export function flush(): void {
   }
   if (!pending.size || !DB) return;
   const body: Record<string, { ".sv": { increment: number } }> = {};
-  pending.forEach((n, k) => (body[k] = { ".sv": { increment: Math.min(n, 50) } }));
+  // Lượt xem/lấy mã của từng ưu đãi còn ghi riêng (pviews/<ưu đãi>/<ngày>/<sự kiện>) để đối tác tự xem trên trang đối tác
+  const deal: Record<string, { ".sv": { increment: number } }> = {};
+  pending.forEach((n, k) => {
+    body[k] = { ".sv": { increment: Math.min(n, 50) } };
+    const m = /^(deal_view|deal_use)\/(.+)$/.exec(k);
+    if (m && m[2] !== "all") deal[m[2] + "/" + vnDay() + "/" + m[1]] = { ".sv": { increment: Math.min(n, 50) } };
+  });
   pending.clear();
   fetch(`${DB}/stats/${vnDay()}/${PLATFORM}.json`, { method: "PATCH", body: JSON.stringify(body), keepalive: true }).catch(() => undefined);
+  if (Object.keys(deal).length) fetch(`${DB}/pviews.json`, { method: "PATCH", body: JSON.stringify(deal), keepalive: true }).catch(() => undefined);
 }
 
 /** Gọi một lần khi mở app/trang: đếm thiết bị hoạt động trong ngày (chỉ đánh dấu trên máy, không gửi mã máy) */

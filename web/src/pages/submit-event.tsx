@@ -66,6 +66,7 @@ const SubmitEventPage: FC = () => {
         <p className="eyebrow">{tr("Dành cho ban tổ chức, quán, điểm diễn", "For organisers, venues and cafés")}</p>
         <h1 className="h1">{tr("Gửi ", "Submit ")}<em>{tr("sự kiện", "an event")}</em></h1>
         <p className="muted">{tr("Sự kiện ở Đà Lạt được DalatEvent duyệt miễn phí trước khi hiện trên web và app.", "Events in Da Lat are reviewed for free before they appear on the website and app.")}</p>
+        <p className="muted small">{tr("Đăng thường xuyên hoặc muốn tạo ưu đãi? ", "Post often or want to run offers? ")}<button type="button" className="link-inline" onClick={() => navigate("/doi-tac")}>{tr("Mở trang đối tác", "Open the partner page")}</button></p>
       </header>
       <div className={"pad adm-list" + (busy ? " is-busy" : "")}>
         {errors.length > 0 && <div className="adm-status is-bad" role="alert"><b>{tr("Cần bổ sung:", "Please fix:")}</b><ul>{errors.map((e) => <li key={e}>{e}</li>)}</ul></div>}

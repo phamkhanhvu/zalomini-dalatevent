@@ -722,3 +722,17 @@ html, body { background: #fff6ef; }
 .season-acts { display: flex; gap: 6px; margin-top: 2px; }
 .season-acts .btn { padding: 6px 12px; font-size: 13px; min-height: 0; }
 .season-note { margin: 0; padding: 10px 12px; border-radius: 14px; background: #fff4e6; border: 1px solid #fcd9b0; font-size: 14px; }
+
+/* Trang đối tác */
+.pt-wrap { display: grid; gap: 14px; padding-bottom: 24px; }
+.pt-card { display: grid; gap: 8px; padding: 14px; border-radius: 18px; background: var(--paper); border: 1px solid var(--line); }
+.pt-hello b { font-size: 18px; }
+.pt-sec { display: grid; gap: 8px; }
+.pt-sec-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pt-sec-head h2 { margin: 0; font-size: 18px; }
+.pt-row { display: grid; gap: 6px; padding: 12px; border-radius: 14px; background: var(--paper); border: 1px solid var(--line); }
+.pt-row > div:first-child { display: grid; gap: 2px; }
+.pt-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pt-nums span { display: grid; padding: 8px 10px; border-radius: 12px; background: #fff4e6; }
+.pt-nums i { font-style: normal; font-size: 12px; color: var(--muted, #6b7280); }
+.pt-nums b { font-size: 20px; }

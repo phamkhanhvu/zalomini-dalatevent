@@ -22,6 +22,10 @@ export interface Deal {
   /** Đối tác đã xác nhận ưu đãi này; ghi chú xác nhận với ai, khi nào */
   confirmed: boolean;
   confirmedNote: string;
+  /** Mã do đối tác cấp (dùng chung, ví dụ nhập khi đặt vé online). Trống thì app tự tạo mã riêng cho từng khách. */
+  code: string;
+  /** Trang dùng mã (ví dụ trang đặt vé của đối tác) */
+  url: string;
 }
 export const DEAL_ID = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const txt = (v: unknown, max: number) => (typeof v === "string" ? v.replace(/[\u0000-\u0008\u000b-\u001f<>]/g, " ").trim().slice(0, max) : "");
@@ -44,6 +48,8 @@ export function cleanDeal(id: string, o: Record<string, unknown> | null | undefi
     status: (["draft", "published", "paused", "ended"] as const).find((s) => s === o.status) || "draft",
     confirmed: o.confirmed === true,
     confirmedNote: txt(o.confirmedNote, 200),
+    code: txt(o.code, 40).replace(/\s+/g, ""),
+    url: typeof o.url === "string" && /^https:\/\/[^\s<>"']+$/.test(o.url) ? o.url.slice(0, 300) : "",
   };
   if (!d.title || !d.partner || !(d.endAt > d.startAt) || !(d.limit >= 1) || !(d.count >= 0)) return null;
   return d;

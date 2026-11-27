@@ -485,3 +485,4 @@ div.ag-row { text-align: left; }
 .gmb-text i { font-style: normal; font-size: 13px; opacity: .9; }
 .gmb-go { position: relative; flex: none; padding: 8px 12px; border-radius: 999px; background: #fff; color: #4c1d95; font-size: 13px; font-weight: 700; }
 @media (max-width: 600px) { .gmb-go { padding: 0; width: 34px; height: 34px; display: grid; place-items: center; font-size: 0; } .gmb-go::after { content: "▶"; font-size: 14px; } }
+.voucher-actions { display: flex; gap: 8px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }

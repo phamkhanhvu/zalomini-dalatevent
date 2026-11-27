@@ -5,7 +5,7 @@ import { getAccount, onAccount } from "../platform/account";
 import { fetchPublicDeals, myRedemption, redeem, Redemption } from "../platform/deals";
 import { vnDayMonth, vnTime } from "../utils/agenda";
 import { Deal, dealState, remaining, visibleDeals } from "../utils/deals";
-import { openDirections } from "../utils/device";
+import { openDirections, openUrl } from "../utils/device";
 import { tr } from "../i18n";
 
 const STATE_LABEL = (): Record<string, string> => ({ active: tr("Đang áp dụng", "Active"), upcoming: tr("Sắp mở", "Coming soon"), soldout: tr("Đã hết lượt", "All used") });
@@ -19,6 +19,21 @@ const Voucher: FC<{ deal: Deal; r: Redemption }> = ({ deal, r }) => {
     return () => window.clearInterval(t);
   }, []);
   const clock = new Date(now + 7 * 3600000).toISOString().slice(11, 19);
+  if (deal.code) {
+    // Mã đối tác cấp: khách nhập khi đặt vé trên trang của đối tác
+    const copy = () => navigator.clipboard?.writeText(deal.code).catch(() => undefined);
+    return (
+      <div className="voucher" role="status">
+        <p className="eyebrow">{tr("Nhập mã này khi đặt vé tại ", "Enter this code when booking with ")}{deal.partner}</p>
+        <b className="voucher-code">{deal.code}</b>
+        <p>{deal.title}</p>
+        <div className="voucher-actions">
+          <button type="button" className="btn btn-line" onClick={copy}>{tr("Chép mã", "Copy code")}</button>
+          {deal.url && <button type="button" className="btn btn-ink" onClick={() => openUrl(deal.url)}>{tr("Đặt vé", "Book tickets")}</button>}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="voucher" role="status">
       <p className="eyebrow">{tr("Đưa màn hình này cho nhân viên ", "Show this screen to the staff at ")}{deal.partner}</p>

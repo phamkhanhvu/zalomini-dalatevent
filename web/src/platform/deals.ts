@@ -88,7 +88,10 @@ export async function adminSaveDeal(d: Deal, isNew: boolean): Promise<void> {
   const s = session();
   if (!s) throw new Error("Chưa đăng nhập");
   const { doc, setDoc, updateDoc } = await import("firebase/firestore/lite");
-  const body = { title: d.title, partner: d.partner, summary: d.summary, terms: d.terms, place: d.place, startAt: d.startAt, endAt: d.endAt, limit: d.limit, status: d.status, confirmed: d.confirmed, confirmedNote: d.confirmedNote };
+  const body: Record<string, unknown> = { title: d.title, partner: d.partner, summary: d.summary, terms: d.terms, place: d.place, startAt: d.startAt, endAt: d.endAt, limit: d.limit, status: d.status, confirmed: d.confirmed, confirmedNote: d.confirmedNote };
+  // Chỉ gửi khi có, để ưu đãi kiểu cũ (mã tự tạo) vẫn lưu như trước
+  if (d.code) body.code = d.code;
+  if (d.url) body.url = d.url;
   if (isNew) await setDoc(doc(s.db, "deals", d.id), { ...body, count: 0 });
   else await updateDoc(doc(s.db, "deals", d.id), body);
 }

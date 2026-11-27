@@ -19,7 +19,7 @@ const fromLocal = (s: string) => Date.parse(s + ":00+07:00");
 const slug = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 50);
 const blank = (): Deal => {
   const t = Date.now();
-  return { id: "", title: "", partner: "", summary: "", terms: "", place: "", startAt: t, endAt: t + 7 * 86400000, limit: 50, count: 0, status: "draft", confirmed: false, confirmedNote: "" };
+  return { id: "", title: "", partner: "", summary: "", terms: "", place: "", startAt: t, endAt: t + 7 * 86400000, limit: 50, count: 0, status: "draft", confirmed: false, confirmedNote: "", code: "", url: "" };
 };
 const Field: FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => <label className="adm-field">{label}{children}</label>;
 
@@ -65,6 +65,8 @@ export const DealsEditor: FC = () => {
         {edit.isNew && <Field label="Mã ưu đãi (để trống sẽ tự đặt theo tên)"><input value={d.id} maxLength={50} placeholder={slug(d.partner + " " + d.title)} onChange={(e) => set({ id: slug(e.target.value) })} /></Field>}
         <Field label="Mô tả ngắn"><textarea rows={2} value={d.summary} maxLength={300} onChange={(e) => set({ summary: e.target.value })} /></Field>
         <Field label="Điều kiện sử dụng"><textarea rows={3} value={d.terms} maxLength={800} onChange={(e) => set({ terms: e.target.value })} /></Field>
+        <Field label="Mã đối tác cấp (để trống: app tự tạo mã riêng cho từng khách)"><input value={d.code} maxLength={40} placeholder="Ví dụ: DALATEVENT.MLT10" onChange={(e) => set({ code: e.target.value.replace(/\s+/g, "") })} /></Field>
+        <Field label="Trang dùng mã (ví dụ trang đặt vé), bắt đầu bằng https://"><input value={d.url} maxLength={300} onChange={(e) => set({ url: e.target.value.trim() })} /></Field>
         <Field label="Địa chỉ dùng ưu đãi"><input value={d.place} maxLength={160} onChange={(e) => set({ place: e.target.value })} /></Field>
         <div className="adm-row">
           <Field label="Bắt đầu"><input type="datetime-local" value={toLocal(d.startAt)} onChange={(e) => e.target.value && set({ startAt: fromLocal(e.target.value) })} /></Field>

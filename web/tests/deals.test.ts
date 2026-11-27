@@ -45,3 +45,11 @@ test("quản trị: không cho công bố khi đối tác chưa xác nhận; ki�
 test("mã đổi: 6 ký tự, không có chữ dễ nhầm", () => {
   for (let i = 0; i < 50; i++) assert.match(makeCode(), /^[A-HJ-NP-Z2-9]{6}$/);
 });
+
+test("mã đối tác cấp và trang đặt vé: làm sạch, chỉ nhận https", () => {
+  const d = cleanDeal("mlt-10", { ...base, code: " DALATEVENT. MLT10 ", url: "https://maylangthang.com.vn/" })!;
+  assert.equal(d.code, "DALATEVENT.MLT10");
+  assert.equal(d.url, "https://maylangthang.com.vn/");
+  assert.equal(cleanDeal("mlt-10", { ...base, url: "javascript:alert(1)" })!.url, "");
+  assert.equal(cleanDeal("mlt-10", base)!.code, "");
+});

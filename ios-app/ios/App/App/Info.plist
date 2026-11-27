@@ -9,6 +9,7 @@
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>vi</string>
+		<string>en</string>
 	</array>
   <key>CAPACITOR_DEBUG</key>
 	<string>$(CAPACITOR_DEBUG)</string>

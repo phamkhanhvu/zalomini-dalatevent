@@ -74,9 +74,12 @@ const TEXT = {
 Không cần tài khoản để xem lịch. Đăng nhập (tùy chọn) bằng Apple, Google hoặc email để đồng bộ lịch trình giữa các máy.
 
 Lịch có thể thay đổi; hãy xem lại trước khi đến.`,
-    whatsNew: `• Mã ưu đãi của đối tác hiện đúng trong Dalat Deals, có nút chép mã và đặt vé
-• Gợi ý tìm kiếm theo ngày khai mạc Festival Hoa (20.12)
-• Sửa lỗi nhỏ và cải thiện tốc độ`,
+    whatsNew: `• Giao diện mới: nền màu nhận diện, thẻ kính trong, nhân vật minh họa
+• Dalat Deals dạng slide; mã ưu đãi đối tác hiện kèm nút chép mã và đặt vé
+• Chấm sao địa điểm trong Top list
+• Gửi sự kiện cho DalatEvent duyệt (một lần, hằng đêm hoặc hằng tuần)
+• Đếm ngược tới đêm khai mạc Festival Hoa 20.12
+• Báo khi có bản cập nhật mới; trang Điều khoản sử dụng`,
   },
   "en-US": {
     name: "DalatEvent",
@@ -100,16 +103,19 @@ Lịch có thể thay đổi; hãy xem lại trước khi đến.`,
 No account needed to browse. Optionally sign in with Apple, Google or email to sync your plan across devices.
 
 Schedules can change; please check before you go.`,
-    whatsNew: `• Partner offer codes now show correctly in Dalat Deals, with copy and booking buttons
-• Search suggestion for the Flower Festival opening day (20.12)
-• Small fixes and speed improvements`,
+    whatsNew: `• New look: brand-colour background, glass cards and illustrations
+• Dalat Deals slider; partner offer codes with copy and booking buttons
+• Star ratings for Top list places
+• Submit events for review (one-off, nightly or weekly)
+• Countdown to the Flower Festival opening night (20.12)
+• Update notice when a new version is out; Terms of use page`,
   },
 };
 const SUPPORT_URL = "https://dalatevent.com/";
 const COPYRIGHT = "© 2026 Sense Group";
 const VIDEO_URL = process.env.REVIEW_VIDEO_URL || "";
 const REVIEW_NOTES = `1) SCREEN RECORDING (physical iPhone, latest iOS): ${VIDEO_URL || "(link will be added)"}
-It starts at app launch and shows browsing events, the assistant, map, passport, weather, language switch, and account registration, sign-in, sign-out and account deletion. It was recorded on version 1.0; what is new in this update is described in 3).
+It starts at app launch and shows browsing events, the assistant, map, passport, weather, language switch, and account registration, sign-in, sign-out and account deletion. It was recorded on version 1.0; the look has since been refreshed and new features are described in 3).
 
 2) PURPOSE AND AUDIENCE
 DalatEvent is a free events guide for Da Lat, Vietnam, run by Sense Group (a local Da Lat company). Audience: domestic and international visitors and residents. Problem it solves: event information in Da Lat (Flower Festival 2026, exhibitions, live music) is scattered across many sites; DalatEvent gathers it in one daily-updated, source-checked calendar and helps users plan their day.
@@ -120,10 +126,16 @@ New in this update: Top lists (green banner on Home). A directory of 1,000+ plac
 Account is optional and only syncs the saved plan and passport stamps across devices. To test: tap "Sign in" (top right) → "Sign up" tab → create an account with any email and a 6+ character password, or use Sign in with Apple / Google.
 Account deletion: "My plan" tab → tap the account strip → "Delete account" → confirm. This deletes the account and all its data.
 Language: tap EN / VI at the top of any page.
-There is no user-generated content shared with other users (a user's plan is private; a plan share link only contains the user's own list). No paid content, no in-app purchases, no ads, no tracking.
+New in this update:
+- Star ratings (Top list → any place → "Rate"): signed-in users give 1–5 stars; only the average and count are shown, never who rated. No text reviews.
+- Submit an event (Home → "Hosting an event in Da Lat?"): signed-in users send event details. Nothing is published automatically; every submission is reviewed by our team in an admin page before it appears, and can be rejected. Contact details are only visible to our admins.
+- A banner at the bottom of Home promotes Sense Group's own event services (our company, labelled "Ad"). No third-party ad networks.
+- Anonymous usage counts (page opens and button taps per day and platform, no user or device identifiers, no cookies) to see which features are used. No tracking.
+- Terms of use: Home → bottom → "Terms". Plans remain private; no user-to-user messaging or public text content. No paid content, no in-app purchases.
 
 4) EXTERNAL SERVICES
-- Firebase Authentication and Cloud Firestore (Google): optional accounts and plan sync.
+- Firebase Authentication and Cloud Firestore (Google): optional accounts, plan sync, offers, star ratings and event submissions.
+- Firebase Realtime Database (Google): anonymous daily usage counts.
 - Sign in with Apple, Google Sign-In.
 - GitHub (raw.githubusercontent.com): hosts the public event data files (updated daily by our team) and the Top list data and place photos.
 - Open-Meteo (api.open-meteo.com): weather forecast for central Da Lat (no user location sent).

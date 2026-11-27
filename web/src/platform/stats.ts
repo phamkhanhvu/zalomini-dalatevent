@@ -21,7 +21,7 @@ export function track(ev: string, item = "all"): void {
   if (!/^[a-z_]{1,24}$/.test(ev) || off()) return;
   const key = ev + "/" + clean(item);
   pending.set(key, (pending.get(key) || 0) + 1);
-  if (!timer) timer = window.setTimeout(flush, 15000);
+  if (!timer) timer = window.setTimeout(flush, 8000);
 }
 
 export function flush(): void {

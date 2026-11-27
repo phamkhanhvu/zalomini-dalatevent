@@ -2,12 +2,12 @@
   "schema": 1,
   "about": "Nguồn dữ liệu sự kiện của DalatEvent. Sửa file này rồi chạy `npm run validate:data`. Mô tả các trường: docs/architecture.md.",
   "timezone": "Asia/Ho_Chi_Minh",
-  "updated_at": "2026-11-23T08:35:00+07:00",
+  "updated_at": "2026-11-27T07:40:00+07:00",
   "series": [
     {
       "id": "festival-hoa-da-lat-2026",
       "name": "Festival Hoa Đà Lạt lần thứ XI",
-      "start_at": "2026-12-12T20:00:00+07:00",
+      "start_at": "2026-12-20T20:00:00+07:00",
       "end_at": "2027-01-03T23:59:59+07:00",
       "edition": "lần thứ XI",
       "edition_short": "Kỳ thứ XI",
@@ -168,16 +168,16 @@
       "tentative": false,
       "sessions": [
         {
-          "start_at": "2026-12-12T20:00:00+07:00",
-          "end_at": "2026-12-12T22:00:00+07:00",
+          "start_at": "2026-12-20T20:00:00+07:00",
+          "end_at": "2026-12-20T22:00:00+07:00",
           "all_day": false,
           "end_estimated": true
         }
       ],
-      "source_url": "https://festivaldalat.lamdongtructuyen.vn/chuong-trinh/",
-      "source_note": "Cổng thông tin chính thức Festival Hoa Đà Lạt 2026 (Trung tâm Xúc tiến Đầu tư, Thương mại và Du lịch tỉnh Lâm Đồng), đọc ngày 23.11.2026",
-      "verified_at": "2026-11-23",
-      "updated_at": "2026-11-23T06:50:00+07:00",
+      "source_url": "https://baolamdong.vn/lam-dong-yeu-cau-tang-toc-chuan-bi-festival-hoa-da-lat-475878.html",
+      "source_note": "Báo Lâm Đồng 26.11.2026 và Dân trí 23.11.2026: Thường trực Tỉnh ủy Lâm Đồng thống nhất khai mạc ngày 20.12.2026",
+      "verified_at": "2026-11-27",
+      "updated_at": "2026-11-27T07:40:00+07:00",
       "organizer": "Tỉnh ủy - Ủy ban nhân dân tỉnh Lâm Đồng",
       "title_en": "Opening of the 11th Da Lat Flower Festival",
       "description_en": "Opening night combining music, light and stage technology at Lam Vien Square. Broadcast live on VTV.",

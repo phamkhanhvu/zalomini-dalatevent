@@ -1,0 +1,6 @@
+{
+  "schema": 1,
+  "note": "Phiên bản mới nhất đang có trên store. Khi Apple/Google duyệt bản mới thì sửa số ở đây; app bản cũ (từ 1.0.2 trở đi) sẽ hiện lời mời cập nhật.",
+  "ios": { "latest": "1.0.1", "url": "https://apps.apple.com/app/id6838873847" },
+  "android": { "latest": "0.0.0", "url": "https://play.google.com/store/apps/details?id=vn.sensegroup.dalatevent" }
+}

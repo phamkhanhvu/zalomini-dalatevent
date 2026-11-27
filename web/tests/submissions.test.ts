@@ -23,3 +23,11 @@ test("sự kiện lặp: kiểm tra và nhãn lịch", async () => {
   assert.ok(submissionErrors({ ...w, weekdays: [] }, "2026-11-27").length >= 1);
   assert.ok(submissionErrors({ ...w, end_date: "2027-12-31" }, "2026-11-27").length >= 1);
 });
+
+test("so sánh phiên bản app", async () => {
+  const { newer } = await import("../src/utils/version.ts");
+  assert.equal(newer("1.0.2", "1.0.1"), true);
+  assert.equal(newer("1.0.10", "1.0.9"), true);
+  assert.equal(newer("1.0.1", "1.0.1"), false);
+  assert.equal(newer("1.0.1", "1.1"), false);
+});

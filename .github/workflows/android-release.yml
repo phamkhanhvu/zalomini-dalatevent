@@ -49,6 +49,7 @@ jobs:
       - name: Kiểm tra dữ liệu và dựng web cho app
         env:
           VITE_DATA_URL: https://raw.githubusercontent.com/${{ github.repository }}/main/data/
+          VITE_APP_VERSION: ${{ inputs.version }}
           VITE_CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
           VITE_ANDROID_GOOGLE: ${{ vars.ANDROID_GOOGLE }}
         run: |

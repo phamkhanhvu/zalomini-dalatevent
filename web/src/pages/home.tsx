@@ -24,6 +24,7 @@ import { WeatherCard } from "../components/weather-card";
 import { ToplistBanner } from "../components/toplist-banner";
 import { GameBanner, SubmitEventCard } from "../components/game-banner";
 import { AdBanner } from "../components/ad-banner";
+import { UpdateBanner } from "../components/update-banner";
 import { tr } from "../i18n";
 
 
@@ -50,6 +51,7 @@ const HomePage: FC = () => {
   return (
     <div className="scroll page">
       <div className="brand-stripe" aria-hidden="true" />
+      <UpdateBanner />
       <header className="hero">
         <div className="brand">
           <img className="brand-logo" src={logoImg} alt="DalatEvent.com" width={90} height={72} />

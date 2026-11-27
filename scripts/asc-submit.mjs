@@ -122,16 +122,16 @@ DalatEvent is a free events guide for Da Lat, Vietnam, run by Sense Group (a loc
 
 3) HOW TO USE / ACCESS
 No login is required for any core feature: Home (Today / Tonight / Weekend filters, search), Festival tab, Shows tab, Map tab ("Use my location" is optional), assistant (pink "Assistant" button: type e.g. "Saturday, two people, live music"), Weather & cloud forecast (strip on Home), Da Lat Passport (stamps only work within 300 m of a venue), Dalat Deals (offers from partner venues; browsing is open, using an offer needs sign-in).
-New in this update: Top lists (green banner on Home). A directory of 1,000+ places in Da Lat in 127 themes (sights, cafés, food, stays, shopping) with one photo per place, search, optional "Sort by nearest" (location is used on the device only and not stored) and directions through Google Maps. "Watch clip" opens a public TikTok review link outside the app. The Weather page also lists cloud-hunting spots with directions.
+Top lists (banner on Home, added in 1.0.1): 1,000+ Da Lat places in 127 themes with photos, search, optional "Sort by nearest" (location stays on the device) and Google Maps directions. "Watch clip" opens a public TikTok link outside the app.
 Account is optional and only syncs the saved plan and passport stamps across devices. To test: tap "Sign in" (top right) → "Sign up" tab → create an account with any email and a 6+ character password, or use Sign in with Apple / Google.
 Account deletion: "My plan" tab → tap the account strip → "Delete account" → confirm. This deletes the account and all its data.
 Language: tap EN / VI at the top of any page.
-New in this update:
+New in 1.0.2:
 - Star ratings (Top list → any place → "Rate"): signed-in users give 1–5 stars; only the average and count are shown, never who rated. No text reviews.
 - Submit an event (Home → "Hosting an event in Da Lat?"): signed-in users send event details. Nothing is published automatically; every submission is reviewed by our team in an admin page before it appears, and can be rejected. Contact details are only visible to our admins.
 - A banner at the bottom of Home promotes Sense Group's own event services (our company, labelled "Ad"). No third-party ad networks.
 - Anonymous usage counts (page opens and button taps per day and platform, no user or device identifiers, no cookies) to see which features are used. No tracking.
-- Terms of use: Home → bottom → "Terms". Plans remain private; no user-to-user messaging or public text content. No paid content, no in-app purchases.
+- Terms of use: Home → bottom → "Terms". No user-to-user messaging, no in-app purchases.
 
 4) EXTERNAL SERVICES
 - Firebase Authentication and Cloud Firestore (Google): optional accounts, plan sync, offers, star ratings and event submissions.

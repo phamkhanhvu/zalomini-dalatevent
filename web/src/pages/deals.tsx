@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router";
 import { Sheet, useSnackbar } from "../ui";
 import { openAccount } from "../components/account-panel";
 import { getAccount, onAccount } from "../platform/account";
@@ -70,6 +71,13 @@ const DealsPage: FC = () => {
     setAgree(false);
     if (getAccount().status === "in" || getAccount().status === "off") myRedemption(d.id).then(setMine).catch(() => undefined);
   };
+  // Mở thẳng một ưu đãi khi bấm từ slide trang chủ (/uu-dai?d=<id>)
+  const [params] = useSearchParams();
+  useEffect(() => {
+    const id = params.get("d");
+    const d = id && deals ? deals.find((x) => x.id === id) : null;
+    if (d) show(d);
+  }, [deals]);
   useEffect(() => {
     if (open && signedIn && !mine) myRedemption(open.id).then(setMine).catch(() => undefined);
   }, [signedIn]);
